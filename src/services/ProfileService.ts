@@ -14,7 +14,7 @@ export class ProfileService implements IProfileService {
 
   baseUri = "http://localhost:8203/";
 
-  profileDetailsUrl = `${this.baseUri}api/contactdetails/5e1c4ef8bef65554dca070fc`;
+  profileDetailsUrl = `${this.baseUri}api/contactdetails/5e00c7942749a84794644f83`;
 
   async getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>> {
     return axios.get<PersonalDetails>(this.profileDetailsUrl, this.config);
