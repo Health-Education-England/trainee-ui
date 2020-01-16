@@ -1,6 +1,6 @@
 export interface PersonalDetails {
   id: string;
-  traineeTISId: string;
+  traineeTisId: string;
   surname: string;
   forenames: string;
   knownAs: string;
@@ -14,4 +14,14 @@ export interface PersonalDetails {
   address3: string;
   address4: string;
   postCode: string;
+  gmcNumber: string;
+  gmcStatus: string;
+  gdcNumber: string;
+  gdcStatus: string;
+  publicHealthNumber: string;
+  eeaResident: string;
+  permitToWork: string;
+  settled: string;
+  visaIssued: string;
+  detailsNumber: string;
 }
