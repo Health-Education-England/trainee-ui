@@ -10,13 +10,15 @@ import Navbar from "./components/navigation/NavbarComponent";
 const App: React.FC = () => {
   return (
     <div>
-      <Navbar />
-      <Switch>
-        <Route path="/formr" component={FormR} />
-        <Route exact path="/profile" component={Profile} />
-        <Route path="/login" component={LogInComponent} />
-        <Redirect exact path="/" to="/profile" />
-      </Switch>
+      <div style={{ paddingBottom: '56px'}}>
+        <Navbar />
+        <Switch>
+          <Route path="/formr" component={FormR} />
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/login" component={LogInComponent} />
+          <Redirect exact path="/" to="/profile" />
+        </Switch>
+      </div>
       <div className="bottom-navigation-menu">
         <BottomNavbar></BottomNavbar>
       </div>

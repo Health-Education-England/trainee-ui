@@ -24,4 +24,20 @@ export interface PersonalDetails {
   settled: string;
   visaIssued: string;
   detailsNumber: string;
+  programmeMemberships: ProgrammeMembership[]
+}
+
+export interface ProgrammeMembership {
+  programmeTisId: string;
+  programmeName: string;
+  programmeNumber: string;
+  managingDeanery: string;
+  startDate: Date;
+  endDate: Date;
+  curricula: curriculm[]
+}
+
+export interface curriculm {
+  curriculumTisId: string;
+  curriculumName: string;
 }

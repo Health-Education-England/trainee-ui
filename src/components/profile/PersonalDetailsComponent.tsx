@@ -1,55 +1,20 @@
 import React from "react";
 import { PersonalDetails } from "../../models/PersonalDetails";
-import { ProfileService } from "../../services/ProfileService";
 
-interface AppProps {}
-
-interface AppState {
-  isLoaded: boolean;
-  data: PersonalDetails | null;
-  error: any;
+interface IProps {
+  personalDetail: PersonalDetails | null;
 }
 
-class PersonalDetailsComponent extends React.PureComponent<AppProps, AppState> {
-  profileService: ProfileService;
-  constructor(props: AppProps) {
+interface IState {
+}
+
+class PersonalDetailsComponent extends React.PureComponent<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
-    this.state = {
-      isLoaded: false,
-      data: null,
-      error: null
-    };
-
-    this.profileService = new ProfileService();
-  }
-
-  componentDidMount() {
-    this.profileService
-      .getPersonalDetails()
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          data: result.data,
-          error: null
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isLoaded: false,
-          data: null,
-          error: error
-        });
-      });
   }
 
   render() {
-    const { isLoaded, data, error } = this.state;
-
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
+      const data = this.props.personalDetail;
       return (
         data && (
           <div className="profile-content">
@@ -80,7 +45,6 @@ class PersonalDetailsComponent extends React.PureComponent<AppProps, AppState> {
         )
       );
     }
-  }
 }
 
 export default PersonalDetailsComponent;
