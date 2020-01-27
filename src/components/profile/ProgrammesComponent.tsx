@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ProgrammeMembership } from "../../models/PersonalDetails";
 
-
 interface IProgrammePanelProps {
   programmeMembership: ProgrammeMembership;
 }
@@ -16,10 +15,13 @@ interface IProgrammePanelProps {
 const ProgrammePanel = (props: IProgrammePanelProps) => {
   const data = props.programmeMembership;
   return (
-    <div>
+    <div style={{border: '1px solid #B5B5B5', marginBottom: '10px'}}>
       <div>Number: {data.programmeNumber}</div>
       <div>Name: {data.programmeName}</div>
       <div>Owner: {data.managingDeanery}</div>
+      <div>Curricula: {data.curricula.length === 0? 
+        'N/A' : 
+        data.curricula.map(c => <span>{c.curriculumName}</span>)} </div>
     </div>
   );
 }
@@ -41,6 +43,9 @@ const useStyles = makeStyles(theme => ({
 const ProgrammesComponent = (props: IProps) => {
   const classes = useStyles();
   const programmeMemberships = props.programmeMemberships;
+  const filteredProgrammeMemberships = programmeMemberships
+    .filter(programmeMembership => 
+      programmeMembership.status === 'Future' || programmeMembership.status === 'Current');
   return (
     programmeMemberships &&
     <div>
@@ -51,14 +56,16 @@ const ProgrammesComponent = (props: IProps) => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
-            style={{display: 'flex', justifyContent:'space-between'}}
           >
             <Typography className={classes.heading}>Programmes</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            {programmeMemberships.map(programmeMembership => 
-              <ProgrammePanel programmeMembership={programmeMembership}/>
-            )}
+            <div style={{width: '100%'}}>
+              {filteredProgrammeMemberships.length === 0? <div>You are not assigned to any current or future programme</div>: filteredProgrammeMemberships
+              .map(programmeMembership => 
+                <ProgrammePanel programmeMembership={programmeMembership}/>
+              )}
+            </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>

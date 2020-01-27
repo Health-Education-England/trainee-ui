@@ -32,6 +32,7 @@ export interface ProgrammeMembership {
   programmeName: string;
   programmeNumber: string;
   managingDeanery: string;
+  status: string;
   startDate: Date;
   endDate: Date;
   curricula: curriculm[]
