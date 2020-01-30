@@ -1,5 +1,6 @@
 import React from "react";
-import {Header} from 'nhsuk-react-components';
+import { Header } from 'nhsuk-react-components';
+import styles from './NavbarComponent.module.scss';
 
 interface INavbarProps {}
 interface INavbarState {
@@ -23,7 +24,7 @@ class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
 
   render() {
     return (
-      <Header style={{ width: '100%', position: 'sticky', top: '0'}}>
+      <Header style={{width: '100%', position: 'sticky', top: '0px'}}>
         <Header.Container>
           <Header.Logo />
           <Header.Content>

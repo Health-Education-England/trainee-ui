@@ -7,6 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ProgrammeMembership } from "../../models/PersonalDetails";
+import styles from "./Programmes.module.scss";
 
 interface IProgrammePanelProps {
   programmeMembership: ProgrammeMembership;
@@ -15,18 +16,30 @@ interface IProgrammePanelProps {
 const ProgrammePanel = (props: IProgrammePanelProps) => {
   const data = props.programmeMembership;
   return (
-    <div style={{border: '1px solid #B5B5B5', marginBottom: '10px'}}>
-      <div>Number: {data.programmeNumber}</div>
-      <div>Name: {data.programmeName}</div>
-      <div>Owner: {data.managingDeanery}</div>
-      <div>Curricula: {data.curricula.length === 0? 
+    <div className = {styles.programmeContainer}>
+      <div className = {styles.grid}>
+        <div>
+          <b>Number:</b><p>{data.programmeNumber}</p>
+        </div>
+        <div className = {styles.statusField}>
+          <b>Status: </b><p>{data.status.charAt(0) + data.status.slice(1).toLowerCase()}</p>
+        </div>
+      </div>
+
+      <div>
+        <b>Name: </b> <p>{data.programmeName}</p>
+      </div>
+      <div>
+        <b>Owner: </b> <p>{data.managingDeanery}</p>
+      </div>
+      <div><b>Curricula:</b> {data.curricula.length === 0? 
         'N/A' : 
         data.curricula.map(c => <span>{c.curriculumName}</span>)} </div>
     </div>
   );
 }
 
-interface IProps {
+interface IProgrammesComponentProps {
   programmeMemberships: ProgrammeMembership[];
 }
 
@@ -35,20 +48,18 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightRegular,
+    margin: '0px',
   },
 }));
 
-const ProgrammesComponent = (props: IProps) => {
+const ProgrammesComponent = (props: IProgrammesComponentProps) => {
   const classes = useStyles();
   const programmeMemberships = props.programmeMemberships;
-  const filteredProgrammeMemberships = programmeMemberships
-    .filter(programmeMembership => 
-      programmeMembership.status === 'Future' || programmeMembership.status === 'Current');
   return (
     programmeMemberships &&
-    <div>
+    <section>
       <Divider/>
       <div className={classes.root}>
         <ExpansionPanel defaultExpanded={true}>
@@ -61,15 +72,15 @@ const ProgrammesComponent = (props: IProps) => {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div style={{width: '100%'}}>
-              {filteredProgrammeMemberships.length === 0? <div>You are not assigned to any current or future programme</div>: filteredProgrammeMemberships
-              .map(programmeMembership => 
-                <ProgrammePanel programmeMembership={programmeMembership}/>
+              {programmeMemberships.length === 0? <div>You are not assigned to any programme</div>: programmeMemberships
+              .map((programmeMembership, index) => 
+                <ProgrammePanel key={index} programmeMembership={programmeMembership}/>
               )}
             </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
-    </div>
+    </section>
   );
 };
 

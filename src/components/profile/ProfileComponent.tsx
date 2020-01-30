@@ -1,8 +1,9 @@
 import React from "react";
-import PersonalDetailsComponent from './PersonalDetailsComponent';
+import { PersonalDetails } from '../../models/PersonalDetails';
 import ProgrammesComponent from "./ProgrammesComponent";
-import { PersonalDetails } from "../../models/PersonalDetails";
+import PersonalDetailsComponent from "./PersonalDetailsComponent";
 import { ProfileService } from "../../services/ProfileService";
+import styles from "./ProfileComponent.module.scss";
 
 interface IProps {}
 
@@ -52,7 +53,7 @@ class ProfileComponent extends React.PureComponent<IProps, IState> {
       return <div>Loading...</div>;
     } else {
       return (
-        data && <div>
+        data && <div className={styles.profileContainer}>
           <PersonalDetailsComponent personalDetail={data}/>
           <ProgrammesComponent programmeMemberships={data.programmeMemberships}/>
         </div>
