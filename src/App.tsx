@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './App.scss';
-import Profile from './components/Profile/ProfileComponent';
+import Profile from './components/profile/ProfileComponent';
 import BottomNavbar from './components/navigation/BottomNavbarComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import FormR from './components/FormR';
