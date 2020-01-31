@@ -1,13 +1,13 @@
 import React from "react";
+import { Header } from 'nhsuk-react-components';
+import styles from './NavbarComponent.module.scss';
 
-let Header = require('nhsuk-react-components/lib/components/header').default;
-
-interface NavbarProps {}
-interface NavbarState {
+interface INavbarProps {}
+interface INavbarState {
   anchorEl: any;
 }
 
-class NavbarComponent extends React.PureComponent<NavbarProps, NavbarState> {
+class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
   constructor(props: any) {
     super(props);
 
@@ -24,7 +24,7 @@ class NavbarComponent extends React.PureComponent<NavbarProps, NavbarState> {
 
   render() {
     return (
-      <Header style={{ width: '100%'}}>
+      <Header className={styles.header}>
         <Header.Container>
           <Header.Logo />
           <Header.Content>
@@ -32,23 +32,23 @@ class NavbarComponent extends React.PureComponent<NavbarProps, NavbarState> {
             <Header.Search />
           </Header.Content>
         </Header.Container>
-        <Header.Navigation title="Menu">
-          <Header.Link href="/profile">
+        <Header.Nav title="Menu">
+          <Header.NavItem href="/profile">
             My details
-          </Header.Link>
-          <Header.Link href="/">
+          </Header.NavItem>
+          <Header.NavItem href="/">
             My placements
-          </Header.Link>
-          <Header.Link href="/">
+          </Header.NavItem>
+          <Header.NavItem href="/">
             My assessments
-          </Header.Link>
-          <Header.Link href="/">
+          </Header.NavItem>
+          <Header.NavItem href="/">
             My forms
-          </Header.Link>
-          <Header.Link href="/">
+          </Header.NavItem>
+          <Header.NavItem href="/">
             My training
-          </Header.Link>
-        </Header.Navigation>
+          </Header.NavItem>
+        </Header.Nav>
       </Header>
     );
   }

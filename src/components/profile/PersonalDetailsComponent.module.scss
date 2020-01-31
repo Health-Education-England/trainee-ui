@@ -1,0 +1,16 @@
+$nhsBlue : #005eb8;
+
+.personalDetailContainer {
+	margin: 10px 10px 20px 10px;
+	font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.name {
+	color: $nhsBlue;
+	font-size: 24px;
+	margin-bottom: 0px;
+}
+
