@@ -1,10 +1,10 @@
-import React from "react";
-import { BottomNavigationAction, BottomNavigation } from "@material-ui/core";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import React from 'react';
+import { BottomNavigationAction, BottomNavigation } from '@material-ui/core';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
 const BottomNavbarComponent = (props: any) => {
-  const [value, setValue] = React.useState("profile");
+  const [value, setValue] = React.useState('profile');
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
   };
