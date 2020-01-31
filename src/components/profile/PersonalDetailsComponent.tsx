@@ -37,8 +37,6 @@ const PersonalDetailsComponent = (props: IProps) => {
           {data.settled && <div>Settled: {data.settled}</div> }
           {data.visaIssued && <div>Visa Issued: {data.visaIssued}</div> }
           {data.detailsNumber && <div>Details/Number: {data.detailsNumber}</div> }
-
-          {/* <button className={styles.editBtn}>Details</button> */}
         </div>
       </section>
     )
