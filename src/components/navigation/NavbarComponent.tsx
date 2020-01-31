@@ -24,7 +24,7 @@ class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
 
   render() {
     return (
-      <Header style={{width: '100%', position: 'sticky', top: '0px'}}>
+      <Header className={styles.header}>
         <Header.Container>
           <Header.Logo />
           <Header.Content>
