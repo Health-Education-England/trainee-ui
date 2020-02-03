@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import "./App.scss";
-import Profile from "./components/Profile/ProfileComponent";
-import BottomNavbar from "./components/navigation/BottomNavbarComponent";
-import { Switch, Route, Redirect } from "react-router-dom";
-import FormR from "./components/FormR";
-import LogInComponent from "./components/authentication/LogInComponent";
-import Navbar from "./components/navigation/NavbarComponent";
+import './App.scss';
+import Profile from './components/profile/ProfileComponent';
+import BottomNavbar from './components/navigation/BottomNavbarComponent';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import FormR from './components/FormR';
+import LogInComponent from './components/authentication/LogInComponent';
+import Navbar from './components/navigation/NavbarComponent';
 
 if (process.env.NODE_ENV !== 'production') {
   var axe = require('react-axe');

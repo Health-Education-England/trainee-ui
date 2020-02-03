@@ -24,7 +24,7 @@ export interface PersonalDetails {
   settled: string;
   visaIssued: string;
   detailsNumber: string;
-  programmeMemberships: ProgrammeMembership[]
+  programmeMemberships: ProgrammeMembership[];
 }
 
 export interface ProgrammeMembership {
@@ -35,7 +35,7 @@ export interface ProgrammeMembership {
   status: Status;
   startDate: Date;
   endDate: Date;
-  curricula: curriculm[]
+  curricula: curriculm[];
 }
 
 export interface curriculm {
@@ -44,7 +44,7 @@ export interface curriculm {
 }
 
 export enum Status {
-  Current ='CURRENT',
+  Current = 'CURRENT',
   Past = 'PAST',
   Future = 'FUTURE'
 }

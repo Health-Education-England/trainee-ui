@@ -1,5 +1,5 @@
-import React from "react";
-import { Menu, MenuItem } from "@material-ui/core";
+import React from 'react';
+import { Menu, MenuItem } from '@material-ui/core';
 
 const AccountSettingsPopupMenu = (props: any) => {
   return (
@@ -7,8 +7,8 @@ const AccountSettingsPopupMenu = (props: any) => {
       elevation={0}
       getContentAnchorEl={null}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "center"
+        vertical: 'bottom',
+        horizontal: 'center'
       }}
       {...props}
     >
