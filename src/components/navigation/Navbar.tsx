@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "nhsuk-react-components";
-import styles from "./NavbarComponent.module.scss";
+import styles from "./Navbar.module.scss";
 
 interface INavbarProps {}
 interface INavbarState {

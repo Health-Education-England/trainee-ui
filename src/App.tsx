@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import "./App.scss";
-import Profile from "./components/profile/ProfileComponent";
+import Profile from "./components/profile/Profile";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
-import LogInComponent from "./components/authentication/LogInComponent";
-import Navbar from "./components/navigation/NavbarComponent";
+import Navbar from "./components/navigation/Navbar";
+import Login from "./components/authentication/Login";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
         <BrowserRouter>
           <Switch>
             <Route path="/profile" component={Profile} />
-            <Route path="/login" component={LogInComponent} />
+            <Route path="/login" component={Login} />
             <Redirect exact path="/" to="/login" />
           </Switch>
         </BrowserRouter>

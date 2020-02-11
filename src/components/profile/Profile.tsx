@@ -1,9 +1,9 @@
 import React from "react";
 import { PersonalDetails } from "../../models/PersonalDetails";
-import ProgrammesComponent from "../programmes/ProgrammesComponent";
-import PersonalDetailsComponent from "./PersonalDetailsComponent";
+import ProgrammesComponent from "../programmes/Programmes";
+import PersonalDetailsComponent from "./PersonalDetails";
 import { ProfileService } from "../../services/ProfileService";
-import styles from "./ProfileComponent.module.scss";
+import styles from "./Profile.module.scss";
 
 interface IProps {}
 
