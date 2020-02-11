@@ -1,5 +1,5 @@
-@import '~nhsuk-frontend/packages/nhsuk';
-@import '~nhsuk-frontend/packages/core/all';
+@import "~nhsuk-frontend/packages/nhsuk";
+@import "~nhsuk-frontend/packages/core/all";
 
 $nhsFont: “Frutiger W01”, Arial, sans-serif;
 
@@ -11,7 +11,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 

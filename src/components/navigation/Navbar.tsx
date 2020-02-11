@@ -1,6 +1,6 @@
-import React from 'react';
-import { Header } from 'nhsuk-react-components';
-import styles from './NavbarComponent.module.scss';
+import React from "react";
+import { Header } from "nhsuk-react-components";
+import styles from "./Navbar.module.scss";
 
 interface INavbarProps {}
 interface INavbarState {
@@ -8,20 +8,6 @@ interface INavbarState {
 }
 
 class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = { anchorEl: null };
-  }
-
-  handleClick = (event: any) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
   render() {
     return (
       <Header className={styles.header}>
@@ -38,6 +24,7 @@ class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
           <Header.NavItem href="/">My assessments</Header.NavItem>
           <Header.NavItem href="/">My forms</Header.NavItem>
           <Header.NavItem href="/">My training</Header.NavItem>
+          <Header.NavItem href="/">Logout</Header.NavItem>
         </Header.Nav>
       </Header>
     );

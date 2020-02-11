@@ -1,6 +1,6 @@
-import React from 'react';
-import { PersonalDetails } from '../../models/PersonalDetails';
-import styles from './PersonalDetailsComponent.module.scss';
+import React from "react";
+import { PersonalDetails } from "../../models/PersonalDetails";
+import styles from "./PersonalDetails.module.scss";
 
 interface IProps {
   personalDetail: PersonalDetails | null;
