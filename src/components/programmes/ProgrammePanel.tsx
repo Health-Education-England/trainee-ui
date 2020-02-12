@@ -1,6 +1,6 @@
 import React from "react";
 import { ProgrammeMembership } from "../../models/ProgrammeMembership";
-import styles from "./Programmes.module.scss";
+import styles from "../ComponentContainer.module.scss";
 
 interface IProgrammePanelProps {
   programmeMembership: ProgrammeMembership;
@@ -9,13 +9,13 @@ interface IProgrammePanelProps {
 export const ProgrammePanel = (props: IProgrammePanelProps) => {
   const data = props.programmeMembership;
   return (
-    <div className={styles.programmeContainer}>
+    <div className={styles.container}>
       <div className={styles.grid}>
         <div>
           <b>Number:</b>
           <p>{data.programmeNumber}</p>
         </div>
-        <div className={styles.statusField}>
+        <div className={styles.followingField}>
           <b>Status: </b>
           <p>{data.status.charAt(0) + data.status.slice(1).toLowerCase()}</p>
         </div>
