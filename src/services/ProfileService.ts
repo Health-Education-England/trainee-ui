@@ -14,7 +14,8 @@ export class ProfileService implements IProfileService {
 
   baseUri = "http://localhost:8203/";
 
-  profileDetailsUrl = `${this.baseUri}api/contactdetails/5e00c7942749a84794644f83`;
+  // Temporarily hard code the trainee object ID to map with the ID in docker compose file
+  profileDetailsUrl = `${this.baseUri}api/contactdetails/5e43d4417fcae83918012479`;
 
   async getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>> {
     return axios.get<PersonalDetails>(this.profileDetailsUrl, this.config);
