@@ -1,4 +1,5 @@
 import { ProgrammeMembership } from "./ProgrammeMembership";
+import { Placement } from "./Placement";
 
 export interface PersonalDetails {
   id: string;
@@ -27,4 +28,5 @@ export interface PersonalDetails {
   visaIssued: string;
   detailsNumber: string;
   programmeMemberships: ProgrammeMembership[];
+  placements: Placement[];
 }

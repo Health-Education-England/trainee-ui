@@ -3,6 +3,10 @@
 
 $nhsFont: “Frutiger W01”, Arial, sans-serif;
 
+html {
+  background-color: inherit;
+}
+
 body {
   margin: 0;
   font-family: $nhsFont;

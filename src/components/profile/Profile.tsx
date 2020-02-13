@@ -1,6 +1,7 @@
 import React from "react";
 import { PersonalDetails } from "../../models/PersonalDetails";
 import ProgrammesComponent from "../programmes/Programmes";
+import PlacementsComponent from "../placements/Placements";
 import PersonalDetailsComponent from "./PersonalDetails";
 import { ProfileService } from "../../services/ProfileService";
 import styles from "./Profile.module.scss";
@@ -59,6 +60,7 @@ class ProfileComponent extends React.PureComponent<IProps, IState> {
             <ProgrammesComponent
               programmeMemberships={data.programmeMemberships}
             />
+            <PlacementsComponent placements={data.placements} />
           </div>
         )
       );
