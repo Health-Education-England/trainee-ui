@@ -1,6 +1,6 @@
 import React from "react";
 import { Placement } from "../../models/Placement";
-import styles from "../ComponentContainer.module.scss";
+import styles from "./Placements.module.scss";
 
 interface IPlacementPanelProps {
   placement: Placement;

@@ -1,6 +1,6 @@
 import React from "react";
 import { ProgrammeMembership } from "../../models/ProgrammeMembership";
-import styles from "../ComponentContainer.module.scss";
+import styles from "./Programmes.module.scss";
 
 interface IProgrammePanelProps {
   programmeMembership: ProgrammeMembership;
