@@ -9,7 +9,7 @@ interface IProgrammePanelProps {
 export const ProgrammePanel = (props: IProgrammePanelProps) => {
   const data = props.programmeMembership;
   return (
-    <div className={styles.container}>
+    <div id="programmeContainer" className={styles.container}>
       <div className={styles.grid}>
         <div>
           <b>Number:</b>

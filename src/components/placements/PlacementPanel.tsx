@@ -9,7 +9,7 @@ interface IPlacementPanelProps {
 export const PlacementPanel = (props: IPlacementPanelProps) => {
   const data = props.placement;
   return (
-    <div className={styles.container}>
+    <div id="placementContainer" className={styles.container}>
       <div>
         <b>{data.status.charAt(0) + data.status.slice(1).toLowerCase()}</b>
         <p>{data.site}</p>
