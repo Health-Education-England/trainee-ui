@@ -32,7 +32,8 @@
     "start": "cross-env EXTEND_ESLINT=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "cypress": "cypress open",
+    "cypress": "cypress run",
+    "cypress-open": "cypress open", 
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\""
