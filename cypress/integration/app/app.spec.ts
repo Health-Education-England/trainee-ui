@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 describe("Cypress", () => {
-  it("Visits the app", () => {
+  it("should visit the app", () => {
     cy.visit("/");
   });
 });

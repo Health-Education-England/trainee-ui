@@ -10,8 +10,8 @@ const PersonalDetailsComponent = (props: IProps) => {
   const data = props.personalDetail;
   return (
     data && (
-      <section>
-        <h1 className={styles.name}>
+      <section id="personalDetailContainer">
+        <h1 id="traineeName" className={styles.name}>
           {data.title}. {data.forenames} {data.surname}
         </h1>
 
