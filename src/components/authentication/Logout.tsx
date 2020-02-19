@@ -9,8 +9,6 @@ class Logout extends SignOut {
       <Button
         className={styles.logout}
         type="button"
-        secondary={true}
-        reverse={true}
         onClick={() => super.signOut()}
       >
         Logout

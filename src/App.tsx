@@ -6,6 +6,7 @@ import Navbar from "./components/navigation/Navbar";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
+import Placements from "./components/placements/Placements";
 
 interface IState {
   isAuthenticated: boolean;
@@ -26,13 +27,6 @@ class App extends React.PureComponent<any, IState> {
       this.setState({
         isAuthenticated: true
       });
-
-      // import { Auth } from "aws-amplify";
-      // let user = await Auth.currentAuthenticatedUser();
-      // This user is a CognitoUser object which will all the information about the UserPool
-      // console.log(user);
-      // signInUserSession will give all the toek nrelated information about the signed in user session
-      // console.log(user.signInUserSession);
     } else {
       this.setState({
         isAuthenticated: false
@@ -50,7 +44,7 @@ class App extends React.PureComponent<any, IState> {
           <BrowserRouter>
             <Switch>
               <Route path="/profile" component={Profile} />
-              <Route path="/logout" children={<h1>Babul</h1>} />
+              <Route path="/placements" component={Placements} />
               <Redirect exact path="/" to="/profile" />
               <Route path="/*" component={PageNotFound} />
             </Switch>

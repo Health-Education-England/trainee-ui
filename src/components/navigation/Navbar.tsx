@@ -10,15 +10,18 @@ const Navbar = (props: any) => {
         <Header.Logo />
         <Header.Content>
           <Header.MenuToggle />
-          <Logout></Logout>
+          <Header.Search></Header.Search>
         </Header.Content>
       </Header.Container>
       <Header.Nav title="Menu">
         <Header.NavItem href="/profile">My details</Header.NavItem>
-        <Header.NavItem href="/">My placements</Header.NavItem>
+        <Header.NavItem href="/programmes">My programmes</Header.NavItem>
+        <Header.NavItem href="/placements">My placements</Header.NavItem>
         <Header.NavItem href="/">My assessments</Header.NavItem>
         <Header.NavItem href="/">My forms</Header.NavItem>
-        <Header.NavItem href="/">My training</Header.NavItem>
+        <Header.NavItem>
+          <Logout></Logout>
+        </Header.NavItem>
       </Header.Nav>
     </Header>
   );

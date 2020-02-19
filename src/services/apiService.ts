@@ -18,7 +18,6 @@ export class ApiService {
   }
 
   get<T = any>(url: string): Promise<AxiosResponse<T>> {
-    // Get the user id / email and pass it to the api.
     const userId = "5e00c7942749a84794644f83";
 
     return this.axiosInstance.get(`${url}/${userId}`);

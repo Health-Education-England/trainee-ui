@@ -1,23 +1,25 @@
 import React from "react";
 import { PersonalDetails } from "../../models/PersonalDetails";
 import ProgrammesComponent from "../programmes/Programmes";
-import PlacementsComponent from "../placements/Placements";
-import PersonalDetailsComponent from "./PersonalDetails";
+import PersonalDetailsComponent from "../personalDetails/PersonalDetails";
 import { ProfileService } from "../../services/ProfileService";
 import styles from "./Profile.module.scss";
 
-interface IProps {}
+interface IProfileProps {}
 
-interface IState {
+interface IProfileState {
   isLoaded: boolean;
   data: PersonalDetails | null;
   error: any;
 }
 
-class ProfileComponent extends React.PureComponent<IProps, IState> {
+class ProfileComponent extends React.PureComponent<
+  IProfileProps,
+  IProfileState
+> {
   profileService: ProfileService;
 
-  constructor(props: IProps) {
+  constructor(props: IProfileProps) {
     super(props);
     this.state = {
       isLoaded: false,
@@ -60,7 +62,6 @@ class ProfileComponent extends React.PureComponent<IProps, IState> {
             <ProgrammesComponent
               programmeMemberships={data.programmeMemberships}
             />
-            <PlacementsComponent placements={data.placements} />
           </div>
         )
       );
