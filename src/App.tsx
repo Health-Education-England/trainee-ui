@@ -22,7 +22,6 @@ class App extends React.PureComponent<any, IState> {
   }
 
   setAuthenticationStatus = async (state: any) => {
-    console.log(state);
     if (state === "signedIn") {
       this.setState({
         isAuthenticated: true
@@ -39,7 +38,7 @@ class App extends React.PureComponent<any, IState> {
 
     return isAuthenticated ? (
       <Fragment>
-        <Navbar setAuthenticationStatus={this.setAuthenticationStatus} />
+        <Navbar />
         <main>
           <BrowserRouter>
             <Switch>

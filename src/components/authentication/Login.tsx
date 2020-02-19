@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
 import { Header } from "nhsuk-react-components";
 import HEEFooter from "../navigation/HEEFooter";
-import { Authenticator, SignIn, ForgotPassword } from "aws-amplify-react";
+import {
+  Authenticator,
+  SignIn,
+  ForgotPassword,
+  RequireNewPassword
+} from "aws-amplify-react";
 
 import styles from "./Login.module.scss";
 
@@ -20,6 +25,7 @@ const Login = (props: any) => {
         >
           <SignIn />
           <ForgotPassword />
+          <RequireNewPassword />
         </Authenticator>
       </main>
       <HEEFooter></HEEFooter>
