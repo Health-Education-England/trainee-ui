@@ -1,34 +1,30 @@
 import React from "react";
 import { Header } from "nhsuk-react-components";
 import styles from "./Navbar.module.scss";
+import Logout from "../authentication/Logout";
 
-interface INavbarProps {}
-interface INavbarState {
-  anchorEl: any;
-}
+const Navbar = (props: any) => {
+  return (
+    <Header className={styles.header}>
+      <Header.Container>
+        <Header.Logo />
+        <Header.Content>
+          <Header.MenuToggle />
+          <Header.Search></Header.Search>
+        </Header.Content>
+      </Header.Container>
+      <Header.Nav title="Menu">
+        <Header.NavItem href="/profile">My details</Header.NavItem>
+        <Header.NavItem href="/programmes">My programmes</Header.NavItem>
+        <Header.NavItem href="/placements">My placements</Header.NavItem>
+        <Header.NavItem href="/">My assessments</Header.NavItem>
+        <Header.NavItem href="/">My forms</Header.NavItem>
+        <Header.NavItem>
+          <Logout></Logout>
+        </Header.NavItem>
+      </Header.Nav>
+    </Header>
+  );
+};
 
-class NavbarComponent extends React.PureComponent<INavbarProps, INavbarState> {
-  render() {
-    return (
-      <Header className={styles.header}>
-        <Header.Container>
-          <Header.Logo />
-          <Header.Content>
-            <Header.MenuToggle />
-            <Header.Search />
-          </Header.Content>
-        </Header.Container>
-        <Header.Nav title="Menu">
-          <Header.NavItem href="/profile">My details</Header.NavItem>
-          <Header.NavItem href="/">My placements</Header.NavItem>
-          <Header.NavItem href="/">My assessments</Header.NavItem>
-          <Header.NavItem href="/">My forms</Header.NavItem>
-          <Header.NavItem href="/">My training</Header.NavItem>
-          <Header.NavItem href="/">Logout</Header.NavItem>
-        </Header.Nav>
-      </Header>
-    );
-  }
-}
-
-export default NavbarComponent;
+export default Navbar;
