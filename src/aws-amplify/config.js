@@ -1,8 +1,8 @@
 export default {
   cognito: {
-    REGION: "eu-west-2",
-    USER_POOL_ID: "eu-west-2_EsAKWKr9j",
-    APP_CLIENT_ID: "4dvuoclaideril65upfvbj25sa",
-    IDENTITY_POOL_ID: ""
+    REGION: process.env.REACT_APP_COGNITO_REGION,
+    USER_POOL_ID: process.env.REACT_APP_COGNITO_USER_POOL_ID,
+    APP_CLIENT_ID: process.env.REACT_APP_COGNITO_APP_CLIENT_ID,
+    IDENTITY_POOL_ID: process.env.REACT_APP_COGNITO_IDENTITY_POOL_ID
   }
 };
