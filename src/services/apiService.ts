@@ -3,7 +3,7 @@ import { Auth } from "aws-amplify";
 
 export class ApiService {
   axiosInstance = axios.create({
-    baseURL: "http://localhost:8203/",
+    baseURL: process.env.REACT_APP_SERVER_ADDRESS,
     headers: {}
   });
 
