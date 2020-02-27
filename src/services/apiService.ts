@@ -3,7 +3,7 @@ import { Auth } from "aws-amplify";
 
 export class ApiService {
   axiosInstance = axios.create({
-    baseURL: `http://${process.env.REACT_APP_SERVER_HOST}:${process.env.REACT_APP_SERVER_PORT}/`,
+    baseURL: process.env.REACT_APP_SERVER_ADDRESS,
     headers: {}
   });
 
