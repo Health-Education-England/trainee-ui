@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import * as Sentry from "@sentry/browser";
 import Amplify from "aws-amplify";
 import config from "./aws-amplify/config";
+
+import store from "./store/store";
 
 Sentry.init({
   dsn: "https://abba1f8a43dd4da4a00277b34beaaf59@sentry.io/1882746",
@@ -22,5 +25,10 @@ Amplify.configure({
   }
 });
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 serviceWorker.register();
