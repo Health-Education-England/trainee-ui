@@ -1,72 +1,40 @@
 import React from "react";
-import { PersonalDetails } from "../../models/PersonalDetails";
+import { connect } from "react-redux";
 import ProgrammesComponent from "../programmes/Programmes";
 import PersonalDetailsComponent from "../personalDetails/PersonalDetails";
-import { ProfileService } from "../../services/ProfileService";
 import styles from "./Profile.module.scss";
+import { fetchPersonDetails } from "../../actions/personActions";
 
-interface IProfileProps {}
-
-interface IProfileState {
-  isLoaded: boolean;
-  data: PersonalDetails | null;
-  error: any;
-}
-
-class ProfileComponent extends React.PureComponent<
-  IProfileProps,
-  IProfileState
-> {
-  profileService: ProfileService;
-
-  constructor(props: IProfileProps) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      data: null,
-      error: null
-    };
-    this.profileService = new ProfileService();
-  }
-
+class ProfileComponent extends React.PureComponent<any> {
   componentDidMount() {
-    this.profileService
-      .getPersonalDetails()
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          data: result.data,
-          error: null
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isLoaded: false,
-          data: null,
-          error: error
-        });
-      });
+    this.props.fetchPersonDetails();
   }
 
   render() {
-    const { isLoaded, data, error } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
+    const personDetails = this.props.personReducer.personalDetails;
+    if (personDetails !== undefined) {
       return (
-        data && (
+        personDetails && (
           <div className={styles.profileContainer}>
-            <PersonalDetailsComponent personalDetail={data} />
+            <PersonalDetailsComponent personalDetail={personDetails} />
             <ProgrammesComponent
-              programmeMemberships={data.programmeMemberships}
+              programmeMemberships={personDetails.programmeMemberships}
             />
           </div>
         )
       );
-    }
+    } else return <div>Nothing coming through</div>;
   }
 }
 
-export default ProfileComponent;
+const mapStateToProps = (state: {
+  personReducer: { personalDetails: any; isLoaded: boolean; error: any };
+}) => ({
+  personReducer: {
+    personalDetails: state.personReducer.personalDetails.data
+  }
+});
+
+export default connect(mapStateToProps, { fetchPersonDetails })(
+  ProfileComponent
+);

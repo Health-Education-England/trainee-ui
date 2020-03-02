@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-//To do - Redux import individual reducers here
+import personReducer from "./personReducer";
 
 export default combineReducers({
-  //to do put reducer names here
+  personReducer
 });
