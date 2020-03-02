@@ -1,5 +1,5 @@
 import { GET_PERSONAL_DETAILS } from "../actions/types";
-import { ProfileService } from "../services/ProfileService";
+import { ProfileService } from "../../services/ProfileService";
 
 const profileService = new ProfileService();
 

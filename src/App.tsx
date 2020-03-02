@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
 import "./App.scss";
-import Profile from "./components/profile/Profile";
+import Profile from "./redux/containers/Profile";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
 import Placements from "./components/placements/Placements";
+import Programmes from "./components/programmes/Programmes";
 
 interface IState {
   isAuthenticated: boolean;
@@ -44,6 +45,7 @@ class App extends React.PureComponent<any, IState> {
             <Switch>
               <Route path="/profile" component={Profile} />
               <Route path="/placements" component={Placements} />
+              <Route path="/programmes" component={Programmes} />
               <Redirect exact path="/" to="/profile" />
               <Route path="/*" component={PageNotFound} />
             </Switch>

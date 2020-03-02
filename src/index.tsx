@@ -8,7 +8,7 @@ import * as Sentry from "@sentry/browser";
 import Amplify from "aws-amplify";
 import config from "./aws-amplify/config";
 
-import store from "./store/store";
+import store from "./redux/store/store";
 
 Sentry.init({
   dsn: "https://abba1f8a43dd4da4a00277b34beaaf59@sentry.io/1882746",
