@@ -6,10 +6,10 @@ const profileService = new ProfileService();
 export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
   profileService
     .getPersonalDetails()
-    .then(personData =>
+    .then(response =>
       dispatch({
         type: GET_PERSONAL_DETAILS,
-        payload: { personalDetails: personData, isLoaded: true, error: null }
+        payload: { personalDetails: response.data, isLoaded: true, error: null }
       })
     )
     .catch(error => {
@@ -18,4 +18,11 @@ export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
         payload: { personalDetails: null, isLoaded: false, error: error }
       });
     });
+
+  return dispatch({
+    type: GET_PERSONAL_DETAILS,
+    payload: { personalDetails: null, isLoaded: false, error: null }
+  });
 };
+
+export default fetchPersonDetails;
