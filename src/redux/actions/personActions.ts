@@ -1,4 +1,8 @@
-import { GET_PERSONAL_DETAILS } from "../actions/types";
+import {
+  LOAD_TRAINEE_PROFILE,
+  LOAD_TRAINEE_PROFILE_FAILURE,
+  LOAD_TRAINEE_PROFILE_SUCCESS
+} from "../actions/types";
 import { ProfileService } from "../../services/ProfileService";
 
 const profileService = new ProfileService();
@@ -6,16 +10,21 @@ const profileService = new ProfileService();
 export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
   profileService
     .getPersonalDetails()
-    .then(personData =>
+    .then(response =>
       dispatch({
-        type: GET_PERSONAL_DETAILS,
-        payload: { personalDetails: personData, isLoaded: true, error: null }
+        type: LOAD_TRAINEE_PROFILE_SUCCESS,
+        payload: response.data
       })
     )
     .catch(error => {
       dispatch({
-        type: GET_PERSONAL_DETAILS,
-        payload: { personalDetails: null, isLoaded: false, error: error }
+        type: LOAD_TRAINEE_PROFILE_FAILURE,
+        payload: error
       });
     });
+
+  return dispatch({
+    type: LOAD_TRAINEE_PROFILE,
+    payload: null
+  });
 };
