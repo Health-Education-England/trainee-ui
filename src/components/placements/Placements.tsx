@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { fetchPersonDetails } from "../../redux/actions/personActions";
+
 import Divider from "@material-ui/core/Divider";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -7,57 +10,17 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { PlacementPanel } from "./PlacementPanel";
 import { Placement } from "../../models/Placement";
-import { ProfileService } from "../../services/ProfileService";
 import styles from "./Placements.module.scss";
 
-interface IPlacementsComponentProps {
-  placements: Placement[];
-}
-
-interface IPlacementsState {
-  isLoaded: boolean;
-  placements: Placement[] | null;
-  error: any;
-}
-
-class Placements extends React.PureComponent<
-  IPlacementsComponentProps,
-  IPlacementsState
-> {
-  profileService: ProfileService;
-
-  constructor(props: IPlacementsComponentProps) {
-    super(props);
-
-    this.state = {
-      isLoaded: false,
-      placements: null,
-      error: null
-    };
-    this.profileService = new ProfileService();
-  }
-
+class Placements extends React.PureComponent<any> {
   componentDidMount() {
-    this.profileService
-      .getPersonalDetails()
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          placements: result.data.placements,
-          error: null
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isLoaded: false,
-          placements: [],
-          error: error
-        });
-      });
+    this.props.fetchPersonDetails();
   }
 
   render() {
-    const { isLoaded, placements, error } = this.state;
+    const personDetails = this.props.personReducer.personalDetails;
+    const isLoaded = this.props.personReducer.isLoaded;
+    const error = this.props.personReducer.error;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -65,8 +28,7 @@ class Placements extends React.PureComponent<
       return <div>Loading...</div>;
     } else {
       return (
-        isLoaded &&
-        placements && (
+        personDetails && (
           <section>
             <Divider />
             <div>
@@ -80,10 +42,10 @@ class Placements extends React.PureComponent<
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <div style={{ width: "100%" }}>
-                    {placements.length === 0 ? (
+                    {personDetails.placements.length === 0 ? (
                       <div>You are not assigned to any placement</div>
                     ) : (
-                      placements.map(
+                      personDetails.placements.map(
                         (
                           placement: Placement,
                           index: string | number | undefined
@@ -103,4 +65,14 @@ class Placements extends React.PureComponent<
   }
 }
 
-export default Placements;
+const mapStateToProps = (state: {
+  personReducer: { personalDetails: any; isLoaded: boolean; error: any };
+}) => ({
+  personReducer: {
+    personalDetails: state.personReducer.personalDetails.data,
+    isLoaded: state.personReducer.isLoaded,
+    error: state.personReducer.error
+  }
+});
+
+export default connect(mapStateToProps, { fetchPersonDetails })(Placements);
