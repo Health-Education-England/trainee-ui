@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPersonDetails } from "../../redux/actions/personActions";
+import { fetchPersonDetails } from "../../../redux/actions/personActions";
 
 import Divider from "@material-ui/core/Divider";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -9,7 +9,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ProgrammePanel } from "./ProgrammePanel";
-import { ProgrammeMembership } from "../../models/ProgrammeMembership";
+import { ProgrammeMembership } from "../../../models/ProgrammeMembership";
 
 class ProgrammesComponent extends React.PureComponent<any> {
   componentDidMount() {

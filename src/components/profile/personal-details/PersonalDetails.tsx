@@ -1,5 +1,5 @@
 import React from "react";
-import { PersonalDetails } from "../../models/PersonalDetails";
+import { PersonalDetails } from "../../../models/PersonalDetails";
 import styles from "./PersonalDetails.module.scss";
 import { SummaryList } from "nhsuk-react-components";
 

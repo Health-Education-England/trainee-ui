@@ -1,27 +1,34 @@
-import { GET_PERSONAL_DETAILS } from "../actions/types";
+import {
+  LOAD_TRAINEE_PROFILE,
+  LOAD_TRAINEE_PROFILE_FAILURE,
+  LOAD_TRAINEE_PROFILE_SUCCESS,
+  PersonActionType
+} from "../types";
 import { ProfileService } from "../../services/ProfileService";
 
 const profileService = new ProfileService();
 
-export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
+export const fetchPersonDetails = () => (
+  dispatch: (action: PersonActionType) => any
+) => {
   profileService
     .getPersonalDetails()
     .then(response =>
       dispatch({
-        type: GET_PERSONAL_DETAILS,
-        payload: { personalDetails: response.data, isLoaded: true, error: null }
+        type: LOAD_TRAINEE_PROFILE_SUCCESS,
+        payload: response.data
       })
     )
-    .catch(error => {
+    .catch(error =>
       dispatch({
-        type: GET_PERSONAL_DETAILS,
-        payload: { personalDetails: null, isLoaded: false, error: error }
-      });
-    });
+        type: LOAD_TRAINEE_PROFILE_FAILURE,
+        payload: error
+      })
+    );
 
   return dispatch({
-    type: GET_PERSONAL_DETAILS,
-    payload: { personalDetails: null, isLoaded: false, error: null }
+    type: LOAD_TRAINEE_PROFILE,
+    payload: null
   });
 };
 
