@@ -1,13 +1,16 @@
 import {
   LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
-  LOAD_TRAINEE_PROFILE_SUCCESS
-} from "../actions/types";
+  LOAD_TRAINEE_PROFILE_SUCCESS,
+  PersonActionType
+} from "../types";
 import { ProfileService } from "../../services/ProfileService";
 
 const profileService = new ProfileService();
 
-export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
+export const fetchPersonDetails = () => (
+  dispatch: (action: PersonActionType) => any
+) => {
   profileService
     .getPersonalDetails()
     .then(response =>
@@ -16,12 +19,12 @@ export const fetchPersonDetails = () => (dispatch: (arg0: {}) => any) => {
         payload: response.data
       })
     )
-    .catch(error => {
+    .catch(error =>
       dispatch({
         type: LOAD_TRAINEE_PROFILE_FAILURE,
         payload: error
-      });
-    });
+      })
+    );
 
   return dispatch({
     type: LOAD_TRAINEE_PROFILE,

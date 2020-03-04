@@ -1,9 +1,10 @@
 import {
   LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
-  LOAD_TRAINEE_PROFILE_SUCCESS
-} from "../actions/types";
-import { PersonalDetails } from "../../models/PersonalDetails";
+  LOAD_TRAINEE_PROFILE_SUCCESS,
+  PersonActionType,
+  PersonState
+} from "../types";
 
 const initialState: PersonState = {
   personalDetails: null,
@@ -11,15 +12,9 @@ const initialState: PersonState = {
   error: null
 };
 
-export interface PersonState {
-  personalDetails: PersonalDetails | null;
-  isLoaded: boolean;
-  error: any;
-}
-
 export default function personReducer(
   state = initialState,
-  action: { type: any; payload: any }
+  action: PersonActionType
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:

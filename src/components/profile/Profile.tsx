@@ -1,9 +1,9 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import PersonalDetailsComponent from "../../components/personalDetails/PersonalDetails";
 import styles from "./Profile.module.scss";
-import { fetchPersonDetails } from "../actions/personActions";
-import { RootState } from "../reducers";
+import { fetchPersonDetails } from "../../redux/actions/personActions";
+import { RootState } from "../../redux/types";
+import PersonalDetailsComponent from "./personal-details/PersonalDetails";
 
 const mapStateToProps = (state: RootState) => ({
   personalDetails: state.persons.personalDetails,
