@@ -8,7 +8,7 @@ import { ProfileService } from "../../services/ProfileService";
 
 const profileService = new ProfileService();
 
-export const fetchPersonDetails = () => (
+export const fetchPersonalDetails = () => (
   dispatch: (action: PersonActionType) => any
 ) => {
   profileService
@@ -32,4 +32,4 @@ export const fetchPersonDetails = () => (
   });
 };
 
-export default fetchPersonDetails;
+export default fetchPersonalDetails;

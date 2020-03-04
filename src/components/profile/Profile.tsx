@@ -1,9 +1,11 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import styles from "./Profile.module.scss";
-import { fetchPersonDetails } from "../../redux/actions/personActions";
+import { fetchPersonalDetails } from "../../redux/actions/personActions";
 import { RootState } from "../../redux/types";
 import PersonalDetailsComponent from "./personal-details/PersonalDetails";
+import ProgrammesComponent from "./programmes/Programmes";
+import PlacementsComponent from "./placements/Placements";
 
 const mapStateToProps = (state: RootState) => ({
   personalDetails: state.persons.personalDetails,
@@ -12,7 +14,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  fetchPersonDetails
+  fetchPersonalDetails
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -20,7 +22,7 @@ type profileProps = ConnectedProps<typeof connector>;
 
 class ProfileComponent extends React.PureComponent<profileProps> {
   componentDidMount() {
-    this.props.fetchPersonDetails();
+    this.props.fetchPersonalDetails();
   }
 
   render() {
@@ -34,7 +36,13 @@ class ProfileComponent extends React.PureComponent<profileProps> {
       return (
         personalDetails && (
           <div className={styles.profileContainer}>
-            <PersonalDetailsComponent personalDetail={personalDetails} />
+            <PersonalDetailsComponent personalDetails={personalDetails} />
+            <PlacementsComponent
+              placements={personalDetails.placements}
+            ></PlacementsComponent>
+            <ProgrammesComponent
+              programmeMemberships={personalDetails.programmeMemberships}
+            ></ProgrammesComponent>
           </div>
         )
       );
