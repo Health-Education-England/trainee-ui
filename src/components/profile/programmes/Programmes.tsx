@@ -7,7 +7,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ProgrammePanel } from "./ProgrammePanel";
-import { ProgrammeMembership } from "../../models/ProgrammeMembership";
+import { ProgrammeMembership } from "../../../models/ProgrammeMembership";
 
 interface IProgrammesComponentProps {
   programmeMemberships: ProgrammeMembership[];
@@ -18,20 +18,24 @@ const useStyles = makeStyles(theme => ({
     width: "100%"
   },
   heading: {
-    fontSize: theme.typography.pxToRem(18),
-    fontWeight: theme.typography.fontWeightRegular,
+    fontSize: theme.typography.pxToRem(22),
+    fontWeight: theme.typography.fontWeightBold,
     margin: "0px"
+  },
+  sectionPadding: {
+    padding: theme.typography.pxToRem(20)
   }
 }));
 
-const ProgrammesComponent = (props: IProgrammesComponentProps) => {
+const ProgrammesComponent: React.FC<IProgrammesComponentProps> = ({
+  programmeMemberships
+}) => {
   const classes = useStyles();
-  const programmeMemberships = props.programmeMemberships;
   return (
     programmeMemberships && (
-      <section>
+      <section className={classes.sectionPadding}>
         <Divider />
-        <div className={classes.root}>
+        <div>
           <ExpansionPanel defaultExpanded={true}>
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -41,16 +45,21 @@ const ProgrammesComponent = (props: IProgrammesComponentProps) => {
               <Typography className={classes.heading}>Programmes</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <div style={{ width: "100%" }}>
+              <div className={classes.root}>
                 {programmeMemberships.length === 0 ? (
                   <div>You are not assigned to any programme</div>
                 ) : (
-                  programmeMemberships.map((programmeMembership, index) => (
-                    <ProgrammePanel
-                      key={index}
-                      programmeMembership={programmeMembership}
-                    />
-                  ))
+                  programmeMemberships.map(
+                    (
+                      programmeMembership: ProgrammeMembership,
+                      index: string | number | undefined
+                    ) => (
+                      <ProgrammePanel
+                        key={index}
+                        programmeMembership={programmeMembership}
+                      />
+                    )
+                  )
                 )}
               </div>
             </ExpansionPanelDetails>

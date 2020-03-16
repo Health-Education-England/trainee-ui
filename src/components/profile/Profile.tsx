@@ -1,67 +1,48 @@
 import React from "react";
-import { PersonalDetails } from "../../models/PersonalDetails";
-import ProgrammesComponent from "../programmes/Programmes";
-import PersonalDetailsComponent from "../personalDetails/PersonalDetails";
-import { ProfileService } from "../../services/ProfileService";
+import { connect, ConnectedProps } from "react-redux";
 import styles from "./Profile.module.scss";
+import { fetchPersonalDetails } from "../../redux/actions/personActions";
+import { RootState } from "../../redux/types";
+import PersonalDetailsComponent from "./personal-details/PersonalDetails";
+import ProgrammesComponent from "./programmes/Programmes";
+import PlacementsComponent from "./placements/Placements";
 
-interface IProfileProps {}
+const mapStateToProps = (state: RootState) => ({
+  personalDetails: state.persons.personalDetails,
+  isLoaded: state.persons.isLoaded,
+  error: state.persons.error
+});
 
-interface IProfileState {
-  isLoaded: boolean;
-  data: PersonalDetails | null;
-  error: any;
-}
+const mapDispatchToProps = {
+  fetchPersonalDetails
+};
 
-class ProfileComponent extends React.PureComponent<
-  IProfileProps,
-  IProfileState
-> {
-  profileService: ProfileService;
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type profileProps = ConnectedProps<typeof connector>;
 
-  constructor(props: IProfileProps) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      data: null,
-      error: null
-    };
-    this.profileService = new ProfileService();
-  }
-
+class ProfileComponent extends React.PureComponent<profileProps> {
   componentDidMount() {
-    this.profileService
-      .getPersonalDetails()
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          data: result.data,
-          error: null
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isLoaded: false,
-          data: null,
-          error: error
-        });
-      });
+    this.props.fetchPersonalDetails();
   }
 
   render() {
-    const { isLoaded, data, error } = this.state;
+    const { personalDetails, isLoaded, error } = this.props;
+
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div>Error: {error}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       return (
-        data && (
+        personalDetails && (
           <div className={styles.profileContainer}>
-            <PersonalDetailsComponent personalDetail={data} />
+            <PersonalDetailsComponent personalDetails={personalDetails} />
+            <PlacementsComponent
+              placements={personalDetails.placements}
+            ></PlacementsComponent>
             <ProgrammesComponent
-              programmeMemberships={data.programmeMemberships}
-            />
+              programmeMemberships={personalDetails.programmeMemberships}
+            ></ProgrammesComponent>
           </div>
         )
       );
@@ -69,4 +50,4 @@ class ProfileComponent extends React.PureComponent<
   }
 }
 
-export default ProfileComponent;
+export default connector(ProfileComponent);

@@ -1,4 +1,4 @@
-$nhsBlue: #005eb8;
+@import "../../Common.module.scss";
 
 .personalDetailContainer {
   margin: 10px 10px 20px 10px;
@@ -10,6 +10,7 @@ $nhsBlue: #005eb8;
 
 .name {
   color: $nhsBlue;
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 0px;
+  font-weight: 500;
 }

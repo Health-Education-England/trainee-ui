@@ -6,7 +6,6 @@ import Navbar from "./components/navigation/Navbar";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
-import Placements from "./components/placements/Placements";
 
 interface IState {
   isAuthenticated: boolean;
@@ -43,7 +42,6 @@ class App extends React.PureComponent<any, IState> {
           <BrowserRouter>
             <Switch>
               <Route path="/profile" component={Profile} />
-              <Route path="/placements" component={Placements} />
               <Redirect exact path="/" to="/profile" />
               <Route path="/*" component={PageNotFound} />
             </Switch>
