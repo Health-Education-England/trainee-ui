@@ -1,3 +1,5 @@
+![Analyse with SonarQube](https://github.com/Health-Education-England/trainee-ui/workflows/Analyse%20with%20SonarQube/badge.svg)
+
 # trainee-ui
 Front-end for Training Pathway app
 
