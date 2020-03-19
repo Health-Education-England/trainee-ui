@@ -1,15 +1,15 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { fetchTraineeProfile } from "../../redux/actions/personActions";
+import { fetchTraineeProfile } from "../../redux/actions/traineeProfileActions";
 import { RootState } from "../../redux/types";
 import PersonalDetailsComponent from "./personal-details/PersonalDetails";
 import Programmes from "./programmes/Programmes";
 import Placements from "./placements/Placements";
 
 const mapStateToProps = (state: RootState) => ({
-  traineeProfile: state.persons.traineeProfile,
-  isLoaded: state.persons.isLoaded,
-  error: state.persons.error
+  traineeProfile: state.person.traineeProfile,
+  isLoaded: state.person.isLoaded,
+  error: state.person.error
 });
 
 const mapDispatchToProps = {
@@ -34,7 +34,7 @@ class Profile extends React.PureComponent<profileProps> {
     } else {
       return (
         traineeProfile && (
-          <div className="nhsuk-width-container">
+          <div>
             <PersonalDetailsComponent
               personalDetails={traineeProfile.personalDetails}
             />

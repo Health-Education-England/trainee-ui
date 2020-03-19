@@ -2,14 +2,14 @@ import {
   LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  PersonActionType
+  ActionType
 } from "../types";
-import { TraineeProfileService } from "../../services/ProfileService";
+import { TraineeProfileService } from "../../services/TraineeProfileService";
 
 const profileService = new TraineeProfileService();
 
 export const fetchTraineeProfile = () => (
-  dispatch: (action: PersonActionType) => any
+  dispatch: (action: ActionType) => any
 ) => {
   profileService
     .getTraineeProfile()

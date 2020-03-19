@@ -15,7 +15,8 @@ const Navbar = (props: any) => {
       </Header.Container>
       <Header.Nav title="Menu">
         <Header.NavItem href="/profile">Profile</Header.NavItem>
-        <Header.NavItem href="/">Forms</Header.NavItem>
+        <Header.NavItem href="/formr-a">Form R-a</Header.NavItem>
+        <Header.NavItem href="/formr-b">Form R-b</Header.NavItem>
         <Header.NavItem>
           <Logout></Logout>
         </Header.NavItem>

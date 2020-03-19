@@ -6,6 +6,8 @@ import Navbar from "./components/navigation/Navbar";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
+import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
+import FormRPartB from "./components/forms/formr-part-b/FormRPartB";
 
 interface IState {
   isAuthenticated: boolean;
@@ -38,10 +40,12 @@ class App extends React.PureComponent<any, IState> {
     return isAuthenticated ? (
       <Fragment>
         <Navbar />
-        <main>
+        <main className="nhsuk-width-container">
           <BrowserRouter>
             <Switch>
               <Route path="/profile" component={Profile} />
+              <Route path="/formr-a" component={FormRPartA} />
+              <Route path="/formr-b" component={FormRPartB} />
               <Redirect exact path="/" to="/profile" />
               <Route path="/*" component={PageNotFound} />
             </Switch>

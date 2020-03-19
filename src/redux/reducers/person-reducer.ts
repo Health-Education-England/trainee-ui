@@ -2,7 +2,7 @@ import {
   LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  PersonActionType,
+  ActionType,
   PersonState
 } from "../types";
 
@@ -14,7 +14,7 @@ const initialState: PersonState = {
 
 export default function personReducer(
   state = initialState,
-  action: PersonActionType
+  action: ActionType
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
