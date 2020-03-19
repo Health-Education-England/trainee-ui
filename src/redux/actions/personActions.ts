@@ -4,15 +4,15 @@ import {
   LOAD_TRAINEE_PROFILE_SUCCESS,
   PersonActionType
 } from "../types";
-import { ProfileService } from "../../services/ProfileService";
+import { TraineeProfileService } from "../../services/ProfileService";
 
-const profileService = new ProfileService();
+const profileService = new TraineeProfileService();
 
-export const fetchPersonalDetails = () => (
+export const fetchTraineeProfile = () => (
   dispatch: (action: PersonActionType) => any
 ) => {
   profileService
-    .getPersonalDetails()
+    .getTraineeProfile()
     .then(response =>
       dispatch({
         type: LOAD_TRAINEE_PROFILE_SUCCESS,
@@ -32,4 +32,4 @@ export const fetchPersonalDetails = () => (
   });
 };
 
-export default fetchPersonalDetails;
+export default fetchTraineeProfile;

@@ -9,7 +9,7 @@ import { PlacementPanel } from "./PlacementPanel";
 import { Placement } from "../../../models/Placement";
 import { makeStyles } from "@material-ui/core/styles";
 
-interface IPlacementsComponentProps {
+interface IPlacementProps {
   placements: Placement[];
 }
 
@@ -27,9 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PlacementsComponent: React.FC<IPlacementsComponentProps> = ({
-  placements
-}) => {
+const Placements: React.FC<IPlacementProps> = ({ placements }) => {
   const classes = useStyles();
   return (
     placements && (
@@ -65,4 +63,4 @@ const PlacementsComponent: React.FC<IPlacementsComponentProps> = ({
   );
 };
 
-export default PlacementsComponent;
+export default Placements;

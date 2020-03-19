@@ -7,7 +7,7 @@ import {
 } from "../types";
 
 const initialState: PersonState = {
-  personalDetails: null,
+  traineeProfile: null,
   isLoaded: false,
   error: null
 };
@@ -19,19 +19,19 @@ export default function personReducer(
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
       return {
-        personalDetails: action.payload,
+        traineeProfile: action.payload,
         isLoaded: true,
         error: null
       };
     case LOAD_TRAINEE_PROFILE_FAILURE:
       return {
-        personalDetails: null,
+        traineeProfile: null,
         isLoaded: true,
         error: action.payload
       };
     case LOAD_TRAINEE_PROFILE:
       return {
-        personalDetails: null,
+        traineeProfile: null,
         isLoaded: false,
         error: null
       };
