@@ -1,6 +1,3 @@
-import { ProgrammeMembership } from "./ProgrammeMembership";
-import { Placement } from "./Placement";
-
 export interface PersonalDetails {
   id: string;
   traineeTisId: string;
@@ -27,6 +24,4 @@ export interface PersonalDetails {
   settled: string;
   visaIssued: string;
   detailsNumber: string;
-  programmeMemberships: ProgrammeMembership[];
-  placements: Placement[];
 }

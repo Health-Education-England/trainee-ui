@@ -1,5 +1,5 @@
 import { rootReducer } from "./reducers";
-import { PersonalDetails } from "../models/PersonalDetails";
+import { TraineeProfile } from "../models/TraineeProfile";
 
 export const LOAD_TRAINEE_PROFILE = "LOAD_TRAINEE_PROFILE";
 export const LOAD_TRAINEE_PROFILE_SUCCESS = "LOAD_TRAINEE_PROFILE_SUCCESS";
@@ -13,7 +13,7 @@ export interface PersonActionType {
 }
 
 export interface PersonState {
-  personalDetails: PersonalDetails | null;
+  traineeProfile: TraineeProfile | null;
   isLoaded: boolean;
   error: any;
 }

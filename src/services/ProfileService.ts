@@ -1,19 +1,19 @@
 import { AxiosResponse } from "axios";
-import { PersonalDetails } from "../models/PersonalDetails";
 import ApiService from "./apiService";
+import { TraineeProfile } from "../models/TraineeProfile";
 
-export interface IProfileService {
-  getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>>;
+export interface ITraineeProfileService {
+  getTraineeProfile(): Promise<AxiosResponse<TraineeProfile>>;
 }
 
-export class ProfileService implements IProfileService {
+export class TraineeProfileService implements ITraineeProfileService {
   apiService: ApiService;
 
   constructor() {
     this.apiService = new ApiService();
   }
 
-  async getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>> {
-    return this.apiService.get<PersonalDetails>(`/api/contactdetails`);
+  async getTraineeProfile(): Promise<AxiosResponse<TraineeProfile>> {
+    return this.apiService.get<TraineeProfile>(`/api/contactdetails`);
   }
 }
