@@ -9,6 +9,6 @@ WORKDIR /app
 ENV PATH="/app/node_modules/.bin:${PATH}"
 ENV REACT_APP_SERVER_ADDRESS="https://trainee.tis.nhs.uk"
 
-RUN npm install
+RUN npm install --verbose
 
 CMD ["npm", "start"]
