@@ -1,4 +1,3 @@
-#base image
 FROM node:12.2.0-alpine
 
 RUN mkdir /app
@@ -10,6 +9,6 @@ WORKDIR /app
 ENV PATH="/app/node_modules/.bin:${PATH}"
 ENV REACT_APP_SERVER_ADDRESS="https://trainee.tis.nhs.uk"
 
-RUN yarn
+RUN npm install
 
 CMD ["npm", "start"]
