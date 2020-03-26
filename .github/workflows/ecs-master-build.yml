@@ -24,9 +24,9 @@
 #    and best practices on handling the access key credentials.
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
   pull_request:
     branches:
       - master
@@ -75,6 +75,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: trainee-ui-fargate
-        cluster: trainee-ui-fargate
+        service: trainee-ui
+        cluster: trainee-ui
         wait-for-service-stability: true
