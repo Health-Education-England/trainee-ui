@@ -1,4 +1,4 @@
-export interface FormRPartAModel {
+export interface FormRPartA {
   id?: string;
   traineeTisId?: string;
   forename: string;

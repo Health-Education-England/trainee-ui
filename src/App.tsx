@@ -6,7 +6,9 @@ import Navbar from "./components/navigation/Navbar";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
-import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
+import FormRPartAList from "./components/forms/formr-part-a/List";
+import ViewFormRPartA from "./components/forms/formr-part-a/View";
+import NewFormRPartA from "./components/forms/formr-part-a/Create";
 import FormRPartB from "./components/forms/formr-part-b/FormRPartB";
 
 interface IState {
@@ -44,7 +46,9 @@ class App extends React.PureComponent<any, IState> {
           <BrowserRouter>
             <Switch>
               <Route path="/profile" component={Profile} />
-              <Route path="/formr-a" component={FormRPartA} />
+              <Route path="/formr-a" component={FormRPartAList} />
+              <Route path="/formr-a-view" component={ViewFormRPartA} />
+              <Route path="/formr-a-new" component={NewFormRPartA} />
               <Route path="/formr-b" component={FormRPartB} />
               <Redirect exact path="/" to="/profile" />
               <Route path="/*" component={PageNotFound} />

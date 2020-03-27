@@ -3,6 +3,7 @@ import { Placement } from "./Placement";
 import { PersonalDetails } from "./PersonalDetails";
 
 export interface TraineeProfile {
+  traineeTisId: string;
   personalDetails: PersonalDetails;
   programmeMemberships: ProgrammeMembership[];
   placements: Placement[];

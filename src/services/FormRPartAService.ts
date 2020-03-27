@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import ApiService from "./apiService";
-import { FormRPartAModel } from "../models/FormRPartAModel";
+import { FormRPartA } from "../models/FormRPartA";
 
 export class FormRPartAService {
   private apiService: ApiService;
@@ -10,12 +10,17 @@ export class FormRPartAService {
   }
 
   async saveTraineeFormRPartA(
-    formData: FormRPartAModel
-  ): Promise<AxiosResponse<FormRPartAModel>> {
-    formData.id = "5e7a30838a68be399cc0dff8";
-    return this.apiService.post<FormRPartAModel>(
-      `http://localhost:8207/api/formr-parta`,
+    formData: FormRPartA
+  ): Promise<AxiosResponse<FormRPartA>> {
+    return this.apiService.post<FormRPartA>(
+      "http://localhost:8207/api/formr-parta",
       formData
+    );
+  }
+
+  async getTraineeFormRPartA(): Promise<AxiosResponse<FormRPartA[]>> {
+    return this.apiService.get<FormRPartA[]>(
+      "http://localhost:8207/api/formr-parta/123"
     );
   }
 }

@@ -6,7 +6,7 @@ import {
 } from "../types";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { TraineeProfile } from "../../models/TraineeProfile";
-import { FormRPartAModel } from "../../models/FormRPartAModel";
+import { FormRPartA } from "../../models/FormRPartA";
 
 const profileService = new TraineeProfileService();
 
@@ -37,11 +37,11 @@ export const fetchTraineeFormRPartAInitialValues = () => (
 
 function mapProfileToFormRPartAInitialValues(
   traineeProfile: TraineeProfile
-): FormRPartAModel {
+): FormRPartA {
   const pd = traineeProfile.personalDetails;
   const programme = traineeProfile.programmeMemberships[0];
 
-  const model: FormRPartAModel = {
+  const model: FormRPartA = {
     forename: pd.forenames,
     surname: pd.surname,
     gmcNumber: pd.gmcNumber,
@@ -70,10 +70,11 @@ function mapProfileToFormRPartAInitialValues(
     startDate: programme.startDate.toString(),
     programmeMembershipType: programme.programmeName,
     wholeTimeEquivalent: "",
-    submissionDate: new Date().getDate().toString(),
-    lastModifiedDate: new Date().getDate().toString(),
+    submissionDate: new Date().toLocaleDateString(),
+    lastModifiedDate: new Date().toLocaleDateString(),
     declarationType: "",
-    otherImmigrationStatus: ""
+    otherImmigrationStatus: "",
+    traineeTisId: traineeProfile.traineeTisId
   };
 
   return model;

@@ -1,6 +1,6 @@
 import { rootReducer } from "./reducers";
 import { TraineeProfile } from "../models/TraineeProfile";
-import { FormRPartAModel } from "../models/FormRPartAModel";
+import { FormRPartA } from "../models/FormRPartA";
 
 export const LOAD_TRAINEE_PROFILE = "LOAD_TRAINEE_PROFILE";
 export const LOAD_TRAINEE_PROFILE_SUCCESS = "LOAD_TRAINEE_PROFILE_SUCCESS";
@@ -25,7 +25,7 @@ export interface PersonState {
 }
 
 export interface FormRPartAState {
-  intialFormValues: FormRPartAModel | null;
+  intialFormValues: FormRPartA | null;
   isLoaded: boolean;
   error: any;
 }

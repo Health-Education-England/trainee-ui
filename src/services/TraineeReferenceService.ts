@@ -25,7 +25,30 @@ export class TraineeReferenceService {
   }
 
   getImmigrationStatuses(): string[] {
-    return ["Resident", "Settled", "Work permit required", "Other"];
+    return [
+      "EEA Resident",
+      "Settled",
+      "Ancestry Visa",
+      "Dependant of HMSP",
+      "Dependant of Work Permit",
+      "Fresh Talent",
+      "HSMP",
+      "Indefinite Leave",
+      "Limited LTR",
+      "Permit Free",
+      "Postgraduate Visa",
+      "Refugee Doctor",
+      "SEGS/IGS",
+      "Spouse of EEA National",
+      "Spouse of HMSP Holder",
+      "Student Visa",
+      "Tier 1",
+      "Tier 2",
+      "Tier 4",
+      "TWES/MT1",
+      "Work Permit",
+      "Other"
+    ];
   }
 
   getDeclarations(): string[] {

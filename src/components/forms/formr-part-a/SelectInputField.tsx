@@ -19,7 +19,9 @@ export const SelectInputField: React.FC<any> = ({
         <option value="">-- Please select--</option>
         {options
           ? options.map((o: { value: string; label: string }) => (
-              <option value={o.value}>{o.label}</option>
+              <option key={o.label} value={o.value}>
+                {o.label}
+              </option>
             ))
           : null}
       </Field>
