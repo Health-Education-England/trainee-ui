@@ -1,6 +1,4 @@
 export interface PersonalDetails {
-  id: string;
-  traineeTisId: string;
   surname: string;
   forenames: string;
   knownAs: string;

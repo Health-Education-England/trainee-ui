@@ -1,8 +1,7 @@
 import {
-  LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  PersonActionType,
+  ActionType,
   PersonState
 } from "../types";
 
@@ -14,7 +13,7 @@ const initialState: PersonState = {
 
 export default function personReducer(
   state = initialState,
-  action: PersonActionType
+  action: ActionType
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
@@ -28,12 +27,6 @@ export default function personReducer(
         traineeProfile: null,
         isLoaded: true,
         error: action.payload
-      };
-    case LOAD_TRAINEE_PROFILE:
-      return {
-        traineeProfile: null,
-        isLoaded: false,
-        error: null
       };
     default:
       return state;

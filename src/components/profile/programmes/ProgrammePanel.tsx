@@ -31,7 +31,9 @@ export const ProgrammePanel = (props: IProgrammePanelProps) => {
         <b>Curricula:</b>{" "}
         {data.curricula.length === 0
           ? "N/A"
-          : data.curricula.map(c => <span>{c.curriculumName}</span>)}
+          : data.curricula.map((c, index) => (
+              <span key={index}>{c.curriculumName}</span>
+            ))}
       </div>
     </div>
   );
