@@ -1,15 +1,16 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { fetchTraineeProfile } from "../../redux/actions/traineeProfileActions";
+import { fetchTraineeProfile } from "../../redux/actions/trainee-profile-actions";
 import { RootState } from "../../redux/types";
 import PersonalDetailsComponent from "./personal-details/PersonalDetails";
 import Programmes from "./programmes/Programmes";
 import Placements from "./placements/Placements";
+import Loading from "../common/Loading";
+import { Fieldset } from "nhsuk-react-components";
 
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.person.traineeProfile,
-  isLoaded: state.person.isLoaded,
-  error: state.person.error
+  isLoaded: state.person.isLoaded
 });
 
 const mapDispatchToProps = {
@@ -25,16 +26,17 @@ class Profile extends React.PureComponent<profileProps> {
   }
 
   render() {
-    const { traineeProfile, isLoaded, error } = this.props;
+    const { traineeProfile, isLoaded } = this.props;
 
-    if (error) {
-      return <div>Error: Failed to load data</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
+    if (!isLoaded) {
+      return <Loading />;
     } else {
       return (
         traineeProfile && (
           <div>
+            <Fieldset>
+              <Fieldset.Legend isPageHeading>Profile</Fieldset.Legend>
+            </Fieldset>
             <PersonalDetailsComponent
               personalDetails={traineeProfile.personalDetails}
             />

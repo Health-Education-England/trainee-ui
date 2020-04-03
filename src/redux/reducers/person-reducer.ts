@@ -7,11 +7,10 @@ import {
 
 const initialState: PersonState = {
   traineeProfile: null,
-  isLoaded: false,
-  error: null
+  isLoaded: false
 };
 
-export default function personReducer(
+export default function PersonReducer(
   state = initialState,
   action: ActionType
 ): PersonState {
@@ -19,14 +18,12 @@ export default function personReducer(
     case LOAD_TRAINEE_PROFILE_SUCCESS:
       return {
         traineeProfile: action.payload,
-        isLoaded: true,
-        error: null
+        isLoaded: true
       };
     case LOAD_TRAINEE_PROFILE_FAILURE:
       return {
-        traineeProfile: null,
-        isLoaded: true,
-        error: action.payload
+        ...state,
+        isLoaded: false
       };
     default:
       return state;

@@ -10,7 +10,7 @@ export class TraineeProfileService {
 
   async getTraineeProfile(): Promise<AxiosResponse<TraineeProfile>> {
     return this.apiService.get<TraineeProfile>(
-      `/api/trainee-profile/5e7a30838a68be399cc0dff8`
+      `/profile/api/trainee-profile/5e7a30838a68be399cc0dff8`
     );
   }
 }

@@ -1,3 +1,5 @@
+import { Status } from "./Status";
+
 export interface ProgrammeMembership {
   programmeTisId: string;
   programmeName: string;
@@ -12,10 +14,4 @@ export interface ProgrammeMembership {
 export interface curriculm {
   curriculumTisId: string;
   curriculumName: string;
-}
-
-export enum Status {
-  Current = "CURRENT",
-  Past = "PAST",
-  Future = "FUTURE"
 }
