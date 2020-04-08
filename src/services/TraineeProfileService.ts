@@ -5,12 +5,12 @@ import { TraineeProfile } from "../models/TraineeProfile";
 export class TraineeProfileService {
   private apiService: ApiService;
   constructor() {
-    super("/trainee/api");
+    this.apiService = new ApiService();
   }
 
   async getTraineeProfile(): Promise<AxiosResponse<TraineeProfile>> {
     return this.apiService.get<TraineeProfile>(
-      `/profile/api/trainee-profile/5e7a30838a68be399cc0dff8`
+      `/profile/api/trainee-profile/${this.apiService.traineeTisId}`
     );
   }
 }

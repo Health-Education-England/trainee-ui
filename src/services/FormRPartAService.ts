@@ -16,6 +16,8 @@ export class FormRPartAService {
   }
 
   async getTraineeFormRPartA(): Promise<AxiosResponse<FormRPartA[]>> {
-    return this.apiService.get<FormRPartA[]>("/form/api/formr-parta/123");
+    return this.apiService.get<FormRPartA[]>(
+      `/form/api/formr-parta/${this.apiService.traineeTisId}`
+    );
   }
 }

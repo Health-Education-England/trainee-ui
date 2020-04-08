@@ -4,6 +4,12 @@ export interface PersonalDetails {
   knownAs: string;
   maidenName: string;
   title: string;
+  personOwner: string;
+  dateOfBirth: string;
+  gender: string;
+  qualification: string;
+  dateAttained: string;
+  medicalSchool: string;
   telephoneNumber: string;
   mobileNumber: string;
   email: string;

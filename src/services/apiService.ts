@@ -3,10 +3,11 @@ import { Auth } from "aws-amplify";
 
 export class ApiService {
   axiosInstance: AxiosInstance;
+  traineeTisId = 123;
 
-  constructor(baseUrl: string) {
+  constructor() {
     this.axiosInstance = axios.create({
-      baseURL: baseUrl,
+      baseURL: process.env.REACT_APP_SERVER_ADDRESS,
       headers: {}
     });
 

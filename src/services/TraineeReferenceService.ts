@@ -23,4 +23,8 @@ export class TraineeReferenceService {
   getLocalOffices(): Promise<AxiosResponse<any>> {
     return this.apiService.get("/reference/api/localoffice");
   }
+
+  getTrainingGrades(): Promise<AxiosResponse<any>> {
+    return this.apiService.get("/reference/api/grade");
+  }
 }

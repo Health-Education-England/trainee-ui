@@ -5,6 +5,7 @@ export interface ProgrammeMembership {
   programmeName: string;
   programmeNumber: string;
   managingDeanery: string;
+  programmeMembershipType: string;
   status: Status;
   startDate: Date;
   endDate: Date;
@@ -14,4 +15,6 @@ export interface ProgrammeMembership {
 export interface curriculm {
   curriculumTisId: string;
   curriculumName: string;
+  curriculumSubType: string;
+  curriculumCompletionDate: string;
 }
