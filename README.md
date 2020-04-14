@@ -1,6 +1,6 @@
 ![Analyse with SonarQube](https://github.com/Health-Education-England/trainee-ui/workflows/Analyse%20with%20SonarQube/badge.svg)  
-![Master Branch Status: CI/CD Workflow](https://github.com/Health-Education-England/tis-trainee-forms/workflows/CI/CD%20Workflow/badge.svg?branch=master)  
-![Deployment Status: CI/CD Workflow](https://github.com/Health-Education-England/tis-trainee-forms/workflows/CI/CD%20Workflow/badge.svg?branch=master&event=deployment_status)  
+![Master Branch Status: CI/CD Workflow](https://github.com/Health-Education-England/trainee-ui/workflows/CI/CD%20Workflow/badge.svg?branch=master)  
+![Deployment Status: CI/CD Workflow](https://github.com/Health-Education-England/trainee-ui/workflows/CI/CD%20Workflow/badge.svg?branch=master&event=deployment_status)  
 
 # trainee-ui
 Front-end for Training Pathway app
