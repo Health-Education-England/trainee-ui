@@ -12,6 +12,6 @@ export class ProfileService extends ApiService implements IProfileService {
   }
 
   async getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>> {
-    return this.get<PersonalDetails>("/contactdetails");
+    return this.get<PersonalDetails>("/trainee-profile");
   }
 }
