@@ -6,14 +6,12 @@ export interface IProfileService {
   getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>>;
 }
 
-export class ProfileService implements IProfileService {
-  apiService: ApiService;
-
+export class ProfileService extends ApiService implements IProfileService {
   constructor() {
-    this.apiService = new ApiService();
+    super("/trainee/api");
   }
 
   async getPersonalDetails(): Promise<AxiosResponse<PersonalDetails>> {
-    return this.apiService.get<PersonalDetails>(`/api/contactdetails`);
+    return this.get<PersonalDetails>("/contactdetails");
   }
 }
