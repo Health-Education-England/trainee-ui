@@ -1,14 +1,15 @@
-import { ProgrammeMembership } from "./ProgrammeMembership";
-import { Placement } from "./Placement";
-
 export interface PersonalDetails {
-  id: string;
-  traineeTisId: string;
   surname: string;
   forenames: string;
   knownAs: string;
   maidenName: string;
   title: string;
+  personOwner: string;
+  dateOfBirth: string;
+  gender: string;
+  qualification: string;
+  dateAttained: string;
+  medicalSchool: string;
   telephoneNumber: string;
   mobileNumber: string;
   email: string;
@@ -27,6 +28,4 @@ export interface PersonalDetails {
   settled: string;
   visaIssued: string;
   detailsNumber: string;
-  programmeMemberships: ProgrammeMembership[];
-  placements: Placement[];
 }

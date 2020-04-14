@@ -10,7 +10,11 @@ import {
 
 import styles from "./Login.module.scss";
 
-const Login = (props: any) => {
+interface LoginProps {
+  setAuthenticationStatus: (state: string) => Promise<void>;
+}
+
+const Login = (props: LoginProps) => {
   return (
     <Fragment>
       <Header className={styles.header}>

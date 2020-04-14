@@ -1,48 +1,49 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import styles from "./Profile.module.scss";
-import { fetchPersonalDetails } from "../../redux/actions/personActions";
+import { fetchTraineeProfile } from "../../redux/actions/trainee-profile-actions";
 import { RootState } from "../../redux/types";
 import PersonalDetailsComponent from "./personal-details/PersonalDetails";
-import ProgrammesComponent from "./programmes/Programmes";
-import PlacementsComponent from "./placements/Placements";
+import Programmes from "./programmes/Programmes";
+import Placements from "./placements/Placements";
+import Loading from "../common/Loading";
+import { Fieldset } from "nhsuk-react-components";
 
 const mapStateToProps = (state: RootState) => ({
-  personalDetails: state.persons.personalDetails,
-  isLoaded: state.persons.isLoaded,
-  error: state.persons.error
+  traineeProfile: state.person.traineeProfile,
+  isLoaded: state.person.isLoaded
 });
 
 const mapDispatchToProps = {
-  fetchPersonalDetails
+  fetchTraineeProfile: fetchTraineeProfile
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type profileProps = ConnectedProps<typeof connector>;
 
-class ProfileComponent extends React.PureComponent<profileProps> {
+class Profile extends React.PureComponent<profileProps> {
   componentDidMount() {
-    this.props.fetchPersonalDetails();
+    this.props.fetchTraineeProfile();
   }
 
   render() {
-    const { personalDetails, isLoaded, error } = this.props;
+    const { traineeProfile, isLoaded } = this.props;
 
-    if (error) {
-      return <div>Error: {error}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
+    if (!isLoaded) {
+      return <Loading />;
     } else {
       return (
-        personalDetails && (
-          <div className={styles.profileContainer}>
-            <PersonalDetailsComponent personalDetails={personalDetails} />
-            <PlacementsComponent
-              placements={personalDetails.placements}
-            ></PlacementsComponent>
-            <ProgrammesComponent
-              programmeMemberships={personalDetails.programmeMemberships}
-            ></ProgrammesComponent>
+        traineeProfile && (
+          <div>
+            <Fieldset>
+              <Fieldset.Legend isPageHeading>Profile</Fieldset.Legend>
+            </Fieldset>
+            <PersonalDetailsComponent
+              personalDetails={traineeProfile.personalDetails}
+            />
+            <Placements placements={traineeProfile.placements}></Placements>
+            <Programmes
+              programmeMemberships={traineeProfile.programmeMemberships}
+            ></Programmes>
           </div>
         )
       );
@@ -50,4 +51,4 @@ class ProfileComponent extends React.PureComponent<profileProps> {
   }
 }
 
-export default connector(ProfileComponent);
+export default connector(Profile);

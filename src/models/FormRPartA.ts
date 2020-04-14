@@ -1,0 +1,36 @@
+export interface FormRPartA {
+  id?: string;
+  traineeTisId?: string;
+  forename: string;
+  surname: string;
+  gmcNumber: string;
+  localOfficeName: string;
+  dateOfBirth: string;
+  gender: string;
+  immigrationStatus: string;
+  qualification: string;
+  dateAttained: string;
+  medicalSchool: string;
+  address1: string;
+  address2: string;
+  address3: string;
+  address4: string;
+  postCode: string;
+  telephoneNumber: string;
+  mobileNumber: string;
+  email: string;
+  isLeadingToCct: boolean;
+  programmeSpecialty: string;
+  cctSpecialty1: string;
+  cctSpecialty2: string;
+  college: string;
+  completionDate: string;
+  trainingGrade: string;
+  startDate: string;
+  programmeMembershipType: string;
+  wholeTimeEquivalent: string;
+  submissionDate: string;
+  lastModifiedDate: string;
+  declarationType: string;
+  otherImmigrationStatus: string;
+}

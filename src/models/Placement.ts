@@ -1,3 +1,5 @@
+import { Status } from "./Status";
+
 export interface Placement {
   placementTisId: string;
   startDate: Date;
@@ -7,10 +9,4 @@ export interface Placement {
   specialty: string;
   placementType: string;
   status: Status;
-}
-
-export enum Status {
-  Current = "CURRENT",
-  Past = "PAST",
-  Future = "FUTURE"
 }

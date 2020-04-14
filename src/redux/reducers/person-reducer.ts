@@ -1,39 +1,29 @@
 import {
-  LOAD_TRAINEE_PROFILE,
   LOAD_TRAINEE_PROFILE_FAILURE,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  PersonActionType,
+  ActionType,
   PersonState
 } from "../types";
 
 const initialState: PersonState = {
-  personalDetails: null,
-  isLoaded: false,
-  error: null
+  traineeProfile: null,
+  isLoaded: false
 };
 
-export default function personReducer(
+export default function PersonReducer(
   state = initialState,
-  action: PersonActionType
+  action: ActionType
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
       return {
-        personalDetails: action.payload,
-        isLoaded: true,
-        error: null
+        traineeProfile: action.payload,
+        isLoaded: true
       };
     case LOAD_TRAINEE_PROFILE_FAILURE:
       return {
-        personalDetails: null,
-        isLoaded: true,
-        error: action.payload
-      };
-    case LOAD_TRAINEE_PROFILE:
-      return {
-        personalDetails: null,
-        isLoaded: false,
-        error: null
+        ...state,
+        isLoaded: false
       };
     default:
       return state;

@@ -9,7 +9,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { ProgrammePanel } from "./ProgrammePanel";
 import { ProgrammeMembership } from "../../../models/ProgrammeMembership";
 
-interface IProgrammesComponentProps {
+interface IProgramProps {
   programmeMemberships: ProgrammeMembership[];
 }
 
@@ -27,9 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProgrammesComponent: React.FC<IProgrammesComponentProps> = ({
-  programmeMemberships
-}) => {
+const Programmes: React.FC<IProgramProps> = ({ programmeMemberships }) => {
   const classes = useStyles();
   return (
     programmeMemberships && (
@@ -70,4 +68,4 @@ const ProgrammesComponent: React.FC<IProgrammesComponentProps> = ({
   );
 };
 
-export default ProgrammesComponent;
+export default Programmes;
