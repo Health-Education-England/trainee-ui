@@ -1,13 +1,15 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { Auth } from "aws-amplify";
 
 export class ApiService {
-  axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_ADDRESS,
-    headers: {}
-  });
+  axiosInstance: AxiosInstance;
 
-  constructor() {
+  constructor(baseUrl: string) {
+    this.axiosInstance = axios.create({
+      baseURL: baseUrl,
+      headers: {}
+    });
+
     this.axiosInstance.interceptors.request.use(async function(config) {
       let user = await Auth.currentAuthenticatedUser();
       const accessToken = user.signInUserSession.accessToken.jwtToken;
