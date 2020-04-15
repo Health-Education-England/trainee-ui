@@ -1,9 +1,8 @@
+import { ActionType, PersonState } from "../types";
 import {
   LOAD_TRAINEE_PROFILE_FAILURE,
-  LOAD_TRAINEE_PROFILE_SUCCESS,
-  ActionType,
-  PersonState
-} from "../types";
+  LOAD_TRAINEE_PROFILE_SUCCESS
+} from "../action_types";
 
 const initialState: PersonState = {
   traineeProfile: null,

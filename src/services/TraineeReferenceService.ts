@@ -25,4 +25,8 @@ export class TraineeReferenceService extends ApiService {
   getTrainingGrades(): Promise<AxiosResponse<any>> {
     return this.get("/grade");
   }
+
+  getImmigrationStatuses(): Promise<AxiosResponse<any>> {
+    return this.get("/immigration-status");
+  }
 }

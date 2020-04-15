@@ -1,8 +1,7 @@
+import { ActionType, FormRPartAState } from "../types";
 import {
   LOAD_INITIAL_VALUES_SUCCESS,
   LOAD_INITIAL_VALUES_FAILURE,
-  ActionType,
-  FormRPartAState,
   LOAD_REFERENCE_GENDER_SUCCESS,
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
@@ -12,16 +11,19 @@ import {
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
-  LOAD_REFERENCE_GRADES_FAILURE
-} from "../types";
+  LOAD_REFERENCE_GRADES_FAILURE,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+} from "../action_types";
 
 const initialState: FormRPartAState = {
   intialFormValues: null,
-  genderOptions: [],
+  genders: [],
   colleges: [],
   localOffices: [],
   qualifications: [],
   grades: [],
+  immigrationStatuses: [],
   isLoaded: false
 };
 
@@ -40,7 +42,7 @@ export default function FormRPartAReducer(
     case LOAD_REFERENCE_GENDER_SUCCESS:
       return {
         ...state,
-        genderOptions: action.payload,
+        genders: action.payload,
         isLoaded: true
       };
 
@@ -72,12 +74,20 @@ export default function FormRPartAReducer(
         isLoaded: true
       };
 
+    case LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS:
+      return {
+        ...state,
+        immigrationStatuses: action.payload,
+        isLoaded: true
+      };
+
     case LOAD_INITIAL_VALUES_FAILURE:
     case LOAD_REFERENCE_GENDER_FAILURE:
     case LOAD_REFERENCE_COLLEGES_FAILURE:
     case LOAD_REFERENCE_QUALIFICATIONS_FAILURE:
     case LOAD_REFERENCE_LOCAL_OFFICES_FAILURE:
     case LOAD_REFERENCE_GRADES_FAILURE:
+    case LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE:
       return {
         ...state,
         isLoaded: false

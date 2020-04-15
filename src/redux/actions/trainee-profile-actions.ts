@@ -1,8 +1,8 @@
+import { ActionType } from "../types";
 import {
   LOAD_TRAINEE_PROFILE_FAILURE,
-  LOAD_TRAINEE_PROFILE_SUCCESS,
-  ActionType
-} from "../types";
+  LOAD_TRAINEE_PROFILE_SUCCESS
+} from "../action_types";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 
 const profileService = new TraineeProfileService();

@@ -1,7 +1,6 @@
-import FormRPartAReducer from "../formr-parta-reducer";
+import FormRPartAReducer from "../reducers/formr-parta-reducer";
+import { ActionType, FormRPartAState } from "../types";
 import {
-  ActionType,
-  FormRPartAState,
   LOAD_INITIAL_VALUES_SUCCESS,
   LOAD_INITIAL_VALUES_FAILURE,
   LOAD_REFERENCE_GENDER_SUCCESS,
@@ -13,17 +12,20 @@ import {
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
-  LOAD_REFERENCE_GRADES_SUCCESS
-} from "../../types";
+  LOAD_REFERENCE_GRADES_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+} from "../action_types";
 
 describe("form-r part-a reducer", () => {
   const initialState: FormRPartAState = {
     intialFormValues: null,
-    genderOptions: [],
+    genders: [],
     colleges: [],
     localOffices: [],
     qualifications: [],
     grades: [],
+    immigrationStatuses: [],
     isLoaded: false
   };
 
@@ -54,7 +56,7 @@ describe("form-r part-a reducer", () => {
   it("should return updated state when LOAD_REFERENCE_GENDER_SUCCESS action passed", () => {
     const state: FormRPartAState = {
       ...initialState,
-      genderOptions: [],
+      genders: [],
       isLoaded: true
     };
 
@@ -120,6 +122,21 @@ describe("form-r part-a reducer", () => {
 
     const successAction: ActionType = {
       type: LOAD_REFERENCE_GRADES_SUCCESS,
+      payload: []
+    };
+
+    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS action passed", () => {
+    const state: FormRPartAState = {
+      ...initialState,
+      immigrationStatuses: [],
+      isLoaded: true
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
       payload: []
     };
 

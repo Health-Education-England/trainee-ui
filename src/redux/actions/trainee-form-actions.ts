@@ -1,5 +1,5 @@
+import { ActionType } from "../types";
 import {
-  ActionType,
   LOAD_INITIAL_VALUES_FAILURE,
   LOAD_INITIAL_VALUES_SUCCESS,
   LOAD_REFERENCE_GENDER_SUCCESS,
@@ -11,8 +11,10 @@ import {
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
-  LOAD_REFERENCE_GRADES_FAILURE
-} from "../types";
+  LOAD_REFERENCE_GRADES_FAILURE,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+} from "../action_types";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { TraineeProfile } from "../../models/TraineeProfile";
 import { FormRPartA } from "../../models/FormRPartA";
@@ -116,6 +118,21 @@ export const fetchTraineeFormRPartAInitialValues = () => (
         payload: error
       })
     );
+
+  referenceService
+    .getImmigrationStatuses()
+    .then(response => {
+      dispatch({
+        type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+        payload: getKeyValuesFromResponse(response)
+      });
+    })
+    .catch(error =>
+      dispatch({
+        type: LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+        payload: error
+      })
+    );
 };
 
 function mapProfileToFormRPartAInitialValues(
@@ -148,16 +165,16 @@ function mapProfileToFormRPartAInitialValues(
     cctSpecialty1: "",
     cctSpecialty2: "",
     college: "",
-    completionDate: programme.endDate.toString(),
+    completionDate: programme.endDate,
     trainingGrade: "",
-    startDate: programme.startDate.toString(),
+    startDate: programme.startDate,
     programmeMembershipType: programme.programmeName,
-    wholeTimeEquivalent: "",
-    submissionDate: new Date().toLocaleDateString(),
-    lastModifiedDate: new Date().toLocaleDateString(),
+    wholeTimeEquivalent: 0,
     declarationType: "",
     otherImmigrationStatus: "",
-    traineeTisId: traineeProfile.traineeTisId
+    traineeTisId: traineeProfile.traineeTisId,
+    submissionDate: "",
+    lastModifiedDate: ""
   };
 
   return model;

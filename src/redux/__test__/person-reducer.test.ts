@@ -1,10 +1,9 @@
-import PersonReducer from "../person-reducer";
+import PersonReducer from "../reducers/person-reducer";
+import { PersonState, ActionType } from "../types";
 import {
-  PersonState,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  LOAD_TRAINEE_PROFILE_FAILURE,
-  ActionType
-} from "../../types";
+  LOAD_TRAINEE_PROFILE_FAILURE
+} from "../action_types";
 
 const initialState: PersonState = {
   traineeProfile: null,

@@ -11,10 +11,7 @@ import {
   BackLink
 } from "nhsuk-react-components";
 import { fetchTraineeFormRPartAInitialValues } from "../../../redux/actions/trainee-form-actions";
-import {
-  DeclarationOptions,
-  ImmigrationStatusOptions
-} from "./DropdownOptions";
+import { Declarations } from "./DropdownOptions";
 import SelectInputField from "./SelectInputField";
 import TextInputField from "./TextInputField";
 import WarningMessage from "./WarningMessage";
@@ -25,11 +22,12 @@ import Loading from "../../common/Loading";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   initialFormValues: state.formRPartA.intialFormValues,
-  genders: state.formRPartA.genderOptions,
+  genders: state.formRPartA.genders,
   qualifications: state.formRPartA.qualifications,
   colleges: state.formRPartA.colleges,
   localOffices: state.formRPartA.localOffices,
   trainingGrades: state.formRPartA.grades,
+  immigrationStatuses: state.formRPartA.immigrationStatuses,
   isLoaded: state.formRPartA.isLoaded,
   history: ownProps.history,
   location: ownProps.location
@@ -56,6 +54,7 @@ class CreateFormRPartA extends React.PureComponent<
       colleges,
       localOffices,
       trainingGrades,
+      immigrationStatuses,
       isLoaded
     } = this.props;
 
@@ -110,7 +109,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <SelectInputField
                     label="Immigration Status"
                     name="immigrationStatus"
-                    options={ImmigrationStatusOptions}
+                    options={immigrationStatuses}
                   />
                   {values.immigrationStatus === "Other" ? (
                     <TextInputField
@@ -162,7 +161,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
 
-                    {DeclarationOptions.map(d => (
+                    {Declarations.map(d => (
                       <Radios.Radio
                         key={d.label}
                         id={d.value}
