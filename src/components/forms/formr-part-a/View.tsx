@@ -3,6 +3,7 @@ import { SummaryList, BackLink } from "nhsuk-react-components";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface ViewProps extends GenericOwnProps {
   formData: FormRPartA;
@@ -45,7 +46,9 @@ class View extends React.Component<ViewProps> {
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>Date of Birth</SummaryList.Key>
-              <SummaryList.Value>{formData.dateOfBirth}</SummaryList.Value>
+              <SummaryList.Value>
+                {DateUtilities.ToLocalDate(formData.dateOfBirth)}
+              </SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>Gender</SummaryList.Key>
@@ -69,7 +72,9 @@ class View extends React.Component<ViewProps> {
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>Date Awarded</SummaryList.Key>
-              <SummaryList.Value>{formData.dateAttained}</SummaryList.Value>
+              <SummaryList.Value>
+                {DateUtilities.ToLocalDate(formData.dateAttained)}
+              </SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>
@@ -138,7 +143,9 @@ class View extends React.Component<ViewProps> {
               <SummaryList.Key>
                 Anticipated Completion Date of Current Programme (if known
               </SummaryList.Key>
-              <SummaryList.Value>{formData.completionDate}</SummaryList.Value>
+              <SummaryList.Value>
+                {DateUtilities.ToLocalDate(formData.completionDate)}
+              </SummaryList.Value>
             </SummaryList.Row>
 
             <h2>Programme</h2>
@@ -148,7 +155,9 @@ class View extends React.Component<ViewProps> {
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>Start Date</SummaryList.Key>
-              <SummaryList.Value>{formData.startDate}</SummaryList.Value>
+              <SummaryList.Value>
+                {DateUtilities.ToLocalDate(formData.startDate)}
+              </SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
               <SummaryList.Key>Post type / Appointment</SummaryList.Key>

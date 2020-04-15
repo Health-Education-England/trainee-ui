@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { KeyValue } from "../../../models/KeyValue";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface IProps {
   personalDetails: PersonalDetails | null;
@@ -41,7 +42,10 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
     { label: "Maiden name", value: personalDetails.maidenName },
     { label: "Known As", value: personalDetails.knownAs },
     { label: "Gender", value: personalDetails.gender },
-    { label: "Date of birth", value: personalDetails.dateOfBirth },
+    {
+      label: "Date of birth",
+      value: DateUtilities.ToLocalDate(personalDetails.dateOfBirth)
+    },
     { label: "Email", value: personalDetails.email },
     { label: "Telephone", value: personalDetails.telephoneNumber },
     { label: "Mobile", value: personalDetails.mobileNumber }

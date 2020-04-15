@@ -1,5 +1,5 @@
-import moment from "moment";
 import * as yup from "yup";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 const phoneRegex = /^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/g;
 const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
@@ -23,12 +23,10 @@ const ValidationSchema = yup.object({
     .max(50)
     .required("Deanery / HEE Local Office is required"),
   dateOfBirth: yup
-    .string()
+    .date()
     .required("Your date of birth is required")
-    .test(
-      "dateOfBirth",
-      "You must be older than 17 years",
-      value => moment().diff(moment(value), "years") >= 18
+    .test("dateOfBirth", "You must be 17 years or above", value =>
+      DateUtilities.IsLegalAge(value)
     ),
   gender: yup
     .string()
@@ -43,12 +41,12 @@ const ValidationSchema = yup.object({
     .max(100)
     .required("Select a Qualification"),
   dateAttained: yup
-    .string()
+    .date()
     .required("Date awarded (most recent qualification) is required")
     .test(
       "dateAttained",
       "Date awarded (most recent qualification) - please choose a date from the past",
-      value => moment().diff(moment(value), "day") >= 1
+      value => DateUtilities.IsPastDate(value)
     ),
   medicalSchool: yup
     .string()
@@ -90,7 +88,7 @@ const ValidationSchema = yup.object({
     .required("Email is required"),
   declarationType: yup
     .string()
-    .required("You need to choose one Declaration option")
+    .required("You need to choose at least one Declaration")
     .nullable(),
   programmeSpecialty: yup
     .string()
@@ -101,28 +99,28 @@ const ValidationSchema = yup.object({
     .max(50)
     .required("Royal College / Faculty Assessing Training is required"),
   completionDate: yup
-    .string()
+    .date()
     .required("Anticipated completion date is required")
     .test(
       "completionDate",
       "Anticipated completion date - please choose a future date",
-      value => moment().diff(moment(value), "day") <= 1
+      value => DateUtilities.IsFutureDate(value)
     ),
   trainingGrade: yup
     .string()
     .max(50)
-    .required("Programme training grade is required"),
-  startDate: yup.string().required("Programme start date is required"),
+    .required("Training Grade is required"),
+  startDate: yup.date().required("Programme start date is required"),
   programmeMembershipType: yup
     .string()
     .max(50)
-    .required("Programme training membership type is required"),
+    .required("Post type / Appointment is required"),
   wholeTimeEquivalent: yup
     .number()
     .required("Programme Full Time or % of Full Time Training is required")
     .positive()
-    .min(0)
-    .max(100)
+    .min(0, "Full Time Training value must be greater than or equal to 0")
+    .max(100, "Full Time Training value must be less than or equal to 100")
 });
 
 export default ValidationSchema;

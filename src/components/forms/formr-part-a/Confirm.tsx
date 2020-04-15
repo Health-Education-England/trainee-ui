@@ -4,6 +4,7 @@ import { Button, WarningCallout } from "nhsuk-react-components";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { FormRPartAService } from "../../../services/FormRPartAService";
 import { GenericOwnProps } from "../../../redux/types";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 class Confirm extends React.Component<GenericOwnProps> {
   formRPartAService: FormRPartAService = new FormRPartAService();
@@ -17,6 +18,11 @@ class Confirm extends React.Component<GenericOwnProps> {
   };
 
   handleSubmit = (formData: FormRPartA) => {
+    formData.submissionDate = DateUtilities.ToUTCDate(new Date());
+    formData.lastModifiedDate = DateUtilities.ToUTCDate(new Date());
+
+    formData.wholeTimeEquivalent = formData.wholeTimeEquivalent / 100;
+
     this.formRPartAService
       .saveTraineeFormRPartA(formData)
       .then(() => this.props.history.push("/formr-a"));
