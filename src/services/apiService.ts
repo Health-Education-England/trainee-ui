@@ -5,9 +5,9 @@ export class ApiService {
   axiosInstance: AxiosInstance;
   traineeTisId = 123;
 
-  constructor() {
+  constructor(baseUrl: string) {
     this.axiosInstance = axios.create({
-      baseURL: process.env.REACT_APP_SERVER_ADDRESS,
+      baseURL: baseUrl,
       headers: {}
     });
 
@@ -19,12 +19,12 @@ export class ApiService {
     });
   }
 
-  get<T = any>(url: string): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.get(url);
+  get<T = any>(endpoint: string): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.get(endpoint);
   }
 
-  post<T = any>(url: string, formData: T): Promise<AxiosResponse<T>> {
-    return this.axiosInstance.post(url, formData);
+  post<T = any>(endpoint: string, formData: T): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.post(endpoint, formData);
   }
 }
 

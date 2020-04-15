@@ -1,30 +1,28 @@
 import ApiService from "./apiService";
 import { AxiosResponse } from "axios";
 
-export class TraineeReferenceService {
-  private apiService: ApiService;
-
+export class TraineeReferenceService extends ApiService {
   constructor() {
-    this.apiService = new ApiService();
+    super("/reference/api");
   }
 
   getGenders(): Promise<AxiosResponse<any>> {
-    return this.apiService.get("/reference/api/gender");
+    return this.get("/gender");
   }
 
   getQualifications(): Promise<AxiosResponse<any>> {
-    return this.apiService.get("/reference/api/qualification");
+    return this.get("/qualification");
   }
 
   getColleges(): Promise<AxiosResponse<any>> {
-    return this.apiService.get("/reference/api/college");
+    return this.get("/college");
   }
 
   getLocalOffices(): Promise<AxiosResponse<any>> {
-    return this.apiService.get("/reference/api/localoffice");
+    return this.get("/localoffice");
   }
 
   getTrainingGrades(): Promise<AxiosResponse<any>> {
-    return this.apiService.get("/reference/api/grade");
+    return this.get("/grade");
   }
 }

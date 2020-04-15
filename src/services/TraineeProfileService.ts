@@ -2,15 +2,14 @@ import { AxiosResponse } from "axios";
 import ApiService from "./apiService";
 import { TraineeProfile } from "../models/TraineeProfile";
 
-export class TraineeProfileService {
-  private apiService: ApiService;
+export class TraineeProfileService extends ApiService {
   constructor() {
-    this.apiService = new ApiService();
+    super("/trainee/api");
   }
 
   async getTraineeProfile(): Promise<AxiosResponse<TraineeProfile>> {
-    return this.apiService.get<TraineeProfile>(
-      `/profile/api/trainee-profile/${this.apiService.traineeTisId}`
+    return this.get<TraineeProfile>(
+      `/trainee-profile/trainee/${this.traineeTisId}`
     );
   }
 }
