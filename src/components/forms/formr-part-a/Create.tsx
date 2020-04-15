@@ -12,7 +12,6 @@ import {
 } from "nhsuk-react-components";
 import { fetchTraineeFormRPartAInitialValues } from "../../../redux/actions/trainee-form-actions";
 import {
-  TrainingLevels,
   DeclarationOptions,
   ImmigrationStatusOptions
 } from "./DropdownOptions";
@@ -223,10 +222,10 @@ class CreateFormRPartA extends React.PureComponent<
                     name="programmeMembershipType"
                     placeholder="programmeMembership type"
                   />
-                  <SelectInputField
+                  <TextInputField
                     label="Full Time or % of Full Time Training"
                     name="wholeTimeEquivalent"
-                    options={TrainingLevels}
+                    placeholder="Any number between 0 to 100"
                   />
                 </Fieldset>
 

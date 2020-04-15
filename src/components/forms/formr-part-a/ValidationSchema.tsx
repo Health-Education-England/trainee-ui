@@ -118,9 +118,11 @@ const ValidationSchema = yup.object({
     .max(50)
     .required("Programme training membership type is required"),
   wholeTimeEquivalent: yup
-    .string()
-    .max(50)
+    .number()
     .required("Programme Full Time or % of Full Time Training is required")
+    .positive()
+    .min(0)
+    .max(100)
 });
 
 export default ValidationSchema;
