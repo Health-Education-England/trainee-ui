@@ -149,7 +149,8 @@ describe("form-r part-a reducer", () => {
     LOAD_REFERENCE_COLLEGES_FAILURE,
     LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
     LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-    LOAD_REFERENCE_GRADES_FAILURE
+    LOAD_REFERENCE_GRADES_FAILURE,
+    LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
   ])("should return updated state when $a action passed", actionType => {
     const state: FormRPartAState = {
       ...initialState,

@@ -13,19 +13,25 @@ import {
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+  LOAD_FORMR_PARTA_LIST_SUCCESS,
+  LOAD_FORMR_PARTA_LIST_FAILURE,
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
-import { TraineeProfile } from "../../models/TraineeProfile";
 import { FormRPartA } from "../../models/FormRPartA";
 import { TraineeReferenceService } from "../../services/TraineeReferenceService";
 import { KeyValue } from "../../models/KeyValue";
 import { AxiosResponse } from "axios";
+import { FormRPartAService } from "../../services/FormRPartAService";
+import { mapProfileToFormRPartAInitialValues } from "../mapProfileToFormRPartAInitialValues";
 
 const profileService = new TraineeProfileService();
 const referenceService = new TraineeReferenceService();
+const formService = new FormRPartAService();
 
-export const fetchTraineeFormRPartAInitialValues = () => (
+export const loadFormRPartAInitialValues = () => (
   dispatch: (action: ActionType) => any
 ) => {
   profileService
@@ -135,50 +141,40 @@ export const fetchTraineeFormRPartAInitialValues = () => (
     );
 };
 
-function mapProfileToFormRPartAInitialValues(
-  traineeProfile: TraineeProfile
-): FormRPartA {
-  const pd = traineeProfile.personalDetails;
-  const programme = traineeProfile.programmeMemberships[0];
+export const loadFormRPartAList = () => (
+  dispatch: (action: ActionType) => any
+) => {
+  formService
+    .getTraineeFormRPartA()
+    .then(response => {
+      dispatch({
+        type: LOAD_FORMR_PARTA_LIST_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: LOAD_FORMR_PARTA_LIST_FAILURE,
+        payload: error
+      });
+    });
+};
 
-  const model: FormRPartA = {
-    forename: pd.forenames,
-    surname: pd.surname,
-    gmcNumber: pd.gmcNumber,
-    localOfficeName: pd.personOwner,
-    dateOfBirth: pd.dateOfBirth,
-    gender: pd.gender,
-    immigrationStatus: "",
-    qualification: pd.qualification,
-    dateAttained: pd.dateAttained,
-    medicalSchool: pd.medicalSchool,
-    address1: pd.address1,
-    address2: pd.address2,
-    address3: pd.address3,
-    address4: pd.address4,
-    postCode: pd.postCode,
-    telephoneNumber: pd.telephoneNumber,
-    mobileNumber: pd.mobileNumber,
-    email: pd.email,
-    isLeadingToCct: false,
-    programmeSpecialty: programme.curricula[0].curriculumName,
-    cctSpecialty1: "",
-    cctSpecialty2: "",
-    college: "",
-    completionDate: programme.endDate,
-    trainingGrade: "",
-    startDate: programme.startDate,
-    programmeMembershipType: programme.programmeName,
-    wholeTimeEquivalent: 0,
-    declarationType: "",
-    otherImmigrationStatus: "",
-    traineeTisId: traineeProfile.traineeTisId,
-    submissionDate: "",
-    lastModifiedDate: ""
-  };
-
-  return model;
-}
+export const loadFormRPartA = (formData: FormRPartA) => (
+  dispatch: (action: ActionType) => any
+) => {
+  if (formData) {
+    dispatch({
+      type: LOAD_FORMR_PARTA_SUCCESS,
+      payload: formData
+    });
+  } else {
+    dispatch({
+      type: LOAD_FORMR_PARTA_FAILURE,
+      payload: null
+    });
+  }
+};
 
 function getKeyValuesFromResponse(response: AxiosResponse<any[]>): KeyValue[] {
   return response.data.map<KeyValue>(d => {

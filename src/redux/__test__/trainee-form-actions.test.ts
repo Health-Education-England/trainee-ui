@@ -1,4 +1,4 @@
-import { fetchTraineeFormRPartAInitialValues } from "../actions/trainee-form-actions";
+import { loadFormRPartAInitialValues } from "../actions/trainee-form-actions";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { TraineeReferenceService } from "../../services/TraineeReferenceService";
 
@@ -7,7 +7,7 @@ jest.mock("../../services/TraineeReferenceService");
 
 describe("fetchTraineeFormRPartAInitialValues", () => {
   it("should create profile and reference service instances", () => {
-    fetchTraineeFormRPartAInitialValues();
+    loadFormRPartAInitialValues();
     expect(TraineeProfileService).toHaveBeenCalled();
     expect(TraineeReferenceService).toHaveBeenCalled();
   });

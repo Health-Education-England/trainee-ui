@@ -30,3 +30,11 @@ export interface FormRPartAState {
   immigrationStatuses: KeyValue[];
   isLoaded: boolean;
 }
+
+export interface FormRPartAViewState {
+  formData: FormRPartA | null;
+}
+
+export interface FormRPartAListState {
+  submittedForms: FormRPartA[];
+}

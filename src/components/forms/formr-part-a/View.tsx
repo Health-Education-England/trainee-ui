@@ -1,30 +1,31 @@
 import React from "react";
 import { SummaryList, BackLink } from "nhsuk-react-components";
-import { FormRPartA } from "../../../models/FormRPartA";
-import { GenericOwnProps } from "../../../redux/types";
+import { GenericOwnProps, RootState } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
+import { connect, ConnectedProps } from "react-redux";
 
-interface ViewProps extends GenericOwnProps {
-  formData: FormRPartA;
-  showBackLink: boolean;
-}
+const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
+  formData: state.formRPartAView.formData,
+  history: ownProps.history,
+  location: ownProps.location
+});
 
-class View extends React.Component<ViewProps> {
+const connector = connect(mapStateToProps, {});
+
+class View extends React.PureComponent<ConnectedProps<typeof connector>> {
   render() {
-    if (!this.props.location.state) {
+    const { formData } = this.props;
+
+    if (!formData) {
       this.props.history.push("/formr-a");
       return null;
     }
 
-    const formData = this.props.formData || this.props.location.state.formData;
-
     return (
       formData && (
         <>
-          {this.props.showBackLink || this.props.location.state.showBackLink ? (
-            <BackLink href="/formr-a">Go back</BackLink>
-          ) : null}
+          <BackLink href="/formr-a">Go back to list</BackLink>
 
           <SummaryList>
             <h2>Personal Details</h2>
@@ -180,4 +181,4 @@ class View extends React.Component<ViewProps> {
   }
 }
 
-export default View;
+export default connector(View);

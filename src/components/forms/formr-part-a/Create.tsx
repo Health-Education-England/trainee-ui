@@ -10,7 +10,10 @@ import {
   ErrorSummary,
   BackLink
 } from "nhsuk-react-components";
-import { fetchTraineeFormRPartAInitialValues } from "../../../redux/actions/trainee-form-actions";
+import {
+  loadFormRPartAInitialValues,
+  loadFormRPartA
+} from "../../../redux/actions/trainee-form-actions";
 import { Declarations } from "./DropdownOptions";
 import SelectInputField from "./SelectInputField";
 import TextInputField from "./TextInputField";
@@ -34,7 +37,8 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
 });
 
 const mapDispatchProps = {
-  fetchTraineeFormRPartAInitialValues
+  loadFormRPartAInitialValues,
+  loadFormRPartA
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
@@ -43,7 +47,7 @@ class CreateFormRPartA extends React.PureComponent<
   ConnectedProps<typeof connector>
 > {
   componentDidMount() {
-    this.props.fetchTraineeFormRPartAInitialValues();
+    this.props.loadFormRPartAInitialValues();
   }
 
   render() {
@@ -72,10 +76,8 @@ class CreateFormRPartA extends React.PureComponent<
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(true);
 
-              this.props.history.push({
-                pathname: "/formr-a/confirm",
-                state: { formData: values }
-              });
+              this.props.loadFormRPartA(values);
+              this.props.history.push("/formr-a/confirm");
 
               setSubmitting(false);
             }}
@@ -224,7 +226,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <TextInputField
                     label="Full Time or % of Full Time Training"
                     name="wholeTimeEquivalent"
-                    placeholder="Any number between 0 to 100"
+                    placeholder="E.g. 0.1 for 10%; 0.25 for 25% etc or 1 for Full time"
                   />
                 </Fieldset>
 

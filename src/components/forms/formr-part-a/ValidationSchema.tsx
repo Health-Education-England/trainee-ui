@@ -4,6 +4,7 @@ import { DateUtilities } from "../../../utilities/DateUtilities";
 const phoneRegex = /^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/g;
 const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
 const postcodeRegex = /[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i;
+const wholeTimeEquivalentRegex = /^\d(\.\d{0,2})?$/;
 
 const ValidationSchema = yup.object({
   forename: yup
@@ -120,7 +121,10 @@ const ValidationSchema = yup.object({
     .required("Programme Full Time or % of Full Time Training is required")
     .positive()
     .min(0, "Full Time Training value must be greater than or equal to 0")
-    .max(100, "Full Time Training value must be less than or equal to 100")
+    .max(1, "Full Time Training value must be less than or equal to 1")
+    .test("wholeTimeEquivalent", "Only two decimal places allowed", value =>
+      wholeTimeEquivalentRegex.test(value)
+    )
 });
 
 export default ValidationSchema;

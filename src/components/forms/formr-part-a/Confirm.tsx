@@ -1,45 +1,53 @@
 import React from "react";
 import View from "./View";
 import { Button, WarningCallout } from "nhsuk-react-components";
-import { FormRPartA } from "../../../models/FormRPartA";
 import { FormRPartAService } from "../../../services/FormRPartAService";
-import { GenericOwnProps } from "../../../redux/types";
+import { GenericOwnProps, RootState } from "../../../redux/types";
 import { DateUtilities } from "../../../utilities/DateUtilities";
+import { ConnectedProps, connect } from "react-redux";
 
-class Confirm extends React.Component<GenericOwnProps> {
+const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
+  formData: state.formRPartAView.formData,
+  history: ownProps.history,
+  location: ownProps.location
+});
+
+const connector = connect(mapStateToProps, {});
+
+class Confirm extends React.PureComponent<ConnectedProps<typeof connector>> {
   formRPartAService: FormRPartAService = new FormRPartAService();
 
-  handleEdit = (formData: FormRPartA) => {
+  handleEdit = () => {
     this.props.history.push({
       pathname: "/formr-a/create",
       history: this.props.history,
-      formData: formData
+      formData: this.props.formData
     });
   };
 
-  handleSubmit = (formData: FormRPartA) => {
-    formData.submissionDate = DateUtilities.ToUTCDate(new Date());
-    formData.lastModifiedDate = DateUtilities.ToUTCDate(new Date());
+  handleSubmit = () => {
+    const { formData } = this.props;
 
-    formData.wholeTimeEquivalent = formData.wholeTimeEquivalent / 100;
+    if (formData) {
+      formData.submissionDate = DateUtilities.ToUTCDate(new Date());
+      formData.lastModifiedDate = DateUtilities.ToUTCDate(new Date());
 
-    this.formRPartAService
-      .saveTraineeFormRPartA(formData)
-      .then(() => this.props.history.push("/formr-a"));
+      this.formRPartAService
+        .saveTraineeFormRPartA(formData)
+        .then(() => this.props.history.push("/formr-a"));
+    }
   };
 
   render() {
-    if (this.props.location && !this.props.location.state) {
+    const { formData } = this.props;
+    if (!formData) {
       this.props.history.push("/formr-a");
       return null;
     }
-    const formData = this.props.location.state.formData;
 
     return (
       <div>
         <View
-          formData={formData}
-          showBackLink={false}
           location={this.props.location}
           history={this.props.history}
         ></View>
@@ -51,13 +59,10 @@ class Confirm extends React.Component<GenericOwnProps> {
             soon as possible of any change to my contact details.
           </p>
         </WarningCallout>
-        <Button
-          onClick={() => this.handleEdit(formData)}
-          style={{ marginRight: 30 }}
-        >
+        <Button onClick={this.handleEdit} style={{ marginRight: 30 }}>
           Edit
         </Button>
-        <Button type="submit" onClick={() => this.handleSubmit(formData)}>
+        <Button type="submit" onClick={this.handleSubmit}>
           Submit
         </Button>
       </div>
@@ -65,4 +70,4 @@ class Confirm extends React.Component<GenericOwnProps> {
   }
 }
 
-export default Confirm;
+export default connector(Confirm);
