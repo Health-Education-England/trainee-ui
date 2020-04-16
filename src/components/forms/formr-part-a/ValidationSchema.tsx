@@ -118,8 +118,8 @@ const ValidationSchema = yup.object({
     .required("Post type / Appointment is required"),
   wholeTimeEquivalent: yup
     .number()
+    .nullable()
     .required("Programme Full Time or % of Full Time Training is required")
-    .positive()
     .min(0, "Full Time Training value must be greater than or equal to 0")
     .max(1, "Full Time Training value must be less than or equal to 1")
     .test("wholeTimeEquivalent", "Only two decimal places allowed", value =>
