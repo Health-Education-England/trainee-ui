@@ -9,19 +9,21 @@ const initialState: PersonState = {
   isLoaded: false
 };
 
-export default function PersonReducer(
+export default function TraineeProfileReducer(
   state = initialState,
   action: ActionType
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
       return {
+        ...state,
         traineeProfile: action.payload,
         isLoaded: true
       };
     case LOAD_TRAINEE_PROFILE_FAILURE:
       return {
         ...state,
+        traineeProfile: null,
         isLoaded: false
       };
     default:

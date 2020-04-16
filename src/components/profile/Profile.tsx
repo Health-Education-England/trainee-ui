@@ -1,20 +1,21 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { fetchTraineeProfile } from "../../redux/actions/trainee-profile-actions";
+import { loadTraineeProfile } from "../../redux/actions/trainee-profile-actions";
 import { RootState } from "../../redux/types";
-import PersonalDetailsComponent from "./personal-details/PersonalDetails";
+import PersonalDetailsComponent from "./personal-details/PersonalDetailsComponent";
 import Programmes from "./programmes/Programmes";
 import Placements from "./placements/Placements";
 import Loading from "../common/Loading";
 import { Fieldset } from "nhsuk-react-components";
+import { TraineeProfileService } from "../../services/TraineeProfileService";
 
 const mapStateToProps = (state: RootState) => ({
-  traineeProfile: state.person.traineeProfile,
-  isLoaded: state.person.isLoaded
+  traineeProfile: state.profile.traineeProfile,
+  isLoaded: state.profile.isLoaded
 });
 
 const mapDispatchToProps = {
-  fetchTraineeProfile: fetchTraineeProfile
+  loadTraineeProfile
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -22,7 +23,7 @@ type profileProps = ConnectedProps<typeof connector>;
 
 class Profile extends React.PureComponent<profileProps> {
   componentDidMount() {
-    this.props.fetchTraineeProfile();
+    this.props.loadTraineeProfile(new TraineeProfileService());
   }
 
   render() {

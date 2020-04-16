@@ -1,32 +1,18 @@
-import FormRPartAReducer from "../reducers/formr-parta-reducer";
-import { ActionType, FormRPartAState } from "../types";
+import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
 import {
-  LOAD_INITIAL_VALUES_SUCCESS,
-  LOAD_INITIAL_VALUES_FAILURE,
-  LOAD_REFERENCE_GENDER_SUCCESS,
-  LOAD_REFERENCE_GENDER_FAILURE,
-  LOAD_REFERENCE_COLLEGES_SUCCESS,
-  LOAD_REFERENCE_COLLEGES_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-  LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
-  LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
-  LOAD_REFERENCE_GRADES_FAILURE,
-  LOAD_REFERENCE_GRADES_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOAD_FORMR_PARTA_FAILURE,
+  LOAD_FORMR_PARTA_LIST_SUCCESS,
+  LOAD_FORMR_PARTA_LIST_FAILURE
 } from "../action_types";
+import {
+  LoadFormRPartAReducer,
+  LoadFormRPartAListReducer
+} from "../reducers/formr-parta-reducer";
 
-describe("form-r part-a reducer", () => {
-  const initialState: FormRPartAState = {
-    intialFormValues: null,
-    genders: [],
-    colleges: [],
-    localOffices: [],
-    qualifications: [],
-    grades: [],
-    immigrationStatuses: [],
-    isLoaded: false
+describe("Load form-r part-a reducer", () => {
+  const initialState: FormRPartAViewState = {
+    formData: null
   };
 
   it("should return initial state when no action passed", () => {
@@ -35,133 +21,83 @@ describe("form-r part-a reducer", () => {
       payload: null
     };
 
-    expect(FormRPartAReducer(undefined, defaultAction)).toEqual(initialState);
+    expect(LoadFormRPartAReducer(undefined, defaultAction)).toEqual(
+      initialState
+    );
   });
 
-  it("should return updated state when LOAD_INITIAL_VALUES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+  it("should return updated state when LOAD_FORMR_PARTA_SUCCESS action passed", () => {
+    const state: FormRPartAViewState = {
       ...initialState,
-      intialFormValues: null,
-      isLoaded: true
+      formData: null
     };
 
     const successAction: ActionType = {
-      type: LOAD_INITIAL_VALUES_SUCCESS,
+      type: LOAD_FORMR_PARTA_SUCCESS,
       payload: null
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(LoadFormRPartAReducer(initialState, successAction)).toEqual(state);
   });
 
-  it("should return updated state when LOAD_REFERENCE_GENDER_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      genders: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_GENDER_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_COLLEGES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      colleges: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_COLLEGES_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_QUALIFICATIONS_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      colleges: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      localOffices: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_GRADES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      grades: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_GRADES_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      immigrationStatuses: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-      payload: []
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  test.each([
-    LOAD_INITIAL_VALUES_FAILURE,
-    LOAD_REFERENCE_GENDER_FAILURE,
-    LOAD_REFERENCE_COLLEGES_FAILURE,
-    LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
-    LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-    LOAD_REFERENCE_GRADES_FAILURE,
-    LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
-  ])("should return updated state when $a action passed", actionType => {
-    const state: FormRPartAState = {
-      ...initialState,
-      isLoaded: false
+  it("should return updated state when LOAD_FORMR_PARTA_FAILURE action passed", () => {
+    const state: FormRPartAViewState = {
+      ...initialState
     };
 
     const failureAction: ActionType = {
-      type: actionType,
+      type: LOAD_FORMR_PARTA_FAILURE,
       payload: null
     };
 
-    expect(FormRPartAReducer(initialState, failureAction)).toEqual(state);
+    expect(LoadFormRPartAReducer(initialState, failureAction)).toEqual(state);
+  });
+});
+
+describe("Load form-r part-a list reducer", () => {
+  const initialState: FormRPartAListState = {
+    submittedForms: []
+  };
+
+  it("should return initial state when no action passed", () => {
+    const defaultAction: ActionType = {
+      type: "",
+      payload: null
+    };
+
+    expect(LoadFormRPartAListReducer(undefined, defaultAction)).toEqual(
+      initialState
+    );
+  });
+
+  it("should return updated state when LOAD_FORMR_PARTA_LIST_SUCCESS action passed", () => {
+    const state: FormRPartAListState = {
+      ...initialState,
+      submittedForms: []
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_FORMR_PARTA_LIST_SUCCESS,
+      payload: []
+    };
+
+    expect(LoadFormRPartAListReducer(initialState, successAction)).toEqual(
+      state
+    );
+  });
+
+  it("should return updated state when LOAD_FORMR_PARTA_LIST_FAILURE action passed", () => {
+    const state: FormRPartAListState = {
+      ...initialState
+    };
+
+    const failureAction: ActionType = {
+      type: LOAD_FORMR_PARTA_LIST_FAILURE,
+      payload: null
+    };
+
+    expect(LoadFormRPartAListReducer(initialState, failureAction)).toEqual(
+      state
+    );
   });
 });

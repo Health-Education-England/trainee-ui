@@ -2,10 +2,8 @@ import React from "react";
 import { Button, Table, ActionLink, LedeText } from "nhsuk-react-components";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { GenericOwnProps, RootState } from "../../../redux/types";
-import {
-  loadFormRPartA,
-  loadFormRPartAList
-} from "../../../redux/actions/trainee-form-actions";
+import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
+import { loadFormRPartAList } from "../../../redux/actions/formr-parta-actions";
 import { ConnectedProps, connect } from "react-redux";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({

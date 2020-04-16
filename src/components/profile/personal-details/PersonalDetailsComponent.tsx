@@ -1,6 +1,6 @@
 import React from "react";
 import { PersonalDetails } from "../../../models/PersonalDetails";
-import styles from "./PersonalDetails.module.scss";
+import styles from "./PersonalDetailsComponent.module.scss";
 import { SummaryList } from "nhsuk-react-components";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -12,7 +12,7 @@ import { KeyValue } from "../../../models/KeyValue";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface IProps {
-  personalDetails: PersonalDetails | null;
+  personalDetails: PersonalDetails;
 }
 
 const useStyles = makeStyles(theme => ({

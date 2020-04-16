@@ -20,8 +20,7 @@ export interface GenericOwnProps {
   location: any;
 }
 
-export interface FormRPartAState {
-  intialFormValues: FormRPartA | null;
+export interface ReferenceDataState {
   genders: KeyValue[];
   colleges: KeyValue[];
   localOffices: KeyValue[];

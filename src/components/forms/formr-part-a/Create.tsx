@@ -10,10 +10,7 @@ import {
   ErrorSummary,
   BackLink
 } from "nhsuk-react-components";
-import {
-  loadFormRPartAInitialValues,
-  loadFormRPartA
-} from "../../../redux/actions/trainee-form-actions";
+import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import { Declarations } from "./DropdownOptions";
 import SelectInputField from "./SelectInputField";
 import TextInputField from "./TextInputField";
@@ -22,22 +19,29 @@ import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import Loading from "../../common/Loading";
+import { mapProfileToFormRPartAInitialValues } from "./mapProfileToFormRPartAInitialValues";
+import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";
+import { TraineeProfileService } from "../../../services/TraineeProfileService";
+import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  initialFormValues: state.formRPartA.intialFormValues,
-  genders: state.formRPartA.genders,
-  qualifications: state.formRPartA.qualifications,
-  colleges: state.formRPartA.colleges,
-  localOffices: state.formRPartA.localOffices,
-  trainingGrades: state.formRPartA.grades,
-  immigrationStatuses: state.formRPartA.immigrationStatuses,
-  isLoaded: state.formRPartA.isLoaded,
+  initialFormValues: mapProfileToFormRPartAInitialValues(
+    state.profile.traineeProfile
+  ),
+  genders: state.referenceData.genders,
+  qualifications: state.referenceData.qualifications,
+  colleges: state.referenceData.colleges,
+  localOffices: state.referenceData.localOffices,
+  trainingGrades: state.referenceData.grades,
+  immigrationStatuses: state.referenceData.immigrationStatuses,
+  isLoaded: state.referenceData.isLoaded,
   history: ownProps.history,
   location: ownProps.location
 });
 
 const mapDispatchProps = {
-  loadFormRPartAInitialValues,
+  loadTraineeProfile,
+  loadReferenceData,
   loadFormRPartA
 };
 
@@ -47,7 +51,8 @@ class CreateFormRPartA extends React.PureComponent<
   ConnectedProps<typeof connector>
 > {
   componentDidMount() {
-    this.props.loadFormRPartAInitialValues();
+    this.props.loadTraineeProfile(new TraineeProfileService());
+    this.props.loadReferenceData();
   }
 
   render() {

@@ -1,9 +1,13 @@
-import { TraineeProfile } from "../models/TraineeProfile";
-import { FormRPartA } from "../models/FormRPartA";
+import { TraineeProfile } from "../../../models/TraineeProfile";
+import { FormRPartA } from "../../../models/FormRPartA";
 
 export function mapProfileToFormRPartAInitialValues(
-  traineeProfile: TraineeProfile
-): FormRPartA {
+  traineeProfile: TraineeProfile | null
+): FormRPartA | null {
+  if (!traineeProfile) {
+    return null;
+  }
+
   const pd = traineeProfile.personalDetails;
   const programme = traineeProfile.programmeMemberships[0];
   const model: FormRPartA = {
