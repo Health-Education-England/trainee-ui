@@ -1,34 +1,32 @@
 import React from "react";
-import { FormRPartAService } from "../../../services/FormRPartAService";
 import { Button, Table, ActionLink, LedeText } from "nhsuk-react-components";
 import { FormRPartA } from "../../../models/FormRPartA";
-import { GenericOwnProps } from "../../../redux/types";
+import { GenericOwnProps, RootState } from "../../../redux/types";
+import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
+import { loadFormRPartAList } from "../../../redux/actions/formr-parta-actions";
+import { ConnectedProps, connect } from "react-redux";
 
-interface ViewState {
-  submittedForms: FormRPartA[];
-}
+const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
+  submittedForms: state.formRPartAList.submittedForms,
+  history: ownProps.history
+});
 
-class List extends React.PureComponent<GenericOwnProps, ViewState> {
-  formService: FormRPartAService = new FormRPartAService();
+const mapDispatchToProps = {
+  loadFormRPartA,
+  loadFormRPartAList
+};
 
-  constructor(props: GenericOwnProps) {
-    super(props);
-    this.state = { submittedForms: [] };
-  }
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
+class List extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
-    this.formService.getTraineeFormRPartA().then(response => {
-      if (response.data) {
-        this.setState({ submittedForms: response.data });
-      }
-    });
+    this.props.loadFormRPartAList();
   }
 
   handleRowClick = (formData: FormRPartA) => {
-    this.props.history.push({
-      pathname: `/formr-a/${formData.id}`,
-      state: { formData: formData, showBackLink: true }
-    });
+    this.props.loadFormRPartA(formData);
+
+    this.props.history.push(`/formr-a/${formData.id}`);
   };
 
   handleNewFormClick = () => {
@@ -40,35 +38,33 @@ class List extends React.PureComponent<GenericOwnProps, ViewState> {
   };
 
   render() {
-    const { submittedForms } = this.state;
+    const { submittedForms } = this.props;
     return (
       <div>
         <Button reverse type="submit" onClick={this.handleNewFormClick}>
           Submit new form
         </Button>
         {submittedForms.length > 0 ? (
-          <>
-            <Table>
-              <Table.Head>
-                <Table.Row>
+          <Table>
+            <Table.Head>
+              <Table.Row>
+                <td>
+                  <b>Submitted forms</b>
+                </td>
+              </Table.Row>
+            </Table.Head>
+            <Table.Body>
+              {submittedForms.map((formData: FormRPartA) => (
+                <Table.Row key={formData.id} style={{ cursor: "pointer" }}>
                   <td>
-                    <b>Submitted forms</b>
+                    <ActionLink onClick={() => this.handleRowClick(formData)}>
+                      form submitted on {formData.submissionDate}
+                    </ActionLink>
                   </td>
                 </Table.Row>
-              </Table.Head>
-              <Table.Body>
-                {submittedForms.map((formData: FormRPartA) => (
-                  <Table.Row key={formData.id} style={{ cursor: "pointer" }}>
-                    <td>
-                      <ActionLink onClick={() => this.handleRowClick(formData)}>
-                        form submitted on {formData.submissionDate}
-                      </ActionLink>
-                    </td>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </>
+              ))}
+            </Table.Body>
+          </Table>
         ) : (
           <LedeText>No forms found.</LedeText>
         )}
@@ -77,4 +73,4 @@ class List extends React.PureComponent<GenericOwnProps, ViewState> {
   }
 }
 
-export default List;
+export default connector(List);

@@ -1,9 +1,6 @@
-import FormRPartAReducer from "../formr-parta-reducer";
+import ReferenceDataReducer from "../reducers/reference-data-reducer";
+import { ActionType, ReferenceDataState } from "../types";
 import {
-  ActionType,
-  FormRPartAState,
-  LOAD_INITIAL_VALUES_SUCCESS,
-  LOAD_INITIAL_VALUES_FAILURE,
   LOAD_REFERENCE_GENDER_SUCCESS,
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
@@ -13,17 +10,22 @@ import {
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
-  LOAD_REFERENCE_GRADES_SUCCESS
-} from "../../types";
+  LOAD_REFERENCE_GRADES_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+  LOAD_REFERENCE_CURRICULA_FAILURE,
+  LOAD_REFERENCE_CURRICULA_SUCCESS
+} from "../action_types";
 
 describe("form-r part-a reducer", () => {
-  const initialState: FormRPartAState = {
-    intialFormValues: null,
-    genderOptions: [],
+  const initialState: ReferenceDataState = {
+    genders: [],
     colleges: [],
     localOffices: [],
     qualifications: [],
     grades: [],
+    immigrationStatus: [],
+    curricula: [],
     isLoaded: false
   };
 
@@ -33,28 +35,15 @@ describe("form-r part-a reducer", () => {
       payload: null
     };
 
-    expect(FormRPartAReducer(undefined, defaultAction)).toEqual(initialState);
-  });
-
-  it("should return updated state when LOAD_INITIAL_VALUES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
-      ...initialState,
-      intialFormValues: null,
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_INITIAL_VALUES_SUCCESS,
-      payload: null
-    };
-
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(undefined, defaultAction)).toEqual(
+      initialState
+    );
   });
 
   it("should return updated state when LOAD_REFERENCE_GENDER_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
-      genderOptions: [],
+      genders: [],
       isLoaded: true
     };
 
@@ -63,11 +52,11 @@ describe("form-r part-a reducer", () => {
       payload: []
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_REFERENCE_COLLEGES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
       colleges: [],
       isLoaded: true
@@ -78,11 +67,11 @@ describe("form-r part-a reducer", () => {
       payload: []
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_REFERENCE_QUALIFICATIONS_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
       colleges: [],
       isLoaded: true
@@ -93,11 +82,11 @@ describe("form-r part-a reducer", () => {
       payload: []
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
       localOffices: [],
       isLoaded: true
@@ -108,11 +97,11 @@ describe("form-r part-a reducer", () => {
       payload: []
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_REFERENCE_GRADES_SUCCESS action passed", () => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
       grades: [],
       isLoaded: true
@@ -123,18 +112,49 @@ describe("form-r part-a reducer", () => {
       payload: []
     };
 
-    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS action passed", () => {
+    const state: ReferenceDataState = {
+      ...initialState,
+      immigrationStatus: [],
+      isLoaded: true
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+      payload: []
+    };
+
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_REFERENCE_CURRICULA_SUCCESS action passed", () => {
+    const state: ReferenceDataState = {
+      ...initialState,
+      curricula: [],
+      isLoaded: true
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_REFERENCE_CURRICULA_SUCCESS,
+      payload: []
+    };
+
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
   });
 
   test.each([
-    LOAD_INITIAL_VALUES_FAILURE,
     LOAD_REFERENCE_GENDER_FAILURE,
     LOAD_REFERENCE_COLLEGES_FAILURE,
     LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
     LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-    LOAD_REFERENCE_GRADES_FAILURE
+    LOAD_REFERENCE_GRADES_FAILURE,
+    LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+    LOAD_REFERENCE_CURRICULA_FAILURE
   ])("should return updated state when $a action passed", actionType => {
-    const state: FormRPartAState = {
+    const state: ReferenceDataState = {
       ...initialState,
       isLoaded: false
     };
@@ -144,6 +164,6 @@ describe("form-r part-a reducer", () => {
       payload: null
     };
 
-    expect(FormRPartAReducer(initialState, failureAction)).toEqual(state);
+    expect(ReferenceDataReducer(initialState, failureAction)).toEqual(state);
   });
 });

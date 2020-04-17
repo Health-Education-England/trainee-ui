@@ -19,10 +19,18 @@ export class TraineeReferenceService extends ApiService {
   }
 
   getLocalOffices(): Promise<AxiosResponse<any>> {
-    return this.get("/localoffice");
+    return this.get("/local-office");
   }
 
   getTrainingGrades(): Promise<AxiosResponse<any>> {
     return this.get("/grade");
+  }
+
+  getImmigrationStatus(): Promise<AxiosResponse<any>> {
+    return this.get("/immigration-status");
+  }
+
+  getCurricula(): Promise<AxiosResponse<any>> {
+    return this.get("/curriculum");
   }
 }

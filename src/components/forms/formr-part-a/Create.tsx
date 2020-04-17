@@ -10,12 +10,8 @@ import {
   ErrorSummary,
   BackLink
 } from "nhsuk-react-components";
-import { fetchTraineeFormRPartAInitialValues } from "../../../redux/actions/trainee-form-actions";
-import {
-  TrainingLevels,
-  DeclarationOptions,
-  ImmigrationStatusOptions
-} from "./DropdownOptions";
+import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
+import { Declarations } from "./DropdownOptions";
 import SelectInputField from "./SelectInputField";
 import TextInputField from "./TextInputField";
 import WarningMessage from "./WarningMessage";
@@ -23,21 +19,31 @@ import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import Loading from "../../common/Loading";
+import { mapProfileToFormRPartAInitialValues } from "./mapProfileToFormRPartAInitialValues";
+import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";
+import { TraineeProfileService } from "../../../services/TraineeProfileService";
+import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  initialFormValues: state.formRPartA.intialFormValues,
-  genders: state.formRPartA.genderOptions,
-  qualifications: state.formRPartA.qualifications,
-  colleges: state.formRPartA.colleges,
-  localOffices: state.formRPartA.localOffices,
-  trainingGrades: state.formRPartA.grades,
-  isLoaded: state.formRPartA.isLoaded,
+  initialFormValues: mapProfileToFormRPartAInitialValues(
+    state.profile.traineeProfile
+  ),
+  genders: state.referenceData.genders,
+  qualifications: state.referenceData.qualifications,
+  colleges: state.referenceData.colleges,
+  localOffices: state.referenceData.localOffices,
+  trainingGrades: state.referenceData.grades,
+  immigrationStatus: state.referenceData.immigrationStatus,
+  curricula: state.referenceData.curricula,
+  isLoaded: state.referenceData.isLoaded,
   history: ownProps.history,
   location: ownProps.location
 });
 
 const mapDispatchProps = {
-  fetchTraineeFormRPartAInitialValues
+  loadTraineeProfile,
+  loadReferenceData,
+  loadFormRPartA
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
@@ -46,7 +52,8 @@ class CreateFormRPartA extends React.PureComponent<
   ConnectedProps<typeof connector>
 > {
   componentDidMount() {
-    this.props.fetchTraineeFormRPartAInitialValues();
+    this.props.loadTraineeProfile(new TraineeProfileService());
+    this.props.loadReferenceData();
   }
 
   render() {
@@ -57,6 +64,8 @@ class CreateFormRPartA extends React.PureComponent<
       colleges,
       localOffices,
       trainingGrades,
+      immigrationStatus,
+      curricula,
       isLoaded
     } = this.props;
 
@@ -74,10 +83,8 @@ class CreateFormRPartA extends React.PureComponent<
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(true);
 
-              this.props.history.push({
-                pathname: "/formr-a/confirm",
-                state: { formData: values }
-              });
+              this.props.loadFormRPartA(values);
+              this.props.history.push("/formr-a/confirm");
 
               setSubmitting(false);
             }}
@@ -111,7 +118,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <SelectInputField
                     label="Immigration Status"
                     name="immigrationStatus"
-                    options={ImmigrationStatusOptions}
+                    options={immigrationStatus}
                   />
                   {values.immigrationStatus === "Other" ? (
                     <TextInputField
@@ -163,7 +170,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
 
-                    {DeclarationOptions.map(d => (
+                    {Declarations.map(d => (
                       <Radios.Radio
                         key={d.label}
                         id={d.value}
@@ -177,19 +184,22 @@ class CreateFormRPartA extends React.PureComponent<
                     ))}
                   </Radios>
 
-                  <TextInputField
+                  <SelectInputField
                     label="Programme Specialty"
                     name="programmeSpecialty"
+                    options={curricula}
                   />
                   {values.declarationType === CCT_DECLARATION ? (
                     <>
-                      <TextInputField
+                      <SelectInputField
                         label="Specialty 1 for Award of CCT"
                         name="cctSpecialty1"
+                        options={curricula}
                       />
-                      <TextInputField
+                      <SelectInputField
                         label="Specialty 2 for Award of CCT"
                         name="cctSpecialty2"
+                        options={curricula}
                       />
                     </>
                   ) : null}
@@ -223,10 +233,10 @@ class CreateFormRPartA extends React.PureComponent<
                     name="programmeMembershipType"
                     placeholder="programmeMembership type"
                   />
-                  <SelectInputField
+                  <TextInputField
                     label="Full Time or % of Full Time Training"
                     name="wholeTimeEquivalent"
-                    options={TrainingLevels}
+                    placeholder="E.g. 0.1 for 10%; 0.25 for 25% etc or 1 for Full time"
                   />
                 </Fieldset>
 

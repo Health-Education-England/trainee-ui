@@ -5,11 +5,11 @@ export interface FormRPartA {
   surname: string;
   gmcNumber: string;
   localOfficeName: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   gender: string;
   immigrationStatus: string;
   qualification: string;
-  dateAttained: string;
+  dateAttained: Date;
   medicalSchool: string;
   address1: string;
   address2: string;
@@ -24,11 +24,11 @@ export interface FormRPartA {
   cctSpecialty1: string;
   cctSpecialty2: string;
   college: string;
-  completionDate: string;
+  completionDate: Date;
   trainingGrade: string;
-  startDate: string;
+  startDate: Date;
   programmeMembershipType: string;
-  wholeTimeEquivalent: string;
+  wholeTimeEquivalent: number | null;
   submissionDate: string;
   lastModifiedDate: string;
   declarationType: string;

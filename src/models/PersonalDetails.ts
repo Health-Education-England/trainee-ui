@@ -5,10 +5,10 @@ export interface PersonalDetails {
   maidenName: string;
   title: string;
   personOwner: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   gender: string;
   qualification: string;
-  dateAttained: string;
+  dateAttained: Date;
   medicalSchool: string;
   telephoneNumber: string;
   mobileNumber: string;

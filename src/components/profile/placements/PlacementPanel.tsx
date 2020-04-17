@@ -1,6 +1,7 @@
 import React from "react";
 import { Placement } from "../../../models/Placement";
 import styles from "./Placements.module.scss";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface IPlacementPanelProps {
   placement: Placement;
@@ -17,10 +18,10 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
 
       <div className={styles.grid}>
         <div>
-          <b>Starts: </b> <p>{data.startDate}</p>
+          <b>Starts: </b> <p>{DateUtilities.ToLocalDate(data.startDate)}</p>
         </div>
         <div className={styles.followingField}>
-          <b>Ends: </b> <p>{data.endDate}</p>
+          <b>Ends: </b> <p>{DateUtilities.ToLocalDate(data.endDate)}</p>
         </div>
       </div>
 

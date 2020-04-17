@@ -1,88 +1,54 @@
+import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
 import {
-  LOAD_INITIAL_VALUES_SUCCESS,
-  LOAD_INITIAL_VALUES_FAILURE,
-  ActionType,
-  FormRPartAState,
-  LOAD_REFERENCE_GENDER_SUCCESS,
-  LOAD_REFERENCE_GENDER_FAILURE,
-  LOAD_REFERENCE_COLLEGES_SUCCESS,
-  LOAD_REFERENCE_COLLEGES_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-  LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
-  LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-  LOAD_REFERENCE_GRADES_SUCCESS,
-  LOAD_REFERENCE_GRADES_FAILURE
-} from "../types";
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOAD_FORMR_PARTA_FAILURE,
+  LOAD_FORMR_PARTA_LIST_SUCCESS,
+  LOAD_FORMR_PARTA_LIST_FAILURE
+} from "../action_types";
 
-const initialState: FormRPartAState = {
-  intialFormValues: null,
-  genderOptions: [],
-  colleges: [],
-  localOffices: [],
-  qualifications: [],
-  grades: [],
-  isLoaded: false
+const formRPartAViewState: FormRPartAViewState = {
+  formData: null
 };
 
-export default function FormRPartAReducer(
-  state = initialState,
+export function LoadFormRPartAReducer(
+  state = formRPartAViewState,
   action: ActionType
-): FormRPartAState {
+): FormRPartAViewState {
   switch (action.type) {
-    case LOAD_INITIAL_VALUES_SUCCESS:
+    case LOAD_FORMR_PARTA_SUCCESS:
       return {
         ...state,
-        intialFormValues: action.payload,
-        isLoaded: true
+        formData: action.payload
       };
-
-    case LOAD_REFERENCE_GENDER_SUCCESS:
+    case LOAD_FORMR_PARTA_FAILURE:
       return {
         ...state,
-        genderOptions: action.payload,
-        isLoaded: true
+        formData: null
       };
+    default:
+      return state;
+  }
+}
 
-    case LOAD_REFERENCE_COLLEGES_SUCCESS:
+const formRPartAListState: FormRPartAListState = {
+  submittedForms: []
+};
+
+export function LoadFormRPartAListReducer(
+  state = formRPartAListState,
+  action: ActionType
+): FormRPartAListState {
+  switch (action.type) {
+    case LOAD_FORMR_PARTA_LIST_SUCCESS:
       return {
         ...state,
-        colleges: action.payload,
-        isLoaded: true
+        submittedForms: action.payload
       };
-
-    case LOAD_REFERENCE_QUALIFICATIONS_SUCCESS:
+    case LOAD_FORMR_PARTA_LIST_FAILURE:
       return {
         ...state,
-        qualifications: action.payload,
-        isLoaded: true
+        submittedForms: []
       };
-
-    case LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS:
-      return {
-        ...state,
-        localOffices: action.payload,
-        isLoaded: true
-      };
-
-    case LOAD_REFERENCE_GRADES_SUCCESS:
-      return {
-        ...state,
-        grades: action.payload,
-        isLoaded: true
-      };
-
-    case LOAD_INITIAL_VALUES_FAILURE:
-    case LOAD_REFERENCE_GENDER_FAILURE:
-    case LOAD_REFERENCE_COLLEGES_FAILURE:
-    case LOAD_REFERENCE_QUALIFICATIONS_FAILURE:
-    case LOAD_REFERENCE_LOCAL_OFFICES_FAILURE:
-    case LOAD_REFERENCE_GRADES_FAILURE:
-      return {
-        ...state,
-        isLoaded: false
-      };
-
     default:
       return state;
   }

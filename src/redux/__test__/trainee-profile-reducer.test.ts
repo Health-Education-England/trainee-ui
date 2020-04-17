@@ -1,10 +1,9 @@
-import PersonReducer from "../person-reducer";
+import TraineeProfileReducer from "../reducers/trainee-profile-reducer";
+import { PersonState, ActionType } from "../types";
 import {
-  PersonState,
   LOAD_TRAINEE_PROFILE_SUCCESS,
-  LOAD_TRAINEE_PROFILE_FAILURE,
-  ActionType
-} from "../../types";
+  LOAD_TRAINEE_PROFILE_FAILURE
+} from "../action_types";
 
 const initialState: PersonState = {
   traineeProfile: null,
@@ -15,7 +14,9 @@ describe("person reducer", () => {
   it("should return initial state when no action passed", () => {
     const defaultAction: ActionType = { type: "", payload: null };
 
-    expect(PersonReducer(undefined, defaultAction)).toEqual(initialState);
+    expect(TraineeProfileReducer(undefined, defaultAction)).toEqual(
+      initialState
+    );
   });
 
   it("should return updated state when LOAD_TRAINEE_PROFILE_SUCCESS action passed", () => {
@@ -29,7 +30,7 @@ describe("person reducer", () => {
       payload: null
     };
 
-    expect(PersonReducer(initialState, successAction)).toEqual(state);
+    expect(TraineeProfileReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_TRAINEE_PROFILE_FAILURE action passed", () => {
@@ -43,6 +44,6 @@ describe("person reducer", () => {
       payload: null
     };
 
-    expect(PersonReducer(initialState, failureAction)).toEqual(state);
+    expect(TraineeProfileReducer(initialState, failureAction)).toEqual(state);
   });
 });
