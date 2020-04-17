@@ -10,4 +10,8 @@ ENV PATH="/app/node_modules/.bin:${PATH}"
 
 RUN npm install --production
 
-CMD ["npm", "start"]
+RUN npm run build
+
+RUN npm install -g serve
+
+CMD serve -p 3000 -s build
