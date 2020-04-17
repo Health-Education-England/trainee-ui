@@ -11,7 +11,9 @@ import {
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+  LOAD_REFERENCE_CURRICULA_FAILURE,
+  LOAD_REFERENCE_CURRICULA_SUCCESS
 } from "../action_types";
 
 const initialState: ReferenceDataState = {
@@ -20,7 +22,8 @@ const initialState: ReferenceDataState = {
   localOffices: [],
   qualifications: [],
   grades: [],
-  immigrationStatuses: [],
+  immigrationStatus: [],
+  curricula: [],
   isLoaded: false
 };
 
@@ -67,7 +70,14 @@ export default function ReferenceDataReducer(
     case LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS:
       return {
         ...state,
-        immigrationStatuses: action.payload,
+        immigrationStatus: action.payload,
+        isLoaded: true
+      };
+
+    case LOAD_REFERENCE_CURRICULA_SUCCESS:
+      return {
+        ...state,
+        curricula: action.payload,
         isLoaded: true
       };
 
@@ -77,6 +87,7 @@ export default function ReferenceDataReducer(
     case LOAD_REFERENCE_LOCAL_OFFICES_FAILURE:
     case LOAD_REFERENCE_GRADES_FAILURE:
     case LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE:
+    case LOAD_REFERENCE_CURRICULA_FAILURE:
       return {
         ...state,
         isLoaded: false

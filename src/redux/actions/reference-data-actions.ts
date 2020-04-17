@@ -11,7 +11,9 @@ import {
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+  LOAD_REFERENCE_CURRICULA_SUCCESS,
+  LOAD_REFERENCE_CURRICULA_FAILURE
 } from "../action_types";
 import { TraineeReferenceService } from "../../services/TraineeReferenceService";
 import { KeyValue } from "../../models/KeyValue";
@@ -98,7 +100,7 @@ export const loadReferenceData = () => (
     );
 
   referenceService
-    .getImmigrationStatuses()
+    .getImmigrationStatus()
     .then(response => {
       dispatch({
         type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
@@ -108,6 +110,21 @@ export const loadReferenceData = () => (
     .catch(error =>
       dispatch({
         type: LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+        payload: error
+      })
+    );
+
+  referenceService
+    .getCurricula()
+    .then(response => {
+      dispatch({
+        type: LOAD_REFERENCE_CURRICULA_SUCCESS,
+        payload: getKeyValuesFromResponse(response)
+      });
+    })
+    .catch(error =>
+      dispatch({
+        type: LOAD_REFERENCE_CURRICULA_FAILURE,
         payload: error
       })
     );

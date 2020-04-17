@@ -33,7 +33,8 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   colleges: state.referenceData.colleges,
   localOffices: state.referenceData.localOffices,
   trainingGrades: state.referenceData.grades,
-  immigrationStatuses: state.referenceData.immigrationStatuses,
+  immigrationStatus: state.referenceData.immigrationStatus,
+  curricula: state.referenceData.curricula,
   isLoaded: state.referenceData.isLoaded,
   history: ownProps.history,
   location: ownProps.location
@@ -63,7 +64,8 @@ class CreateFormRPartA extends React.PureComponent<
       colleges,
       localOffices,
       trainingGrades,
-      immigrationStatuses,
+      immigrationStatus,
+      curricula,
       isLoaded
     } = this.props;
 
@@ -116,7 +118,7 @@ class CreateFormRPartA extends React.PureComponent<
                   <SelectInputField
                     label="Immigration Status"
                     name="immigrationStatus"
-                    options={immigrationStatuses}
+                    options={immigrationStatus}
                   />
                   {values.immigrationStatus === "Other" ? (
                     <TextInputField
@@ -182,19 +184,22 @@ class CreateFormRPartA extends React.PureComponent<
                     ))}
                   </Radios>
 
-                  <TextInputField
+                  <SelectInputField
                     label="Programme Specialty"
                     name="programmeSpecialty"
+                    options={curricula}
                   />
                   {values.declarationType === CCT_DECLARATION ? (
                     <>
-                      <TextInputField
+                      <SelectInputField
                         label="Specialty 1 for Award of CCT"
                         name="cctSpecialty1"
+                        options={curricula}
                       />
-                      <TextInputField
+                      <SelectInputField
                         label="Specialty 2 for Award of CCT"
                         name="cctSpecialty2"
+                        options={curricula}
                       />
                     </>
                   ) : null}

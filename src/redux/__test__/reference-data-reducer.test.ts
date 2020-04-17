@@ -12,7 +12,9 @@ import {
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+  LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+  LOAD_REFERENCE_CURRICULA_FAILURE,
+  LOAD_REFERENCE_CURRICULA_SUCCESS
 } from "../action_types";
 
 describe("form-r part-a reducer", () => {
@@ -22,7 +24,8 @@ describe("form-r part-a reducer", () => {
     localOffices: [],
     qualifications: [],
     grades: [],
-    immigrationStatuses: [],
+    immigrationStatus: [],
+    curricula: [],
     isLoaded: false
   };
 
@@ -115,12 +118,27 @@ describe("form-r part-a reducer", () => {
   it("should return updated state when LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS action passed", () => {
     const state: ReferenceDataState = {
       ...initialState,
-      immigrationStatuses: [],
+      immigrationStatus: [],
       isLoaded: true
     };
 
     const successAction: ActionType = {
       type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
+      payload: []
+    };
+
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_REFERENCE_CURRICULA_SUCCESS action passed", () => {
+    const state: ReferenceDataState = {
+      ...initialState,
+      curricula: [],
+      isLoaded: true
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_REFERENCE_CURRICULA_SUCCESS,
       payload: []
     };
 
@@ -133,7 +151,8 @@ describe("form-r part-a reducer", () => {
     LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
     LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
     LOAD_REFERENCE_GRADES_FAILURE,
-    LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE
+    LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
+    LOAD_REFERENCE_CURRICULA_FAILURE
   ])("should return updated state when $a action passed", actionType => {
     const state: ReferenceDataState = {
       ...initialState,

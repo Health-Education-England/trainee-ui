@@ -26,7 +26,8 @@ export interface ReferenceDataState {
   localOffices: KeyValue[];
   qualifications: KeyValue[];
   grades: KeyValue[];
-  immigrationStatuses: KeyValue[];
+  immigrationStatus: KeyValue[];
+  curricula: KeyValue[];
   isLoaded: boolean;
 }
 
