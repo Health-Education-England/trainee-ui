@@ -75,7 +75,7 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <SummaryList>
+          <SummaryList noBorder={true}>
             {personalData.map(pd => (
               <SummaryList.Row>
                 <SummaryList.Key>{pd.label}</SummaryList.Key>
