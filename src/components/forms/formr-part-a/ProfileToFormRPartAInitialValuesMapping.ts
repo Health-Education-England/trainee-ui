@@ -1,7 +1,7 @@
 import { TraineeProfile } from "../../../models/TraineeProfile";
 import { FormRPartA } from "../../../models/FormRPartA";
 
-export function mapProfileToFormRPartAInitialValues(
+export function ProfileToFormRPartAInitialValuesMapping(
   traineeProfile: TraineeProfile | null
 ): FormRPartA | null {
   if (!traineeProfile) {
@@ -9,7 +9,16 @@ export function mapProfileToFormRPartAInitialValues(
   }
 
   const pd = traineeProfile.personalDetails;
-  const programme = traineeProfile.programmeMemberships[0];
+  const programme = traineeProfile.programmeMemberships.reduce(function(a, b) {
+    return a.startDate > b.startDate ? a : b;
+  });
+
+  const curriculum = programme.curricula
+    .filter(c => c.curriculumSubType === "MEDICAL_CURRICULUM")
+    .reduce(function(a, b) {
+      return a.curriculumStartDate > b.curriculumStartDate ? a : b;
+    });
+
   const model: FormRPartA = {
     forename: pd.forenames || "",
     surname: pd.surname || "",
@@ -30,15 +39,15 @@ export function mapProfileToFormRPartAInitialValues(
     mobileNumber: pd.mobileNumber || "",
     email: pd.email || "",
     isLeadingToCct: false,
-    programmeSpecialty: programme.curricula[0].curriculumName,
-    cctSpecialty1: "",
+    programmeSpecialty: curriculum?.curriculumName || "",
+    cctSpecialty1: curriculum?.curriculumName || "",
     cctSpecialty2: "",
     college: "",
-    completionDate: programme.endDate || "",
+    completionDate: curriculum?.curriculumCompletionDate || new Date(),
     trainingGrade: "",
-    startDate: programme.startDate || "",
-    programmeMembershipType: programme.programmeName || "",
-    wholeTimeEquivalent: null,
+    startDate: programme.startDate,
+    programmeMembershipType: programme.programmeMembershipType || "",
+    wholeTimeEquivalent: undefined,
     declarationType: "",
     otherImmigrationStatus: "",
     traineeTisId: traineeProfile.traineeTisId,

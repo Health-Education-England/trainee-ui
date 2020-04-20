@@ -11,7 +11,6 @@ import {
   BackLink
 } from "nhsuk-react-components";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
-import { Declarations } from "./DropdownOptions";
 import SelectInputField from "./SelectInputField";
 import TextInputField from "./TextInputField";
 import WarningMessage from "./WarningMessage";
@@ -19,13 +18,22 @@ import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import Loading from "../../common/Loading";
-import { mapProfileToFormRPartAInitialValues } from "./mapProfileToFormRPartAInitialValues";
+import { ProfileToFormRPartAInitialValuesMapping } from "./ProfileToFormRPartAInitialValuesMapping";
 import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";
 import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 
+const Declarations = [
+  CCT_DECLARATION,
+  "I will be seeking specialist registration by application for a CESR",
+  "I will be seeking specialist registration by application for a CESR CP",
+  "I will be seeking specialist registration by application for a CEGPR",
+  "I will be seeking specialist registration by application for a CEGPR CP",
+  "I am a CORE trainee, not yet eligible for CCT"
+];
+
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  initialFormValues: mapProfileToFormRPartAInitialValues(
+  initialFormValues: ProfileToFormRPartAInitialValuesMapping(
     state.profile.traineeProfile
   ),
   genders: state.referenceData.genders,
@@ -170,16 +178,14 @@ class CreateFormRPartA extends React.PureComponent<
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
 
-                    {Declarations.map(d => (
+                    {Declarations.map(label => (
                       <Radios.Radio
-                        key={d.label}
-                        id={d.value}
-                        checked={values.declarationType === d.value}
-                        onChange={() =>
-                          setFieldValue("declarationType", d.value)
-                        }
+                        key={label}
+                        id={label}
+                        checked={values.declarationType === label}
+                        onChange={() => setFieldValue("declarationType", label)}
                       >
-                        {d.label}
+                        {label}
                       </Radios.Radio>
                     ))}
                   </Radios>

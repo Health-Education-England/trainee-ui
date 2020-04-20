@@ -28,7 +28,7 @@ export interface FormRPartA {
   trainingGrade: string;
   startDate: Date;
   programmeMembershipType: string;
-  wholeTimeEquivalent: number | null;
+  wholeTimeEquivalent: number | undefined;
   submissionDate: string;
   lastModifiedDate: string;
   declarationType: string;

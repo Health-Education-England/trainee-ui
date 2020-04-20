@@ -16,5 +16,6 @@ export interface curriculm {
   curriculumTisId: string;
   curriculumName: string;
   curriculumSubType: string;
-  curriculumCompletionDate: string;
+  curriculumStartDate: Date;
+  curriculumCompletionDate: Date;
 }
