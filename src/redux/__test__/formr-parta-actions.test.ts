@@ -8,7 +8,8 @@ import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import { AxiosResponse } from "axios";
 import { FormRPartAService } from "../../services/FormRPartAService";
-import { formrParta } from "../../mock-data/formr-parta";
+import { submittedForms } from "../../mock-data/submitted-formr-parta";
+
 import {
   loadFormRPartAList,
   loadFormRPartA
@@ -22,7 +23,7 @@ const store = mockStore({});
 
 describe("loadFormRPartAList method", () => {
   it("Should dispatch LOAD_FORMR_PARTA_LIST_SUCCESS on successfull api call", () => {
-    const responsedata = [formrParta];
+    const responsedata = submittedForms;
 
     const successResponse: Promise<AxiosResponse<
       FormRPartA[]
@@ -80,6 +81,7 @@ describe("loadFormRPartAList method", () => {
 
 describe("loadFormRPartA method", () => {
   it("should dispatch LOAD_FORMR_PARTA_SUCCESS if data is not null", () => {
+    const formrParta = submittedForms[0];
     const expectedActions = {
       type: LOAD_FORMR_PARTA_SUCCESS,
       payload: formrParta

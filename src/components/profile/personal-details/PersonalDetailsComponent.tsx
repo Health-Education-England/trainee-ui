@@ -12,7 +12,7 @@ import { KeyValue } from "../../../models/KeyValue";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface IProps {
-  personalDetails: PersonalDetails;
+  personalDetails: PersonalDetails | null;
 }
 
 const useStyles = makeStyles(theme => ({

@@ -1,15 +1,22 @@
 import React from "react";
 import { Button, Table, ActionLink, LedeText } from "nhsuk-react-components";
 import { FormRPartA } from "../../../models/FormRPartA";
-import { GenericOwnProps, RootState } from "../../../redux/types";
+import { RootState } from "../../../redux/types";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import { loadFormRPartAList } from "../../../redux/actions/formr-parta-actions";
-import { ConnectedProps, connect } from "react-redux";
+import { connect } from "react-redux";
 import { FormRPartAService } from "../../../services/FormRPartAService";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
-const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  submittedForms: state.formRPartAList.submittedForms,
-  history: ownProps.history
+interface ListProps {
+  submittedForms: FormRPartA[];
+  history: any;
+  loadFormRPartAList: (service: FormRPartAService) => Promise<void>;
+  loadFormRPartA: (data: FormRPartA | null) => any;
+}
+
+const mapStateToProps = (state: RootState) => ({
+  submittedForms: state.formRPartAList.submittedForms
 });
 
 const mapDispatchToProps = {
@@ -17,21 +24,22 @@ const mapDispatchToProps = {
   loadFormRPartAList
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-class List extends React.PureComponent<ConnectedProps<typeof connector>> {
+class List extends React.PureComponent<ListProps> {
   componentDidMount() {
     this.props.loadFormRPartAList(new FormRPartAService());
   }
 
   handleRowClick = (formData: FormRPartA) => {
-    this.props.loadFormRPartA(formData);
+    const { loadFormRPartA, history } = this.props;
 
-    this.props.history.push(`/formr-a/${formData.id}`);
+    loadFormRPartA(formData);
+    history.push(`/formr-a/${formData.id}`);
   };
 
   handleNewFormClick = () => {
-    this.props.history.push({
+    const { history } = this.props;
+
+    history.push({
       pathname: "/formr-a/create",
       history: this.props.history,
       formData: undefined
@@ -59,7 +67,8 @@ class List extends React.PureComponent<ConnectedProps<typeof connector>> {
                 <Table.Row key={formData.id} style={{ cursor: "pointer" }}>
                   <td>
                     <ActionLink onClick={() => this.handleRowClick(formData)}>
-                      form submitted on {formData.submissionDate}
+                      form submitted on{" "}
+                      {DateUtilities.ToLocalDate(formData.submissionDate)}
                     </ActionLink>
                   </td>
                 </Table.Row>
@@ -74,4 +83,4 @@ class List extends React.PureComponent<ConnectedProps<typeof connector>> {
   }
 }
 
-export default connector(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);

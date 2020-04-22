@@ -29,8 +29,8 @@ export interface FormRPartA {
   startDate: Date;
   programmeMembershipType: string;
   wholeTimeEquivalent: number | undefined;
-  submissionDate: string;
-  lastModifiedDate: string;
+  submissionDate: Date | null;
+  lastModifiedDate: Date | null;
   declarationType: string;
   otherImmigrationStatus: string;
 }
