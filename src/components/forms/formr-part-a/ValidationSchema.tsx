@@ -6,120 +6,75 @@ const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
 const postcodeRegex = /[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i;
 const wholeTimeEquivalentRegex = /^\d(\.\d{0,2})?$/;
 
+const dateSchema = (fieldName: string) =>
+  yup.date().required(`${fieldName} is required`);
+
+const stringSchema = (fieldName: string, maxLength: number = 50) =>
+  yup
+    .string()
+    .transform(value => (value as string).trim())
+    .min(2, `${fieldName} must be at least 2 characters`)
+    .max(maxLength, `${fieldName} must be shorter than ${maxLength} characters`)
+    .required(`${fieldName} is required`);
+
 const ValidationSchema = yup.object({
-  forename: yup
-    .string()
-    .max(50)
-    .required("Forename(s) is required"),
-  surname: yup
-    .string()
-    .max(30)
-    .required("Surname (GMC-Registered) is required"),
-  gmcNumber: yup
-    .string()
-    .max(20)
-    .required("GMC number is required"),
-  localOfficeName: yup
-    .string()
-    .max(50)
-    .required("Deanery / HEE Local Office is required"),
-  dateOfBirth: yup
-    .date()
-    .required("Your date of birth is required")
-    .test("dateOfBirth", "You must be 17 years or above", value =>
-      DateUtilities.IsLegalAge(value)
-    ),
-  gender: yup
-    .string()
-    .max(50)
-    .required("Select your Gender"),
-  immigrationStatus: yup
-    .string()
-    .max(50)
-    .required("Select an Immigration Status"),
-  qualification: yup
-    .string()
-    .max(100)
-    .required("Select a Qualification"),
-  dateAttained: yup
-    .date()
-    .required("Date awarded (most recent qualification) is required")
-    .test(
-      "dateAttained",
-      "Date awarded (most recent qualification) - please choose a date from the past",
-      value => DateUtilities.IsPastDate(value)
-    ),
-  medicalSchool: yup
-    .string()
-    .max(50)
-    .required("Medical school is required"),
-  address1: yup
-    .string()
-    .max(50)
-    .required("Address - house number/ name and road is required"),
-  address2: yup
-    .string()
-    .max(50)
-    .required("Address - district is required"),
-  address3: yup
-    .string()
-    .max(50)
-    .required("Address - town or city is required"),
-  address4: yup
-    .string()
-    .max(50)
-    .required("Address - country is required"),
-  postCode: yup
-    .string()
-    .max(8)
-    .required("Postcode is required")
-    .matches(postcodeRegex, "Please enter a valid postcode"),
-  telephoneNumber: yup
-    .string()
-    .required("Contact (landline telephone) is required")
-    .matches(phoneRegex, "Contact (landline) number - requires a valid number"),
-  mobileNumber: yup
-    .string()
-    .required("Contact (mobile) is required")
-    .matches(mobileRegex, "Contact (mobile) number - requires a valid number"),
-  email: yup
-    .string()
-    .email("Email is invalid")
-    .max(255, "Email must be shorter than 255 characters")
-    .required("Email is required"),
+  forename: stringSchema("Forename(s)"),
+  surname: stringSchema("Surname (GMC-Registered)", 30),
+  gmcNumber: stringSchema("GMC number", 20),
+  localOfficeName: stringSchema("Deanery / HEE Local Office"),
+  dateOfBirth: dateSchema("Your date of birth").test(
+    "dateOfBirth",
+    "You must be 17 years or above",
+    value => DateUtilities.IsLegalAge(value)
+  ),
+  gender: stringSchema("Gender"),
+  immigrationStatus: stringSchema("Immigration Status"),
+  qualification: stringSchema("Qualification"),
+  dateAttained: dateSchema(
+    "Date awarded (most recent qualification)"
+  ).test(
+    "dateAttained",
+    "Date awarded (most recent qualification) - please choose a date from the past",
+    value => DateUtilities.IsPastDate(value)
+  ),
+  medicalSchool: stringSchema("Medical school", 100),
+  address1: stringSchema("Address - house number/ name and road"),
+  address2: stringSchema("Address - district"),
+  address3: stringSchema("Address - town or city"),
+  address4: stringSchema("Address - country"),
+  postCode: stringSchema("Postcode", 8).matches(
+    postcodeRegex,
+    "Please enter a valid postcode"
+  ),
+  telephoneNumber: stringSchema("Contact (landline telephone)").matches(
+    phoneRegex,
+    "Contact (landline) number - requires a valid number"
+  ),
+  mobileNumber: stringSchema("Contact (mobile)").matches(
+    mobileRegex,
+    "Contact (mobile) number - requires a valid number"
+  ),
+  email: stringSchema("Email").email("Email is invalid"),
   declarationType: yup
     .string()
     .required("You need to choose at least one Declaration")
     .nullable(),
-  programmeSpecialty: yup
-    .string()
-    .max(50)
-    .required("Programme specialty is required"),
-  college: yup
-    .string()
-    .max(50)
-    .required("Royal College / Faculty Assessing Training is required"),
-  completionDate: yup
-    .date()
-    .required("Anticipated completion date is required")
-    .test(
-      "completionDate",
-      "Anticipated completion date - please choose a future date",
-      value => DateUtilities.IsFutureDate(value)
-    ),
-  trainingGrade: yup
-    .string()
-    .max(50)
-    .required("Training Grade is required"),
-  startDate: yup.date().required("Programme start date is required"),
-  programmeMembershipType: yup
-    .string()
-    .max(50)
-    .required("Post type / Appointment is required"),
+  programmeSpecialty: stringSchema("Programme specialty"),
+  college: stringSchema("Royal College / Faculty Assessing Training"),
+  completionDate: dateSchema(
+    "Anticipated completion date"
+  ).test(
+    "completionDate",
+    "Anticipated completion date - please choose a future date",
+    value => DateUtilities.IsFutureDate(value)
+  ),
+  trainingGrade: stringSchema("Training Grade"),
+  startDate: dateSchema("Programme start date"),
+  programmeMembershipType: stringSchema("Post type / Appointment"),
   wholeTimeEquivalent: yup
     .number()
     .nullable()
-    .required("Programme Full Time or % of Full Time Training is required")
+    .required("Programme Full Time or % of Full Time Training")
     .min(0, "Full Time Training value must be greater than or equal to 0")
     .max(1, "Full Time Training value must be less than or equal to 1")
     .test("wholeTimeEquivalent", "Only two decimal places allowed", value =>
