@@ -9,6 +9,7 @@ export interface ProgrammeMembership {
   status: Status;
   startDate: Date;
   endDate: Date;
+  programmeCompletionDate: Date;
   curricula: curriculm[];
 }
 
@@ -17,5 +18,4 @@ export interface curriculm {
   curriculumName: string;
   curriculumSubType: string;
   curriculumStartDate: Date;
-  curriculumCompletionDate: Date;
 }
