@@ -43,7 +43,7 @@ export function ProfileToFormRPartAInitialValuesMapping(
     cctSpecialty1: curriculum?.curriculumName || "",
     cctSpecialty2: "",
     college: "",
-    completionDate: curriculum?.curriculumCompletionDate || new Date(),
+    completionDate: programme.programmeCompletionDate || new Date(),
     trainingGrade: "",
     startDate: programme.startDate,
     programmeMembershipType: programme.programmeMembershipType || "",
