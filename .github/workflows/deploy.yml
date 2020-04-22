@@ -48,5 +48,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: trainee-ui
-        cluster: trainee
+        cluster: trainee-preprod
         wait-for-service-stability: true
