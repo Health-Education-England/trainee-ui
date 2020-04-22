@@ -5,6 +5,7 @@ import { GenericOwnProps, RootState } from "../../../redux/types";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import { loadFormRPartAList } from "../../../redux/actions/formr-parta-actions";
 import { ConnectedProps, connect } from "react-redux";
+import { FormRPartAService } from "../../../services/FormRPartAService";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   submittedForms: state.formRPartAList.submittedForms,
@@ -20,7 +21,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 class List extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
-    this.props.loadFormRPartAList();
+    this.props.loadFormRPartAList(new FormRPartAService());
   }
 
   handleRowClick = (formData: FormRPartA) => {

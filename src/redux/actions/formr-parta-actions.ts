@@ -8,12 +8,10 @@ import {
 import { FormRPartA } from "../../models/FormRPartA";
 import { FormRPartAService } from "../../services/FormRPartAService";
 
-const formService = new FormRPartAService();
-
-export const loadFormRPartAList = () => (
+export const loadFormRPartAList = (formService: FormRPartAService) => (
   dispatch: (action: ActionType) => any
 ) => {
-  formService
+  return formService
     .getTraineeFormRPartA()
     .then(response => {
       dispatch({
@@ -29,18 +27,11 @@ export const loadFormRPartAList = () => (
     });
 };
 
-export const loadFormRPartA = (formData: FormRPartA) => (
+export const loadFormRPartA = (formData: FormRPartA | null) => (
   dispatch: (action: ActionType) => any
 ) => {
-  if (formData) {
-    dispatch({
-      type: LOAD_FORMR_PARTA_SUCCESS,
-      payload: formData
-    });
-  } else {
-    dispatch({
-      type: LOAD_FORMR_PARTA_FAILURE,
-      payload: null
-    });
-  }
+  return dispatch({
+    type: formData ? LOAD_FORMR_PARTA_SUCCESS : LOAD_FORMR_PARTA_FAILURE,
+    payload: formData
+  });
 };
