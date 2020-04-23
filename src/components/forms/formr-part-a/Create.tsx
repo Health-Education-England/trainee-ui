@@ -240,9 +240,9 @@ class CreateFormRPartA extends React.PureComponent<
                     placeholder="programmeMembership type"
                   />
                   <TextInputField
-                    label="Full Time or % of Full Time Training"
+                    label="Full Time Equivalent in Training"
                     name="wholeTimeEquivalent"
-                    placeholder="E.g. 0.1 for 10%; 0.25 for 25% etc or 1 for Full time"
+                    placeholder="e.g. 0.1 for 10%; 0.25 for 25% etc. or 1 for Full Time"
                   />
                 </Fieldset>
 
