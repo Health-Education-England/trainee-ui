@@ -254,7 +254,7 @@ class CreateFormRPartA extends React.PureComponent<
                     ))}
                   </ErrorSummary>
                 ) : null}
-                <Button type="submit">Confirm</Button>
+                <Button type="submit">Continue</Button>
               </Form>
             )}
           </Formik>

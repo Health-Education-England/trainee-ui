@@ -4,7 +4,7 @@ import { PersonalDetails } from "./PersonalDetails";
 
 export interface TraineeProfile {
   traineeTisId: string;
-  personalDetails: PersonalDetails;
+  personalDetails: PersonalDetails | null;
   programmeMemberships: ProgrammeMembership[];
   placements: Placement[];
 }

@@ -2,55 +2,45 @@ import React from "react";
 import View from "./View";
 import { Button, WarningCallout } from "nhsuk-react-components";
 import { FormRPartAService } from "../../../services/FormRPartAService";
-import { GenericOwnProps, RootState } from "../../../redux/types";
-import { DateUtilities } from "../../../utilities/DateUtilities";
-import { ConnectedProps, connect } from "react-redux";
+import { RootState } from "../../../redux/types";
+import { connect } from "react-redux";
+import { FormRPartA } from "../../../models/FormRPartA";
 
-const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  formData: state.formRPartAView.formData,
-  history: ownProps.history,
-  location: ownProps.location
+interface ConfirmProps {
+  formData: FormRPartA | null;
+  history: any;
+}
+
+const mapStateToProps = (state: RootState) => ({
+  formData: state.formRPartAView.formData
 });
 
-const connector = connect(mapStateToProps, {});
-
-class Confirm extends React.PureComponent<ConnectedProps<typeof connector>> {
+class Confirm extends React.PureComponent<ConfirmProps> {
   formRPartAService: FormRPartAService = new FormRPartAService();
 
-  handleEdit = () => {
+  handleEdit = (formData: FormRPartA) => {
     this.props.history.push({
       pathname: "/formr-a/create",
-      history: this.props.history,
-      formData: this.props.formData
+      formData: formData
     });
   };
 
-  handleSubmit = () => {
-    const { formData } = this.props;
-
-    if (formData) {
-      formData.submissionDate = DateUtilities.ToUTCDate(new Date());
-      formData.lastModifiedDate = DateUtilities.ToUTCDate(new Date());
-
-      this.formRPartAService
-        .saveTraineeFormRPartA(formData)
-        .then(() => this.props.history.push("/formr-a"));
-    }
+  handleSubmit = (formData: FormRPartA) => {
+    this.formRPartAService
+      .saveTraineeFormRPartA(formData)
+      .then(() => this.props.history.push("/formr-a"));
   };
 
   render() {
     const { formData } = this.props;
     if (!formData) {
-      this.props.history.push("/formr-a");
+      this.props.history.push("/formr-a/create");
       return null;
     }
 
     return (
       <div>
-        <View
-          location={this.props.location}
-          history={this.props.history}
-        ></View>
+        <View history={this.props.history}></View>
         <WarningCallout style={{ textAlign: "justify" }}>
           <h3 className="nhsuk-warning-callout__label">Warning</h3>
           <p>
@@ -59,10 +49,13 @@ class Confirm extends React.PureComponent<ConnectedProps<typeof connector>> {
             soon as possible of any change to my contact details.
           </p>
         </WarningCallout>
-        <Button onClick={this.handleEdit} style={{ marginRight: 30 }}>
+        <Button
+          onClick={() => this.handleEdit(formData)}
+          style={{ marginRight: 30 }}
+        >
           Edit
         </Button>
-        <Button type="submit" onClick={this.handleSubmit}>
+        <Button type="submit" onClick={() => this.handleSubmit(formData)}>
           Submit
         </Button>
       </div>
@@ -70,4 +63,4 @@ class Confirm extends React.PureComponent<ConnectedProps<typeof connector>> {
   }
 }
 
-export default connector(Confirm);
+export default connect(mapStateToProps)(Confirm);

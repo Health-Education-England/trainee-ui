@@ -5,7 +5,7 @@ import {
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { mockTraineeProfile } from "../../mock-data/mock-personal-details";
+import { mockTraineeProfile } from "../../mock-data/trainee-profile";
 import { AxiosResponse } from "axios";
 import { TraineeProfile } from "../../models/TraineeProfile";
 import { loadTraineeProfile } from "../actions/trainee-profile-actions";

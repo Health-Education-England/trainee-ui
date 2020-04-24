@@ -1,24 +1,26 @@
 import React from "react";
 import { SummaryList, BackLink } from "nhsuk-react-components";
-import { GenericOwnProps, RootState } from "../../../redux/types";
+import { RootState } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
-import { connect, ConnectedProps } from "react-redux";
+import { connect } from "react-redux";
+import { FormRPartA } from "../../../models/FormRPartA";
 
-const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  formData: state.formRPartAView.formData,
-  history: ownProps.history,
-  location: ownProps.location
+interface ViewProps {
+  formData: FormRPartA | null;
+  history: any;
+}
+
+const mapStateToProps = (state: RootState) => ({
+  formData: state.formRPartAView.formData
 });
 
-const connector = connect(mapStateToProps, {});
-
-class View extends React.PureComponent<ConnectedProps<typeof connector>> {
+class View extends React.PureComponent<ViewProps> {
   render() {
-    const { formData } = this.props;
+    const { formData, history } = this.props;
 
     if (!formData) {
-      this.props.history.push("/formr-a");
+      history.push("/formr-a");
       return null;
     }
 
@@ -181,4 +183,4 @@ class View extends React.PureComponent<ConnectedProps<typeof connector>> {
   }
 }
 
-export default connector(View);
+export default connect(mapStateToProps)(View);

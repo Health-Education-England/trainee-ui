@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
-import { Form, Fieldset } from "nhsuk-react-components";
+import { Form, Fieldset, Label } from "nhsuk-react-components";
 
 const validationSchema = yup.object({
   forenames: yup
@@ -32,6 +32,7 @@ const FormRPartB: React.FC = () => {
             <Fieldset>
               <Fieldset.Legend isPageHeading>Form-R (Part B)</Fieldset.Legend>
             </Fieldset>
+            <Label>Coming soon...</Label>
           </Form>
         )}
       </Formik>
