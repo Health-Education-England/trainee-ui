@@ -5,7 +5,7 @@ export class DateUtilities {
     let utcDate = "";
 
     if (date) {
-      const momentDate = moment(date);
+      const momentDate = moment(date, moment.ISO_8601);
       utcDate = momentDate.isValid() ? moment(date).format("YYYY-MM-DD") : "";
     }
 
@@ -15,7 +15,7 @@ export class DateUtilities {
   public static ToLocalDate(date: Date | string | null): string {
     let localDate = "";
     if (date) {
-      const momentDate = moment(date);
+      const momentDate = moment(date, moment.ISO_8601);
       localDate = momentDate.isValid() ? momentDate.format("DD/MM/YYYY") : "";
     }
 
@@ -23,17 +23,17 @@ export class DateUtilities {
   }
 
   public static IsLegalAge(value: Date | string): boolean {
-    const momentDate = moment(value);
+    const momentDate = moment(value, moment.ISO_8601);
     return momentDate.isValid() && moment().diff(momentDate, "years") >= 18;
   }
 
   public static IsPastDate(value: Date | string): boolean {
-    const momentDate = moment(value);
+    const momentDate = moment(value, moment.ISO_8601);
     return momentDate.isValid() && moment().diff(momentDate, "years") >= 1;
   }
 
   public static IsFutureDate(value: Date | string): boolean {
-    const momentDate = moment(value);
+    const momentDate = moment(value, moment.ISO_8601);
     return momentDate.isValid() && moment().diff(momentDate, "years") <= 1;
   }
 }

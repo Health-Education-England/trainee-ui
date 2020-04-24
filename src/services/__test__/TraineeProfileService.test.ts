@@ -31,8 +31,11 @@ describe("TraineeProfileService", () => {
       .spyOn(mockService, "get")
       .mockReturnValue(Promise.reject(errorResponse));
 
-    const expectedResponse = Promise.resolve(errorResponse);
-
-    expect(mockService.getTraineeProfile()).toEqual(expectedResponse);
+    mockService
+      .getTraineeProfile()
+      .then()
+      .catch(respose => {
+        expect(respose).toEqual(errorResponse);
+      });
   });
 });

@@ -19,7 +19,7 @@ import { FormRPartA } from "../../models/FormRPartA";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const formRPartAService = new FormRPartAService();
-const store = mockStore({});
+let store = mockStore({});
 
 describe("loadFormRPartAList method", () => {
   it("Should dispatch LOAD_FORMR_PARTA_LIST_SUCCESS on successfull api call", () => {
@@ -52,7 +52,7 @@ describe("loadFormRPartAList method", () => {
   });
 
   it("Should dispatch LOAD_FORMR_PARTA_LIST_FAILURE if api call fails", () => {
-    const store = mockStore({});
+    store = mockStore({});
 
     const errorResponse = {
       data: null,
