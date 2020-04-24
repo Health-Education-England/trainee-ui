@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 const history: never[] = [];
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let store = mockStore({
+const store = mockStore({
   formRPartAView: {
     formData: null
   }

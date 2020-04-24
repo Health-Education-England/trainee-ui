@@ -77,7 +77,7 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
         <ExpansionPanelDetails>
           <SummaryList noBorder={true}>
             {personalData.map(pd => (
-              <SummaryList.Row>
+              <SummaryList.Row key={pd.label}>
                 <SummaryList.Key>{pd.label}</SummaryList.Key>
                 <SummaryList.Value>{pd.value}</SummaryList.Value>
               </SummaryList.Row>
@@ -98,7 +98,7 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
             {sensitiveData.map(
               sd =>
                 sd.value && (
-                  <SummaryList.Row>
+                  <SummaryList.Row key={sd.label}>
                     <SummaryList.Key>{sd.label}</SummaryList.Key>
                     <SummaryList.Value>{sd.value}</SummaryList.Value>
                   </SummaryList.Row>
