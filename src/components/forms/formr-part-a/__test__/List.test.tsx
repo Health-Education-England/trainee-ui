@@ -36,14 +36,14 @@ describe("List", () => {
     expect(history[0].pathname).toEqual("/formr-a/create");
   });
 
-  it("renders No forms found label without table", () => {
+  it("renders 'No forms found label' without table when submitted forms not available", () => {
     const wrapper = mountComponent([], null);
 
     expect(wrapper.find("table")).toHaveLength(0);
     expect(wrapper.html()).toContain("No forms found");
   });
 
-  it("renders submitted forms list in a table", () => {
+  it("renders submitted forms list in a table when submitted forms available", () => {
     const history: any[] = [];
     const wrapper = mountComponent(submittedForms, history);
 

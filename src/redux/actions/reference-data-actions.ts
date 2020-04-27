@@ -19,12 +19,10 @@ import { TraineeReferenceService } from "../../services/TraineeReferenceService"
 import { KeyValue } from "../../models/KeyValue";
 import { AxiosResponse } from "axios";
 
-const referenceService = new TraineeReferenceService();
-
-export const loadReferenceData = () => (
-  dispatch: (action: ActionType) => any
-) => {
-  referenceService
+export const loadReferenceData = (
+  referenceService: TraineeReferenceService
+) => (dispatch: (action: ActionType) => any) => {
+  const genders = referenceService
     .getGenders()
     .then(response => {
       dispatch({
@@ -39,7 +37,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const qualifications = referenceService
     .getQualifications()
     .then(response => {
       dispatch({
@@ -54,7 +52,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const colleges = referenceService
     .getColleges()
     .then(response => {
       dispatch({
@@ -69,7 +67,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const localOffices = referenceService
     .getLocalOffices()
     .then(response => {
       dispatch({
@@ -84,7 +82,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const trainingGrades = referenceService
     .getTrainingGrades()
     .then(response => {
       dispatch({
@@ -99,7 +97,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const immigrationStatus = referenceService
     .getImmigrationStatus()
     .then(response => {
       dispatch({
@@ -114,7 +112,7 @@ export const loadReferenceData = () => (
       })
     );
 
-  referenceService
+  const curricule = referenceService
     .getCurricula()
     .then(response => {
       dispatch({
@@ -128,6 +126,16 @@ export const loadReferenceData = () => (
         payload: error
       })
     );
+
+  return [
+    genders,
+    colleges,
+    qualifications,
+    immigrationStatus,
+    localOffices,
+    trainingGrades,
+    curricule
+  ];
 };
 
 function getKeyValuesFromResponse(response: AxiosResponse<any[]>): KeyValue[] {

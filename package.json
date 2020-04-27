@@ -89,6 +89,11 @@
       "!**/vendor/**",
       "!**/src/models/*.{js,jsx,ts,tsx}",
       "!**/src/mock-data/*.{js,jsx,ts,tsx}",
+      "!**/src/redux/store/*.{js,jsx,ts,tsx}",
+      "!**/src/*.{js,ts}",
+      "!**/src/components/authentication/*.{js,jsx,ts,tsx}",
+      "!**/src/redux/reducers/index.ts",
+      "!**/src/components/forms/formr-part-a/ValidationSchema.ts",
       "**/src/**/*.{ts,tsx}"
     ],
     "coverageReporters": [
