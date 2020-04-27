@@ -11,8 +11,8 @@ import {
   BackLink
 } from "nhsuk-react-components";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
-import SelectInputField from "./SelectInputField";
-import TextInputField from "./TextInputField";
+import SelectInputField from "../SelectInputField";
+import TextInputField from "../TextInputField";
 import WarningMessage from "./WarningMessage";
 import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
@@ -22,6 +22,7 @@ import { ProfileToFormRPartAInitialValuesMapping } from "./ProfileToFormRPartAIn
 import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";
 import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
+import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
 
 const Declarations = [
   CCT_DECLARATION,
@@ -61,7 +62,7 @@ class CreateFormRPartA extends React.PureComponent<
 > {
   componentDidMount() {
     this.props.loadTraineeProfile(new TraineeProfileService());
-    this.props.loadReferenceData();
+    this.props.loadReferenceData(new TraineeReferenceService());
   }
 
   render() {
