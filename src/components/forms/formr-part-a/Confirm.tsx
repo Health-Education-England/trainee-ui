@@ -1,7 +1,7 @@
 import React from "react";
 import View from "./View";
 import { Button, WarningCallout } from "nhsuk-react-components";
-import { FormRPartAService } from "../../../services/FormRPartAService";
+import { FormsService } from "../../../services/FormsService";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
@@ -16,7 +16,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 class Confirm extends React.PureComponent<ConfirmProps> {
-  formRPartAService: FormRPartAService = new FormRPartAService();
+  formRPartAService: FormsService = new FormsService();
 
   handleEdit = (formData: FormRPartA) => {
     this.props.history.push({

@@ -5,13 +5,13 @@ import { RootState } from "../../../redux/types";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import { loadFormRPartAList } from "../../../redux/actions/formr-parta-actions";
 import { connect } from "react-redux";
-import { FormRPartAService } from "../../../services/FormRPartAService";
+import { FormsService } from "../../../services/FormsService";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface ListProps {
   submittedForms: FormRPartA[];
   history: any;
-  loadFormRPartAList: (service: FormRPartAService) => Promise<void>;
+  loadFormRPartAList: (service: FormsService) => Promise<void>;
   loadFormRPartA: (data: FormRPartA | null) => any;
 }
 
@@ -26,7 +26,7 @@ const mapDispatchToProps = {
 
 class List extends React.PureComponent<ListProps> {
   componentDidMount() {
-    this.props.loadFormRPartAList(new FormRPartAService());
+    this.props.loadFormRPartAList(new FormsService());
   }
 
   handleRowClick = (formData: FormRPartA) => {

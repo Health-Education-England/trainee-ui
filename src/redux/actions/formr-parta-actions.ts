@@ -6,9 +6,9 @@ import {
   LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 import { FormRPartA } from "../../models/FormRPartA";
-import { FormRPartAService } from "../../services/FormRPartAService";
+import { FormsService } from "../../services/FormsService";
 
-export const loadFormRPartAList = (formService: FormRPartAService) => (
+export const loadFormRPartAList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
   return formService

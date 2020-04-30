@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import ApiService from "./apiService";
 import { FormRPartA } from "../models/FormRPartA";
 
-export class FormRPartAService extends ApiService {
+export class FormsService extends ApiService {
   constructor() {
     super("/forms/api");
   }
