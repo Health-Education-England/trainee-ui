@@ -1,14 +1,23 @@
 import React from "react";
-import { Form, Fieldset, Label } from "nhsuk-react-components";
+import { Fieldset, Label } from "nhsuk-react-components";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Create from "./Create";
 
 const FormRPartB: React.FC = () => {
   return (
-    <Form>
+    <div>
       <Fieldset>
         <Fieldset.Legend isPageHeading>Form-R (Part B)</Fieldset.Legend>
+        <Label>
+          Self-declaration for the Revalidation of Doctors in Training
+        </Label>
       </Fieldset>
-      <Label>Coming soon...</Label>
-    </Form>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/formr-b/" component={Create} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 };
 

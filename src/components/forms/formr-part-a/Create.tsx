@@ -13,7 +13,7 @@ import {
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import SelectInputField from "../SelectInputField";
 import TextInputField from "../TextInputField";
-import WarningMessage from "./WarningMessage";
+import WarningMessage from "../WarningMessage";
 import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
