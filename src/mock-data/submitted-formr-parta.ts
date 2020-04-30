@@ -1,6 +1,6 @@
 import { FormRPartA } from "../models/FormRPartA";
 
-export const submittedForms: FormRPartA[] = [
+export const submittedFormRPartAs: FormRPartA[] = [
   {
     id: "5e972ec9b9b5781b94eb1270",
     traineeTisId: "123",

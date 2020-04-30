@@ -2,6 +2,8 @@ import React from "react";
 import { Fieldset, Label } from "nhsuk-react-components";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Create from "./Create";
+import List from "./List";
+import View from "./View";
 
 const FormRPartB: React.FC = () => {
   return (
@@ -14,7 +16,9 @@ const FormRPartB: React.FC = () => {
       </Fieldset>
       <BrowserRouter>
         <Switch>
-          <Route path="/formr-b/" component={Create} />
+          <Route path="/formr-b/create" component={Create} />
+          <Route path="/formr-b/:id" component={View} />
+          <Route path="/" component={List} />
         </Switch>
       </BrowserRouter>
     </div>

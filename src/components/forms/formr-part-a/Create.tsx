@@ -57,9 +57,7 @@ const mapDispatchProps = {
 
 const connector = connect(mapStateToProps, mapDispatchProps);
 
-class CreateFormRPartA extends React.PureComponent<
-  ConnectedProps<typeof connector>
-> {
+class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
     this.props.loadTraineeProfile(new TraineeProfileService());
     this.props.loadReferenceData(new TraineeReferenceService());
@@ -265,4 +263,4 @@ class CreateFormRPartA extends React.PureComponent<
   }
 }
 
-export default connector(CreateFormRPartA);
+export default connector(Create);

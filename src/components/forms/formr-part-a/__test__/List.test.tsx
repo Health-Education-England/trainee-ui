@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import List from "../List";
-import { submittedForms } from "../../../../mock-data/submitted-formr-parta";
+import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
 import { FormRPartA } from "../../../../models/FormRPartA";
 import { Provider } from "react-redux";
 
@@ -45,7 +45,7 @@ describe("List", () => {
 
   it("renders submitted forms list in a table when submitted forms available", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedForms, history);
+    const wrapper = mountComponent(submittedFormRPartAs, history);
 
     expect(wrapper.find("table")).toHaveLength(1);
 
@@ -55,6 +55,6 @@ describe("List", () => {
 
     const linkElement = rows.last().find("a");
     linkElement.simulate("click");
-    expect(history[0]).toEqual(`/formr-a/${submittedForms[0].id}`);
+    expect(history[0]).toEqual(`/formr-a/${submittedFormRPartAs[0].id}`);
   });
 });

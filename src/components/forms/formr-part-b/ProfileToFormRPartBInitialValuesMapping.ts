@@ -1,5 +1,6 @@
 import { TraineeProfile } from "../../../models/TraineeProfile";
 import { FormRPartB } from "../../../models/FormRPartB";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 
 export function ProfileToFormRPartBInitialValuesMapping(
   traineeProfile: TraineeProfile | null
@@ -29,13 +30,16 @@ export function ProfileToFormRPartBInitialValuesMapping(
     forename: pd?.forenames || "",
     surname: pd?.surname || "",
     gmcNumber: pd?.gmcNumber || "",
-    email: "",
+    email: pd?.email || "",
     localOfficeName: pd?.personOwner || "",
-    previousRevalBody: pd?.previousRevalBody || "",
-    currentRevalDate: pd?.currentRevalDate || new Date("1800-01-01"),
-    previousRevalDate: pd?.previousRevalDate || new Date("1800-01-01"),
+    prevRevalBody: pd?.prevRevalBody || "",
+    currRevalDate: pd?.currRevalDate,
+    prevRevalDate: pd?.prevRevalDate,
     programmeSpecialty: curriculum?.curriculumName || "",
-    dualSpecialty: ""
+    dualSpecialty: curriculum?.curriculumName || "",
+    traineeTisId: traineeProfile.traineeTisId,
+    submissionDate: DateUtilities.ToUTCDate(new Date()),
+    lastModifiedDate: DateUtilities.ToUTCDate(new Date())
   };
   return model;
 }

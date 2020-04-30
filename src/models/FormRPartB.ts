@@ -4,11 +4,13 @@ export interface FormRPartB {
   forename: string;
   surname: string;
   gmcNumber: string;
-  email: string | null;
+  email: string;
   localOfficeName: string;
-  previousRevalBody: string;
-  currentRevalDate: Date;
-  previousRevalDate: Date;
+  prevRevalBody: string;
+  currRevalDate: Date | undefined;
+  prevRevalDate: Date | undefined;
   programmeSpecialty: string;
   dualSpecialty: string;
+  submissionDate: string;
+  lastModifiedDate: string;
 }

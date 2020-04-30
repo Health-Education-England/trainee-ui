@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import View from "../View";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { submittedForms } from "../../../../mock-data/submitted-formr-parta";
+import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
 import { Provider } from "react-redux";
 import { FormRPartA } from "../../../../models/FormRPartA";
 
@@ -26,7 +26,7 @@ describe("View", () => {
   };
 
   it("renders without crashing", () => {
-    mountComponent(submittedForms[0], []);
+    mountComponent(submittedFormRPartAs[0], []);
   });
 
   it("should push /formr-a to history when form data is null", () => {
@@ -38,7 +38,7 @@ describe("View", () => {
 
   it("should load data when form data is not null", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedForms[0], history);
+    const wrapper = mountComponent(submittedFormRPartAs[0], history);
 
     expect(history).toHaveLength(0);
     expect(wrapper.find("a")).toHaveLength(1);
