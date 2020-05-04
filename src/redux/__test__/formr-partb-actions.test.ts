@@ -1,73 +1,82 @@
 import {
   LOAD_FORMR_PARTB_SUCCESS,
-  LOAD_FORMR_PARTB_FAILURE
+  LOAD_FORMR_PARTB_FAILURE,
+  LOAD_FORMR_PARTB_LIST_SUCCESS,
+  LOAD_FORMR_PARTB_LIST_FAILURE
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import { submittedFormRPartBs } from "../../mock-data/submitted-formr-partb";
-import { loadFormRPartB } from "../actions/formr-partb-actions";
+import {
+  loadFormRPartB,
+  loadFormRPartBList
+} from "../actions/formr-partb-actions";
+import { FormRPartB } from "../../models/FormRPartB";
+import { AxiosResponse } from "axios";
+import { FormsService } from "../../services/FormsService";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+const formsService = new FormsService();
 let store = mockStore({});
 
-// describe("loadFormRPartBList method", () => {
-//   it("Should dispatch LOAD_FORMR_PARTB_LIST_SUCCESS on successfull api call", () => {
-//     const responsedata = submittedFormRPartBs;
+describe("loadFormRPartBList method", () => {
+  it("Should dispatch LOAD_FORMR_PARTB_LIST_SUCCESS on successfull api call", () => {
+    const responsedata = submittedFormRPartBs;
 
-//     const successResponse: Promise<AxiosResponse<
-//       FormRPartB[]
-//     >> = Promise.resolve({
-//       data: responsedata,
-//       status: 200,
-//       statusText: "OK",
-//       headers: {},
-//       config: {}
-//     });
+    const successResponse: Promise<AxiosResponse<
+      FormRPartB[]
+    >> = Promise.resolve({
+      data: responsedata,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config: {}
+    });
 
-//     jest
-//       .spyOn(formsService, "getTraineeFormRPartB")
-//       .mockReturnValue(successResponse);
+    jest
+      .spyOn(formsService, "getTraineeFormRPartB")
+      .mockReturnValue(successResponse);
 
-//     const expectedActions = [
-//       {
-//         type: LOAD_FORMR_PARTB_LIST_SUCCESS,
-//         payload: responsedata
-//       }
-//     ];
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTB_LIST_SUCCESS,
+        payload: responsedata
+      }
+    ];
 
-//     return store.dispatch(loadFormRPartBList(formsService)).then(() => {
-//       expect(store.getActions()).toEqual(expectedActions);
-//     });
-//   });
+    return store.dispatch(loadFormRPartBList(formsService)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 
-//   it("Should dispatch LOAD_FORMR_PARTB_LIST_FAILURE if api call fails", () => {
-//     store = mockStore({});
+  it("Should dispatch LOAD_FORMR_PARTB_LIST_FAILURE if api call fails", () => {
+    store = mockStore({});
 
-//     const errorResponse = {
-//       data: null,
-//       status: 500,
-//       statusText: "Internal server error",
-//       headers: {},
-//       config: {}
-//     };
+    const errorResponse = {
+      data: null,
+      status: 500,
+      statusText: "Internal server error",
+      headers: {},
+      config: {}
+    };
 
-//     jest
-//       .spyOn(formsService, "getTraineeFormRPartB")
-//       .mockReturnValue(Promise.reject(errorResponse));
+    jest
+      .spyOn(formsService, "getTraineeFormRPartB")
+      .mockReturnValue(Promise.reject(errorResponse));
 
-//     const expectedActions = [
-//       {
-//         type: LOAD_FORMR_PARTB_LIST_FAILURE,
-//         payload: errorResponse
-//       }
-//     ];
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTB_LIST_FAILURE,
+        payload: errorResponse
+      }
+    ];
 
-//     return store.dispatch(loadFormRPartBList(formsService)).then(() => {
-//       expect(store.getActions()).toEqual(expectedActions);
-//     });
-//   });
-// });
+    return store.dispatch(loadFormRPartBList(formsService)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});
 
 describe("loadFormRPartB method", () => {
   it("should dispatch LOAD_FORMR_PARTB_SUCCESS if data is not null", () => {

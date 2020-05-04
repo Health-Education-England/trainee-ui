@@ -58,8 +58,8 @@ export function ProfileToFormRPartAInitialValuesMapping(
     declarationType: "",
     otherImmigrationStatus: "",
     traineeTisId: traineeProfile.traineeTisId,
-    submissionDate: new Date(),
-    lastModifiedDate: new Date()
+    submissionDate: null,
+    lastModifiedDate: null
   };
   return model;
 }

@@ -35,33 +35,33 @@ describe("FormsService", () => {
     );
   });
 
-  // it("getTraineeFormRPartB method should return success response", () => {
-  //   const successResponse: Promise<AxiosResponse<any>> = Promise.resolve({
-  //     data: submittedFormRPartBs,
-  //     status: 200,
-  //     statusText: "OK",
-  //     headers: {},
-  //     config: {}
-  //   });
+  it("getTraineeFormRPartB method should return success response", () => {
+    const successResponse: Promise<AxiosResponse<any>> = Promise.resolve({
+      data: submittedFormRPartBs,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config: {}
+    });
 
-  //   jest.spyOn(mockService, "get").mockReturnValue(successResponse);
+    jest.spyOn(mockService, "get").mockReturnValue(successResponse);
 
-  //   expect(mockService.getTraineeFormRPartB()).toEqual(successResponse);
-  // });
+    expect(mockService.getTraineeFormRPartB()).toEqual(successResponse);
+  });
 
-  // it("saveTraineeFormRPartB method should return success response", () => {
-  //   const successResponse: Promise<AxiosResponse<any>> = Promise.resolve({
-  //     data: submittedFormRPartBs[0],
-  //     status: 200,
-  //     statusText: "OK",
-  //     headers: {},
-  //     config: {}
-  //   });
+  it("saveTraineeFormRPartB method should return success response", () => {
+    const successResponse: Promise<AxiosResponse<any>> = Promise.resolve({
+      data: submittedFormRPartBs[0],
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config: {}
+    });
 
-  //   jest.spyOn(mockService, "post").mockReturnValue(successResponse);
+    jest.spyOn(mockService, "post").mockReturnValue(successResponse);
 
-  //   expect(mockService.saveTraineeFormRPartB(submittedFormRPartBs[0])).toEqual(
-  //     successResponse
-  //   );
-  // });
+    expect(mockService.saveTraineeFormRPartB(submittedFormRPartBs[0])).toEqual(
+      successResponse
+    );
+  });
 });

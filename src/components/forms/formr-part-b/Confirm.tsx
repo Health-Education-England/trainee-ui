@@ -4,40 +4,40 @@ import { Button, WarningCallout } from "nhsuk-react-components";
 import { FormsService } from "../../../services/FormsService";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
-import { FormRPartA } from "../../../models/FormRPartA";
+import { FormRPartB } from "../../../models/FormRPartB";
 
 interface ConfirmProps {
-  formData: FormRPartA | null;
+  formData: FormRPartB | null;
   history: any;
 }
 
 const mapStateToProps = (state: RootState) => ({
-  formData: state.formRPartAView.formData
+  formData: state.formRPartBView.formData
 });
 
 class Confirm extends React.PureComponent<ConfirmProps> {
-  formRPartAService: FormsService = new FormsService();
+  formsService: FormsService = new FormsService();
 
-  handleEdit = (formData: FormRPartA) => {
+  handleEdit = (formData: FormRPartB) => {
     this.props.history.push({
-      pathname: "/formr-a/create",
+      pathname: "/formr-b/create",
       formData: formData
     });
   };
 
-  handleSubmit = (formData: FormRPartA) => {
+  handleSubmit = (formData: FormRPartB) => {
     formData.submissionDate = new Date();
     formData.lastModifiedDate = new Date();
 
-    this.formRPartAService
-      .saveTraineeFormRPartA(formData)
-      .then(() => this.props.history.push("/formr-a"));
+    this.formsService
+      .saveTraineeFormRPartB(formData)
+      .then(() => this.props.history.push("/formr-b"));
   };
 
   render() {
     const { formData } = this.props;
     if (!formData) {
-      this.props.history.push("/formr-a/create");
+      this.props.history.push("/formr-b/create");
       return null;
     }
 

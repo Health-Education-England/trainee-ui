@@ -11,6 +11,6 @@ export interface FormRPartB {
   prevRevalDate: Date | undefined;
   programmeSpecialty: string;
   dualSpecialty: string;
-  submissionDate: string;
-  lastModifiedDate: string;
+  submissionDate: Date | null;
+  lastModifiedDate: Date | null;
 }

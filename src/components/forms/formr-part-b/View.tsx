@@ -19,7 +19,7 @@ class View extends React.PureComponent<ViewProps> {
     const { formData, history } = this.props;
 
     if (!formData) {
-      history.push("/formr-a");
+      history.push("/formr-b");
       return null;
     }
 

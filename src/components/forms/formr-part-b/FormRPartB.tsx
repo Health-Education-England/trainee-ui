@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Create from "./Create";
 import List from "./List";
 import View from "./View";
+import Confirm from "./Confirm";
 
 const FormRPartB: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const FormRPartB: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route path="/formr-b/create" component={Create} />
+          <Route path="/formr-b/confirm" component={Confirm} />
           <Route path="/formr-b/:id" component={View} />
           <Route path="/" component={List} />
         </Switch>
