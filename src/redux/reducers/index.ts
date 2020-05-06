@@ -5,12 +5,18 @@ import {
   LoadFormRPartAReducer,
   LoadFormRPartAListReducer
 } from "./formr-parta-reducer";
+import {
+  LoadFormRPartBReducer,
+  LoadFormRPartBListReducer
+} from "./formr-partb-reducer";
 
 export const rootReducer = combineReducers({
   profile: TraineeProfileReducer,
   referenceData: ReferenceDataReducer,
   formRPartAView: LoadFormRPartAReducer,
-  formRPartAList: LoadFormRPartAListReducer
+  formRPartAList: LoadFormRPartAListReducer,
+  formRPartBView: LoadFormRPartBReducer,
+  formRPartBList: LoadFormRPartBListReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

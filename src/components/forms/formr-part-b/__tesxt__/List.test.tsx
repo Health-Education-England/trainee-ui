@@ -3,17 +3,17 @@ import { mount } from "enzyme";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import List from "../List";
-import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
-import { FormRPartA } from "../../../../models/FormRPartA";
+import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import { FormRPartB } from "../../../../models/FormRPartB";
 import { Provider } from "react-redux";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("List", () => {
-  const mountComponent = (forms: FormRPartA[], history: any) => {
+  const mountComponent = (forms: FormRPartB[], history: any) => {
     const store = mockStore({
-      formRPartAList: {
+      formRPartBList: {
         submittedForms: forms
       }
     });
@@ -33,7 +33,7 @@ describe("List", () => {
     expect(newFormButton.html()).toContain("Submit new form");
 
     newFormButton.simulate("click");
-    expect(history[0].pathname).toEqual("/formr-a/create");
+    expect(history[0].pathname).toEqual("/formr-b/create");
   });
 
   it("renders 'No forms found label' without table when submitted forms not available", () => {
@@ -45,7 +45,7 @@ describe("List", () => {
 
   it("renders submitted forms list in a table when submitted forms available", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedFormRPartAs, history);
+    const wrapper = mountComponent(submittedFormRPartBs, history);
 
     expect(wrapper.find("table")).toHaveLength(1);
 
@@ -55,6 +55,6 @@ describe("List", () => {
 
     const linkElement = rows.last().find("a");
     linkElement.simulate("click");
-    expect(history[0]).toEqual(`/formr-a/${submittedFormRPartAs[0].id}`);
+    expect(history[0]).toEqual(`/formr-b/${submittedFormRPartBs[0].id}`);
   });
 });

@@ -1,4 +1,4 @@
-import { TraineeReferenceService } from "../../services/TraineereferenceService";
+import { TraineeReferenceService } from "../../services/TraineeReferenceService";
 import { loadReferenceData } from "../actions/reference-data-actions";
 import {
   LOAD_REFERENCE_GENDER_SUCCESS,

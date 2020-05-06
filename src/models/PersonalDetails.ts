@@ -28,4 +28,7 @@ export interface PersonalDetails {
   settled: string;
   visaIssued: string;
   detailsNumber: string;
+  prevRevalBody: string;
+  currRevalDate: Date | undefined;
+  prevRevalDate: Date | undefined;
 }

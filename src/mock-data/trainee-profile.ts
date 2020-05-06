@@ -31,7 +31,10 @@ export const mockPersonalDetails: PersonalDetails = {
   permitToWork: "",
   settled: "",
   visaIssued: "",
-  detailsNumber: ""
+  detailsNumber: "",
+  prevRevalBody: "",
+  prevRevalDate: new Date("2021-12-31"),
+  currRevalDate: new Date("2021-12-31")
 };
 
 export const mockProgrammeMemberships = [

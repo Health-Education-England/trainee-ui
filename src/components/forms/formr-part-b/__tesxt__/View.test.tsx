@@ -3,17 +3,17 @@ import { mount } from "enzyme";
 import View from "../View";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
-import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
+import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { Provider } from "react-redux";
-import { FormRPartA } from "../../../../models/FormRPartA";
+import { FormRPartB } from "../../../../models/FormRPartB";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("View", () => {
-  const mountComponent = (form: FormRPartA | null, history: any) => {
+  const mountComponent = (form: FormRPartB | null, history: any) => {
     const store = mockStore({
-      formRPartAView: {
+      formRPartBView: {
         formData: form
       }
     });
@@ -26,19 +26,19 @@ describe("View", () => {
   };
 
   it("renders without crashing", () => {
-    mountComponent(submittedFormRPartAs[0], []);
+    mountComponent(submittedFormRPartBs[0], []);
   });
 
-  it("should push /formr-a to history when form data is null", () => {
+  it("should push /formr-b to history when form data is null", () => {
     const history: any[] = [];
     mountComponent(null, history);
 
-    expect(history[0]).toEqual("/formr-a");
+    expect(history[0]).toEqual("/formr-b");
   });
 
   it("should load data when form data is not null", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedFormRPartAs[0], history);
+    const wrapper = mountComponent(submittedFormRPartBs[0], history);
 
     expect(history).toHaveLength(0);
     expect(wrapper.find("a")).toHaveLength(1);

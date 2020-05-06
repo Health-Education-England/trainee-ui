@@ -4,16 +4,16 @@ import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import Confirm from "../Confirm";
 import { Provider } from "react-redux";
-import { FormRPartA } from "../../../../models/FormRPartA";
-import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
+import { FormRPartB } from "../../../../models/FormRPartB";
+import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("Confirm", () => {
-  const mountComponent = (form: FormRPartA | null, history: any) => {
+  const mountComponent = (form: FormRPartB | null, history: any) => {
     const store = mockStore({
-      formRPartAView: {
+      formRPartBView: {
         formData: form
       }
     });
@@ -26,36 +26,36 @@ describe("Confirm", () => {
   };
 
   it("renders without crashing", () => {
-    mountComponent(submittedFormRPartAs[0], null);
+    mountComponent(submittedFormRPartBs[0], null);
   });
 
-  it("should push 'formr-a/create' page to history when form data not available", () => {
+  it("should push 'formr-b/create' page to history when form data not available", () => {
     const history: any[] = [];
     mountComponent(null, history);
 
-    expect(history[0]).toEqual("/formr-a/create");
+    expect(history[0]).toEqual("/formr-b/create");
   });
 
   it("renders the edit and confirm buttons when form data is avaialbe", () => {
-    const wrapper = mountComponent(submittedFormRPartAs[0], null);
+    const wrapper = mountComponent(submittedFormRPartBs[0], null);
 
     expect(wrapper.find("button")).toHaveLength(2);
   });
 
-  it("should push 'formr-a/create' along with formData page to history when edit button clicked", () => {
+  it("should push 'formr-b/create' along with formData page to history when edit button clicked", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedFormRPartAs[0], history);
+    const wrapper = mountComponent(submittedFormRPartBs[0], history);
 
     const editButton = wrapper.find("button").first();
     editButton.simulate("click");
 
-    expect(history[0].pathname).toEqual("/formr-a/create");
-    expect(history[0].formData).toEqual(submittedFormRPartAs[0]);
+    expect(history[0].pathname).toEqual("/formr-b/create");
+    expect(history[0].formData).toEqual(submittedFormRPartBs[0]);
   });
 
-  it("should invoke saveTraineeFormRPartA with form data when submit button clicked", () => {
+  it("should invoke saveTraineeFormRPartB with form data when submit button clicked", () => {
     const history: any[] = [];
-    const wrapper = mountComponent(submittedFormRPartAs[0], history);
+    const wrapper = mountComponent(submittedFormRPartBs[0], history);
 
     const submitButton = wrapper.find("button").last();
     submitButton.simulate("click");
