@@ -48,6 +48,14 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
       return <Loading />;
     } else {
       const formData = this.props.location.formData || initialFormValues;
+
+      if (!localOffices.find(l => l.label === formData.localOfficeName)) {
+        formData.localOfficeName = "";
+      }
+
+      if (!curricula.find(l => l.label === formData.programmeSpecialty)) {
+        formData.programmeSpecialty = "";
+      }
       return (
         <>
           <Formik
@@ -66,8 +74,9 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                 <WarningMessage />
                 <Panel>
                   <em>
-                    Failure to complete a Form R Part B when requested may
-                    result in an Outcome 5 at ARCP (Gold Guide v6, 7.74).
+                    Failure to appropriately complete a Form R Part B when
+                    requested may result in an Outcome 5 at ARCP (
+                    <b>Please refer to latest edition of the Gold Guide</b>).
                   </em>
                 </Panel>
 

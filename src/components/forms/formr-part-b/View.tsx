@@ -31,7 +31,7 @@ class View extends React.PureComponent<ViewProps> {
           <SummaryList>
             <h2>Personal Details</h2>
             <SummaryList.Row>
-              <SummaryList.Key>Forname</SummaryList.Key>
+              <SummaryList.Key>Forename(s)</SummaryList.Key>
               <SummaryList.Value>{formData.forename}</SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
@@ -47,7 +47,9 @@ class View extends React.PureComponent<ViewProps> {
               <SummaryList.Value>{formData.email}</SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
-              <SummaryList.Key>Deanery / HEE Local Office</SummaryList.Key>
+              <SummaryList.Key>
+                Current Deanery / HEE Local team
+              </SummaryList.Key>
               <SummaryList.Value>{formData.localOfficeName}</SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
@@ -69,7 +71,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Value>
             </SummaryList.Row>
             <SummaryList.Row>
-              <SummaryList.Key>Programme Specialty</SummaryList.Key>
+              <SummaryList.Key>Programme / Training Specialty</SummaryList.Key>
               <SummaryList.Value>
                 {formData.programmeSpecialty}
               </SummaryList.Value>
