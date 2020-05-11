@@ -18,8 +18,8 @@ const ValidationSchema = yup.object({
     .max(255, "Email must be shorter than 255 characters")
     .required("Email is required"),
   localOfficeName: stringValidationSchema("Deanery / HEE Local Office"),
-  previousRevalBody: yup.string(),
-  programmeSpecialty: stringValidationSchema("Programme specialty"),
+  prevRevalBody: yup.string(),
+  programmeSpecialty: stringValidationSchema("Programme / Training Specialty"),
   dualSpecialty: yup.string()
 });
 
