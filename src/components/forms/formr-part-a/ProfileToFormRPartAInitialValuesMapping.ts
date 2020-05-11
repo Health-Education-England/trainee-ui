@@ -43,7 +43,7 @@ export function ProfileToFormRPartAInitialValuesMapping(
     postCode: pd?.postCode || "",
     telephoneNumber: pd?.telephoneNumber || "",
     mobileNumber: pd?.mobileNumber || "",
-    email: pd?.email || "",
+    email: "",
     isLeadingToCct: false,
     programmeSpecialty: curriculum?.curriculumName || "",
     cctSpecialty1: curriculum?.curriculumName || "",

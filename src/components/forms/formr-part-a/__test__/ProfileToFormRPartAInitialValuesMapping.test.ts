@@ -21,7 +21,7 @@ const formrPartA: FormRPartA = {
   postCode: "WC1B 5DN",
   telephoneNumber: "01632960363",
   mobileNumber: "07465879348",
-  email: "email@email.com",
+  email: "",
   declarationType: "",
   isLeadingToCct: false,
   programmeSpecialty: "ST6",
