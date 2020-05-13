@@ -49,13 +49,23 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     } else {
       const formData = this.props.location.formData || initialFormValues;
 
-      if (!localOffices.find(l => l.label === formData.localOfficeName)) {
-        formData.localOfficeName = "";
+      if (localOffices.length > 0) {
+        if (!localOffices.some(l => l.label === formData.localOfficeName)) {
+          formData.localOfficeName = "";
+        }
+
+        if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
+          formData.prevRevalBody = "";
+        }
       }
 
-      if (!curricula.find(l => l.label === formData.programmeSpecialty)) {
+      if (
+        curricula.length > 0 &&
+        !curricula.some(l => l.label === formData.programmeSpecialty)
+      ) {
         formData.programmeSpecialty = "";
       }
+
       return (
         <>
           <Formik
