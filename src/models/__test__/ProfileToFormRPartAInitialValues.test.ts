@@ -1,6 +1,6 @@
-import { ProfileToFormRPartAInitialValuesMapping } from "./../ProfileToFormRPartAInitialValuesMapping";
-import { mockTraineeProfile } from "../../../../mock-data/trainee-profile";
-import { FormRPartA } from "../../../../models/FormRPartA";
+import { ProfileToFormRPartAInitialValues } from "./../ProfileToFormRPartAInitialValues";
+import { mockTraineeProfile } from "../../mock-data/trainee-profile";
+import { FormRPartA } from "../FormRPartA";
 
 const formrPartA: FormRPartA = {
   traineeTisId: "123",
@@ -38,34 +38,32 @@ const formrPartA: FormRPartA = {
   otherImmigrationStatus: ""
 };
 
-describe("ProfileToFormRPartAInitialValuesMapping", () => {
+describe("ProfileToFormRPartAInitialValues", () => {
   it("should return null when null is passed", () => {
-    expect(ProfileToFormRPartAInitialValuesMapping(null)).toEqual(null);
+    expect(ProfileToFormRPartAInitialValues(null)).toEqual(null);
   });
 
   it("should return formrPartA when trainee profile is passed", () => {
-    expect(ProfileToFormRPartAInitialValuesMapping(mockTraineeProfile)).toEqual(
+    expect(ProfileToFormRPartAInitialValues(mockTraineeProfile)).toEqual(
       formrPartA
     );
 
     expect(
-      ProfileToFormRPartAInitialValuesMapping(mockTraineeProfile)
-        ?.programmeSpecialty
+      ProfileToFormRPartAInitialValues(mockTraineeProfile)?.programmeSpecialty
     ).toEqual("ST6");
   });
 
   it("should return formRPartA with empty programmespeciality when no programmeMemberships available", () => {
     const traineeProfile = { ...mockTraineeProfile, programmeMemberships: [] };
     expect(
-      ProfileToFormRPartAInitialValuesMapping(traineeProfile)
-        ?.programmeSpecialty
+      ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
     ).toEqual("");
   });
 
   it("should return formRPartA with empty strings when no personal details available", () => {
     const traineeProfile = { ...mockTraineeProfile, personalDetails: null };
-    expect(
-      ProfileToFormRPartAInitialValuesMapping(traineeProfile)?.forename
-    ).toEqual("");
+    expect(ProfileToFormRPartAInitialValues(traineeProfile)?.forename).toEqual(
+      ""
+    );
   });
 });

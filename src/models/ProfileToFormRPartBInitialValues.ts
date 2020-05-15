@@ -1,7 +1,7 @@
-import { TraineeProfile } from "../../../models/TraineeProfile";
-import { FormRPartB } from "../../../models/FormRPartB";
+import { TraineeProfile } from "./TraineeProfile";
+import { FormRPartB } from "./FormRPartB";
 
-export function ProfileToFormRPartBInitialValuesMapping(
+export function ProfileToFormRPartBInitialValues(
   traineeProfile: TraineeProfile | null
 ): FormRPartB | null {
   if (!traineeProfile) {

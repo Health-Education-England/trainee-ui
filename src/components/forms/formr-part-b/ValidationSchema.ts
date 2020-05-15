@@ -8,7 +8,7 @@ const stringValidationSchema = (fieldName: string, maxLength: number = 50) =>
     .max(maxLength, `${fieldName} must be shorter than ${maxLength} characters`)
     .required(`${fieldName} is required`);
 
-const ValidationSchema = yup.object({
+export const Section1ValidationSchema = yup.object({
   forename: stringValidationSchema("Forename(s)"),
   surname: stringValidationSchema("Surname (GMC-Registered)", 30),
   gmcNumber: stringValidationSchema("GMC number", 20),
@@ -22,5 +22,3 @@ const ValidationSchema = yup.object({
   programmeSpecialty: stringValidationSchema("Programme / Training Specialty"),
   dualSpecialty: yup.string()
 });
-
-export default ValidationSchema;
