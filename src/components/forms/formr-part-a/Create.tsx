@@ -18,7 +18,7 @@ import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import Loading from "../../common/Loading";
-import { ProfileToFormRPartAInitialValuesMapping } from "./ProfileToFormRPartAInitialValuesMapping";
+import { ProfileToFormRPartAInitialValues } from "../../../models/ProfileToFormRPartAInitialValues";
 import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";
 import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
@@ -34,7 +34,7 @@ const Declarations = [
 ];
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  initialFormValues: ProfileToFormRPartAInitialValuesMapping(
+  initialFormValues: ProfileToFormRPartAInitialValues(
     state.profile.traineeProfile
   ),
   genders: state.referenceData.genders,
