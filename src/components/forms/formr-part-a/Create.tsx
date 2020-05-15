@@ -130,9 +130,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                   {values.immigrationStatus === "Other" ? (
                     <TextInputField
                       name="otherImmigrationStatus"
-                      onSubmit={() =>
-                        setFieldValue("immigrationStatus", "Other")
-                      }
+                      label="Other"
                       placeholder="Please add your 'Other' immigration status"
                     />
                   ) : null}
@@ -156,10 +154,26 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     name="address1"
                     placeholder="House number, name / road"
                   />
-                  <TextInputField name="address2" placeholder="district" />
-                  <TextInputField name="address3" placeholder="town or city" />
-                  <TextInputField name="address4" placeholder="country" />
-                  <TextInputField name="postCode" placeholder="postcode" />
+                  <TextInputField
+                    label="District"
+                    name="address2"
+                    placeholder="district"
+                  />
+                  <TextInputField
+                    label="Town or city"
+                    name="address3"
+                    placeholder="town or city"
+                  />
+                  <TextInputField
+                    label="Country"
+                    name="address4"
+                    placeholder="country"
+                  />
+                  <TextInputField
+                    label="Postcode"
+                    name="postCode"
+                    placeholder="postcode"
+                  />
                   <TextInputField
                     label="Contact Telephone (landline)"
                     name="telephoneNumber"
@@ -246,8 +260,14 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                 </Fieldset>
 
                 {[...Object.values(errors)].length > 0 ? (
-                  <ErrorSummary>
-                    <h3>Check the following</h3>
+                  <ErrorSummary
+                    aria-labelledby="errorSummaryTitle"
+                    role="alert"
+                    tabIndex={-1}
+                  >
+                    <ErrorSummary.Title id="errorSummaryTitle">
+                      Check the following
+                    </ErrorSummary.Title>
                     {Object.values(errors).map((errorMsg, i) => (
                       <ErrorSummary.Item key={i}>{errorMsg}</ErrorSummary.Item>
                     ))}

@@ -4,6 +4,8 @@ import { shallow } from "enzyme";
 
 describe("SelectInputField", () => {
   it("renders without crashing", () => {
-    shallow(<SelectInputField />);
+    shallow(
+      <SelectInputField name="selectInputField" label="Select input field" />
+    );
   });
 });

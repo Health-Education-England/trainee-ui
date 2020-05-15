@@ -35,6 +35,7 @@ const Section1 = (props: any) => {
             <TextInputField
               label="Primary contact email address"
               name="email"
+              hint="For reasons of security and due to frequent systme failures with internet email accounts, you are strongly advised to provide an NHS.net email address."
             />
             <SelectInputField
               label="Current Deanery / HEE Local team"
@@ -69,8 +70,14 @@ const Section1 = (props: any) => {
           </Fieldset>
 
           {[...Object.values(errors)].length > 0 ? (
-            <ErrorSummary>
-              <h3>Check the following</h3>
+            <ErrorSummary
+              aria-labelledby="errorSummaryTitle"
+              role="alert"
+              tabIndex={-1}
+            >
+              <ErrorSummary.Title id="errorSummaryTitle">
+                Check the following
+              </ErrorSummary.Title>
               {Object.values(errors).map((errorMsg, i) => (
                 <ErrorSummary.Item key={i}>{errorMsg}</ErrorSummary.Item>
               ))}
