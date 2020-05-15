@@ -47,3 +47,8 @@ export interface FormRPartBViewState {
 export interface FormRPartBListState {
   submittedForms: FormRPartB[];
 }
+
+export interface NewFormRPartBState {
+  formData: FormRPartB | null;
+  section: number;
+}

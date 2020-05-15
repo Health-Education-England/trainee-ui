@@ -7,7 +7,8 @@ import {
 } from "./formr-parta-reducer";
 import {
   LoadFormRPartBReducer,
-  LoadFormRPartBListReducer
+  LoadFormRPartBListReducer,
+  LoadNewFormRPartBReducer
 } from "./formr-partb-reducer";
 
 export const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   referenceData: ReferenceDataReducer,
   formRPartAView: LoadFormRPartAReducer,
   formRPartAList: LoadFormRPartAListReducer,
+  newFormRPartB: LoadNewFormRPartBReducer,
   formRPartBView: LoadFormRPartBReducer,
   formRPartBList: LoadFormRPartBListReducer
 });
