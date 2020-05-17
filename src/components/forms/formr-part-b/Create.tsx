@@ -14,7 +14,6 @@ import { TraineeReferenceService } from "../../../services/TraineeReferenceServi
 import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
 import Section2 from "./Sections/Section2";
-import WarningMessage from "../WarningMessage";
 import { FormRPartB } from "../../../models/FormRPartB";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
@@ -108,7 +107,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
           );
 
         default:
-          return <WarningMessage />;
+          return <Loading />;
       }
     }
   }

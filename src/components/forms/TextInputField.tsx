@@ -12,6 +12,7 @@ interface Props {
   width?: any;
   footer?: any;
   type?: string;
+  readOnly?: boolean;
 }
 
 const TextInputField: FunctionComponent<Props> = props => {
@@ -41,6 +42,7 @@ const TextInputField: FunctionComponent<Props> = props => {
           onChange={field.onChange}
           value={field.value}
           {...props}
+          readOnly={props.readOnly}
         />
         <InputFooterLabel label={props.footer || ""} />
       </div>

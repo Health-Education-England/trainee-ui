@@ -8,12 +8,12 @@ import {
   Radios,
   Button,
   ErrorSummary,
-  BackLink
+  BackLink,
+  WarningCallout
 } from "nhsuk-react-components";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import SelectInputField from "../SelectInputField";
 import TextInputField from "../TextInputField";
-import WarningMessage from "../WarningMessage";
 import ValidationSchema from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
@@ -98,9 +98,28 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
           >
             {({ values, errors, setFieldValue }) => (
               <Form>
-                <WarningMessage />
+                <WarningCallout style={{ textAlign: "justify" }}>
+                  <h3 className="nhsuk-warning-callout__label">Important</h3>
+                  <p>
+                    This form has been pre-populated using the information
+                    available against your records within the Trainee
+                    Information System (TIS). Please check all details and
+                    either amend them within the relevant system (see guidance
+                    in the form), or speak to your local office to amend them on
+                    your behalf. By singing this document you are confirming
+                    that ALL DETAILS (pre-populated or entered by you) are
+                    correct. It remains your own responsibility to keep your
+                    Designated Body and the GMC informed as soon as possible of
+                    any changes to your contact details. Your HEE Local team
+                    remains your Designated Body throughout your time in
+                    training. You can update your Designated Body on your GMC
+                    Online account under “My Revalidation”.
+                  </p>
+                </WarningCallout>
                 <Fieldset name="personalDetails">
-                  <h2>Personal details</h2>
+                  <Fieldset.Legend headingLevel="H2" size="l">
+                    Personal Details
+                  </Fieldset.Legend>
                   <TextInputField label="Forename(s)" name="forename" />
                   <TextInputField
                     label="Surname (GMC-Registered)"
@@ -186,7 +205,9 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                 </Fieldset>
 
                 <Fieldset name="declarations">
-                  <h2>Declarations</h2>
+                  <Fieldset.Legend headingLevel="H2" size="l">
+                    Declarations
+                  </Fieldset.Legend>
 
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
@@ -236,7 +257,9 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                 </Fieldset>
 
                 <Fieldset name="programme">
-                  <h2>Programme</h2>
+                  <Fieldset.Legend headingLevel="H2" size="l">
+                    Programme
+                  </Fieldset.Legend>
                   <SelectInputField
                     label="Training Grade"
                     name="trainingGrade"

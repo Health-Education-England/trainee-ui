@@ -1,8 +1,12 @@
 import React from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
-import WarningMessage from "../../WarningMessage";
-import { Button, Panel, Fieldset, ErrorSummary } from "nhsuk-react-components";
+import {
+  Fieldset,
+  ErrorSummary,
+  WarningCallout,
+  Pagination
+} from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { Section1ValidationSchema } from "../ValidationSchema";
 
@@ -16,19 +20,31 @@ const Section1 = (props: any) => {
         nextSection(values);
       }}
     >
-      {({ values, errors, isSubmitting }) => (
+      {({ values, errors, handleSubmit }) => (
         <Form>
-          <WarningMessage />
-          <Panel>
-            <em>
-              ppropriately complete a Form R Part B when requested may result in
-              an Outcome 5 at ARCP (
-              <b>Please refer to latest edition of the Gold Guide</b>).
-            </em>
-          </Panel>
-
           <Fieldset name="doctorsDetails">
-            <h2>Doctor's details</h2>
+            <Fieldset.Legend headingLevel="H2" size="l">
+              Section 1: Doctor's details
+            </Fieldset.Legend>
+
+            <WarningCallout style={{ textAlign: "justify" }}>
+              <h3 className="nhsuk-warning-callout__label">Important</h3>
+              <p>
+                Section 1 - DOCTORS DETAILS (assistance information required)
+                Your form has been partially pre-populated by your Deanery/HEE
+                local team. Please check all details and add or amend where
+                necessary. By signing this document you are confirming that ALL
+                details (pre-populated or entered by you) are correct. It
+                remains your own responsibility to keep your Designated Body,
+                and the GMC, informed as soon as possible of any change to your
+                contact details. Your Deanery/HEE local team remains your
+                Designated Body throughout your time in training. You can update
+                your Designated Body on your GMC Online account under ‘My
+                Revalidation’. Failure to appropriately complete a Form R Part B
+                when requested may result in an Outcome 5 at ARCP{" "}
+                <b>(Please refer to latest edition of the Gold Guide)</b>.
+              </p>
+            </WarningCallout>
             <TextInputField label="Forename(s)" name="forename" />
             <TextInputField label="Surname (GMC-Registered)" name="surname" />
             <TextInputField label="GMC Number" name="gmcNumber" />
@@ -84,7 +100,11 @@ const Section1 = (props: any) => {
             </ErrorSummary>
           ) : null}
 
-          <Button type="submit">Continue</Button>
+          <Pagination>
+            <Pagination.Link next onClick={() => handleSubmit()}>
+              Section 2
+            </Pagination.Link>
+          </Pagination>
         </Form>
       )}
     </Formik>
