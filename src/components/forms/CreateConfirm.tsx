@@ -55,8 +55,7 @@ export const CreateConfirm = (
       return (
         <div>
           <ViewComponent history={this.props.history}></ViewComponent>
-          <WarningCallout style={{ textAlign: "justify" }}>
-            <h3 className="nhsuk-warning-callout__label">Warning</h3>
+          <WarningCallout label="Warning">
             <p>
               By submitting this form, I confirm that the information above is
               correct and I will keep my Designated Body, and the GMC, informed

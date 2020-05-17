@@ -13,6 +13,7 @@ interface Props {
   footer?: any;
   type?: string;
   readOnly?: boolean;
+  value?: any;
 }
 
 const TextInputField: FunctionComponent<Props> = props => {

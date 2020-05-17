@@ -1,22 +1,33 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
 import {
   Fieldset,
   ErrorSummary,
   WarningCallout,
-  Pagination
+  Pagination,
+  Panel,
+  ErrorMessage
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { Section1ValidationSchema } from "../ValidationSchema";
+import { KeyValue } from "../../../../models/KeyValue";
+import { FormRPartB } from "../../../../models/FormRPartB";
 
-const Section1 = (props: any) => {
+interface Section1Props {
+  localOffices: KeyValue[];
+  curricula: KeyValue[];
+  formData: FormRPartB;
+  nextSection: (formData: FormRPartB | null) => void;
+}
+
+const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
   const { localOffices, curricula, formData, nextSection } = props;
   return (
     <Formik
       initialValues={formData}
       validationSchema={Section1ValidationSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={values => {
         nextSection(values);
       }}
     >
@@ -27,8 +38,7 @@ const Section1 = (props: any) => {
               Section 1: Doctor's details
             </Fieldset.Legend>
 
-            <WarningCallout style={{ textAlign: "justify" }}>
-              <h3 className="nhsuk-warning-callout__label">Important</h3>
+            <WarningCallout label="Important">
               <p>
                 Section 1 - DOCTORS DETAILS (assistance information required)
                 Your form has been partially pre-populated by your Deanery/HEE
@@ -45,44 +55,47 @@ const Section1 = (props: any) => {
                 <b>(Please refer to latest edition of the Gold Guide)</b>.
               </p>
             </WarningCallout>
-            <TextInputField label="Forename(s)" name="forename" />
-            <TextInputField label="Surname (GMC-Registered)" name="surname" />
-            <TextInputField label="GMC Number" name="gmcNumber" />
-            <TextInputField
-              label="Primary contact email address"
-              name="email"
-              hint="For reasons of security and due to frequent systme failures with internet email accounts, you are strongly advised to provide an NHS.net email address."
-            />
-            <SelectInputField
-              label="Current Deanery / HEE Local team"
-              options={localOffices}
-              name="localOfficeName"
-            />
-            <SelectInputField
-              label="Previous Designated Body for Revalidation (if applicable)"
-              options={localOffices}
-              name="prevRevalBody"
-            />
-            <TextInputField
-              label="Current Revalidation Date"
-              type="date"
-              name="currRevalDate"
-            />
-            <TextInputField
-              label="Date of Previous Revalidation (if applicable)"
-              type="date"
-              name="prevRevalDate"
-            />
-            <SelectInputField
-              label="Programme / Training Specialty"
-              name="programmeSpecialty"
-              options={curricula}
-            />
-            <SelectInputField
-              label="Dual Specialty (if applicable)"
-              name="dualSpecialty"
-              options={curricula}
-            />
+
+            <Panel label="Personal details">
+              <TextInputField label="Forename(s)" name="forename" />
+              <TextInputField label="Surname (GMC-Registered)" name="surname" />
+              <TextInputField label="GMC Number" name="gmcNumber" />
+              <TextInputField
+                label="Primary contact email address"
+                name="email"
+                hint="For reasons of security and due to frequent system failures with internet email accounts, you are strongly advised to provide an NHS.net email address."
+              />
+              <SelectInputField
+                label="Current Deanery / HEE Local team"
+                options={localOffices}
+                name="localOfficeName"
+              />
+              <SelectInputField
+                label="Previous Designated Body for Revalidation (if applicable)"
+                options={localOffices}
+                name="prevRevalBody"
+              />
+              <TextInputField
+                label="Current Revalidation Date"
+                type="date"
+                name="currRevalDate"
+              />
+              <TextInputField
+                label="Date of Previous Revalidation (if applicable)"
+                type="date"
+                name="prevRevalDate"
+              />
+              <SelectInputField
+                label="Programme / Training Specialty"
+                name="programmeSpecialty"
+                options={curricula}
+              />
+              <SelectInputField
+                label="Dual Specialty (if applicable)"
+                name="dualSpecialty"
+                options={curricula}
+              />
+            </Panel>
           </Fieldset>
 
           {[...Object.values(errors)].length > 0 ? (
@@ -91,12 +104,7 @@ const Section1 = (props: any) => {
               role="alert"
               tabIndex={-1}
             >
-              <ErrorSummary.Title id="errorSummaryTitle">
-                Check the following
-              </ErrorSummary.Title>
-              {Object.values(errors).map((errorMsg, i) => (
-                <ErrorSummary.Item key={i}>{errorMsg}</ErrorSummary.Item>
-              ))}
+              <ErrorMessage>Please check highlighted fields</ErrorMessage>
             </ErrorSummary>
           ) : null}
 

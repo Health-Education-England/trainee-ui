@@ -98,7 +98,6 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
         case 2:
           return (
             <Section2
-              curricula={curricula}
               formData={formData}
               previousSection={this.previousSection}
               submitForm={this.submitForm}

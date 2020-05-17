@@ -14,6 +14,14 @@ const formrPartB: FormRPartB = {
   currRevalDate: new Date("2021-12-31"),
   prevRevalDate: new Date("2021-12-31"),
   dualSpecialty: "",
+  work: [],
+  sicknessAbsence: 0,
+  parentalLeave: 0,
+  careerBreaks: 0,
+  paidLeave: 0,
+  unauthorisedLeave: 0,
+  otherLeave: 0,
+  totalLeave: 0,
   submissionDate: null,
   lastModifiedDate: null
 };

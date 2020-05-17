@@ -98,8 +98,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
           >
             {({ values, errors, setFieldValue }) => (
               <Form>
-                <WarningCallout style={{ textAlign: "justify" }}>
-                  <h3 className="nhsuk-warning-callout__label">Important</h3>
+                <WarningCallout label="Important">
                   <p>
                     This form has been pre-populated using the information
                     available against your records within the Trainee
