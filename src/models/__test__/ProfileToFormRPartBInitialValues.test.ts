@@ -14,7 +14,16 @@ const formrPartB: FormRPartB = {
   currRevalDate: new Date("2021-12-31"),
   prevRevalDate: new Date("2021-12-31"),
   dualSpecialty: "",
-  work: [],
+  work: [
+    {
+      endDate: new Date("2020-12-31"),
+      site: "Addenbrookes Hospital",
+      siteLocation: undefined,
+      startDate: new Date("2020-01-01"),
+      trainingPost: "Yes",
+      typeOfWork: "In Post ST1 Dermatology"
+    }
+  ],
   sicknessAbsence: 0,
   parentalLeave: 0,
   careerBreaks: 0,

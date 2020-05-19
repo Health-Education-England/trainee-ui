@@ -1,5 +1,5 @@
 import { TraineeProfile } from "./TraineeProfile";
-import { FormRPartB } from "./FormRPartB";
+import { FormRPartB, Work } from "./FormRPartB";
 
 export function ProfileToFormRPartBInitialValues(
   traineeProfile: TraineeProfile | null
@@ -25,6 +25,19 @@ export function ProfileToFormRPartBInitialValues(
           })
       : null;
 
+  const work = traineeProfile.placements.map<Work>(placement => {
+    const work: Work = {
+      typeOfWork: `${placement.placementType} ${placement.grade} ${placement.specialty}`,
+      startDate: placement.startDate,
+      endDate: placement.endDate,
+      site: placement.site,
+      siteLocation: placement.siteLocation,
+      trainingPost: placement.placementType === "In Post" ? "Yes" : ""
+    };
+
+    return work;
+  });
+
   const model: FormRPartB = {
     forename: pd?.forenames || "",
     surname: pd?.surname || "",
@@ -37,7 +50,7 @@ export function ProfileToFormRPartBInitialValues(
     programmeSpecialty: curriculum?.curriculumName || "",
     dualSpecialty: "",
     traineeTisId: traineeProfile.traineeTisId,
-    work: [],
+    work: work,
     sicknessAbsence: 0,
     parentalLeave: 0,
     careerBreaks: 0,
