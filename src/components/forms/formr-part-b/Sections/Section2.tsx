@@ -137,7 +137,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                 name="unauthorisedLeave"
               />
               <TextInputField
-                label="Other (see guidance)"
+                label="Other"
                 name="otherLeave"
                 hint="TOOT does not include study leave, paid annual leave, prospectively approved Out of Programme Training/Research (OOPT/OOPR) or periods of time between training programmes (e.g. between core and higher training)."
               />

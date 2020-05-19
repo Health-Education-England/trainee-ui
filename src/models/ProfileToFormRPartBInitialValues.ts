@@ -25,18 +25,14 @@ export function ProfileToFormRPartBInitialValues(
           })
       : null;
 
-  const work = traineeProfile.placements.map<Work>(placement => {
-    const work: Work = {
-      typeOfWork: `${placement.placementType} ${placement.grade} ${placement.specialty}`,
-      startDate: placement.startDate,
-      endDate: placement.endDate,
-      site: placement.site,
-      siteLocation: placement.siteLocation,
-      trainingPost: placement.placementType === "In Post" ? "Yes" : ""
-    };
-
-    return work;
-  });
+  const work = traineeProfile.placements.map<Work>(placement => ({
+    typeOfWork: `${placement.placementType} ${placement.grade} ${placement.specialty}`,
+    startDate: placement.startDate,
+    endDate: placement.endDate,
+    site: placement.site,
+    siteLocation: placement.siteLocation,
+    trainingPost: placement.placementType === "In Post" ? "Yes" : ""
+  }));
 
   const model: FormRPartB = {
     forename: pd?.forenames || "",
