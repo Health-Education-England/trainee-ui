@@ -1,14 +1,51 @@
-import React from "react";
-import { Field } from "formik";
-import { Label } from "nhsuk-react-components";
+import React, { FunctionComponent } from "react";
+import { useField, connect } from "formik";
+import { Input, Textarea } from "nhsuk-react-components";
+import InputFooterLabel from "./InputFooterLabel";
+interface Props {
+  name: string;
+  label: string;
+  id?: string;
+  placeholder?: string;
+  rows?: number;
+  hint?: string;
+  width?: any;
+  footer?: any;
+  type?: string;
+}
 
-const TextInputField: React.FC<any> = ({ label, ...field }) => {
+const TextInputField: FunctionComponent<Props> = props => {
+  const [field, { error, touched }] = useField(props);
+  const FormElement = props.rows ? Textarea : Input;
+
+  const setFieldWidth = (width: number) => {
+    return width < 20 ? 20 : Math.floor(width / 10) * 10;
+  };
+
   return (
     <>
-      {label && label !== "" ? <Label>{label}</Label> : null}
-      <Field className="nhsuk-input" {...field} style={{ marginBottom: 10 }} />
+      <div
+        className={
+          error && touched
+            ? "nhsuk-form-group nhsuk-form-group--error"
+            : "nhsuk-form-group"
+        }
+      >
+        <FormElement
+          width={
+            field.value ? props.width || setFieldWidth(field.value.length) : 20
+          }
+          error={error && touched ? error : ""}
+          id={props.id || props.name}
+          onBlur={field.onBlur}
+          onChange={field.onChange}
+          value={field.value}
+          {...props}
+        />
+        <InputFooterLabel label={props.footer || ""} />
+      </div>
     </>
   );
 };
 
-export default TextInputField;
+export default connect(TextInputField);

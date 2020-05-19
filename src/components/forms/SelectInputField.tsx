@@ -1,28 +1,54 @@
-import { Field } from "formik";
 import React from "react";
-import { Label } from "nhsuk-react-components";
+import { connect, useField } from "formik";
+import { Select } from "nhsuk-react-components";
+import InputFooterLabel from "./InputFooterLabel";
 
-const SelectInputField: React.FC<any> = ({ label, options, ...field }) => {
+interface Props {
+  name: string;
+  label: string;
+  id?: string;
+  hint?: string;
+  options?: any[];
+  footer?: any;
+}
+
+const SelectInputField: React.FC<Props> = props => {
+  const [field, { error, touched }, helpers] = useField(props);
   return (
     <>
-      {label && label !== "" ? <Label>{label}</Label> : null}
-      <Field
-        className="nhsuk-select"
-        as="select"
-        {...field}
-        style={{ width: "100%", marginBottom: 10 }}
+      <div
+        className={
+          error && touched
+            ? "nhsuk-form-group nhsuk-form-group--error"
+            : "nhsuk-form-group"
+        }
       >
-        <option value="">-- Please select--</option>
-        {options
-          ? options.map((o: { value: string; label: string }) => (
-              <option key={o.label} value={o.value}>
-                {o.label}
-              </option>
-            ))
-          : null}
-      </Field>
+        <Select
+          name={props.name}
+          id={props.id || props.name}
+          onBlur={() => {
+            helpers.setTouched(true);
+          }}
+          error={error && touched ? error : ""}
+          label={props.label}
+          onChange={field.onChange}
+        >
+          <Select.Option value="">-- Please select --</Select.Option>
+          {props.options
+            ? props.options.map((option: { value: string; label: string }) => (
+                <Select.Option
+                  selected={field.value === option.value ? true : false}
+                  value={option.value}
+                >
+                  {option.label}
+                </Select.Option>
+              ))
+            : null}
+        </Select>
+        <InputFooterLabel label={props.footer || ""} />
+      </div>
     </>
   );
 };
 
-export default SelectInputField;
+export default connect(SelectInputField);
