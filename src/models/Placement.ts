@@ -5,6 +5,7 @@ export interface Placement {
   startDate: Date;
   endDate: Date;
   site: string;
+  siteLocation: string;
   grade: string;
   specialty: string;
   placementType: string;

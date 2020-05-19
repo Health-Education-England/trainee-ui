@@ -27,7 +27,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
   const [direction, setDirection] = useState("back");
   const { formData, previousSection, submitForm, history } = props;
   const newWork: Work = {
-    placementType: "",
+    typeOfWork: "",
     startDate: undefined,
     endDate: undefined,
     trainingPost: "",

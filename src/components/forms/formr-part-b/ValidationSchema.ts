@@ -35,7 +35,7 @@ export const Section2ValidationSchema = yup.object({
   work: yup
     .array(
       yup.object({
-        placementType: stringValidationSchema("Type of work"),
+        typeOfWork: stringValidationSchema("Type of work"),
         trainingPost: stringValidationSchema("Training Post"),
         site: stringValidationSchema("Site Name"),
         siteLocation: stringValidationSchema("Site Location"),

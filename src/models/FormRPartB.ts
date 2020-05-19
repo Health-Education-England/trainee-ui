@@ -24,7 +24,7 @@ export interface FormRPartB {
 }
 
 export interface Work {
-  placementType: string;
+  typeOfWork: string;
   startDate: Date | undefined;
   endDate: Date | undefined;
   trainingPost: string;

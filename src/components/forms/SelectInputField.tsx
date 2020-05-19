@@ -32,6 +32,7 @@ const SelectInputField: React.FC<Props> = props => {
           error={error && touched ? error : ""}
           label={props.label}
           onChange={field.onChange}
+          hint={props.hint}
         >
           <Select.Option value="">-- Please select --</Select.Option>
           {props.options

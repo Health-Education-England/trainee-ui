@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import TextInputField from "../../TextInputField";
 import { Button, Panel, CloseIcon } from "nhsuk-react-components";
 import classes from "../FormRPartB.module.scss";
+import SelectInputField from "../../SelectInputField";
 
 interface Props {
   index: number;
@@ -31,19 +32,22 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
         </div>
       </div>
       <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-three-quarters">
+        <div className="nhsuk-grid-column-two-thirds">
           <TextInputField
             label="Type of work"
-            name={`work[${index}].placementType`}
+            name={`work[${index}].typeOfWork`}
             hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
           />
         </div>
-      </div>
-      <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-three-quarters">
-          <TextInputField
+        <div className="nhsuk-grid-column-one-third">
+          <SelectInputField
             label="Training Post"
             name={`work[${index}].trainingPost`}
+            hint="Yes if In post"
+            options={[
+              { label: "Yes", value: "Yes" },
+              { label: "No", value: "No" }
+            ]}
           />
         </div>
       </div>
