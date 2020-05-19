@@ -36,6 +36,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
           <TextInputField
             label="Type of Work"
             name={`work[${index}].typeOfWork`}
+            width="50"
             hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
           />
         </div>

@@ -4,12 +4,13 @@ import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import {
   Label,
-  Fieldset,
   Radios,
   Button,
   ErrorSummary,
   BackLink,
-  WarningCallout
+  WarningCallout,
+  Panel,
+  ErrorMessage
 } from "nhsuk-react-components";
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import SelectInputField from "../SelectInputField";
@@ -115,10 +116,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     Online account under “My Revalidation”.
                   </p>
                 </WarningCallout>
-                <Fieldset name="personalDetails">
-                  <Fieldset.Legend headingLevel="H2" size="l">
-                    Personal Details
-                  </Fieldset.Legend>
+                <Panel label="Personal Details">
                   <TextInputField label="Forename(s)" name="forename" />
                   <TextInputField
                     label="Surname (GMC-Registered)"
@@ -201,13 +199,9 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     name="mobileNumber"
                   />
                   <TextInputField label="Email" name="email" />
-                </Fieldset>
+                </Panel>
 
-                <Fieldset name="declarations">
-                  <Fieldset.Legend headingLevel="H2" size="l">
-                    Declarations
-                  </Fieldset.Legend>
-
+                <Panel label="Declarations">
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
 
@@ -253,12 +247,9 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     type="date"
                     name="completionDate"
                   />
-                </Fieldset>
+                </Panel>
 
-                <Fieldset name="programme">
-                  <Fieldset.Legend headingLevel="H2" size="l">
-                    Programme
-                  </Fieldset.Legend>
+                <Panel label="Programme">
                   <SelectInputField
                     label="Training Grade"
                     name="trainingGrade"
@@ -279,7 +270,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     name="wholeTimeEquivalent"
                     placeholder="e.g. 0.1 for 10%; 0.25 for 25% etc. or 1 for Full Time"
                   />
-                </Fieldset>
+                </Panel>
 
                 {[...Object.values(errors)].length > 0 ? (
                   <ErrorSummary
@@ -287,12 +278,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     role="alert"
                     tabIndex={-1}
                   >
-                    <ErrorSummary.Title id="errorSummaryTitle">
-                      Check the following
-                    </ErrorSummary.Title>
-                    {Object.values(errors).map((errorMsg, i) => (
-                      <ErrorSummary.Item key={i}>{errorMsg}</ErrorSummary.Item>
-                    ))}
+                    <ErrorMessage>Please check highlighted fields</ErrorMessage>
                   </ErrorSummary>
                 ) : null}
                 <Button type="submit">Continue</Button>
