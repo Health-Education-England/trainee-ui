@@ -15,11 +15,12 @@ interface Props {
 }
 
 const TextInputField: FunctionComponent<Props> = props => {
-  const [field, { error, touched }] = useField({
-    name: props.name,
-    type: props.name
-  });
+  const [field, { error, touched }] = useField(props);
   const FormElement = props.rows ? Textarea : Input;
+
+  const setFieldWidth = (width: number) => {
+    return width < 20 ? 20 : Math.floor(width / 10) * 10;
+  };
 
   return (
     <>
@@ -31,10 +32,14 @@ const TextInputField: FunctionComponent<Props> = props => {
         }
       >
         <FormElement
-          width={props.width || 20}
+          width={
+            field.value ? props.width || setFieldWidth(field.value.length) : 20
+          }
           error={error && touched ? error : ""}
           id={props.id || props.name}
-          {...field}
+          onBlur={field.onBlur}
+          onChange={field.onChange}
+          value={field.value}
           {...props}
         />
         <InputFooterLabel label={props.footer || ""} />
