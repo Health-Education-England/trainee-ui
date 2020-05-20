@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import TextInputField from "../../TextInputField";
 import {
   Fieldset,
@@ -24,7 +24,6 @@ interface Section2Props {
 }
 
 const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
-  const [direction, setDirection] = useState("back");
   const { formData, previousSection, submitForm, history } = props;
   const newWork: Work = {
     typeOfWork: "",
@@ -42,15 +41,13 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
   return (
     <Formik
       initialValues={formData}
+      validateOnChange={false}
+      validateOnBlur={false}
       validationSchema={Section2ValidationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        if (direction === "back") {
-          previousSection(values);
-        } else {
-          submitForm(values);
-          history.push("/formr-b/confirm");
-        }
+        submitForm(values);
+        history.push("/formr-b/confirm");
         setSubmitting(false);
       }}
     >
@@ -169,23 +166,11 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
           ) : null}
 
           <Pagination>
-            <Pagination.Link
-              previous
-              onClick={() => {
-                setDirection("back");
-                handleSubmit();
-              }}
-            >
+            <Pagination.Link previous onClick={() => previousSection(values)}>
               Section 1
             </Pagination.Link>
 
-            <Pagination.Link
-              next
-              onClick={() => {
-                setDirection("continue");
-                handleSubmit();
-              }}
-            >
+            <Pagination.Link next onClick={() => handleSubmit()}>
               Continue to Submit
             </Pagination.Link>
           </Pagination>

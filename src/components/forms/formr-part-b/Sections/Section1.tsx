@@ -26,6 +26,8 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
   return (
     <Formik
       initialValues={formData}
+      validateOnChange={false}
+      validateOnBlur={false}
       validationSchema={Section1ValidationSchema}
       onSubmit={values => {
         nextSection(values);
