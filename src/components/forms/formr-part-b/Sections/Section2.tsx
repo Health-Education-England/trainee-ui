@@ -59,12 +59,11 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
             </Fieldset.Legend>
             <WarningCallout label="Important">
               <p>
-                Section 2 - WHOLE SCOPE OF PRACTICE (assistance information
-                required) Read these instructions carefully! Please list all
-                placements in your capacity as a registered medical practitioner
-                since last ARCP (or since initial registration to programme if
-                more recent). This includes: (1) each of your training posts if
-                you are or were in a training programme; (2) any time out of
+                Read these instructions carefully! Please list all placements in
+                your capacity as a registered medical practitioner since last
+                ARCP (or since initial registration to programme if more
+                recent). This includes: (1) each of your training posts if you
+                are or were in a training programme; (2) any time out of
                 programme, e.g. OOP, mat leave, career break, etc.;{" "}
                 <b>(3) any voluntary or advisory work</b>, work in non-NHS
                 bodies, or self-employment; (4) any work as a locum. For locum

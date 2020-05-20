@@ -42,18 +42,23 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
 
             <WarningCallout label="Important">
               <p>
-                Section 1 - DOCTORS DETAILS (assistance information required)
-                Your form has been partially pre-populated by your Deanery/HEE
-                local team. Please check all details and add or amend where
-                necessary. By signing this document you are confirming that ALL
-                details (pre-populated or entered by you) are correct. It
-                remains your own responsibility to keep your Designated Body,
-                and the GMC, informed as soon as possible of any change to your
-                contact details. Your Deanery/HEE local team remains your
-                Designated Body throughout your time in training. You can update
-                your Designated Body on your GMC Online account under ‘My
-                Revalidation’. Failure to appropriately complete a Form R Part B
-                when requested may result in an Outcome 5 at ARCP{" "}
+                This form has been pre-populated using the information available
+                against your records within the Trainee Information System
+                (TIS). Please check all details and amend where necessary.
+                Amendments made to your details on this form will not update
+                other systems that you may have access to. By submitting this
+                document you are confirming that ALL DETAILS (pre-populated or
+                entered/amended by you) are correct.
+                <br />
+                <br /> It remains your own responsibility to keep your
+                Designated Body and the GMC informed as soon as possible of any
+                changes to your contact details. Your HEE Local team remains
+                your Designated Body throughout your time in training. You can
+                update your Designated Body on your GMC Online account under "My
+                Revalidation".
+                <br />
+                <br /> Failure to appropriately complete a Form R Part B when
+                requested may result in an Outcome 5 at ARCP{" "}
                 <b>(Please refer to latest edition of the Gold Guide)</b>.
               </p>
             </WarningCallout>
