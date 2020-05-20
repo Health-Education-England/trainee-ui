@@ -32,7 +32,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
         </div>
       </div>
       <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-two-thirds">
+        <div className="nhsuk-grid-column-three-quarters">
           <TextInputField
             label="Type of Work"
             name={`work[${index}].typeOfWork`}
@@ -40,27 +40,26 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
             hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
           />
         </div>
+      </div>
+      <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-third">
           <SelectInputField
             label="Training Post"
             name={`work[${index}].trainingPost`}
-            hint="Yes if In post"
             options={[
               { label: "Yes", value: "Yes" },
               { label: "No", value: "No" }
             ]}
           />
         </div>
-      </div>
-      <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-one-half">
+        <div className="nhsuk-grid-column-one-third">
           <TextInputField
             label="Start Date"
             type="date"
             name={`work[${index}].startDate`}
           />
         </div>
-        <div className="nhsuk-grid-column-one-half">
+        <div className="nhsuk-grid-column-one-third">
           <TextInputField
             label="End Date"
             type="date"

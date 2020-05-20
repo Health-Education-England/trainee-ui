@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { DateUtilities } from "../../../utilities/DateUtilities";
+import { StringValidationSchema } from "../StringValidationSchema";
 
 const phoneRegex = /^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/g;
 const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
@@ -9,27 +10,19 @@ const wholeTimeEquivalentRegex = /^((0\.[1-9]{1})?|(0\.([0-9]{1}[1-9]{1}|[1-9]{1
 const dateValidationSchema = (fieldName: string) =>
   yup.date().required(`${fieldName} is required`);
 
-const stringValidationSchema = (fieldName: string, maxLength: number = 50) =>
-  yup
-    .string()
-    .transform(value => (value as string).trim())
-    .min(1)
-    .max(maxLength, `${fieldName} must be shorter than ${maxLength} characters`)
-    .required(`${fieldName} is required`);
-
 const ValidationSchema = yup.object({
-  forename: stringValidationSchema("Forename(s)"),
-  surname: stringValidationSchema("Surname (GMC-Registered)", 30),
-  gmcNumber: stringValidationSchema("GMC number", 20),
-  localOfficeName: stringValidationSchema("Deanery / HEE Local Office"),
+  forename: StringValidationSchema("Forename(s)"),
+  surname: StringValidationSchema("Surname (GMC-Registered)", 30),
+  gmcNumber: StringValidationSchema("GMC number", 20),
+  localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
   dateOfBirth: dateValidationSchema("Your date of birth").test(
     "dateOfBirth",
     "You must be 17 years or above",
     value => DateUtilities.IsLegalAge(value)
   ),
-  gender: stringValidationSchema("Gender"),
-  immigrationStatus: stringValidationSchema("Immigration Status"),
-  qualification: stringValidationSchema("Qualification"),
+  gender: StringValidationSchema("Gender"),
+  immigrationStatus: StringValidationSchema("Immigration Status"),
+  qualification: StringValidationSchema("Qualification"),
   dateAttained: dateValidationSchema(
     "Date awarded (most recent qualification)"
   ).test(
@@ -37,19 +30,19 @@ const ValidationSchema = yup.object({
     "Date awarded (most recent qualification) - please choose a date from the past",
     value => DateUtilities.IsPastDate(value)
   ),
-  medicalSchool: stringValidationSchema("Medical school"),
-  address1: stringValidationSchema("Address - house number/ name and road"),
-  address2: stringValidationSchema("Address - district"),
-  address3: stringValidationSchema("Address - town or city"),
-  address4: stringValidationSchema("Address - country"),
-  postCode: stringValidationSchema("Postcode", 8).matches(
+  medicalSchool: StringValidationSchema("Medical school"),
+  address1: StringValidationSchema("Address - house number/ name and road"),
+  address2: StringValidationSchema("Address - district"),
+  address3: StringValidationSchema("Address - town or city"),
+  address4: StringValidationSchema("Address - country"),
+  postCode: StringValidationSchema("Postcode", 8).matches(
     postcodeRegex,
     "Please enter a valid postcode"
   ),
-  telephoneNumber: stringValidationSchema(
+  telephoneNumber: StringValidationSchema(
     "Contact (landline telephone)"
   ).matches(phoneRegex, "Contact (landline) number - requires a valid number"),
-  mobileNumber: stringValidationSchema("Contact (mobile)").matches(
+  mobileNumber: StringValidationSchema("Contact (mobile)").matches(
     mobileRegex,
     "Contact (mobile) number - requires a valid number"
   ),
@@ -62,8 +55,8 @@ const ValidationSchema = yup.object({
     .string()
     .required("You need to choose at least one Declaration")
     .nullable(),
-  programmeSpecialty: stringValidationSchema("Programme specialty"),
-  college: stringValidationSchema("Royal College / Faculty Assessing Training"),
+  programmeSpecialty: StringValidationSchema("Programme specialty"),
+  college: StringValidationSchema("Royal College / Faculty Assessing Training"),
   completionDate: dateValidationSchema(
     "Anticipated completion date"
   ).test(
@@ -71,9 +64,9 @@ const ValidationSchema = yup.object({
     "Anticipated completion date - please choose a future date",
     value => DateUtilities.IsFutureDate(value)
   ),
-  trainingGrade: stringValidationSchema("Training Grade"),
+  trainingGrade: StringValidationSchema("Training Grade"),
   startDate: dateValidationSchema("Programme start date"),
-  programmeMembershipType: stringValidationSchema("Post type / Appointment"),
+  programmeMembershipType: StringValidationSchema("Post type / Appointment"),
   wholeTimeEquivalent: yup
     .string()
     .required("Programme Full Time Equivalent in Training is required")

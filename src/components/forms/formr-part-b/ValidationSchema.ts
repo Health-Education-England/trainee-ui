@@ -1,12 +1,5 @@
 import * as yup from "yup";
-
-const stringValidationSchema = (fieldName: string, maxLength: number = 50) =>
-  yup
-    .string()
-    .transform(value => (value as string).trim())
-    .min(1)
-    .max(maxLength, `${fieldName} must be shorter than ${maxLength} characters`)
-    .required(`${fieldName} is required`);
+import { StringValidationSchema } from "../StringValidationSchema";
 
 const leaveValidation = (fieldName: string) =>
   yup
@@ -17,17 +10,17 @@ const leaveValidation = (fieldName: string) =>
     .required(`${fieldName} is required`);
 
 export const Section1ValidationSchema = yup.object({
-  forename: stringValidationSchema("Forename(s)"),
-  surname: stringValidationSchema("Surname (GMC-Registered)", 30),
-  gmcNumber: stringValidationSchema("GMC number", 20),
+  forename: StringValidationSchema("Forename(s)"),
+  surname: StringValidationSchema("Surname (GMC-Registered)", 30),
+  gmcNumber: StringValidationSchema("GMC number", 20),
   email: yup
     .string()
     .email("Email is invalid")
     .max(255, "Email must be shorter than 255 characters")
     .required("Email is required"),
-  localOfficeName: stringValidationSchema("Deanery / HEE Local Office"),
+  localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
   prevRevalBody: yup.string(),
-  programmeSpecialty: stringValidationSchema("Programme / Training Specialty"),
+  programmeSpecialty: StringValidationSchema("Programme / Training Specialty"),
   dualSpecialty: yup.string()
 });
 
@@ -35,10 +28,10 @@ export const Section2ValidationSchema = yup.object({
   work: yup
     .array(
       yup.object({
-        typeOfWork: stringValidationSchema("Type of work"),
-        trainingPost: stringValidationSchema("Training Post"),
-        site: stringValidationSchema("Site Name"),
-        siteLocation: stringValidationSchema("Site Location"),
+        typeOfWork: StringValidationSchema("Type of work"),
+        trainingPost: StringValidationSchema("Training Post"),
+        site: StringValidationSchema("Site Name"),
+        siteLocation: StringValidationSchema("Site Location"),
         startDate: yup.date().required("Start date is required"),
         endDate: yup
           .date()
