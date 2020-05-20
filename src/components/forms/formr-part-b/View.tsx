@@ -90,37 +90,43 @@ class View extends React.PureComponent<ViewProps> {
 
           <h2>Section 2: Whole Scope of Practice</h2>
           <Panel label="Type of work">
-            {formData.work.map((w, i) => (
-              <Panel className={classes.workPanel}>
-                <h3>Type of work {i + 1}</h3>
-                <SummaryList>
-                  <SummaryList.Row>
-                    <SummaryList.Key>Type of Work</SummaryList.Key>
-                    <SummaryList.Value>{w.typeOfWork}</SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>Training post</SummaryList.Key>
-                    <SummaryList.Value>{w.trainingPost}</SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>Start Date</SummaryList.Key>
-                    <SummaryList.Value>{w.startDate}</SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>End Date</SummaryList.Key>
-                    <SummaryList.Value>{w.endDate}</SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>Site Name</SummaryList.Key>
-                    <SummaryList.Value>{w.site}</SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>Site Location</SummaryList.Key>
-                    <SummaryList.Value>{w.siteLocation}</SummaryList.Value>
-                  </SummaryList.Row>
-                </SummaryList>
-              </Panel>
-            ))}
+            {formData.work
+              ? formData.work.map((w, i) => (
+                  <Panel key={i} className={classes.workPanel}>
+                    <h3>Type of work {i + 1}</h3>
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Type of Work</SummaryList.Key>
+                        <SummaryList.Value>{w.typeOfWork}</SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Training post</SummaryList.Key>
+                        <SummaryList.Value>{w.trainingPost}</SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Start Date</SummaryList.Key>
+                        <SummaryList.Value>
+                          {DateUtilities.ToLocalDate(w.startDate || null)}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>End Date</SummaryList.Key>
+                        <SummaryList.Value>
+                          {DateUtilities.ToLocalDate(w.endDate || null)}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Site Name</SummaryList.Key>
+                        <SummaryList.Value>{w.site}</SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Site Location</SummaryList.Key>
+                        <SummaryList.Value>{w.siteLocation}</SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+                ))
+              : null}
           </Panel>
           <Panel label="Reasons for TIME OUT OF TRAINING (‘TOOT’)">
             <SummaryList>
