@@ -47,6 +47,17 @@ code {
   border-top: transparent;
 }
 
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.nhsuk-pagination__link {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .MuiTypography-h5 {
     display: none;

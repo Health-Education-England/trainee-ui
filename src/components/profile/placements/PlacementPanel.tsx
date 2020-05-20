@@ -1,6 +1,6 @@
 import React from "react";
 import { Placement } from "../../../models/Placement";
-import styles from "./Placements.module.scss";
+import { SummaryList } from "nhsuk-react-components";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 
 interface IPlacementPanelProps {
@@ -10,25 +10,32 @@ interface IPlacementPanelProps {
 export const PlacementPanel = (props: IPlacementPanelProps) => {
   const data = props.placement;
   return (
-    <div id="placementContainer" className={styles.container}>
-      <div>
-        <b>{data.status.charAt(0) + data.status.slice(1).toLowerCase()}</b>
-        <p>{data.site}</p>
-      </div>
+    <>
+      <SummaryList>
+        <SummaryList.Row>
+          <SummaryList.Key>Site</SummaryList.Key>
+          <SummaryList.Value>{data.site}</SummaryList.Value>
+        </SummaryList.Row>
 
-      <div className={styles.grid}>
-        <div>
-          <b>Starts: </b> <p>{DateUtilities.ToLocalDate(data.startDate)}</p>
-        </div>
-        <div className={styles.followingField}>
-          <b>Ends: </b> <p>{DateUtilities.ToLocalDate(data.endDate)}</p>
-        </div>
-      </div>
+        <SummaryList.Row>
+          <SummaryList.Key>Starts</SummaryList.Key>
+          <SummaryList.Value>
+            {DateUtilities.ToLocalDate(data.startDate)}
+          </SummaryList.Value>
+        </SummaryList.Row>
 
-      <div>
-        <b>Specialty: </b> <p>{data.specialty}</p>
-      </div>
-    </div>
+        <SummaryList.Row>
+          <SummaryList.Key>Ends</SummaryList.Key>
+          <SummaryList.Value>
+            {DateUtilities.ToLocalDate(data.endDate)}
+          </SummaryList.Value>
+        </SummaryList.Row>
+        <SummaryList.Row>
+          <SummaryList.Key>Specialty</SummaryList.Key>
+          <SummaryList.Value>{data.specialty}</SummaryList.Value>
+        </SummaryList.Row>
+      </SummaryList>
+    </>
   );
 };
 

@@ -1,12 +1,7 @@
 import React from "react";
 import { PersonalDetails } from "../../../models/PersonalDetails";
-import styles from "./PersonalDetailsComponent.module.scss";
-import { SummaryList } from "nhsuk-react-components";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import { SummaryList, Details } from "nhsuk-react-components";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { KeyValue } from "../../../models/KeyValue";
 import { DateUtilities } from "../../../utilities/DateUtilities";
@@ -62,52 +57,47 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
     { label: "Visa Issued", value: personalDetails.visaIssued },
     { label: "Details/Number", value: personalDetails.detailsNumber }
   ];
-  return (
-    <section className={classes.sectionPadding}>
-      <ExpansionPanel defaultExpanded={false}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <div id="traineeName" className={styles.name}>
-            {fullName}
-          </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <SummaryList noBorder={true}>
-            {personalData.map(pd => (
-              <SummaryList.Row key={pd.label}>
-                <SummaryList.Key>{pd.label}</SummaryList.Key>
-                <SummaryList.Value>{pd.value}</SummaryList.Value>
-              </SummaryList.Row>
-            ))}
 
-            <SummaryList.Row>
-              <SummaryList.Key>Address</SummaryList.Key>
-              <SummaryList.Value>
-                <p>{personalDetails.address1}</p>
-                <p>{personalDetails.address2}</p>
-                <p>
-                  {personalDetails.address3}, {personalDetails.address4}
-                </p>
-                <p>{personalDetails.postCode}</p>
-              </SummaryList.Value>
+  return (
+    <Details expander>
+      <Details.Summary>Personal details</Details.Summary>
+      <Details.Text>
+        <SummaryList>
+          <SummaryList.Row>
+            <SummaryList.Key>Fullname</SummaryList.Key>
+            <SummaryList.Value>{fullName}</SummaryList.Value>
+          </SummaryList.Row>
+          {personalData.map(pd => (
+            <SummaryList.Row key={pd.label}>
+              <SummaryList.Key>{pd.label}</SummaryList.Key>
+              <SummaryList.Value>{pd.value}</SummaryList.Value>
             </SummaryList.Row>
-            <Typography className={classes.heading}>Sensitive data</Typography>
-            {sensitiveData.map(
-              sd =>
-                sd.value && (
-                  <SummaryList.Row key={sd.label}>
-                    <SummaryList.Key>{sd.label}</SummaryList.Key>
-                    <SummaryList.Value>{sd.value}</SummaryList.Value>
-                  </SummaryList.Row>
-                )
-            )}
-          </SummaryList>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </section>
+          ))}
+
+          <SummaryList.Row>
+            <SummaryList.Key>Address</SummaryList.Key>
+            <SummaryList.Value>
+              <p>{personalDetails.address1}</p>
+              <p>{personalDetails.address2}</p>
+              <p>
+                {personalDetails.address3}, {personalDetails.address4}
+              </p>
+              <p>{personalDetails.postCode}</p>
+            </SummaryList.Value>
+          </SummaryList.Row>
+          <Typography className={classes.heading}>Sensitive data</Typography>
+          {sensitiveData.map(
+            sd =>
+              sd.value && (
+                <SummaryList.Row key={sd.label}>
+                  <SummaryList.Key>{sd.label}</SummaryList.Key>
+                  <SummaryList.Value>{sd.value}</SummaryList.Value>
+                </SummaryList.Row>
+              )
+          )}
+        </SummaryList>
+      </Details.Text>
+    </Details>
   );
 };
 
