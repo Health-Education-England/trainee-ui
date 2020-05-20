@@ -14,6 +14,23 @@ export const submittedFormRPartBs: FormRPartB[] = [
     currRevalDate: new Date("2020-04-22"),
     programmeSpecialty: "ST3",
     dualSpecialty: "DS",
+    work: [
+      {
+        typeOfWork: "In Post ST1 Dermatology",
+        startDate: new Date("2020-01-01"),
+        endDate: new Date("2020-12-31"),
+        trainingPost: "Yes",
+        site: "Addenbrookes Hospital",
+        siteLocation: "Hills Road Cambridge Cambridgeshire"
+      }
+    ],
+    sicknessAbsence: 0,
+    parentalLeave: 0,
+    careerBreaks: 0,
+    paidLeave: 0,
+    unauthorisedLeave: 10,
+    otherLeave: 0,
+    totalLeave: 10,
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
   }

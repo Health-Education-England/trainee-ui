@@ -34,8 +34,9 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-two-thirds">
           <TextInputField
-            label="Type of work"
+            label="Type of Work"
             name={`work[${index}].typeOfWork`}
+            width="50"
             hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
           />
         </div>
