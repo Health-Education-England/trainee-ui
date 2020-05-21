@@ -207,10 +207,10 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                   <Radios name="declarationType" style={{ marginBottom: 30 }}>
                     <Label>I confirm that,</Label>
 
-                    {Declarations.map(label => (
+                    {Declarations.map((label, index) => (
                       <Radios.Radio
                         key={label}
-                        id={label}
+                        data-cy={`radio-${index}`}
                         checked={values.declarationType === label}
                         onChange={() => setFieldValue("declarationType", label)}
                       >

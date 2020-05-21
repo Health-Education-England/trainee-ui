@@ -124,3 +124,7 @@ sketch
 
 ### Additional Rules ###
 build/
+
+
+### Cypress login ###
+cypress.env.json

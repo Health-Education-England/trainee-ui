@@ -18,3 +18,11 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// cyress testing defaults
+beforeEach(() => {
+  cy.visit("./");
+  cy.get("input[name=username]").type(Cypress.env("username"));
+  cy.get("input[name=password]").type(`${Cypress.env("password")}{enter}`);
+  cy.viewport("iphone-6");
+});
