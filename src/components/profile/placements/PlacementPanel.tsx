@@ -9,6 +9,7 @@ interface IPlacementPanelProps {
 
 export const PlacementPanel = (props: IPlacementPanelProps) => {
   const data = props.placement;
+
   return (
     <>
       <SummaryList>
@@ -18,7 +19,9 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
         </SummaryList.Row>
 
         <SummaryList.Row>
-          <SummaryList.Key>Starts</SummaryList.Key>
+          <SummaryList.Key>
+            <span className="noWrap">Starts</span>
+          </SummaryList.Key>
           <SummaryList.Value>
             {DateUtilities.ToLocalDate(data.startDate)}
           </SummaryList.Value>
@@ -31,7 +34,9 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
           </SummaryList.Value>
         </SummaryList.Row>
         <SummaryList.Row>
-          <SummaryList.Key>Specialty</SummaryList.Key>
+          <SummaryList.Key>
+            <span className="noWrap">Specialty</span>
+          </SummaryList.Key>
           <SummaryList.Value>{data.specialty}</SummaryList.Value>
         </SummaryList.Row>
       </SummaryList>

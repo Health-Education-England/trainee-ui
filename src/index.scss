@@ -58,6 +58,10 @@ fieldset {
   cursor: pointer;
 }
 
+.noWrap {
+  white-space: nowrap;
+}
+
 @media only screen and (max-width: 600px) {
   .MuiTypography-h5 {
     display: none;
