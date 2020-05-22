@@ -1,8 +1,6 @@
 import React from "react";
 import { PersonalDetails } from "../../../models/PersonalDetails";
 import { SummaryList, Details } from "nhsuk-react-components";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import { KeyValue } from "../../../models/KeyValue";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 
@@ -10,23 +8,7 @@ interface IProps {
   personalDetails: PersonalDetails | null;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(22),
-    fontWeight: theme.typography.fontWeightBold,
-    margin: "5px 0"
-  },
-  sectionPadding: {
-    padding: theme.typography.pxToRem(20)
-  }
-}));
-
 const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
-  const classes = useStyles();
-
   if (!personalDetails) {
     return <div>Failed to laod data.</div>;
   }
@@ -85,7 +67,9 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
               <p>{personalDetails.postCode}</p>
             </SummaryList.Value>
           </SummaryList.Row>
-          <Typography className={classes.heading}>Sensitive data</Typography>
+          <div className="nhsuk-heading-m nhsuk-u-margin-top-4">
+            Sensitive data
+          </div>
           {sensitiveData.map(
             sd =>
               sd.value && (
