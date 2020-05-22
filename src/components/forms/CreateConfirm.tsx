@@ -3,6 +3,7 @@ import { Button, WarningCallout } from "nhsuk-react-components";
 import { FormsService } from "../../services/FormsService";
 import { RootState } from "../../redux/types";
 import { connect, ConnectedComponent } from "react-redux";
+import styles from "./FormR.module.scss";
 
 export const CreateConfirm = (
   ViewComponent: ConnectedComponent<any, Pick<any, "history">>,
@@ -63,8 +64,8 @@ export const CreateConfirm = (
             </p>
           </WarningCallout>
           <Button
+            className={styles.btnWarning}
             onClick={() => this.handleEdit(formData)}
-            style={{ marginRight: 30 }}
           >
             Edit
           </Button>

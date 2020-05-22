@@ -15,21 +15,29 @@ const ValidationSchema = yup.object({
   surname: StringValidationSchema("Surname (GMC-Registered)", 30),
   gmcNumber: StringValidationSchema("GMC number", 20),
   localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
-  dateOfBirth: dateValidationSchema("Your date of birth").test(
-    "dateOfBirth",
-    "You must be 17 years or above",
-    value => DateUtilities.IsLegalAge(value)
-  ),
+  dateOfBirth: dateValidationSchema("Your date of birth")
+    .test("dateOfBirth", "You must be 17 years or above", value =>
+      DateUtilities.IsLegalAge(value)
+    )
+    .test(
+      "dateOfBirth",
+      "This date is before the minumum date allowed",
+      value => DateUtilities.IsMoreThanMinDate(value)
+    ),
   gender: StringValidationSchema("Gender"),
   immigrationStatus: StringValidationSchema("Immigration Status"),
   qualification: StringValidationSchema("Qualification"),
-  dateAttained: dateValidationSchema(
-    "Date awarded (most recent qualification)"
-  ).test(
-    "dateAttained",
-    "Date awarded (most recent qualification) - please choose a date from the past",
-    value => DateUtilities.IsPastDate(value)
-  ),
+  dateAttained: dateValidationSchema("Date awarded (most recent qualification)")
+    .test(
+      "dateAttained",
+      "Date awarded (most recent qualification) - please choose a date from the past",
+      value => DateUtilities.IsPastDate(value)
+    )
+    .test(
+      "dateAttained",
+      "This date is before the minumum date allowed",
+      value => DateUtilities.IsMoreThanMinDate(value)
+    ),
   medicalSchool: StringValidationSchema("Medical school"),
   address1: StringValidationSchema("Address - house number/ name and road"),
   address2: StringValidationSchema("Address - district"),
@@ -57,15 +65,23 @@ const ValidationSchema = yup.object({
     .nullable(),
   programmeSpecialty: StringValidationSchema("Programme specialty"),
   college: StringValidationSchema("Royal College / Faculty Assessing Training"),
-  completionDate: dateValidationSchema(
-    "Anticipated completion date"
-  ).test(
-    "completionDate",
-    "Anticipated completion date - please choose a future date",
-    value => DateUtilities.IsFutureDate(value)
-  ),
+  completionDate: dateValidationSchema("Anticipated completion date")
+    .test(
+      "completionDate",
+      "Anticipated completion date - please choose a future date",
+      value => DateUtilities.IsFutureDate(value)
+    )
+    .test(
+      "completionDate",
+      "This date is greater than the maximum date allowed",
+      value => DateUtilities.IsLessThanMaxDate(value)
+    ),
   trainingGrade: StringValidationSchema("Training Grade"),
-  startDate: dateValidationSchema("Programme start date"),
+  startDate: dateValidationSchema("Programme start date").test(
+    "startDate",
+    "This date is outside the allowed date range",
+    value => DateUtilities.IsInsideDateRange(value)
+  ),
   programmeMembershipType: StringValidationSchema("Post type / Appointment"),
   wholeTimeEquivalent: yup
     .string()

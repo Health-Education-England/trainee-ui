@@ -36,6 +36,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
           <TextInputField
             label="Type of Work"
             name={`work[${index}].typeOfWork`}
+            data-cy={`workTypeInput${index}`}
             width="50"
             hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
           />
@@ -44,6 +45,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-third">
           <SelectInputField
+            data-cy={`postSelect${index}`}
             label="Training Post"
             name={`work[${index}].trainingPost`}
             options={[
@@ -57,6 +59,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
             label="Start Date"
             type="date"
             name={`work[${index}].startDate`}
+            data-cy={`startInput${index}`}
           />
         </div>
         <div className="nhsuk-grid-column-one-third">
@@ -64,17 +67,23 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
             label="End Date"
             type="date"
             name={`work[${index}].endDate`}
+            data-cy={`endInput${index}`}
           />
         </div>
       </div>
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
-          <TextInputField label="Site Name" name={`work[${index}].site`} />
+          <TextInputField
+            label="Site Name"
+            name={`work[${index}].site`}
+            data-cy={`siteNameInput${index}`}
+          />
         </div>
         <div className="nhsuk-grid-column-one-half">
           <TextInputField
             label="Site Location"
             name={`work[${index}].siteLocation`}
+            data-cy={`siteLocInput${index}`}
           />
         </div>
       </div>
