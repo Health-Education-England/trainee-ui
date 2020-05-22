@@ -41,7 +41,7 @@ const TextInputField: FunctionComponent<Props> = props => {
           id={props.id || props.name}
           onBlur={field.onBlur}
           onChange={field.onChange}
-          value={field.value}
+          value={field.value || ""}
           {...props}
           readOnly={props.readOnly}
           min="1920-01-01"

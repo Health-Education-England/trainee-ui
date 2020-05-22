@@ -33,20 +33,15 @@ const SelectInputField: React.FC<Props> = props => {
           label={props.label}
           onChange={field.onChange}
           hint={props.hint}
+          value={field.value || ""}
         >
           <Select.Option value="">-- Please select --</Select.Option>
           {props.options
-            ? props.options.map(
-                (option: { value: string; label: string }, index) => (
-                  <Select.Option
-                    key={index}
-                    selected={field.value === option.value ? true : false}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </Select.Option>
-                )
-              )
+            ? props.options.map(option => (
+                <Select.Option key={option.value} value={option.value}>
+                  {option.label}
+                </Select.Option>
+              ))
             : null}
         </Select>
         <InputFooterLabel label={props.footer || ""} />
