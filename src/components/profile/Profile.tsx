@@ -6,7 +6,7 @@ import PersonalDetailsComponent from "./personal-details/PersonalDetailsComponen
 import Programmes from "./programmes/Programmes";
 import Placements from "./placements/Placements";
 import Loading from "../common/Loading";
-import { Fieldset } from "nhsuk-react-components";
+import { Fieldset, Details } from "nhsuk-react-components";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 
 const mapStateToProps = (state: RootState) => ({
@@ -38,13 +38,16 @@ class Profile extends React.PureComponent<profileProps> {
             <Fieldset>
               <Fieldset.Legend isPageHeading>Profile</Fieldset.Legend>
             </Fieldset>
-            <PersonalDetailsComponent
-              personalDetails={traineeProfile.personalDetails}
-            />
-            <Placements placements={traineeProfile.placements}></Placements>
-            <Programmes
-              programmeMemberships={traineeProfile.programmeMemberships}
-            ></Programmes>
+            <Details.ExpanderGroup>
+              <PersonalDetailsComponent
+                personalDetails={traineeProfile.personalDetails}
+              />
+              <Placements placements={traineeProfile.placements}></Placements>
+
+              <Programmes
+                programmeMemberships={traineeProfile.programmeMemberships}
+              ></Programmes>
+            </Details.ExpanderGroup>
           </div>
         )
       );
