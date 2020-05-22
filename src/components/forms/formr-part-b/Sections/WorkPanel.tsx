@@ -22,6 +22,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
             <Button
               reverse
               type="button"
+              data-jest="removePanel"
               onClick={() => removePlacement(index)}
               className={classes.panelCloseButton}
               title="Delete"

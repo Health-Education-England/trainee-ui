@@ -40,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll=false --testResultsProcessor ./node_modules/jest-sonar-reporter/index.js",
+    "test": "react-scripts test --silent --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
     "cypress": "cypress run",
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
@@ -88,13 +88,11 @@
     "collectCoverageFrom": [
       "!**/node_modules/**",
       "!**/vendor/**",
-      "!**/src/models/*.{js,jsx,ts,tsx}",
       "!**/src/mock-data/*.{js,jsx,ts,tsx}",
       "!**/src/redux/store/*.{js,jsx,ts,tsx}",
       "!**/src/*.{js,ts}",
-      "!**/src/components/authentication/*.{js,jsx,ts,tsx}",
+      "!**/src/index.tsx",
       "!**/src/redux/reducers/index.ts",
-      "!**/src/components/forms/formr-part-a/ValidationSchema.ts",
       "**/src/**/*.{ts,tsx}"
     ],
     "coverageReporters": [

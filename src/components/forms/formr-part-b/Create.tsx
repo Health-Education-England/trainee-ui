@@ -64,7 +64,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     } = this.props;
 
     if (!isLoaded || !initialFormValues) {
-      return <Loading />;
+      return <Loading data-jest="loading" />;
     } else {
       const formData = this.props.location.formData || initialFormValues;
 
@@ -100,13 +100,13 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
             <Section2
               formData={formData}
               previousSection={this.previousSection}
-              submitForm={this.submitForm}
+              nextSection={this.submitForm}
               history={this.props.history}
             ></Section2>
           );
 
         default:
-          return <Loading />;
+          return <Loading data-jest="loading" />;
       }
     }
   }

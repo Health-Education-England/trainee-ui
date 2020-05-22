@@ -93,7 +93,7 @@ export function LoadNewFormRPartBReducer(
       return {
         ...state,
         formData: action.payload,
-        section: state.section - 1
+        section: state.section - 1 >= 1 ? state.section - 1 : 1
       };
     default:
       return state;

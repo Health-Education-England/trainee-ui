@@ -6,6 +6,7 @@ import Confirm from "../Confirm";
 import { Provider } from "react-redux";
 import { FormRPartA } from "../../../../models/FormRPartA";
 import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
+import { act } from "react-test-renderer";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -47,7 +48,9 @@ describe("Confirm", () => {
     const wrapper = mountComponent(submittedFormRPartAs[0], history);
 
     const editButton = wrapper.find("button").first();
-    editButton.simulate("click");
+    act(() => {
+      editButton.simulate("click");
+    });
 
     expect(history[0].pathname).toEqual("/formr-a/create");
     expect(history[0].formData).toEqual(submittedFormRPartAs[0]);
@@ -58,6 +61,9 @@ describe("Confirm", () => {
     const wrapper = mountComponent(submittedFormRPartAs[0], history);
 
     const submitButton = wrapper.find("button").last();
-    submitButton.simulate("click");
+
+    act(() => {
+      submitButton.simulate("click");
+    });
   });
 });
