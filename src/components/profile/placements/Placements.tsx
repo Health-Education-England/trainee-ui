@@ -16,29 +16,24 @@ const Placements: React.FC<IPlacementProps> = ({ placements }) => {
 
   return (
     placements && (
-      <>
-        <Details expander>
-          <Details.Summary>Placements</Details.Summary>
-          <Details.Text>
-            <Row className={styles.placementRow}>
-              {placements.length === 0 ? (
-                <div>You are not assigned to any placement</div>
-              ) : (
-                placements.map(
-                  (
-                    placement: Placement,
-                    index: number | string | undefined
-                  ) => (
-                    <Col key={index} width={columnWidth}>
-                      <PlacementPanel key={index} placement={placement} />
-                    </Col>
-                  )
+      <Details expander>
+        <Details.Summary>Placements</Details.Summary>
+        <Details.Text>
+          <Row className={styles.placementRow}>
+            {placements.length === 0 ? (
+              <div>You are not assigned to any placement</div>
+            ) : (
+              placements.map(
+                (placement: Placement, index: number | string | undefined) => (
+                  <Col key={index} width={columnWidth}>
+                    <PlacementPanel key={index} placement={placement} />
+                  </Col>
                 )
-              )}
-            </Row>
-          </Details.Text>
-        </Details>
-      </>
+              )
+            )}
+          </Row>
+        </Details.Text>
+      </Details>
     )
   );
 };

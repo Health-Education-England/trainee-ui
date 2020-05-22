@@ -26,30 +26,28 @@ const Programmes: React.FC<IProgramProps> = ({ programmeMemberships }) => {
   const classes = useStyles();
   return (
     programmeMemberships && (
-      <>
-        <Details expander>
-          <Details.Summary>Programmes</Details.Summary>
-          <Details.Text>
-            <div className={classes.root}>
-              {programmeMemberships.length === 0 ? (
-                <div>You are not assigned to any programme</div>
-              ) : (
-                programmeMemberships.map(
-                  (
-                    programmeMembership: ProgrammeMembership,
-                    index: string | number | undefined
-                  ) => (
-                    <ProgrammePanel
-                      key={index}
-                      programmeMembership={programmeMembership}
-                    />
-                  )
+      <Details expander>
+        <Details.Summary>Programmes</Details.Summary>
+        <Details.Text>
+          <div className={classes.root}>
+            {programmeMemberships.length === 0 ? (
+              <div>You are not assigned to any programme</div>
+            ) : (
+              programmeMemberships.map(
+                (
+                  programmeMembership: ProgrammeMembership,
+                  index: string | number | undefined
+                ) => (
+                  <ProgrammePanel
+                    key={index}
+                    programmeMembership={programmeMembership}
+                  />
                 )
-              )}
-            </div>
-          </Details.Text>
-        </Details>
-      </>
+              )
+            )}
+          </div>
+        </Details.Text>
+      </Details>
     )
   );
 };
