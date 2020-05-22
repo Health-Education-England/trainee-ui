@@ -1,17 +1,12 @@
 import React from "react";
+import styles from "./FormR.module.scss";
 
 interface InputFooterLabelProps {
   label: string;
 }
 
 const InputFooterLabel: React.FC<InputFooterLabelProps> = ({ label }) => (
-  <>
-    {label ? (
-      <div style={{ color: "#900", fontSize: "9pt", paddingTop: "10px" }}>
-        {label}
-      </div>
-    ) : null}
-  </>
+  <>{label ? <div className={styles.inputFooterLabel}>{label}</div> : null}</>
 );
 
 export default InputFooterLabel;

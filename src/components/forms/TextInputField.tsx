@@ -44,6 +44,8 @@ const TextInputField: FunctionComponent<Props> = props => {
           value={field.value}
           {...props}
           readOnly={props.readOnly}
+          min="1920-01-01"
+          max="2119-31-12"
         />
         <InputFooterLabel label={props.footer || ""} />
       </div>

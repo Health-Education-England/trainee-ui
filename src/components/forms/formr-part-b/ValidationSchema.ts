@@ -1,5 +1,9 @@
 import * as yup from "yup";
+import { DateUtilities } from "../../../utilities/DateUtilities";
 import { StringValidationSchema } from "../StringValidationSchema";
+
+const dateValidationSchema = (fieldName: string) =>
+  yup.date().required(`${fieldName} is required`);
 
 const leaveValidation = (fieldName: string) =>
   yup
@@ -20,6 +24,16 @@ export const Section1ValidationSchema = yup.object({
     .required("Email is required"),
   localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
   prevRevalBody: yup.string(),
+  currRevalDate: dateValidationSchema("Current Revalidation date")
+    .test("currRevalDate", "The date has to be on or after today", value =>
+      DateUtilities.IsFutureDate(value)
+    )
+    .test(
+      "currRevalDate",
+      "The date is outside the allowed date range",
+      value => DateUtilities.IsInsideDateRange(value)
+    ),
+  prevRevalDate: yup.string(),
   programmeSpecialty: StringValidationSchema("Programme / Training Specialty"),
   dualSpecialty: yup.string()
 });
@@ -32,14 +46,26 @@ export const Section2ValidationSchema = yup.object({
         trainingPost: StringValidationSchema("Training Post"),
         site: StringValidationSchema("Site Name"),
         siteLocation: StringValidationSchema("Site Location"),
-        startDate: yup.date().required("Start date is required"),
+        startDate: yup
+          .date()
+          .required("Start date is required")
+          .test(
+            "startDate",
+            "The date is outside the allowed date range",
+            value => DateUtilities.IsInsideDateRange(value)
+          ),
         endDate: yup
           .date()
           .required("End date is required")
           .min(yup.ref("startDate"), "End date must be later than Start date")
+          .test(
+            "endDate",
+            "The date is outside the allowed date range",
+            value => DateUtilities.IsInsideDateRange(value)
+          )
       })
     )
-    .min(1, "Atleast one type of work should be added")
+    .min(1, "At least one type of work should be added")
     .max(30, "Maximum number of placements allowed are restricted to 30"),
   sicknessAbsence: leaveValidation("Short and Long-term sickness absence"),
   parentalLeave: leaveValidation(

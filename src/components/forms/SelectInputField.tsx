@@ -36,14 +36,17 @@ const SelectInputField: React.FC<Props> = props => {
         >
           <Select.Option value="">-- Please select --</Select.Option>
           {props.options
-            ? props.options.map((option: { value: string; label: string }) => (
-                <Select.Option
-                  selected={field.value === option.value ? true : false}
-                  value={option.value}
-                >
-                  {option.label}
-                </Select.Option>
-              ))
+            ? props.options.map(
+                (option: { value: string; label: string }, index) => (
+                  <Select.Option
+                    key={index}
+                    selected={field.value === option.value ? true : false}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </Select.Option>
+                )
+              )
             : null}
         </Select>
         <InputFooterLabel label={props.footer || ""} />

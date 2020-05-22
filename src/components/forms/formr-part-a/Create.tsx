@@ -24,6 +24,7 @@ import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actio
 import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
+import styles from "./FormRPartA.module.scss";
 
 const Declarations = [
   CCT_DECLARATION,
@@ -81,6 +82,13 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
       return <Loading />;
     } else {
       const formData = this.props.location.formData || initialFormValues;
+
+      if (localOffices.length > 0) {
+        if (!localOffices.some(l => l.label === formData.localOfficeName)) {
+          formData.localOfficeName = "";
+        }
+      }
+
       return (
         <>
           <BackLink href="/formr-a">Go back</BackLink>
@@ -204,11 +212,12 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                 </Panel>
 
                 <Panel label="Declarations">
-                  <Radios name="declarationType" style={{ marginBottom: 30 }}>
+                  <Radios name="declarationType" className={styles.panelRadios}>
                     <Label>I confirm that,</Label>
 
                     {Declarations.map((label, index) => (
                       <Radios.Radio
+                        className={styles.radios}
                         key={label}
                         data-cy={`radio-${index}`}
                         checked={values.declarationType === label}
@@ -245,7 +254,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
                     options={colleges}
                   />
                   <TextInputField
-                    label="Anticipated Completion Date of Current Programme (if known)"
+                    label="Anticipated Completion Date of Current Programme"
                     type="date"
                     name="completionDate"
                   />

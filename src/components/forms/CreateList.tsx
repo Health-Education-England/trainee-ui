@@ -4,6 +4,7 @@ import { RootState, ActionType } from "../../redux/types";
 import { connect } from "react-redux";
 import { FormsService } from "../../services/FormsService";
 import { DateUtilities } from "../../utilities/DateUtilities";
+import styles from "./FormR.module.scss";
 
 export const CreateList = (
   loadFormList: (
@@ -69,7 +70,7 @@ export const CreateList = (
               </Table.Head>
               <Table.Body>
                 {submittedForms.map((formData: any) => (
-                  <Table.Row key={formData.id} style={{ cursor: "pointer" }}>
+                  <Table.Row key={formData.id} className={styles.listTableRow}>
                     <td>
                       <ActionLink onClick={() => this.handleRowClick(formData)}>
                         form submitted on{" "}
