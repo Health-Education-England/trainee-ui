@@ -79,7 +79,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     } = this.props;
 
     if (!isLoaded || !initialFormValues) {
-      return <Loading />;
+      return <Loading data-jest="loading" />;
     } else {
       const formData = this.props.location.formData || initialFormValues;
 
