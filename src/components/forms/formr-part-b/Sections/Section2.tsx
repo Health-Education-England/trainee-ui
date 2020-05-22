@@ -19,12 +19,12 @@ import classes from "../FormRPartB.module.scss";
 interface Section2Props {
   formData: FormRPartB;
   previousSection: (formData: FormRPartB | null) => void;
-  submitForm: (formData: FormRPartB | null) => void;
+  nextSection: (formData: FormRPartB | null) => void;
   history: any;
 }
 
 const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
-  const { formData, previousSection, submitForm, history } = props;
+  const { formData, previousSection, nextSection, history } = props;
   const newWork: Work = {
     typeOfWork: "",
     startDate: undefined,
@@ -34,7 +34,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
     siteLocation: ""
   };
 
-  if (formData.work.length === 0) {
+  if (formData && formData.work.length === 0) {
     formData.work.push(newWork);
   }
 
@@ -46,7 +46,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
       validationSchema={Section2ValidationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        submitForm(values);
+        nextSection(values);
         history.push("/formr-b/confirm");
         setSubmitting(false);
       }}
@@ -83,12 +83,14 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                         key={i}
                         index={i}
                         removeWork={(index: number) => ps.remove(index)}
+                        data-jest="workPanel"
                       ></WorkPanel>
                     ))}
                     <Button
                       data-cy={`BtnAddWorkType`}
                       type="button"
                       secondary
+                      data-jest="addMore"
                       onClick={() => ps.push(newWork)}
                     >
                       Add more...
