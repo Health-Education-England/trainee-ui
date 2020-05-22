@@ -86,6 +86,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                       ></WorkPanel>
                     ))}
                     <Button
+                      data-cy={`BtnAddWorkType`}
                       type="button"
                       secondary
                       onClick={() => ps.push(newWork)}
