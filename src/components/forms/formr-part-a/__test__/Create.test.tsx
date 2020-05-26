@@ -6,12 +6,13 @@ import Create from "../Create";
 import { Provider } from "react-redux";
 import { mockTraineeProfile } from "../../../../mock-data/trainee-profile";
 import { TraineeProfile } from "../../../../models/TraineeProfile";
+import Loading from "../../../common/Loading";
+import * as yup from "yup";
 
 const history: any[] = [];
 const location: any[] = [];
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-
 const createStore = (profile: TraineeProfile | null) =>
   mockStore({
     profile: {
@@ -33,44 +34,57 @@ const createStore = (profile: TraineeProfile | null) =>
     }
   });
 
-let store = createStore(mockTraineeProfile);
+const getComponent = (store: TraineeProfile | null) => (
+  <Provider store={createStore(store)}>
+    <Create history={history} location={location} />
+  </Provider>
+);
+
+beforeEach(() => {
+  jest.resetModules();
+});
 
 describe("Create", () => {
   it("renders without crashing", () => {
-    shallow(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
+    shallow(getComponent(mockTraineeProfile));
   });
 
   it("mounts without crashing", () => {
-    mount(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
-  });
-
-  it("should enable specialty for award of CCT fields for CCT declaration type selection", () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
-
-    expect(wrapper.find("div[name='declarationType']").length).toBe(1);
+    mount(getComponent(mockTraineeProfile));
   });
 
   it("should load Loading when reference data is not loaded", () => {
-    store = createStore(null);
+    const wrapper = mount(getComponent(null));
 
-    const wrapper = mount(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
+    expect(wrapper.find(Loading)).toHaveLength(1);
+  });
 
-    expect(wrapper.find("[data-jest='loading']").length).toBe(1);
+  it("should show program speciality fields when CCT_DECLRATION is selected", () => {
+    const wrapper = mount(getComponent(mockTraineeProfile));
+
+    const submitBtn = wrapper.find("button").last();
+    submitBtn.simulate("submit");
+  });
+
+  it("should call loadFormRPartA, when the form is submitted", async () => {
+    const wrapper = mount(getComponent(mockTraineeProfile));
+    const mockValidationSchema = yup.object({
+      forename: yup.string()
+    });
+
+    jest.mock("../ValidationSchema", () => ({
+      get ValidationSchema() {
+        return mockValidationSchema;
+      }
+    }));
+
+    jest.mock("../../../../redux/actions/formr-parta-actions", () => ({
+      get loadFormRPartA() {
+        return jest.fn();
+      }
+    }));
+
+    const submitBtn = wrapper.find("button").last();
+    submitBtn.simulate("click");
   });
 });
