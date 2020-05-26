@@ -34,6 +34,10 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
     siteLocation: ""
   };
 
+  const getNumber = (value: number) => {
+    return isNaN(value) ? 0 : Number(value);
+  };
+
   if (formData && formData.work.length === 0) {
     formData.work.push(newWork);
   }
@@ -41,8 +45,6 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
   return (
     <Formik
       initialValues={formData}
-      validateOnChange={false}
-      validateOnBlur={false}
       validationSchema={Section2ValidationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
@@ -145,12 +147,12 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                 name="totalLeave"
                 value={
                   (values.totalLeave =
-                    Number(values.sicknessAbsence) +
-                    Number(values.parentalLeave) +
-                    Number(values.careerBreaks) +
-                    Number(values.paidLeave) +
-                    Number(values.unauthorisedLeave) +
-                    Number(values.otherLeave))
+                    getNumber(values.sicknessAbsence) +
+                    getNumber(values.parentalLeave) +
+                    getNumber(values.careerBreaks) +
+                    getNumber(values.paidLeave) +
+                    getNumber(values.unauthorisedLeave) +
+                    getNumber(values.otherLeave))
                 }
                 readOnly
               />

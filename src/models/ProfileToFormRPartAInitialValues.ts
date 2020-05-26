@@ -1,5 +1,6 @@
 import { TraineeProfile } from "./TraineeProfile";
 import { FormRPartA } from "./FormRPartA";
+import { MEDICAL_CURRICULUM } from "../components/forms/formr-part-a/Constants";
 
 export function ProfileToFormRPartAInitialValues(
   traineeProfile: TraineeProfile | null
@@ -19,7 +20,7 @@ export function ProfileToFormRPartAInitialValues(
   const curriculum =
     programme && programme.curricula.length > 0
       ? programme.curricula
-          .filter(c => c.curriculumSubType === "MEDICAL_CURRICULUM")
+          .filter(c => c.curriculumSubType === MEDICAL_CURRICULUM)
           .reduce(function(a, b) {
             return a.curriculumStartDate > b.curriculumStartDate ? a : b;
           })
