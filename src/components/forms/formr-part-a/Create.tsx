@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { connect, ConnectedProps } from "react-redux";
+import { connect } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import {
   Label,
@@ -15,7 +15,7 @@ import {
 import { loadFormRPartA } from "../../../redux/actions/formr-parta-actions";
 import SelectInputField from "../SelectInputField";
 import TextInputField from "../TextInputField";
-import ValidationSchema from "./ValidationSchema";
+import { ValidationSchema } from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import { CCT_DECLARATION } from "./Constants";
 import Loading from "../../common/Loading";
@@ -25,6 +25,8 @@ import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
 import styles from "./FormRPartA.module.scss";
+import { KeyValue } from "../../../models/KeyValue";
+import { FormRPartA } from "../../../models/FormRPartA";
 
 const Declarations = [
   CCT_DECLARATION,
@@ -35,7 +37,24 @@ const Declarations = [
   "I am a CORE trainee, not yet eligible for CCT"
 ];
 
-const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
+interface CreateProps extends GenericOwnProps {
+  initialFormValues: FormRPartA | null;
+  genders: KeyValue[];
+  qualifications: KeyValue[];
+  colleges: KeyValue[];
+  localOffices: KeyValue[];
+  trainingGrades: KeyValue[];
+  immigrationStatus: KeyValue[];
+  curricula: KeyValue[];
+  isLoaded: boolean;
+  loadTraineeProfile: (profileService: TraineeProfileService) => Promise<any>;
+  loadReferenceData: (
+    referenceService: TraineeReferenceService
+  ) => Promise<any>[];
+  loadFormRPartA: (formData: FormRPartA | null) => any;
+}
+
+const mapStateToProps = (state: RootState) => ({
   initialFormValues: ProfileToFormRPartAInitialValues(
     state.profile.traineeProfile
   ),
@@ -46,9 +65,7 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   trainingGrades: state.referenceData.grades,
   immigrationStatus: state.referenceData.immigrationStatus,
   curricula: state.referenceData.curricula,
-  isLoaded: state.referenceData.isLoaded,
-  history: ownProps.history,
-  location: ownProps.location
+  isLoaded: state.referenceData.isLoaded
 });
 
 const mapDispatchProps = {
@@ -57,9 +74,7 @@ const mapDispatchProps = {
   loadFormRPartA
 };
 
-const connector = connect(mapStateToProps, mapDispatchProps);
-
-class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
+class Create extends React.PureComponent<CreateProps> {
   componentDidMount() {
     this.props.loadTraineeProfile(new TraineeProfileService());
     this.props.loadReferenceData(new TraineeReferenceService());
@@ -75,11 +90,13 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
       trainingGrades,
       immigrationStatus,
       curricula,
-      isLoaded
+      isLoaded,
+      history,
+      loadFormRPartA
     } = this.props;
 
     if (!isLoaded || !initialFormValues) {
-      return <Loading data-jest="loading" />;
+      return <Loading />;
     } else {
       const formData = this.props.location.formData || initialFormValues;
 
@@ -98,8 +115,8 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
             onSubmit={(values, { setSubmitting }) => {
               setSubmitting(true);
 
-              this.props.loadFormRPartA(values);
-              this.props.history.push("/formr-a/confirm");
+              loadFormRPartA(values);
+              history.push("/formr-a/confirm");
 
               setSubmitting(false);
             }}
@@ -301,4 +318,4 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   }
 }
 
-export default connector(Create);
+export default connect(mapStateToProps, mapDispatchProps)(Create);

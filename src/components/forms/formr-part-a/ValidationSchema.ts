@@ -10,7 +10,7 @@ const wholeTimeEquivalentRegex = /^((0\.[1-9]{1})?|(0\.([0-9]{1}[1-9]{1}|[1-9]{1
 const dateValidationSchema = (fieldName: string) =>
   yup.date().required(`${fieldName} is required`);
 
-const ValidationSchema = yup.object({
+export const ValidationSchema = yup.object({
   forename: StringValidationSchema("Forename(s)"),
   surname: StringValidationSchema("Surname (GMC-Registered)", 30),
   gmcNumber: StringValidationSchema("GMC number", 20),
@@ -93,5 +93,3 @@ const ValidationSchema = yup.object({
     )
     .nullable()
 });
-
-export default ValidationSchema;
