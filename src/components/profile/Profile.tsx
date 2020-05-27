@@ -34,7 +34,7 @@ class Profile extends React.PureComponent<profileProps> {
     } else {
       return (
         traineeProfile && (
-          <div>
+          <div id="profile">
             <Fieldset>
               <Fieldset.Legend isPageHeading>Profile</Fieldset.Legend>
             </Fieldset>
