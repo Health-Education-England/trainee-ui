@@ -93,7 +93,6 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
         <>
           <BackLink href="/formr-a">Go back</BackLink>
           <Formik
-            validateOnChange={true}
             initialValues={formData}
             validationSchema={ValidationSchema}
             onSubmit={(values, { setSubmitting }) => {

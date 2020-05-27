@@ -13,12 +13,12 @@ interface Props {
 }
 
 const SelectInputField: React.FC<Props> = props => {
-  const [field, { error, touched }, helpers] = useField(props);
+  const [field, { error }, helpers] = useField(props);
   return (
     <>
       <div
         className={
-          error && touched
+          error
             ? "nhsuk-form-group nhsuk-form-group--error"
             : "nhsuk-form-group"
         }
@@ -29,7 +29,7 @@ const SelectInputField: React.FC<Props> = props => {
           onBlur={() => {
             helpers.setTouched(true);
           }}
-          error={error && touched ? error : ""}
+          error={error || ""}
           label={props.label}
           onChange={field.onChange}
           hint={props.hint}

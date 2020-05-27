@@ -17,7 +17,7 @@ interface Props {
 }
 
 const TextInputField: FunctionComponent<Props> = props => {
-  const [field, { error, touched }] = useField(props);
+  const [field, { error }] = useField(props);
   const FormElement = props.rows ? Textarea : Input;
 
   const setFieldWidth = (width: number) => {
@@ -28,7 +28,7 @@ const TextInputField: FunctionComponent<Props> = props => {
     <>
       <div
         className={
-          error && touched
+          error
             ? "nhsuk-form-group nhsuk-form-group--error"
             : "nhsuk-form-group"
         }
@@ -37,11 +37,11 @@ const TextInputField: FunctionComponent<Props> = props => {
           width={
             field.value ? props.width || setFieldWidth(field.value.length) : 20
           }
-          error={error && touched ? error : ""}
+          error={error || ""}
           id={props.id || props.name}
           onBlur={field.onBlur}
           onChange={field.onChange}
-          value={field.value || ""}
+          value={field.value != null ? field.value : ""}
           {...props}
           readOnly={props.readOnly}
           min="1920-01-01"
