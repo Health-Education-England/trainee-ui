@@ -128,3 +128,4 @@ build/
 
 ### Cypress login ###
 cypress.env.json
+videos/

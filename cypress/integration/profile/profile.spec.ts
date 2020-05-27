@@ -1,30 +1,35 @@
 /// <reference types="cypress" />
 describe("Profile", () => {
-  it("should show name by default then on click expand to show all personal information", () => {
-    cy.get("#traineeName").should("not.be.empty");
-    cy.get(
-      ".makeStyles-sectionPadding-3 > .MuiPaper-root > #panel1a-header"
-    ).click();
+  it("should click expand to show all personal information then toggle close", () => {
+    cy.contains("Personal details")
+      .should("be.visible")
+      .click();
     cy.contains("Gender").should("be.visible");
+    cy.contains("Sensitive data").should("be.visible");
+    cy.contains("Personal details").click();
+    cy.contains("Gender").should("not.be.visible");
+    cy.contains("Sensitive data").should("not.be.visible");
   });
 
-  it("should show placement information by default", () => {
-    cy.contains("Placements");
-    cy.get("#traineeName").should("be.visible");
-  });
-
-  it("should close placement container after clicking placement container header", () => {
+  it("should click expand to show placement information then toggle close", () => {
+    cy.contains("Placements")
+      .should("be.visible")
+      .click();
+    cy.contains("Site").should("be.visible");
+    cy.contains("Specialty").should("be.visible");
     cy.contains("Placements").click();
-    cy.get("#placementContainer").should("not.visible");
+    cy.contains("Site").should("not.be.visible");
+    cy.contains("Specialty").should("not.be.visible");
   });
 
-  it("should show programme information by default", () => {
-    cy.contains("Programmes");
-    cy.get("#programmeContainer").should("be.visible");
-  });
-
-  it("should close programme container after clicking programme container header", () => {
+  it("should click expand to show placement information then toggle close", () => {
+    cy.contains("Programmes")
+      .should("be.visible")
+      .click();
+    cy.contains("Number").should("be.visible");
+    cy.contains("Curricula").should("be.visible");
     cy.contains("Programmes").click();
-    cy.get("#programmeContainer").should("not.visible");
+    cy.contains("Number").should("not.be.visible");
+    cy.contains("Curricula").should("not.be.visible");
   });
 });
