@@ -11,8 +11,7 @@ import {
   LOAD_FORMR_PARTB_LIST_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
   LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-  FORMR_PARTB_NEXT_SECTION,
-  FORMR_PARTB_PREVIOUS_SECTION
+  FORMR_PARTB_MOVE_TO_SECTION
 } from "../action_types";
 import {
   LoadFormRPartBReducer,
@@ -191,60 +190,16 @@ describe("LoadNewFormRPartBReducer", () => {
     );
   });
 
-  it("should add 1 to section when FORMR_PARTB_NEXT_SECTION action passed", () => {
+  it("should return updated state when FORMR_PARTB_MOVE_TO_SECTION action passed", () => {
     const state: NewFormRPartBState = {
       ...initialState,
-      formData: formrPartB,
-      section: 2
-    };
-
-    const successAction: ActionType = {
-      type: FORMR_PARTB_NEXT_SECTION,
-      payload: formrPartB
-    };
-
-    expect(LoadNewFormRPartBReducer(initialState, successAction)).toEqual(
-      state
-    );
-  });
-
-  it("should reduce section by 1 when FORMR_PARTB_PREVIOUS_SECTION action passed", () => {
-    initialState = {
       formData: formrPartB,
       section: 3
     };
 
-    const state: NewFormRPartBState = {
-      ...initialState,
-      formData: formrPartB,
-      section: 2
-    };
-
     const successAction: ActionType = {
-      type: FORMR_PARTB_PREVIOUS_SECTION,
-      payload: formrPartB
-    };
-
-    expect(LoadNewFormRPartBReducer(initialState, successAction)).toEqual(
-      state
-    );
-  });
-
-  it("should return section 1 when FORMR_PARTB_PREVIOUS_SECTION action passed", () => {
-    initialState = {
-      formData: formrPartB,
-      section: 1
-    };
-
-    const state: NewFormRPartBState = {
-      ...initialState,
-      formData: formrPartB,
-      section: 1
-    };
-
-    const successAction: ActionType = {
-      type: FORMR_PARTB_PREVIOUS_SECTION,
-      payload: formrPartB
+      type: FORMR_PARTB_MOVE_TO_SECTION,
+      payload: { formData: formrPartB, section: 3 }
     };
 
     expect(LoadNewFormRPartBReducer(initialState, successAction)).toEqual(

@@ -4,9 +4,8 @@ import { GenericOwnProps } from "../../../redux/types";
 import { connect, ConnectedProps } from "react-redux";
 import {
   loadFormRPartBInitialValues,
-  moveToNextSection,
-  moveToPreviousSection,
-  loadFormRPartB
+  loadFormRPartB,
+  moveToSection
 } from "../../../redux/actions/formr-partb-actions";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeProfileService } from "../../../services/TraineeProfileService";
@@ -17,7 +16,7 @@ import Section2 from "./Sections/Section2";
 import { FormRPartB } from "../../../models/FormRPartB";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  initialFormValues: state.newFormRPartB.formData,
+  formData: state.newFormRPartB.formData,
   localOffices: state.referenceData.localOffices,
   curricula: state.referenceData.curricula,
   isLoaded: state.referenceData.isLoaded,
@@ -30,8 +29,7 @@ const mapDispatchProps = {
   loadFormRPartBInitialValues,
   loadReferenceData,
   loadFormRPartB,
-  moveToNextSection,
-  moveToPreviousSection
+  moveToSection
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
@@ -42,32 +40,24 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     this.props.loadReferenceData(new TraineeReferenceService());
   }
 
-  nextSection = (formData: FormRPartB | null) => {
-    this.props.moveToNextSection(formData);
+  nextSection = (formData: FormRPartB) => {
+    this.props.moveToSection(formData, this.props.section + 1);
   };
 
-  previousSection = (formData: FormRPartB | null) => {
-    this.props.moveToPreviousSection(formData);
+  previousSection = (formData: FormRPartB) => {
+    this.props.moveToSection(formData, this.props.section - 1);
   };
 
-  submitForm = (formData: FormRPartB | null) => {
+  submitForm = (formData: FormRPartB) => {
     this.props.loadFormRPartB(formData);
   };
 
   render() {
-    const {
-      initialFormValues,
-      localOffices,
-      curricula,
-      isLoaded,
-      section
-    } = this.props;
+    const { formData, localOffices, curricula, isLoaded, section } = this.props;
 
-    if (!isLoaded || !initialFormValues) {
+    if (!isLoaded || !formData) {
       return <Loading data-jest="loading" />;
     } else {
-      const formData = this.props.location.formData || initialFormValues;
-
       if (localOffices.length > 0) {
         if (!localOffices.some(l => l.label === formData.localOfficeName)) {
           formData.localOfficeName = "";

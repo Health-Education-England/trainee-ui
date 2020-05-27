@@ -18,7 +18,7 @@ interface Section1Props {
   localOffices: KeyValue[];
   curricula: KeyValue[];
   formData: FormRPartB;
-  nextSection: (formData: FormRPartB | null) => void;
+  nextSection: (formData: FormRPartB) => void;
 }
 
 const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {

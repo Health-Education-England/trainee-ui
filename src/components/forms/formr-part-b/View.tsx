@@ -1,13 +1,16 @@
 import React from "react";
-import { BackLink, SummaryList, Panel } from "nhsuk-react-components";
+import { BackLink, SummaryList, Panel, Button } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
 import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
+import { moveToSection } from "../../../redux/actions/formr-partb-actions";
 
 interface ViewProps {
   formData: FormRPartB | null;
+  moveToSection: (formData: FormRPartB, section?: number) => any;
+  canEdit: boolean;
   history: any;
 }
 
@@ -15,20 +18,47 @@ const mapStateToProps = (state: RootState) => ({
   formData: state.formRPartBView.formData
 });
 
+const mapDispatchToProps = {
+  moveToSection
+};
+
 class View extends React.PureComponent<ViewProps> {
   render() {
-    const { formData, history } = this.props;
+    const { formData, history, moveToSection, canEdit } = this.props;
 
     if (!formData) {
       history.push("/formr-b");
       return null;
     }
 
+    const SectionEditButton = (section: number) => {
+      return canEdit ? (
+        <Button
+          type="button"
+          className={classes.sectionEditButton}
+          onClick={() => {
+            moveToSection(formData, section);
+            history.push("/formr-b/create");
+          }}
+        >
+          Edit
+        </Button>
+      ) : null;
+    };
+
     return (
       formData && (
         <>
           <BackLink href="/formr-b">Go back to list</BackLink>
-          <h2>Section 1: Doctor's details</h2>
+          <div className="nhsuk-grid-row">
+            <div className="nhsuk-grid-column-two-thirds">
+              <h2>Section 1: Doctor's details</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(1)}
+            </div>
+          </div>
+
           <Panel label="Personal details">
             <SummaryList>
               <SummaryList.Row>
@@ -88,7 +118,15 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          <h2>Section 2: Whole Scope of Practice</h2>
+          <div className="nhsuk-grid-row">
+            <div className="nhsuk-grid-column-two-thirds">
+              <h2>Section 2: Whole Scope of Practice</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(2)}
+            </div>
+          </div>
+
           <Panel label="Type of work">
             {formData.work
               ? formData.work.map((w, i) => (
@@ -185,4 +223,4 @@ class View extends React.PureComponent<ViewProps> {
   }
 }
 
-export default connect(mapStateToProps)(View);
+export default connect(mapStateToProps, mapDispatchToProps)(View);
