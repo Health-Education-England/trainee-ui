@@ -5,8 +5,7 @@ import {
   LOAD_FORMR_PARTB_LIST_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
   LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-  FORMR_PARTB_NEXT_SECTION,
-  FORMR_PARTB_PREVIOUS_SECTION
+  FORMR_PARTB_MOVE_TO_SECTION
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
@@ -15,8 +14,7 @@ import {
   loadFormRPartB,
   loadFormRPartBList,
   loadFormRPartBInitialValues,
-  moveToNextSection,
-  moveToPreviousSection
+  moveToSection
 } from "../actions/formr-partb-actions";
 import { FormRPartB } from "../../models/FormRPartB";
 import { AxiosResponse } from "axios";
@@ -171,30 +169,29 @@ describe("loadFormRPartBInitialValues method", () => {
   });
 });
 
-describe("moveToNextSection method", () => {
-  it("should dispatch FORMR_PARTB_NEXT_SECTION", () => {
-    const formrPartb = submittedFormRPartBs[0];
+describe("moveToSection method", () => {
+  it("should dispatch FORMR_PARTB_MOVE_TO_SECTION with section 1 when no section passed", () => {
+    const formData = submittedFormRPartBs[0];
     const expectedActions = {
-      type: FORMR_PARTB_NEXT_SECTION,
-      payload: formrPartb
+      type: FORMR_PARTB_MOVE_TO_SECTION,
+      payload: { formData, section: 1 }
     };
 
-    return expect(store.dispatch(moveToNextSection(formrPartb))).toEqual(
+    return expect(store.dispatch(moveToSection(formData))).toEqual(
       expectedActions
     );
   });
-});
 
-describe("moveToPreviousSection method", () => {
-  it("should dispatch FORMR_PARTB_PREVIOUS_SECTION", () => {
-    const formrPartb = submittedFormRPartBs[0];
+  it("should dispatch FORMR_PARTB_MOVE_TO_SECTION with section passed", () => {
+    const sectionNumber = 3;
+    const formData = submittedFormRPartBs[0];
     const expectedActions = {
-      type: FORMR_PARTB_PREVIOUS_SECTION,
-      payload: formrPartb
+      type: FORMR_PARTB_MOVE_TO_SECTION,
+      payload: { formData, section: sectionNumber }
     };
 
-    return expect(store.dispatch(moveToPreviousSection(formrPartb))).toEqual(
-      expectedActions
-    );
+    return expect(
+      store.dispatch(moveToSection(formData, sectionNumber))
+    ).toEqual(expectedActions);
   });
 });

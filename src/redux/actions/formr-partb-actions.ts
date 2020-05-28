@@ -6,13 +6,13 @@ import {
   LOAD_FORMR_PARTB_LIST_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-  FORMR_PARTB_NEXT_SECTION,
-  FORMR_PARTB_PREVIOUS_SECTION
+  FORMR_PARTB_MOVE_TO_SECTION
 } from "../action_types";
 import { FormRPartB } from "../../models/FormRPartB";
 import { FormsService } from "../../services/FormsService";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { ProfileToFormRPartBInitialValues } from "../../models/ProfileToFormRPartBInitialValues";
+import store from "../store/store";
 
 export const loadFormRPartBList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
@@ -45,36 +45,38 @@ export const loadFormRPartB = (formData: FormRPartB | null) => (
 export const loadFormRPartBInitialValues = (
   traineeProfileService: TraineeProfileService
 ) => (dispatch: (action: ActionType) => any) => {
-  return traineeProfileService
-    .getTraineeProfile()
-    .then(response => {
-      dispatch({
-        type: LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-        payload: ProfileToFormRPartBInitialValues(response.data)
+  const newFormState = store.getState().newFormRPartB;
+  if (newFormState.formData === null) {
+    return traineeProfileService
+      .getTraineeProfile()
+      .then(response => {
+        dispatch({
+          type: LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
+          payload: ProfileToFormRPartBInitialValues(response.data)
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
+          payload: error
+        });
       });
-    })
-    .catch(error => {
-      dispatch({
-        type: LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-        payload: error
-      });
+  } else {
+    return dispatch({
+      type: FORMR_PARTB_MOVE_TO_SECTION,
+      payload: {
+        formData: newFormState.formData,
+        section: newFormState.section
+      }
     });
+  }
 };
 
-export const moveToNextSection = (formData: FormRPartB | null) => (
+export const moveToSection = (formData: FormRPartB, section: number = 1) => (
   dispatch: (action: ActionType) => any
 ) => {
   return dispatch({
-    type: FORMR_PARTB_NEXT_SECTION,
-    payload: formData
-  });
-};
-
-export const moveToPreviousSection = (formData: FormRPartB | null) => (
-  dispatch: (action: ActionType) => any
-) => {
-  return dispatch({
-    type: FORMR_PARTB_PREVIOUS_SECTION,
-    payload: formData
+    type: FORMR_PARTB_MOVE_TO_SECTION,
+    payload: { formData, section }
   });
 };

@@ -11,8 +11,7 @@ import {
   LOAD_FORMR_PARTB_LIST_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
   LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-  FORMR_PARTB_PREVIOUS_SECTION,
-  FORMR_PARTB_NEXT_SECTION
+  FORMR_PARTB_MOVE_TO_SECTION
 } from "../action_types";
 
 const formRPartAViewState: FormRPartBViewState = {
@@ -76,24 +75,19 @@ export function LoadNewFormRPartBReducer(
     case LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS:
       return {
         ...state,
-        formData: action.payload
+        formData: action.payload,
+        section: 1
       };
     case LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE:
       return {
         ...state,
         formData: null
       };
-    case FORMR_PARTB_NEXT_SECTION:
+    case FORMR_PARTB_MOVE_TO_SECTION:
       return {
         ...state,
-        formData: action.payload,
-        section: state.section + 1
-      };
-    case FORMR_PARTB_PREVIOUS_SECTION:
-      return {
-        ...state,
-        formData: action.payload,
-        section: state.section - 1 >= 1 ? state.section - 1 : 1
+        formData: action.payload.formData,
+        section: action.payload.section
       };
     default:
       return state;
