@@ -35,7 +35,7 @@
     "redux-thunk": "^2.3.0",
     "stylelint": "^13.0.0",
     "typescript": "^3.7.4",
-    "yup": "^0.28.3"
+    "yup": "^0.29.1"
   },
   "scripts": {
     "start": "react-scripts start",
