@@ -83,3 +83,18 @@ export const Section2ValidationSchema = yup.object({
   otherLeave: leaveValidation("Other"),
   totalLeave: leaveValidation("Total")
 });
+
+export const Section3ValidationSchema = yup.object({
+  declarationHonesty: yup
+    .string()
+    .required("You must confirm your acceptance.")
+    .nullable(),
+  declarationHealth: yup
+    .string()
+    .required("You must confirm your acceptance.")
+    .nullable(),
+  gmcConditions: yup
+    .string()
+    .required("You must select yes or no.")
+    .nullable()
+});

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import TextInputField from "../../TextInputField";
+import ScrollToHere from "../../ScrollToHere";
 import {
   Fieldset,
   WarningCallout,
@@ -175,14 +176,13 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                 Section 1
               </Pagination.Link>
 
-              <Pagination.Link next onClick={() => handleSubmit()}>
-                Continue to Submit
-              </Pagination.Link>
-            </Pagination>
-          </Form>
-        )}
-      </Formik>
-    )
+            <Pagination.Link next onClick={() => handleSubmit()}>
+              Continue to Section 3
+            </Pagination.Link>
+          </Pagination>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
