@@ -33,21 +33,13 @@ describe("App", () => {
   });
 
   it("should set isAuthenticated to true, when signedIn state received", async () => {
-    wrapper
-      .find(App)
-      .find(Login)
-      .props()
-      .setAuthenticationStatus("signedIn");
+    wrapper.find(App).find(Login).props().setAuthenticationStatus("signedIn");
 
     expect(wrapper.find(App).state("isAuthenticated")).toBe(true);
   });
 
   it("should set isAuthenticated to false, when state received is not signedIn ", async () => {
-    wrapper
-      .find(App)
-      .find(Login)
-      .props()
-      .setAuthenticationStatus("signedOut");
+    wrapper.find(App).find(Login).props().setAuthenticationStatus("signedOut");
 
     expect(wrapper.find(App).state("isAuthenticated")).toBe(false);
   });
