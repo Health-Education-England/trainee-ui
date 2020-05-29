@@ -31,6 +31,11 @@ const formrPartB: FormRPartB = {
   unauthorisedLeave: 0,
   otherLeave: 0,
   totalLeave: 0,
+  isHonest: undefined,
+  isHealthy: undefined,
+  isWarned: undefined,
+  isComplying: undefined,
+  healthStatement: "",
   submissionDate: null,
   lastModifiedDate: null
 };

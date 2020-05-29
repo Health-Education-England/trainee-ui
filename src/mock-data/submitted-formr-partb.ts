@@ -31,6 +31,11 @@ export const submittedFormRPartBs: FormRPartB[] = [
     unauthorisedLeave: 10,
     otherLeave: 0,
     totalLeave: 10,
+    isHonest: true,
+    isHealthy: true,
+    isWarned: true,
+    isComplying: true,
+    healthStatement: "I feel great etc.",
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
   }
