@@ -37,12 +37,7 @@ describe("SelectInputField", () => {
 
     expect(wrapper.find(Select)).toHaveLength(1);
     expect(wrapper.find("option").length).toBe(1);
-    expect(
-      wrapper
-        .find("label")
-        .first()
-        .text()
-    ).toBe("Select input field");
+    expect(wrapper.find("label").first().text()).toBe("Select input field");
   });
 
   it("should have options along with default option when options passed", () => {
@@ -54,11 +49,6 @@ describe("SelectInputField", () => {
   it("should render footer when footer property passed", () => {
     const wrapper = mount(getComponent(options, "Footer label"));
 
-    expect(
-      wrapper
-        .find("div")
-        .last()
-        .text()
-    ).toBe("Footer label");
+    expect(wrapper.find("div").last().text()).toBe("Footer label");
   });
 });

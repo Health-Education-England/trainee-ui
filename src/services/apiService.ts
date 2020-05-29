@@ -11,7 +11,7 @@ export class ApiService {
       headers: {}
     });
 
-    this.axiosInstance.interceptors.request.use(async function(config) {
+    this.axiosInstance.interceptors.request.use(async function (config) {
       let user = await Auth.currentAuthenticatedUser();
       config.headers.authorization = `Bearer ${user.signInUserSession.accessToken.jwtToken}`;
 

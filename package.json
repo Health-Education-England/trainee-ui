@@ -44,8 +44,8 @@
     "cypress": "cypress run",
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .ts,.tsx,.js",
-    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\""
+    "lint": "eslint . --ext .ts,.tsx,.js --fix",
+    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\" --fix"
   },
   "husky": {
     "hooks": {

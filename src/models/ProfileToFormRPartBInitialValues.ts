@@ -12,7 +12,7 @@ export function ProfileToFormRPartBInitialValues(
 
   const programme =
     traineeProfile.programmeMemberships.length > 0
-      ? traineeProfile.programmeMemberships.reduce(function(a, b) {
+      ? traineeProfile.programmeMemberships.reduce(function (a, b) {
           return a.startDate > b.startDate ? a : b;
         })
       : null;
@@ -21,7 +21,7 @@ export function ProfileToFormRPartBInitialValues(
     programme && programme.curricula.length > 0
       ? programme.curricula
           .filter(c => c.curriculumSubType === MEDICAL_CURRICULUM)
-          .reduce(function(a, b) {
+          .reduce(function (a, b) {
             return a.curriculumStartDate > b.curriculumStartDate ? a : b;
           })
       : null;
