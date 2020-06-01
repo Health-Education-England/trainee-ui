@@ -6,8 +6,8 @@ import InputFooterLabel from "./InputFooterLabel";
 interface Props {
   name: string;
   label: string;
-  items: any[];
   type: "radio" | "checkbox";
+  items?: any[];
   id?: string;
   hint?: string;
   footer?: any;
@@ -21,6 +21,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
   return (
     <>
       <div
+        data-jest={props.name}
         className={
           error
             ? "nhsuk-form-group nhsuk-form-group--error"
@@ -37,11 +38,12 @@ const MultiChoiceInputField: React.FC<Props> = props => {
           value={field.value || ""}
         >
           {props.items
-            ? props.items.map(item => (
+            ? props.items.map((item, index) => (
                 <FormChildElement
                   key={item.value}
                   value={item.value}
-                  id={item.id || item.name}
+                  id={item.id || item.value + "_" + index}
+                  checked={item.checked || undefined}
                 >
                   {item.label}
                 </FormChildElement>
