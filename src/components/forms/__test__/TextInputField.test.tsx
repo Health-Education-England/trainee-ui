@@ -19,7 +19,12 @@ describe("TextInputField", () => {
       </Formik>
     );
 
-    expect(wrapper.find("label").first().text()).toBe("Text Input Field");
+    expect(
+      wrapper
+        .find("label")
+        .first()
+        .text()
+    ).toBe("Text Input Field");
 
     expect(wrapper.find("input").length).toBe(1);
     expect(wrapper.find("textarea").length).toBe(0);
@@ -40,7 +45,12 @@ describe("TextInputField", () => {
       </Formik>
     );
 
-    expect(wrapper.find("div").last().text()).toBe("Footer label");
+    expect(
+      wrapper
+        .find("div")
+        .last()
+        .text()
+    ).toBe("Footer label");
   });
 
   it("should render textarea element when number of rows passed", () => {
@@ -58,7 +68,12 @@ describe("TextInputField", () => {
       </Formik>
     );
 
-    expect(wrapper.find("label").first().text()).toBe("Text Input Field");
+    expect(
+      wrapper
+        .find("label")
+        .first()
+        .text()
+    ).toBe("Text Input Field");
 
     expect(wrapper.find("textarea").length).toBe(1);
     expect(wrapper.find("input").length).toBe(0);

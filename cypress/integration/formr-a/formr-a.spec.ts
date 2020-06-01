@@ -19,7 +19,9 @@ describe("Form R (Part A)", () => {
     cy.contains("Menu").click();
     cy.contains("Form R-a").click();
 
-    cy.contains("Submit").should("be.visible").click();
+    cy.contains("Submit")
+      .should("be.visible")
+      .click();
     cy.get(".nhsuk-warning-callout > p").should("be.visible");
     cy.location("pathname", { timeout: 10000 }).should("include", "/formr-a");
     //-- personal details section --
@@ -48,7 +50,9 @@ describe("Form R (Part A)", () => {
       .invoke("val")
       .should("not.be.empty");
     //TODO need to test date picker too
-    cy.get("#gender").should("be.visible").should("have.value", "Male");
+    cy.get("#gender")
+      .should("be.visible")
+      .should("have.value", "Male");
     //Test for 'Other' immigration status
     cy.get("#immigrationStatus")
       .should("be.visible")
@@ -66,7 +70,10 @@ describe("Form R (Part A)", () => {
           .select(selectedItem)
           .should("not.have.value", "--Please select--");
       });
-    cy.get("#dateAttained").should("be.visible").clear().type(dateAttained);
+    cy.get("#dateAttained")
+      .should("be.visible")
+      .clear()
+      .type(dateAttained);
     cy.get("#medicalSchool")
       .should("be.visible")
       .clear()
@@ -95,11 +102,19 @@ describe("Form R (Part A)", () => {
       .should("be.visible")
       .invoke("val")
       .should("not.be.empty");
-    cy.get("#mobileNumber").should("be.visible").clear().type("0777777777777");
+    cy.get("#mobileNumber")
+      .should("be.visible")
+      .clear()
+      .type("0777777777777");
     // Leave email blank intentionally to check for inline error message
-    cy.get("#email").focus().should("be.visible").should("not.contain.text");
+    cy.get("#email")
+      .focus()
+      .should("be.visible")
+      .should("not.contain.text");
     cy.get("#mobileNumber").focus();
-    cy.get("#email").should("be.visible").type("traineeui.tester@hee.nhs.uk");
+    cy.get("#email")
+      .should("be.visible")
+      .type("traineeui.tester@hee.nhs.uk");
 
     //-- Declarations section --
     cy.get("#cctSpecialty1").should("not.be.visible");
@@ -153,8 +168,13 @@ describe("Form R (Part A)", () => {
           .select(selectedItem)
           .should("not.have.value", "--Please select--");
       });
-    cy.get("#startDate").type(startDate).should("not.have.value", "");
-    cy.get("#programmeMembershipType").should("be.visible").clear().type("LAT");
+    cy.get("#startDate")
+      .type(startDate)
+      .should("not.have.value", "");
+    cy.get("#programmeMembershipType")
+      .should("be.visible")
+      .clear()
+      .type("LAT");
     //-- error msg when FTE not completed
     cy.get("form > .nhsuk-button").click();
     cy.get(".nhsuk-error-summary").should("be.visible");
@@ -166,19 +186,27 @@ describe("Form R (Part A)", () => {
     cy.get(".nhsuk-warning-callout").should("be.visible");
 
     cy.contains("Submit").should("be.visible");
-    cy.contains("Edit").should("be.visible").click();
+    cy.contains("Edit")
+      .should("be.visible")
+      .click();
     //TODO could do a cypress visual test of form here to check contents have remained the same
     cy.contains("Submit").should("not.be.visible");
     cy.contains("Edit").should("not.be.visible");
     cy.contains("Continue").should("be.visible");
-    cy.get("#wholeTimeEquivalent").clear().type("1").should("have.value", "1");
+    cy.get("#wholeTimeEquivalent")
+      .clear()
+      .type("1")
+      .should("have.value", "1");
     cy.contains("Continue").click();
     cy.get(
       ":nth-child(2) > .nhsuk-summary-list > :nth-child(1) > .nhsuk-summary-list__key"
     )
       .scrollIntoView()
       .should("be.visible");
-    cy.contains("Submit").scrollIntoView().should("be.visible").click();
+    cy.contains("Submit")
+      .scrollIntoView()
+      .should("be.visible")
+      .click();
 
     //--Go to list of submitted/ saved forms (Form Part A)
     cy.contains("Submitted forms").should("be.visible");
@@ -188,7 +216,9 @@ describe("Form R (Part A)", () => {
       .should("be.visible")
       .click();
     cy.contains("Personal Details").should("be.visible");
-    cy.get(".nhsuk-back-link__link").should("be.visible").click();
+    cy.get(".nhsuk-back-link__link")
+      .should("be.visible")
+      .click();
     cy.contains("Submitted forms").should("be.visible");
   });
 });

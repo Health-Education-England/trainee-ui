@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 describe("Profile", () => {
   it("should click expand to show all personal information then toggle close", () => {
-    cy.contains("Personal details").should("be.visible").click();
+    cy.contains("Personal details")
+      .should("be.visible")
+      .click();
     cy.contains("Gender").should("be.visible");
     cy.contains("Sensitive data").should("be.visible");
     cy.contains("Personal details").click();
@@ -10,7 +12,9 @@ describe("Profile", () => {
   });
 
   it("should click expand to show placement information then toggle close", () => {
-    cy.contains("Placements").should("be.visible").click();
+    cy.contains("Placements")
+      .should("be.visible")
+      .click();
     cy.contains("Site").should("be.visible");
     cy.contains("Specialty").should("be.visible");
     cy.contains("Placements").click();
@@ -19,7 +23,9 @@ describe("Profile", () => {
   });
 
   it("should click expand to show placement information then toggle close", () => {
-    cy.contains("Programmes").should("be.visible").click();
+    cy.contains("Programmes")
+      .should("be.visible")
+      .click();
     cy.contains("Number").should("be.visible");
     cy.contains("Curricula").should("be.visible");
     cy.contains("Programmes").click();
