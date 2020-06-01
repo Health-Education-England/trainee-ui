@@ -58,23 +58,33 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
               </WarningCallout>
               <Panel label="Declarations">
                 <MultiChoiceInputField
-                  label="I declare that I accept the professional obligations paced on me in Good Medical Practice in relation to honesty and integrity."
+                  label="Please tick to confirm your acceptance."
                   id="isHonest"
                   type="checkbox"
                   name="isHonest"
-                  hint="Please tick to confirm your acceptance."
-                  items={[{ label: "", value: "true" }]}
+                  hint=""
+                  items={[
+                    {
+                      label:
+                        "I declare that I accept the professional obligations paced on me in Good Medical Practice in relation to honesty and integrity.",
+                      value: "true"
+                    }
+                  ]}
                   footer="If you wish to make any declarations in relation to honesty and integrity, please do this in section 6"
                 />
 
                 <MultiChoiceInputField
-                  label="I declare that I accept the professional obligations placed on
-                me in Good Medical Practice about my personal health."
+                  label="Please tick to confirm your acceptance."
                   id="isHealthy"
                   name="isHealthy"
                   type="checkbox"
-                  hint="Please tick to confirm your acceptance."
-                  items={[{ label: "", value: "true" }]}
+                  items={[
+                    {
+                      label:
+                        "I declare that I accept the professional obligations placed on me in Good Medical Practice about my personal health.",
+                      value: "true"
+                    }
+                  ]}
                 />
 
                 <MultiChoiceInputField

@@ -5,8 +5,8 @@ import InputFooterLabel from "./InputFooterLabel";
 
 interface Props {
   name: string;
-  label: string;
   type: "radio" | "checkbox";
+  label?: string;
   items?: any[];
   id?: string;
   hint?: string;
