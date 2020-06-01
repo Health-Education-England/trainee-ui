@@ -85,16 +85,7 @@ export const Section2ValidationSchema = yup.object({
 });
 
 export const Section3ValidationSchema = yup.object({
-  declarationHonesty: yup
-    .string()
-    .required("You must confirm your acceptance.")
-    .nullable(),
-  declarationHealth: yup
-    .string()
-    .required("You must confirm your acceptance.")
-    .nullable(),
-  gmcConditions: yup
-    .string()
-    .required("You must select yes or no.")
-    .nullable()
+  isHonest: yup.bool().oneOf([true], "You must confirm your acceptance."),
+  isHealthy: yup.bool().oneOf([true], "You must confirm your acceptance."),
+  isWarned: yup.boolean().required("You must select yes or no.")
 });
