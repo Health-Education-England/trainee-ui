@@ -5,54 +5,53 @@ import InputFooterLabel from "./InputFooterLabel";
 
 interface Props {
   name: string;
-  type: "radio" | "checkbox";
+  type: "radios" | "checkbox";
+  items: any[];
   label?: string;
-  items?: any[];
   id?: string;
-  hint?: string;
+  hint?: any;
   footer?: any;
 }
 
 const MultiChoiceInputField: React.FC<Props> = props => {
   const [field, { error }] = useField(props);
-  const FormElement = props.type === "radio" ? Radios : Checkboxes;
+  const FormElement = props.type === "radios" ? Radios : Checkboxes;
   const FormChildElement =
-    props.type === "radio" ? Radios.Radio : Checkboxes.Box;
+    props.type === "radios" ? Radios.Radio : Checkboxes.Box;
   return (
-    <>
-      <div
-        data-jest={props.name}
-        className={
-          error
-            ? "nhsuk-form-group nhsuk-form-group--error"
-            : "nhsuk-form-group"
-        }
+    <div
+      data-jest={props.name}
+      className={
+        error ? "nhsuk-form-group nhsuk-form-group--error" : "nhsuk-form-group"
+      }
+    >
+      <Label>{props.label}</Label>
+      <FormElement
+        name={props.name}
+        id={props.id || props.name}
+        error={error || ""}
+        onChange={field.onChange}
+        hint={props.hint}
       >
-        <Label>{props.label}</Label>
-        <FormElement
-          name={props.name}
-          id={props.id || props.name}
-          error={error || ""}
-          onChange={field.onChange}
-          hint={props.hint}
-          value={field.value || ""}
-        >
-          {props.items
-            ? props.items.map((item, index) => (
-                <FormChildElement
-                  key={item.value}
-                  value={item.value}
-                  id={item.id || item.value + "_" + index}
-                  checked={item.checked || undefined}
-                >
-                  {item.label}
-                </FormChildElement>
-              ))
-            : null}
-        </FormElement>
-        <InputFooterLabel label={props.footer || ""} />
-      </div>
-    </>
+        {props.items
+          ? props.items.map((item, index) => (
+              <FormChildElement
+                key={item.value}
+                value={item.value}
+                id={item.id || "item_" + index}
+                checked={
+                  typeof field.value === "boolean"
+                    ? field.value
+                    : field.value && field.value.includes(item.value)
+                }
+              >
+                {item.label}
+              </FormChildElement>
+            ))
+          : null}
+      </FormElement>
+      <InputFooterLabel label={props.footer || ""} />
+    </div>
   );
 };
 

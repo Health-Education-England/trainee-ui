@@ -67,7 +67,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                     {
                       label:
                         "I declare that I accept the professional obligations paced on me in Good Medical Practice in relation to honesty and integrity.",
-                      value: "true"
+                      value: true
                     }
                   ]}
                   footer="If you wish to make any declarations in relation to honesty and integrity, please do this in section 6"
@@ -82,7 +82,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                     {
                       label:
                         "I declare that I accept the professional obligations placed on me in Good Medical Practice about my personal health.",
-                      value: "true"
+                      value: true
                     }
                   ]}
                 />
@@ -91,7 +91,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                   label="Do you have any GMC conditions, warnings or undertakings placed on you by the GMC, employing organisation or other organisations?"
                   id="isWarned"
                   name="isWarned"
-                  type="radio"
+                  type="radios"
                   items={[
                     { label: "Yes", value: "true" },
                     { label: "No", value: "false" }
@@ -100,11 +100,17 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
 
                 {values.isWarned && values.isWarned.toString() === "true" ? (
                   <MultiChoiceInputField
-                    label="If yes, are you complying with these conditions/undertakings?"
+                    label=""
                     id="isComplying"
                     name="isComplying"
                     type="checkbox"
-                    items={[{ label: "Yes", value: true }]}
+                    items={[
+                      {
+                        label:
+                          "If yes, are you complying with these conditions/undertakings?",
+                        value: true
+                      }
+                    ]}
                   />
                 ) : null}
               </Panel>

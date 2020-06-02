@@ -11,7 +11,7 @@ const items: KeyValue[] = [
 
 const getComponent = (
   options: KeyValue[],
-  type: "checkbox" | "radio" = "checkbox",
+  type: "checkbox" | "radios" = "checkbox",
   footer = null,
   hint = null
 ) => (
@@ -38,6 +38,7 @@ describe("MultiChoiceInputField as checkboxes", () => {
         type="checkbox"
         name="multiChoiceInputField"
         label="Select items"
+        items={items}
       />
     );
   });
@@ -91,9 +92,10 @@ describe("MultiChoiceInputField as radios", () => {
   it("renders without crashing", () => {
     shallow(
       <MultiChoiceInputField
-        type="radio"
+        type="radios"
         name="multiChoiceInputField"
         label="Select items"
+        items={items}
       />
     );
   });
@@ -114,26 +116,27 @@ describe("MultiChoiceInputField as radios", () => {
   it("renders without crashing", () => {
     shallow(
       <MultiChoiceInputField
-        type="radio"
+        type="radios"
         name="multiChoiceInputField"
         label="Select items"
+        items={items}
       />
     );
   });
 
   it("should display radios when items passed", () => {
-    const wrapper = mount(getComponent(items, "radio"));
+    const wrapper = mount(getComponent(items, "radios"));
     expect(wrapper.find("input[type='radio']").length).toBe(items.length);
   });
 
   it("should display radio value", () => {
-    const component = mount(getComponent(items, "radio"));
+    const component = mount(getComponent(items, "radios"));
     const wrapper = component.find("input[type='radio']").first();
     expect(wrapper.props().value).toBe(items[0].value);
   });
 
   it("should display radio label", () => {
-    const component = mount(getComponent(items, "radio"));
+    const component = mount(getComponent(items, "radios"));
     const wrapper = component
       .find("input[type='radio']")
       .first()
@@ -145,7 +148,7 @@ describe("MultiChoiceInputField as radios", () => {
   });
 
   it("should render hint when hint property passed", () => {
-    const wrapper = mount(getComponent(items, "radio", null, "Hint label"));
+    const wrapper = mount(getComponent(items, "radios", null, "Hint label"));
     expect(
       wrapper
         .find("span")
@@ -155,7 +158,7 @@ describe("MultiChoiceInputField as radios", () => {
   });
 
   it("should render footer when footer property passed", () => {
-    const wrapper = mount(getComponent(items, "radio", "Footer label"));
+    const wrapper = mount(getComponent(items, "radios", "Footer label"));
 
     expect(
       wrapper
