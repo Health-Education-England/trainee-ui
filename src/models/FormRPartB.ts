@@ -22,7 +22,7 @@ export interface FormRPartB {
   isHonest: boolean | undefined;
   isHealthy: boolean | undefined;
   isWarned: boolean | undefined;
-  isComplying?: boolean | undefined;
+  isComplying: boolean | undefined;
   healthStatement: string;
   submissionDate: Date | null;
   lastModifiedDate: Date | null;

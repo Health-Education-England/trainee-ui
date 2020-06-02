@@ -10,7 +10,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
     email: "email@email.com",
     localOfficeName: "Health Education England Thames Valley",
     prevRevalBody: "Health Education England Midlands",
-    prevRevalDate: new Date("20-04-22"),
+    prevRevalDate: new Date("2020-04-22"),
     currRevalDate: new Date("2020-04-22"),
     programmeSpecialty: "ST3",
     dualSpecialty: "DS",
