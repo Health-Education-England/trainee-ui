@@ -6,6 +6,7 @@ import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { moveToSection } from "../../../redux/actions/formr-partb-actions";
+import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
 
 interface ViewProps {
   formData: FormRPartB | null;
@@ -93,13 +94,13 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Current Revalidation Date</SummaryList.Key>
-                <SummaryList.Value>
+                <SummaryList.Value data-jest="currRevalDate">
                   {DateUtilities.ToLocalDate(formData.currRevalDate || null)}
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Previous Revalidation Date</SummaryList.Key>
-                <SummaryList.Value>
+                <SummaryList.Value data-jest="prevRevalDate">
                   {DateUtilities.ToLocalDate(formData.prevRevalDate || null)}
                 </SummaryList.Value>
               </SummaryList.Row>
@@ -128,7 +129,7 @@ class View extends React.PureComponent<ViewProps> {
           </div>
 
           <Panel label="Type of work">
-            {formData.work
+            {formData.work.length > 0
               ? formData.work.map((w, i) => (
                   <Panel key={i} className={classes.workPanel}>
                     <h3>Type of work {i + 1}</h3>
@@ -143,13 +144,13 @@ class View extends React.PureComponent<ViewProps> {
                       </SummaryList.Row>
                       <SummaryList.Row>
                         <SummaryList.Key>Start Date</SummaryList.Key>
-                        <SummaryList.Value>
+                        <SummaryList.Value data-jest="startDate">
                           {DateUtilities.ToLocalDate(w.startDate || null)}
                         </SummaryList.Value>
                       </SummaryList.Row>
                       <SummaryList.Row>
                         <SummaryList.Key>End Date</SummaryList.Key>
-                        <SummaryList.Value>
+                        <SummaryList.Value data-jest="endDate">
                           {DateUtilities.ToLocalDate(w.endDate || null)}
                         </SummaryList.Value>
                       </SummaryList.Row>
@@ -214,6 +215,64 @@ class View extends React.PureComponent<ViewProps> {
                 <SummaryList.Key>
                   <b>{formData.totalLeave}</b>
                 </SummaryList.Key>
+              </SummaryList.Row>
+            </SummaryList>
+          </Panel>
+
+          <div className="nhsuk-grid-row">
+            <div className="nhsuk-grid-column-two-thirds">
+              <h2>Section 3: Declarations relating to Good Medical Practice</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(3)}
+            </div>
+          </div>
+
+          <Panel label="Declarations">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  I declare that I accept the professional obligations paced on
+                  me in Good Medical Practice in relation to honesty and
+                  integrity
+                </SummaryList.Key>
+                <SummaryList.Value>
+                  {BooleanUtilities.ToYesNo(formData.isHonest)}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  I declare that I accept the professional obligations placed on
+                  me in Good Medical Practice about my personal health
+                </SummaryList.Key>
+                <SummaryList.Value>
+                  {BooleanUtilities.ToYesNo(formData.isHealthy)}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  Do you have any GMC conditions, warnings or undertakings
+                  placed on you by the GMC, employing Trust or other
+                  organisation?
+                </SummaryList.Key>
+                <SummaryList.Value>
+                  {BooleanUtilities.ToYesNo(formData.isWarned)}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  If yes, are you complying with these conditions /
+                  undertakings?
+                </SummaryList.Key>
+                <SummaryList.Value>
+                  {BooleanUtilities.ToYesNo(formData.isComplying)}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>Health Statement</SummaryList.Key>
+                <SummaryList.Value>
+                  {formData.healthStatement}
+                </SummaryList.Value>
               </SummaryList.Row>
             </SummaryList>
           </Panel>

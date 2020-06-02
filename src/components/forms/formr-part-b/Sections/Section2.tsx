@@ -25,7 +25,7 @@ interface Section2Props {
 }
 
 const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
-  const { formData, previousSection, nextSection, history } = props;
+  const { formData, previousSection, nextSection } = props;
   const newWork: Work = {
     typeOfWork: "",
     startDate: undefined,
@@ -51,7 +51,6 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
           nextSection(values);
-          history.push("/formr-b/confirm");
           setSubmitting(false);
         }}
       >
