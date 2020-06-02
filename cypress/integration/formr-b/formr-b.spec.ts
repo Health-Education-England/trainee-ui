@@ -15,7 +15,9 @@ describe("Form R (Part B)", () => {
     cy.contains("Menu").click();
     cy.contains("Form R-b").click();
 
-    cy.contains("Submit").should("be.visible").click();
+    cy.contains("Submit")
+      .should("be.visible")
+      .click();
     cy.get(".nhsuk-warning-callout > p").should("be.visible");
     cy.location("pathname", { timeout: 10000 }).should("include", "/formr-b");
 
@@ -54,8 +56,14 @@ describe("Form R (Part B)", () => {
           .select(selectedItem)
           .should("not.have.value", "--Please select--");
       });
-    cy.get("#currRevalDate").should("be.visible").clear().type(currRevalDate);
-    cy.get("#prevRevalDate").should("be.visible").clear().type(prevRevalDate);
+    cy.get("#currRevalDate")
+      .should("be.visible")
+      .clear()
+      .type(currRevalDate);
+    cy.get("#prevRevalDate")
+      .should("be.visible")
+      .clear()
+      .type(prevRevalDate);
     cy.get("#programmeSpecialty > option")
       .eq(1)
       .then(element => {
@@ -73,7 +81,9 @@ describe("Form R (Part B)", () => {
           .should("not.have.value", "--Please select--");
       });
     cy.get(".nhsuk-pagination__page").should("be.visible");
-    cy.contains("Section 2").should("be.visible").click();
+    cy.contains("Section 2")
+      .should("be.visible")
+      .click();
 
     // check form validation
     cy.get(".nhsuk-error-message").should("be.visible");
@@ -115,8 +125,14 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=BtnAddWorkType]").should("be.visible");
 
     // Total TOOT data
-    cy.get("#sicknessAbsence").should("be.visible").clear().type("10");
-    cy.get("#paidLeave").should("be.visible").clear().type("1");
+    cy.get("#sicknessAbsence")
+      .should("be.visible")
+      .clear()
+      .type("10");
+    cy.get("#paidLeave")
+      .should("be.visible")
+      .clear()
+      .type("1");
     cy.get("#totalLeave").should("have.value", "11");
 
     //Attempt to clcik next to submit form

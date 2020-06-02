@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import TextInputField from "../../TextInputField";
+import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
@@ -56,6 +57,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
       >
         {({ values, errors, handleSubmit }) => (
           <Form>
+            <ScrollTo />
             <Fieldset name="scopeOfPractice">
               <Fieldset.Legend headingLevel="H2" size="l">
                 Section 2: Whole Scope of Practice
@@ -176,7 +178,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
               </Pagination.Link>
 
               <Pagination.Link next onClick={() => handleSubmit()}>
-                Continue to Submit
+                Continue to Section 3
               </Pagination.Link>
             </Pagination>
           </Form>

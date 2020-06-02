@@ -8,7 +8,7 @@ interface Props {
   id?: string;
   placeholder?: string;
   rows?: number;
-  hint?: string;
+  hint?: string | any;
   width?: any;
   footer?: any;
   type?: string;

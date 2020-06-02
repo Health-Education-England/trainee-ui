@@ -13,6 +13,7 @@ import { TraineeReferenceService } from "../../../services/TraineeReferenceServi
 import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
 import Section2 from "./Sections/Section2";
+import Section3 from "./Sections/Section3";
 import { FormRPartB } from "../../../models/FormRPartB";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
@@ -90,9 +91,18 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
             <Section2
               formData={formData}
               previousSection={this.previousSection}
-              nextSection={this.submitForm}
+              nextSection={this.nextSection}
               history={this.props.history}
             ></Section2>
+          );
+        case 3:
+          return (
+            <Section3
+              previousSection={this.previousSection}
+              nextSection={this.submitForm}
+              formData={formData}
+              history={this.props.history}
+            ></Section3>
           );
 
         default:

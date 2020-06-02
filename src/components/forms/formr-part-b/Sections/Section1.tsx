@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
+import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   ErrorSummary,
@@ -33,6 +34,7 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
     >
       {({ values, errors, handleSubmit }) => (
         <Form>
+          <ScrollTo />
           <Fieldset name="doctorsDetails">
             <Fieldset.Legend headingLevel="H2" size="l">
               Section 1: Doctor's details

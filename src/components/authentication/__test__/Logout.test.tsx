@@ -23,6 +23,9 @@ describe("Logout", () => {
       </Authenticator>
     );
 
-    wrapper.find("button").first().simulate("click");
+    wrapper
+      .find("button")
+      .first()
+      .simulate("click");
   });
 });
