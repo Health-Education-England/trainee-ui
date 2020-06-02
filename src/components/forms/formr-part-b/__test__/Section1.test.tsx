@@ -23,9 +23,6 @@ describe("Form-R Part-B Section1", () => {
     const wrapper = mount(<Section1 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
-    wrapper
-      .find("a.nhsuk-pagination__link--next")
-      .first()
-      .simulate("click");
+    wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 });

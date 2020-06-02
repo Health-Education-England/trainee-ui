@@ -68,23 +68,13 @@ describe("MultiChoiceInputField as checkboxes", () => {
 
   it("should render hint when hint property passed", () => {
     const wrapper = mount(getComponent(items, "checkbox", null, "Hint label"));
-    expect(
-      wrapper
-        .find("span")
-        .last()
-        .text()
-    ).toBe("Hint label");
+    expect(wrapper.find("span").last().text()).toBe("Hint label");
   });
 
   it("should render footer when footer property passed", () => {
     const wrapper = mount(getComponent(items, "checkbox", "Footer label"));
 
-    expect(
-      wrapper
-        .find("div")
-        .last()
-        .text()
-    ).toBe("Footer label");
+    expect(wrapper.find("div").last().text()).toBe("Footer label");
   });
 });
 
@@ -103,12 +93,7 @@ describe("MultiChoiceInputField as radios", () => {
   it("should render footer when footer property passed", () => {
     const wrapper = mount(getComponent(items, "radio", "Footer label"));
 
-    expect(
-      wrapper
-        .find("div")
-        .last()
-        .text()
-    ).toBe("Footer label");
+    expect(wrapper.find("div").last().text()).toBe("Footer label");
   });
 });
 
@@ -149,22 +134,12 @@ describe("MultiChoiceInputField as radios", () => {
 
   it("should render hint when hint property passed", () => {
     const wrapper = mount(getComponent(items, "radios", null, "Hint label"));
-    expect(
-      wrapper
-        .find("span")
-        .last()
-        .text()
-    ).toBe("Hint label");
+    expect(wrapper.find("span").last().text()).toBe("Hint label");
   });
 
   it("should render footer when footer property passed", () => {
     const wrapper = mount(getComponent(items, "radios", "Footer label"));
 
-    expect(
-      wrapper
-        .find("div")
-        .last()
-        .text()
-    ).toBe("Footer label");
+    expect(wrapper.find("div").last().text()).toBe("Footer label");
   });
 });

@@ -65,10 +65,7 @@ describe("Form-R Part-B Section3", () => {
     const wrapper = mount(<Section3 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
-    wrapper
-      .find("a.nhsuk-pagination__link--prev")
-      .first()
-      .simulate("click");
+    wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
@@ -76,9 +73,6 @@ describe("Form-R Part-B Section3", () => {
     const wrapper = mount(<Section3 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
-    wrapper
-      .find("a.nhsuk-pagination__link--next")
-      .first()
-      .simulate("click");
+    wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 });
