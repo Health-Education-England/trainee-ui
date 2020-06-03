@@ -57,7 +57,7 @@ export function ProfileToFormRPartBInitialValues(
     totalLeave: 0,
     isHonest: undefined,
     isHealthy: undefined,
-    isWarned: undefined,
+    isWarned: "",
     isComplying: undefined,
     healthStatement: "",
     submissionDate: null,

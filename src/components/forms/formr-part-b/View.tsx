@@ -259,15 +259,18 @@ class View extends React.PureComponent<ViewProps> {
                   {BooleanUtilities.ToYesNo(formData.isWarned)}
                 </SummaryList.Value>
               </SummaryList.Row>
-              <SummaryList.Row>
-                <SummaryList.Key>
-                  If yes, are you complying with these conditions /
-                  undertakings?
-                </SummaryList.Key>
-                <SummaryList.Value>
-                  {BooleanUtilities.ToYesNo(formData.isComplying)}
-                </SummaryList.Value>
-              </SummaryList.Row>
+              {BooleanUtilities.ToBoolean(formData.isWarned) ? (
+                <SummaryList.Row>
+                  <SummaryList.Key>
+                    If yes, are you complying with these conditions /
+                    undertakings?
+                  </SummaryList.Key>
+                  <SummaryList.Value>
+                    {BooleanUtilities.ToYesNo(formData.isComplying)}
+                  </SummaryList.Value>
+                </SummaryList.Row>
+              ) : null}
+
               <SummaryList.Row>
                 <SummaryList.Key>Health Statement</SummaryList.Key>
                 <SummaryList.Value>

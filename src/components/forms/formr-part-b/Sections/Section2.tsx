@@ -48,10 +48,8 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
       <Formik
         initialValues={formData}
         validationSchema={Section2ValidationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
+        onSubmit={values => {
           nextSection(values);
-          setSubmitting(false);
         }}
       >
         {({ values, errors, handleSubmit }) => (
