@@ -14,7 +14,7 @@ interface Props {
 }
 
 const MultiChoiceInputField: React.FC<Props> = props => {
-  const [field, { error }] = useField(props);
+  const [field, { error }, helpers] = useField(props);
   const FormElement = props.type === "radios" ? Radios : Checkboxes;
   const FormChildElement =
     props.type === "radios" ? Radios.Radio : Checkboxes.Box;
@@ -44,6 +44,9 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                     ? field.value
                     : field.value && field.value.includes(item.value)
                 }
+                onChange={() => {
+                  helpers.setValue(item.value);
+                }}
               >
                 {item.label}
               </FormChildElement>
