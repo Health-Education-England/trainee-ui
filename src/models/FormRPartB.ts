@@ -21,7 +21,7 @@ export interface FormRPartB {
   totalLeave: number;
   isHonest: boolean | undefined;
   isHealthy: boolean | undefined;
-  isWarned: boolean | undefined;
+  isWarned: boolean | string;
   isComplying: boolean | undefined;
   healthStatement: string;
   submissionDate: Date | null;
