@@ -84,14 +84,17 @@ export const Section2ValidationSchema = yup.object({
   totalLeave: leaveValidation("Total")
 });
 
+const acceptanceValidation = yup
+  .bool()
+  .oneOf([true], "You must confirm your acceptance")
+  .required("You must confirm your acceptance");
+
 export const Section3ValidationSchema = yup.object({
-  isHonest: yup
-    .bool()
-    .oneOf([true], "You must confirm your acceptance.")
-    .required("You must confirm your acceptance"),
-  isHealthy: yup
-    .bool()
-    .oneOf([true], "You must confirm your acceptance.")
-    .required("You must confirm your acceptance"),
-  isWarned: yup.boolean().required("You must select yes or no.")
+  isHonest: acceptanceValidation,
+  isHealthy: acceptanceValidation,
+  isWarned: yup.boolean().required("You must select yes or no"),
+  isComplying: yup.boolean().when("isWarned", {
+    is: true,
+    then: acceptanceValidation
+  })
 });

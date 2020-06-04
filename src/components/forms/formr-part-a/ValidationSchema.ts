@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { StringValidationSchema } from "../StringValidationSchema";
+import { CCT_DECLARATION } from "./Constants";
 
 const phoneRegex = /^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/g;
 const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
@@ -64,6 +65,10 @@ export const ValidationSchema = yup.object({
     .required("You need to choose at least one Declaration")
     .nullable(),
   programmeSpecialty: StringValidationSchema("Programme specialty"),
+  cctSpecialty1: yup.string().when("declarationType", {
+    is: CCT_DECLARATION,
+    then: StringValidationSchema("Specialty 1 for Award of CCT")
+  }),
   college: StringValidationSchema("Royal College / Faculty Assessing Training"),
   completionDate: dateValidationSchema("Anticipated completion date")
     .test(
