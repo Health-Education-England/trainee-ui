@@ -38,7 +38,11 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
         {({ values, errors, handleSubmit }) => (
           <Form>
             <ScrollTo />
-            <Fieldset data-jest="mainFieldset" name="declarationsOfGMP">
+            <Fieldset
+              data-jest="mainFieldset"
+              disableErrorLine={true}
+              name="declarationsOfGMP"
+            >
               <Fieldset.Legend headingLevel="H2" size="l">
                 Section 3: Declarations relating to Good Medical Practice
               </Fieldset.Legend>

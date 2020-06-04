@@ -35,7 +35,7 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
       {({ values, errors, handleSubmit }) => (
         <Form>
           <ScrollTo />
-          <Fieldset name="doctorsDetails">
+          <Fieldset disableErrorLine={true} name="doctorsDetails">
             <Fieldset.Legend headingLevel="H2" size="l">
               Section 1: Doctor's details
             </Fieldset.Legend>
