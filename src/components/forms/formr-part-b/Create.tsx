@@ -3,8 +3,8 @@ import { RootState } from "../../../redux/reducers";
 import { GenericOwnProps } from "../../../redux/types";
 import { connect, ConnectedProps } from "react-redux";
 import {
-  loadFormRPartBInitialValues,
-  loadFormRPartB,
+  initializeForm,
+  loadForm,
   moveToSection
 } from "../../../redux/actions/formr-partb-actions";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
@@ -17,19 +17,19 @@ import Section3 from "./Sections/Section3";
 import { FormRPartB } from "../../../models/FormRPartB";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
-  formData: state.newFormRPartB.formData,
+  formData: state.formRPartB.formData,
   localOffices: state.referenceData.localOffices,
   curricula: state.referenceData.curricula,
   isLoaded: state.referenceData.isLoaded,
-  section: state.newFormRPartB.section,
+  section: state.formRPartB.section,
   history: ownProps.history,
   location: ownProps.location
 });
 
 const mapDispatchProps = {
-  loadFormRPartBInitialValues,
+  initializeForm,
   loadReferenceData,
-  loadFormRPartB,
+  loadForm,
   moveToSection
 };
 
@@ -37,20 +37,34 @@ const connector = connect(mapStateToProps, mapDispatchProps);
 
 class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
-    this.props.loadFormRPartBInitialValues(new TraineeProfileService());
-    this.props.loadReferenceData(new TraineeReferenceService());
+    const {
+      formData,
+      isLoaded,
+      initializeForm,
+      loadReferenceData
+    } = this.props;
+
+    if (!formData) {
+      initializeForm(new TraineeProfileService());
+    }
+
+    if (!isLoaded) {
+      loadReferenceData(new TraineeReferenceService());
+    }
   }
 
   nextSection = (formData: FormRPartB) => {
-    this.props.moveToSection(formData, this.props.section + 1);
+    this.props.loadForm(formData);
+    this.props.moveToSection(this.props.section + 1);
   };
 
   previousSection = (formData: FormRPartB) => {
-    this.props.moveToSection(formData, this.props.section - 1);
+    this.props.loadForm(formData);
+    this.props.moveToSection(this.props.section - 1);
   };
 
   submitForm = (formData: FormRPartB) => {
-    this.props.loadFormRPartB(formData);
+    this.props.loadForm(formData);
   };
 
   render() {

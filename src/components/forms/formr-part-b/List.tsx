@@ -1,5 +1,7 @@
 import { CreateList } from "../CreateList";
-import { loadFormRPartBList } from "../../../redux/actions/formr-partb-actions";
-import { loadFormRPartB } from "../../../redux/actions/formr-partb-actions";
+import {
+  loadFormRPartBList,
+  loadForm
+} from "../../../redux/actions/formr-partb-actions";
 
-export default CreateList(loadFormRPartBList, loadFormRPartB, "formr-b");
+export default CreateList(loadFormRPartBList, loadForm, "formr-b");

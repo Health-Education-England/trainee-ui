@@ -1,53 +1,26 @@
+import { ActionType, FormRPartBListState, FormRPartBState } from "../types";
 import {
-  ActionType,
-  FormRPartBListState,
-  FormRPartBViewState,
-  NewFormRPartBState
-} from "../types";
-import {
-  LOAD_FORMR_PARTB_SUCCESS,
-  LOAD_FORMR_PARTB_FAILURE,
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-  FORMR_PARTB_MOVE_TO_SECTION
+  INITIALIZE_FORMR_PARTB_FAILURE,
+  INITIALIZE_FORMR_PARTB_SUCCESS,
+  MOVE_TO_SECTION,
+  EDIT_FORMR_PARTB,
+  LOAD_FORMR_PARTB,
+  SAVE_FORMR_PARTB_SUCCESS,
+  SAVE_FORMR_PARTB_FAILURE
 } from "../action_types";
-
-const formRPartAViewState: FormRPartBViewState = {
-  formData: null
-};
 
 const formRPartAListState: FormRPartBListState = {
   submittedForms: []
 };
 
-const newFormRPartBState: NewFormRPartBState = {
+const initialState: FormRPartBState = {
   formData: null,
   section: 1
 };
 
-export function LoadFormRPartBReducer(
-  state = formRPartAViewState,
-  action: ActionType
-): FormRPartBViewState {
-  switch (action.type) {
-    case LOAD_FORMR_PARTB_SUCCESS:
-      return {
-        ...state,
-        formData: action.payload
-      };
-    case LOAD_FORMR_PARTB_FAILURE:
-      return {
-        ...state,
-        formData: null
-      };
-    default:
-      return state;
-  }
-}
-
-export function LoadFormRPartBListReducer(
+export function FormRPartBListReducer(
   state = formRPartAListState,
   action: ActionType
 ): FormRPartBListState {
@@ -67,29 +40,47 @@ export function LoadFormRPartBListReducer(
   }
 }
 
-export function LoadNewFormRPartBReducer(
-  state = newFormRPartBState,
+export function FormRPartBReducer(
+  state = { ...initialState },
   action: ActionType
-): NewFormRPartBState {
+): FormRPartBState {
   switch (action.type) {
-    case LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS:
+    case INITIALIZE_FORMR_PARTB_SUCCESS:
       return {
         ...state,
         formData: action.payload,
         section: 1
       };
-    case LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE:
+    case INITIALIZE_FORMR_PARTB_FAILURE:
       return {
         ...state,
-        formData: null
+        formData: null,
+        section: 1
       };
-    case FORMR_PARTB_MOVE_TO_SECTION:
+    case LOAD_FORMR_PARTB:
       return {
         ...state,
-        formData: action.payload.formData,
-        section: action.payload.section
+        formData: action.payload
+      };
+    case MOVE_TO_SECTION:
+      return {
+        ...state,
+        section: action.payload
+      };
+    case SAVE_FORMR_PARTB_SUCCESS:
+      return {
+        ...state,
+        formData: action.payload,
+        section: 1
+      };
+    case EDIT_FORMR_PARTB:
+    case SAVE_FORMR_PARTB_FAILURE:
+      return {
+        ...state
       };
     default:
-      return state;
+      return {
+        ...state
+      };
   }
 }

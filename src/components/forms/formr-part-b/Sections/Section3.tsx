@@ -28,11 +28,9 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
       <Formik
         initialValues={formData}
         validationSchema={Section3ValidationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
+        onSubmit={values => {
           nextSection(values);
           history.push("/formr-b/confirm");
-          setSubmitting(false);
         }}
       >
         {({ values, errors, handleSubmit }) => (

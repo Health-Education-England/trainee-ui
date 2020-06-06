@@ -18,7 +18,7 @@ export const CreateConfirm = (
     formData:
       rootPath === "formr-a"
         ? state.formRPartAView.formData
-        : state.formRPartBView.formData
+        : state.formRPartB.formData
   });
 
   class Confirm extends React.PureComponent<ConfirmProps> {
