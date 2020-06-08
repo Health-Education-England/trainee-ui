@@ -32,15 +32,19 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
         nextSection(values);
       }}
     >
-      {({ values, errors, handleSubmit }) => (
+      {({ errors, handleSubmit }) => (
         <Form>
           <ScrollTo />
           <Fieldset disableErrorLine={true} name="doctorsDetails">
-            <Fieldset.Legend headingLevel="H2" size="l">
+            <Fieldset.Legend
+              headingLevel="H2"
+              size="l"
+              data-cy="legendFieldset1"
+            >
               Section 1: Doctor's details
             </Fieldset.Legend>
 
-            <WarningCallout label="Important">
+            <WarningCallout label="Important" data-cy="mainWarning1">
               <p>
                 This form has been pre-populated using the information available
                 against your records within the Trainee Information System

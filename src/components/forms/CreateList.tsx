@@ -69,10 +69,13 @@ export const CreateList = (
                 </Table.Row>
               </Table.Head>
               <Table.Body>
-                {submittedForms.map((formData: any) => (
+                {submittedForms.map((formData: any, index: number) => (
                   <Table.Row key={formData.id} className={styles.listTableRow}>
                     <td>
-                      <ActionLink onClick={() => this.handleRowClick(formData)}>
+                      <ActionLink
+                        onClick={() => this.handleRowClick(formData)}
+                        data-cy={`submittedForm${index}`}
+                      >
                         form submitted on{" "}
                         {DateUtilities.ToLocalDate(formData.submissionDate)}
                       </ActionLink>

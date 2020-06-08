@@ -56,10 +56,14 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
           <Form>
             <ScrollTo />
             <Fieldset disableErrorLine={true} name="scopeOfPractice">
-              <Fieldset.Legend headingLevel="H2" size="l">
+              <Fieldset.Legend
+                headingLevel="H2"
+                size="l"
+                data-cy="legendFieldset2"
+              >
                 Section 2: Whole Scope of Practice
               </Fieldset.Legend>
-              <WarningCallout label="Important">
+              <WarningCallout label="Important" data-cy="mainWarning2">
                 <p>
                   Read these instructions carefully! Please list all placements
                   in your capacity as a registered medical practitioner since

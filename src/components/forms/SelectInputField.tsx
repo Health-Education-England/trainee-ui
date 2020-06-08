@@ -34,6 +34,7 @@ const SelectInputField: React.FC<Props> = props => {
           onChange={field.onChange}
           hint={props.hint}
           value={field.value || ""}
+          data-cy={props.name}
         >
           <Select.Option value="">-- Please select --</Select.Option>
           {props.options

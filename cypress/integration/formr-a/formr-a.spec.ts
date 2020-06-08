@@ -104,7 +104,7 @@ describe("Form R (Part A)", () => {
     //-- Declarations section --
     cy.get("#cctSpecialty1").should("not.be.visible");
     cy.get("#cctSpecialty2").should("not.be.visible");
-    cy.get('div[data-cy="radio-0"] > [data-cy=radio-0]').click();
+    cy.get("[data-cy=radio-0]").click();
     cy.get("#cctSpecialty1").should("be.visible");
     cy.get("#cctSpecialty2").should("be.visible");
 

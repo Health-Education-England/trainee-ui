@@ -23,6 +23,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
               reverse
               type="button"
               data-jest="removePanel"
+              data-cy={`closeIcon${index}`}
               onClick={() => removePlacement(index)}
               className={classes.panelCloseButton}
               title="Delete"
@@ -46,7 +47,6 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-third">
           <SelectInputField
-            data-cy={`postSelect${index}`}
             label="Training Post"
             name={`work[${index}].trainingPost`}
             options={[
