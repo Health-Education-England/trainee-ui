@@ -48,7 +48,6 @@ describe("Form R (Part B)", () => {
       .should("not.be.empty");
     // intentionally left email blank
     cy.get("#email").should("be.visible");
-    cy.wait(1000);
     cy.get("#localOfficeName > option")
       .eq(1)
       .then(element => {
