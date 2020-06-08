@@ -9,7 +9,7 @@ const Navbar = (_: {}) => {
       <Header.Container>
         <Header.Logo />
         <Header.Content>
-          <Header.MenuToggle />
+          <Header.MenuToggle data-cy="BtnMenu" />
           <Header.Search></Header.Search>
         </Header.Content>
       </Header.Container>

@@ -20,7 +20,8 @@ const prevRevalDate = Cypress.moment(currentDate)
 
 describe("Form R (Part B)", () => {
   it("Should complete a new Form R Part B.", () => {
-    cy.contains("Menu").click();
+    cy.viewport("iphone-6");
+    cy.get("[data-cy=BtnMenu]").should("be.visible").click();
     cy.contains("Form R-b").click();
 
     cy.contains("Submit").should("be.visible").click();

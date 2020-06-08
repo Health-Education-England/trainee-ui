@@ -16,7 +16,8 @@ const startDate = Cypress.moment(todaysDate)
 
 describe("Form R (Part A)", () => {
   it("Should complete a new Form R Part A.", () => {
-    cy.contains("Menu").click();
+    cy.viewport("iphone-6");
+    cy.get("[data-cy=BtnMenu]").should("be.visible").click();
     cy.contains("Form R-a").click();
 
     cy.contains("Submit").should("be.visible").click();
