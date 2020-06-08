@@ -55,10 +55,10 @@ export function ProfileToFormRPartBInitialValues(
     unauthorisedLeave: 0,
     otherLeave: 0,
     totalLeave: 0,
-    isHonest: undefined,
-    isHealthy: undefined,
+    isHonest: "",
+    isHealthy: "",
     isWarned: "",
-    isComplying: undefined,
+    isComplying: "",
     healthStatement: "",
     submissionDate: null,
     lastModifiedDate: null
