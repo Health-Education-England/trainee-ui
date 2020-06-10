@@ -7,8 +7,7 @@ import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-part
 import { Provider } from "react-redux";
 import { FormRPartB } from "../../../../models/FormRPartB";
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+const mockStore = configureMockStore([thunk]);
 
 const mountComponent = (
   form: FormRPartB | null,
@@ -16,14 +15,14 @@ const mountComponent = (
   canEdit: boolean
 ) => {
   const store = mockStore({
-    formRPartBView: {
+    formRPartB: {
       formData: form
     }
   });
 
   return mount(
     <Provider store={store}>
-      <View canEdit={canEdit} history={history} />
+      <View canEdit={canEdit} history={history} editSection={() => jest.fn} />
     </Provider>
   );
 };

@@ -6,27 +6,22 @@ import { connect } from "react-redux";
 import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
-import { moveToSection } from "../../../redux/actions/formr-partb-actions";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
 
 interface ViewProps {
   formData: FormRPartB | null;
-  moveToSection: (formData: FormRPartB, section?: number) => any;
+  editSection: (section: number) => any;
   canEdit: boolean;
   history: any;
 }
 
 const mapStateToProps = (state: RootState) => ({
-  formData: state.formRPartBView.formData
+  formData: state.formRPartB.formData
 });
-
-const mapDispatchToProps = {
-  moveToSection
-};
 
 class View extends React.PureComponent<ViewProps> {
   render() {
-    const { formData, history, moveToSection, canEdit } = this.props;
+    const { formData, history, editSection, canEdit } = this.props;
 
     if (!formData) {
       history.push("/formr-b");
@@ -38,10 +33,7 @@ class View extends React.PureComponent<ViewProps> {
         <Button
           type="button"
           className={classes.sectionEditButton}
-          onClick={() => {
-            moveToSection(formData, section);
-            history.push("/formr-b/create");
-          }}
+          onClick={() => editSection(section)}
           data-cy={`BtnEditSection${section}`}
         >
           Edit
@@ -299,4 +291,4 @@ class View extends React.PureComponent<ViewProps> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(View);
+export default connect(mapStateToProps)(View);

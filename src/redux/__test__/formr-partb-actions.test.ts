@@ -1,20 +1,24 @@
 import {
-  LOAD_FORMR_PARTB_SUCCESS,
-  LOAD_FORMR_PARTB_FAILURE,
+  LOAD_FORMR_PARTB,
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-  FORMR_PARTB_MOVE_TO_SECTION
+  INITIALIZE_FORMR_PARTB_FAILURE,
+  INITIALIZE_FORMR_PARTB_SUCCESS,
+  MOVE_TO_SECTION,
+  EDIT_FORMR_PARTB,
+  SAVE_FORMR_PARTB_SUCCESS,
+  SAVE_FORMR_PARTB_FAILURE
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import { submittedFormRPartBs } from "../../mock-data/submitted-formr-partb";
 import {
-  loadFormRPartB,
+  loadForm,
   loadFormRPartBList,
-  loadFormRPartBInitialValues,
-  moveToSection
+  initializeForm,
+  moveToSection,
+  editForm,
+  saveForm
 } from "../actions/formr-partb-actions";
 import { FormRPartB } from "../../models/FormRPartB";
 import { AxiosResponse } from "axios";
@@ -31,7 +35,9 @@ const traineeProfileService = new TraineeProfileService();
 let store = null;
 
 beforeEach(() => {
-  store = mockStore({});
+  store = mockStore({
+    formrPartb: { formData: null, section: 1 }
+  });
 });
 
 describe("loadFormRPartBList method", () => {
@@ -90,33 +96,8 @@ describe("loadFormRPartBList method", () => {
   });
 });
 
-describe("loadFormRPartB method", () => {
-  it("should dispatch LOAD_FORMR_PARTB_SUCCESS if data is not null", () => {
-    const formrPartb = submittedFormRPartBs[0];
-    const expectedActions = {
-      type: LOAD_FORMR_PARTB_SUCCESS,
-      payload: formrPartb
-    };
-
-    return expect(store.dispatch(loadFormRPartB(formrPartb))).toEqual(
-      expectedActions
-    );
-  });
-
-  it("should dispatch LOAD_FORMR_PARTB_FAILURE if data is null", () => {
-    const expectedActions = {
-      type: LOAD_FORMR_PARTB_FAILURE,
-      payload: null
-    };
-
-    return expect(store.dispatch(loadFormRPartB(null))).toEqual(
-      expectedActions
-    );
-  });
-});
-
-describe("loadFormRPartBInitialValues method", () => {
-  it("should dispatch LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS if trainee profile is received", () => {
+describe("initializeForm method", () => {
+  it("should dispatch INITIALIZE_FORMR_PARTB_SUCCESS if trainee profile is received", () => {
     const successResponse: Promise<AxiosResponse<
       TraineeProfile
     >> = Promise.resolve({
@@ -132,18 +113,16 @@ describe("loadFormRPartBInitialValues method", () => {
       .mockReturnValue(successResponse);
 
     const expectedAction = {
-      type: LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
+      type: INITIALIZE_FORMR_PARTB_SUCCESS,
       payload: ProfileToFormRPartBInitialValues(mockTraineeProfile)
     };
 
-    return store
-      .dispatch(loadFormRPartBInitialValues(traineeProfileService))
-      .then(() => {
-        expect(store.getActions()).toContainEqual(expectedAction);
-      });
+    return store.dispatch(initializeForm(traineeProfileService)).then(() => {
+      expect(store.getActions()).toContainEqual(expectedAction);
+    });
   });
 
-  it("should dispatch LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE if trainee profile call fails", () => {
+  it("should dispatch INITIALIZE_FORMR_PARTB_FAILURE if trainee profile call fails", () => {
     const errorResponse = {
       data: null,
       status: 500,
@@ -157,41 +136,109 @@ describe("loadFormRPartBInitialValues method", () => {
       .mockReturnValue(Promise.reject(errorResponse));
 
     const expectedAction = {
-      type: LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
+      type: INITIALIZE_FORMR_PARTB_FAILURE,
       payload: errorResponse
     };
 
-    return store
-      .dispatch(loadFormRPartBInitialValues(traineeProfileService))
-      .then(() => {
-        expect(store.getActions()).toContainEqual(expectedAction);
-      });
+    return store.dispatch(initializeForm(traineeProfileService)).then(() => {
+      expect(store.getActions()).toContainEqual(expectedAction);
+    });
+  });
+});
+
+describe("loadForm method", () => {
+  it("should dispatch LOAD_FORMR_PARTB if data is not null", () => {
+    const formrPartb = submittedFormRPartBs[0];
+    const expectedActions = {
+      type: LOAD_FORMR_PARTB,
+      payload: formrPartb
+    };
+
+    return expect(store.dispatch(loadForm(formrPartb))).toEqual(
+      expectedActions
+    );
   });
 });
 
 describe("moveToSection method", () => {
-  it("should dispatch FORMR_PARTB_MOVE_TO_SECTION with section 1 when no section passed", () => {
-    const formData = submittedFormRPartBs[0];
+  it("should dispatch FORMR_PARTB_MOVE_TO_SECTION with section passed", () => {
+    const sectionNumber = 3;
     const expectedActions = {
-      type: FORMR_PARTB_MOVE_TO_SECTION,
-      payload: { formData, section: 1 }
+      type: MOVE_TO_SECTION,
+      payload: 3
     };
 
-    return expect(store.dispatch(moveToSection(formData))).toEqual(
+    return expect(store.dispatch(moveToSection(sectionNumber))).toEqual(
       expectedActions
     );
   });
+});
 
-  it("should dispatch FORMR_PARTB_MOVE_TO_SECTION with section passed", () => {
+describe("editForm", () => {
+  it("should dispatch EDIT_FORMR_PARTB with section and formData passed", () => {
+    const formrPartb = submittedFormRPartBs[0];
     const sectionNumber = 3;
-    const formData = submittedFormRPartBs[0];
     const expectedActions = {
-      type: FORMR_PARTB_MOVE_TO_SECTION,
-      payload: { formData, section: sectionNumber }
+      type: EDIT_FORMR_PARTB,
+      payload: { formData: formrPartb, section: sectionNumber }
     };
 
-    return expect(
-      store.dispatch(moveToSection(formData, sectionNumber))
-    ).toEqual(expectedActions);
+    return expect(store.dispatch(editForm(formrPartb, sectionNumber))).toEqual(
+      expectedActions
+    );
+  });
+});
+
+describe("saveForm", () => {
+  it("should dispatch SAVE_FORMR_PARTB_SUCCESS when form is posted successfully", () => {
+    const formrPartb = submittedFormRPartBs[0];
+
+    const successResponse: Promise<AxiosResponse<FormRPartB>> = Promise.resolve(
+      {
+        data: formrPartb,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      }
+    );
+
+    jest
+      .spyOn(formsService, "saveTraineeFormRPartB")
+      .mockReturnValue(successResponse);
+
+    const expectedAction = {
+      type: SAVE_FORMR_PARTB_SUCCESS,
+      payload: formrPartb
+    };
+
+    return store.dispatch(saveForm(formsService, formrPartb)).then(() => {
+      expect(store.getActions()).toContainEqual(expectedAction);
+    });
+  });
+
+  it("should dispatch SAVE_FORMR_PARTB_FAILURE when form couddn't posted", () => {
+    const errorResponse = {
+      data: null,
+      status: 500,
+      statusText: "Internal server error",
+      headers: {},
+      config: {}
+    };
+
+    jest
+      .spyOn(formsService, "saveTraineeFormRPartB")
+      .mockReturnValue(Promise.reject(errorResponse));
+
+    const expectedAction = {
+      type: SAVE_FORMR_PARTB_FAILURE,
+      payload: errorResponse
+    };
+
+    return store
+      .dispatch(saveForm(formsService, submittedFormRPartBs[0]))
+      .then(() => {
+        expect(store.getActions()).toContainEqual(expectedAction);
+      });
   });
 });

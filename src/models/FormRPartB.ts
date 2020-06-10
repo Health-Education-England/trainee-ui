@@ -19,10 +19,10 @@ export interface FormRPartB {
   unauthorisedLeave: number;
   otherLeave: number;
   totalLeave: number;
-  isHonest: boolean | undefined;
-  isHealthy: boolean | undefined;
+  isHonest: boolean | string;
+  isHealthy: boolean | string;
   isWarned: boolean | string;
-  isComplying: boolean | undefined;
+  isComplying: boolean | string;
   healthStatement: string;
   submissionDate: Date | null;
   lastModifiedDate: Date | null;

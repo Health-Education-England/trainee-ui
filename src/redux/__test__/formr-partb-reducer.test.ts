@@ -1,22 +1,18 @@
+import { ActionType, FormRPartBState, FormRPartBListState } from "../types";
 import {
-  ActionType,
-  FormRPartBViewState,
-  FormRPartBListState,
-  NewFormRPartBState
-} from "../types";
-import {
-  LOAD_FORMR_PARTB_SUCCESS,
-  LOAD_FORMR_PARTB_FAILURE,
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
-  LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
-  FORMR_PARTB_MOVE_TO_SECTION
+  INITIALIZE_FORMR_PARTB_FAILURE,
+  INITIALIZE_FORMR_PARTB_SUCCESS,
+  MOVE_TO_SECTION,
+  EDIT_FORMR_PARTB,
+  SAVE_FORMR_PARTB_SUCCESS,
+  SAVE_FORMR_PARTB_FAILURE,
+  LOAD_FORMR_PARTB
 } from "../action_types";
 import {
-  LoadFormRPartBReducer,
-  LoadFormRPartBListReducer,
-  LoadNewFormRPartBReducer
+  FormRPartBListReducer,
+  FormRPartBReducer
 } from "../reducers/formr-partb-reducer";
 import { FormRPartB } from "../../models/FormRPartB";
 
@@ -49,55 +45,16 @@ const formrPartB: FormRPartB = {
   unauthorisedLeave: 0,
   otherLeave: 0,
   totalLeave: 0,
+  isHonest: true,
+  isHealthy: true,
+  isWarned: true,
+  isComplying: true,
+  healthStatement: "I feel great etc.",
   submissionDate: null,
   lastModifiedDate: null
 };
 
-describe("LoadFormRPartBReducer", () => {
-  const initialState: FormRPartBViewState = {
-    formData: null
-  };
-
-  it("should return initial state when no action passed", () => {
-    const defaultAction: ActionType = {
-      type: "",
-      payload: null
-    };
-
-    expect(LoadFormRPartBReducer(undefined, defaultAction)).toEqual(
-      initialState
-    );
-  });
-
-  it("should return updated state when LOAD_FORMR_PARTB_SUCCESS action passed", () => {
-    const state: FormRPartBViewState = {
-      ...initialState,
-      formData: null
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_FORMR_PARTB_SUCCESS,
-      payload: null
-    };
-
-    expect(LoadFormRPartBReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_FORMR_PARTB_FAILURE action passed", () => {
-    const state: FormRPartBViewState = {
-      ...initialState
-    };
-
-    const failureAction: ActionType = {
-      type: LOAD_FORMR_PARTB_FAILURE,
-      payload: null
-    };
-
-    expect(LoadFormRPartBReducer(initialState, failureAction)).toEqual(state);
-  });
-});
-
-describe("LoadFormRPartBListReducer", () => {
+describe("FormRPartBListReducer", () => {
   const initialState: FormRPartBListState = {
     submittedForms: []
   };
@@ -108,7 +65,7 @@ describe("LoadFormRPartBListReducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartBListReducer(undefined, defaultAction)).toEqual(
+    expect(FormRPartBListReducer(undefined, defaultAction)).toEqual(
       initialState
     );
   });
@@ -124,9 +81,7 @@ describe("LoadFormRPartBListReducer", () => {
       payload: [formrPartB]
     };
 
-    expect(LoadFormRPartBListReducer(initialState, successAction)).toEqual(
-      state
-    );
+    expect(FormRPartBListReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_FORMR_PARTB_LIST_FAILURE action passed", () => {
@@ -139,17 +94,19 @@ describe("LoadFormRPartBListReducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartBListReducer(initialState, failureAction)).toEqual(
-      state
-    );
+    expect(FormRPartBListReducer(initialState, failureAction)).toEqual(state);
   });
 });
 
-describe("LoadNewFormRPartBReducer", () => {
-  let initialState: NewFormRPartBState = {
-    formData: null,
-    section: 1
-  };
+describe("FormRPartBReducer", () => {
+  let initialState: FormRPartBState;
+
+  beforeEach(() => {
+    initialState = {
+      formData: null,
+      section: 1
+    };
+  });
 
   it("should return initial state when no action passed", () => {
     const defaultAction: ActionType = {
@@ -157,53 +114,103 @@ describe("LoadNewFormRPartBReducer", () => {
       payload: null
     };
 
-    expect(LoadNewFormRPartBReducer(undefined, defaultAction)).toEqual(
-      initialState
-    );
+    expect(FormRPartBReducer(undefined, defaultAction)).toEqual(initialState);
   });
 
-  it("should return updated state when LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS action passed", () => {
-    const state: NewFormRPartBState = {
+  it("should return updated state when LOAD_FORMR_PARTB action passed", () => {
+    const state: FormRPartBState = {
       ...initialState,
       formData: formrPartB,
       section: 1
     };
 
     const successAction: ActionType = {
-      type: LOAD_FORMR_PARTB_INITIAL_VALUES_SUCCESS,
+      type: LOAD_FORMR_PARTB,
       payload: formrPartB
     };
 
-    expect(LoadNewFormRPartBReducer(initialState, successAction)).toEqual(
-      state
-    );
+    expect(FormRPartBReducer(initialState, successAction)).toEqual(state);
   });
 
-  it("should return updated state when LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE action passed", () => {
+  it("should return updated state when INITIALIZE_FORMR_PARTB_SUCCESS action passed", () => {
+    const state: FormRPartBState = {
+      ...initialState,
+      formData: formrPartB,
+      section: 1
+    };
+
+    const successAction: ActionType = {
+      type: INITIALIZE_FORMR_PARTB_SUCCESS,
+      payload: formrPartB
+    };
+
+    expect(FormRPartBReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when INITIALIZE_FORMR_PARTB_FAILURE action passed", () => {
     const failureAction: ActionType = {
-      type: LOAD_FORMR_PARTB_INITIAL_VALUES_FAILURE,
+      type: INITIALIZE_FORMR_PARTB_FAILURE,
       payload: null
     };
 
-    expect(LoadNewFormRPartBReducer(initialState, failureAction)).toEqual(
+    expect(FormRPartBReducer(initialState, failureAction)).toEqual(
       initialState
     );
   });
 
-  it("should return updated state when FORMR_PARTB_MOVE_TO_SECTION action passed", () => {
-    const state: NewFormRPartBState = {
+  it("should return updated state when MOVE_TO_SECTION action passed", () => {
+    const state: FormRPartBState = {
       ...initialState,
-      formData: formrPartB,
       section: 3
     };
 
     const successAction: ActionType = {
-      type: FORMR_PARTB_MOVE_TO_SECTION,
-      payload: { formData: formrPartB, section: 3 }
+      type: MOVE_TO_SECTION,
+      payload: 3
     };
 
-    expect(LoadNewFormRPartBReducer(initialState, successAction)).toEqual(
-      state
-    );
+    expect(FormRPartBReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return the same state when EDIT_FORMR_PARTB action passed", () => {
+    const state: FormRPartBState = {
+      ...initialState,
+      section: 3
+    };
+
+    const successAction: ActionType = {
+      type: EDIT_FORMR_PARTB,
+      payload: 3
+    };
+
+    expect(FormRPartBReducer(state, successAction)).toEqual(state);
+  });
+
+  it("should return initial state when SAVE_FORMR_PARTB_SUCCESS action passed", () => {
+    const state: FormRPartBState = {
+      ...initialState,
+      section: 3
+    };
+
+    const successAction: ActionType = {
+      type: SAVE_FORMR_PARTB_SUCCESS,
+      payload: null
+    };
+
+    expect(FormRPartBReducer(state, successAction)).toEqual(initialState);
+  });
+
+  it("should return the  samestate when SAVE_FORMR_PARTB_FAILURE action passed", () => {
+    const state: FormRPartBState = {
+      ...initialState,
+      section: 3
+    };
+
+    const failureAction: ActionType = {
+      type: SAVE_FORMR_PARTB_FAILURE,
+      payload: {}
+    };
+
+    expect(FormRPartBReducer(state, failureAction)).toEqual(state);
   });
 });

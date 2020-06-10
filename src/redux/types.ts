@@ -40,15 +40,11 @@ export interface FormRPartAListState {
   submittedForms: FormRPartA[];
 }
 
-export interface FormRPartBViewState {
-  formData: FormRPartB | null;
-}
-
 export interface FormRPartBListState {
   submittedForms: FormRPartB[];
 }
 
-export interface NewFormRPartBState {
+export interface FormRPartBState {
   formData: FormRPartB | null;
   section: number;
 }

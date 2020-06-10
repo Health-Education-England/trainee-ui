@@ -30,7 +30,10 @@ describe("loadReferenceData method", () => {
     const store = mockStore({});
 
     const successResponse: Promise<AxiosResponse<any>> = Promise.resolve({
-      data: [],
+      data: [
+        { id: "1", label: "option1" },
+        { id: "2", label: "option2" }
+      ],
       status: 200,
       statusText: "OK",
       headers: {},
@@ -57,34 +60,39 @@ describe("loadReferenceData method", () => {
       .spyOn(referenceService, "getCurricula")
       .mockReturnValue(successResponse);
 
+    const returnValue = [
+      { label: "option1", value: "option1" },
+      { label: "option2", value: "option2" }
+    ];
+
     const expectedActions = [
       {
         type: LOAD_REFERENCE_GENDER_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_COLLEGES_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_GRADES_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
-        payload: []
+        payload: returnValue
       },
       {
         type: LOAD_REFERENCE_CURRICULA_SUCCESS,
-        payload: []
+        payload: returnValue
       }
     ];
 

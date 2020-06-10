@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { FormRPartB } from "../../../../models/FormRPartB";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { act } from "react-test-renderer";
+import { BrowserRouter } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -14,27 +15,22 @@ const mockStore = configureMockStore(middlewares);
 describe("Confirm", () => {
   const mountComponent = (form: FormRPartB | null, history: any) => {
     const store = mockStore({
-      formRPartBView: {
+      formRPartB: {
         formData: form
       }
     });
 
     return mount(
       <Provider store={store}>
-        <Confirm history={history} />
+        <BrowserRouter>
+          <Confirm history={history} />
+        </BrowserRouter>
       </Provider>
     );
   };
 
   it("renders without crashing", () => {
     mountComponent(submittedFormRPartBs[0], null);
-  });
-
-  it("should push 'formr-b/create' page to history when form data not available", () => {
-    const history: any[] = [];
-    mountComponent(null, history);
-
-    expect(history[0]).toEqual("/formr-b/create");
   });
 
   it("renders the edit and confirm buttons when form data is avaialbe", () => {

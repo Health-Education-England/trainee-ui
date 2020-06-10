@@ -31,10 +31,10 @@ const formrPartB: FormRPartB = {
   unauthorisedLeave: 0,
   otherLeave: 0,
   totalLeave: 0,
-  isHonest: undefined,
-  isHealthy: undefined,
+  isHonest: "",
+  isHealthy: "",
   isWarned: "",
-  isComplying: undefined,
+  isComplying: "",
   healthStatement: "",
   submissionDate: null,
   lastModifiedDate: null

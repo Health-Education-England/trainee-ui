@@ -14,7 +14,7 @@ const location: any[] = [];
 
 const createStore = (form: FormRPartB | null, section: number = 1) =>
   mockStore({
-    newFormRPartB: { formData: form, section: section },
+    formRPartB: { formData: form, section: section },
     referenceData: {
       localOffices: [{ label: "localOffice", value: "localOffice" }],
       curricula: [{ label: "curriculum", value: "curriculum" }],
@@ -73,7 +73,7 @@ describe("Create", () => {
 
   it("should load Loading when reference data is not loaded", () => {
     store = mockStore({
-      newFormRPartB: { formData: submittedFormRPartBs[0], section: 1 },
+      formRPartB: { formData: submittedFormRPartBs[0], section: 1 },
       referenceData: {
         localOffices: [],
         curricula: [],
