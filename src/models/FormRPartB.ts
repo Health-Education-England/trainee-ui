@@ -24,8 +24,27 @@ export interface FormRPartB {
   isWarned: boolean | string;
   isComplying: boolean | string;
   healthStatement: string;
+  havePreviousDeclarations: boolean | string;
+  previousDeclarations: Declaration[];
+  previousDeclarationsSummary: string;
+  haveCurrentDeclarations: boolean | string;
+  currentDeclarations: Declaration[];
+  currentDeclarationsSummary: string;
   submissionDate: Date | null;
   lastModifiedDate: Date | null;
+}
+
+export interface Declaration {
+  declarationType: DeclarationType;
+  DateOfEntry: Date | undefined;
+  Title: string;
+  LocationOfEntry: string;
+}
+
+export enum DeclarationType {
+  SignificantEvent = "Significant event",
+  Complaint = "Complaint",
+  OtherInvestigation = "Other investigation"
 }
 
 export interface Work {

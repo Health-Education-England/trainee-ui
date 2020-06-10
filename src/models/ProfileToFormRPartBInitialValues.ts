@@ -60,6 +60,12 @@ export function ProfileToFormRPartBInitialValues(
     isWarned: "",
     isComplying: "",
     healthStatement: "",
+    havePreviousDeclarations: "",
+    previousDeclarations: [],
+    previousDeclarationsSummary: "",
+    haveCurrentDeclarations: "",
+    currentDeclarations: [],
+    currentDeclarationsSummary: "",
     submissionDate: null,
     lastModifiedDate: null
   };

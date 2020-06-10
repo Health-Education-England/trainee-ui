@@ -36,6 +36,12 @@ export const submittedFormRPartBs: FormRPartB[] = [
     isWarned: true,
     isComplying: true,
     healthStatement: "I feel great etc.",
+    havePreviousDeclarations: true,
+    previousDeclarations: [],
+    previousDeclarationsSummary: "",
+    haveCurrentDeclarations: true,
+    currentDeclarations: [],
+    currentDeclarationsSummary: "",
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
   }
