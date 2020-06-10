@@ -89,7 +89,7 @@ class View extends React.PureComponent<ViewProps> {
                 <SummaryList.Key>
                   Current Deanery / HEE Local team
                 </SummaryList.Key>
-                <SummaryList.Value>
+                <SummaryList.Value data-cy="localOfficeName">
                   {formData.localOfficeName}
                 </SummaryList.Value>
               </SummaryList.Row>

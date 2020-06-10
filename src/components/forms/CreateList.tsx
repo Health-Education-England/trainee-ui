@@ -74,7 +74,7 @@ export const CreateList = (
                     <td>
                       <ActionLink
                         onClick={() => this.handleRowClick(formData)}
-                        data-cy={`submittedForm${index}`}
+                        data-cy="submittedForm"
                       >
                         form submitted on{" "}
                         {DateUtilities.ToLocalDate(formData.submissionDate)}

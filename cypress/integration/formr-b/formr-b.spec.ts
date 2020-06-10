@@ -49,15 +49,9 @@ describe("Form R (Part B)", () => {
       .should("not.be.empty");
     // intentionally left email blank
     cy.get("#email").should("be.visible");
-    cy.get("#localOfficeName > option")
-      .eq(1)
-      .then(element => {
-        const selectedItem = element.val().toString();
-        cy.get("#localOfficeName")
-          .focus()
-          .select(selectedItem)
-          .should("not.have.value", "--Please select--");
-      });
+    cy.get("[data-cy=localOfficeName]").select(
+      "Health Education England Wessex"
+    );
     cy.get("#prevRevalBody > option")
       .eq(1)
       .then(element => {
@@ -84,13 +78,14 @@ describe("Form R (Part B)", () => {
           .select(selectedItem)
           .should("not.have.value", "--Please select--");
       });
-    cy.get(".nhsuk-pagination__page").should("be.visible");
-    cy.contains("Section 2").should("be.visible").click();
+    cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page")
+      .should("be.visible")
+      .click();
 
     // check form validation
-    cy.get(".nhsuk-error-message").should("be.visible");
+    cy.get(".nhsuk-error-summary").should("be.visible");
     cy.get("#email").type("traineeui.tester@hee.nhs.uk");
-    cy.get(".nhsuk-pagination__page").click();
+    cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
 
     // -------- Section 2 Whole Scope Types of Work -----------
     cy.contains("Whole Scope of Practice").should("be.visible");
@@ -100,29 +95,28 @@ describe("Form R (Part B)", () => {
     cy.contains("TOOT").should("be.visible");
 
     // edit first work panel
-    cy.get("[data-cy=workTypeInput0]")
+    cy.get('[data-cy="work[0].typeOfWork"]')
       .should("be.visible")
       .clear()
       .type("In Post Doing Something");
-    cy.get("[data-cy=startInput0]")
+    cy.get('[data-cy="work[0].startDate"]')
       .should("be.visible")
       .clear()
       .type(outOfRangeFutureDate);
 
     //navigate back to section 1
-    cy.get(
-      ".nhsuk-pagination-item--previous > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
+    cy.get("[data-cy=BacklinkToSection1] > .nhsuk-pagination__page").click();
+
     cy.get(".nhsuk-error-summary").should("not.be.visible");
     cy.get("[data-cy=mainWarning1]").should("be.visible");
 
     //Return to section 2 and data is unchanged
-    cy.get(".nhsuk-pagination__page").click();
-    cy.get("[data-cy=workTypeInput0]").should(
+    cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+    cy.get('[data-cy="work[0].typeOfWork"]').should(
       "contain.value",
       "In Post Doing Something"
     );
-    cy.get("[data-cy=startInput0]").should(
+    cy.get('[data-cy="work[0].startDate"]').should(
       "contain.value",
       outOfRangeFutureDate
     );
@@ -134,43 +128,42 @@ describe("Form R (Part B)", () => {
     cy.get("#paidLeave").should("be.visible").clear().type("1");
     cy.get("#totalLeave").should("have.value", "11");
 
-    //Attempt to click next to submit form
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    )
+    //Attempt to navigate to section 3
+    cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page")
       .should("be.visible")
       .click();
-
     cy.get(".nhsuk-error-summary").should("be.visible");
 
-    // Delete 'Type of work' x3
+    // Delete 'Type of work' panel x3
     cy.get("[data-cy=closeIcon1]").click().click().click();
 
     // Fix form errors
-    cy.get("[data-cy=startInput0]").clear().type(pastDate);
+    cy.get('[data-cy="work[0].startDate"]').clear().type(pastDate);
     cy.get('[data-cy="work[1].trainingPost"]').select("Yes");
     cy.get(".nhsuk-error-summary").should("not.be.visible");
 
     // Add a new 'Type of work'
     cy.get("[data-cy=BtnAddWorkType]").click();
-    cy.get("[data-cy=workTypeInput2]")
+    cy.get('[data-cy="work[2].typeOfWork"]')
       .should("be.visible")
       .type("Another type of work");
     cy.get('[data-cy="work[2].trainingPost"]')
       .should("be.visible")
       .select("No");
-    cy.get("[data-cy=startInput2]").should("be.visible").type(pastDate);
-    cy.get("[data-cy=endInput2]").should("be.visible").type(currentDate);
-    cy.get("[data-cy=siteNameInput2]")
+    cy.get('[data-cy="work[2].startDate"]').should("be.visible").type(pastDate);
+    cy.get('[data-cy="work[2].endDate"]')
+      .should("be.visible")
+      .type(currentDate);
+    cy.get('[data-cy="work[2].site"]')
       .should("be.visible")
       .type("This other site");
-    cy.get("[data-cy=siteLocInput2]").should("be.visible").type("Over there");
+    cy.get('[data-cy="work[2].siteLocation"]')
+      .should("be.visible")
+      .type("Over there");
 
-    // Click next to submit form
+    // Click to navigate to section 3
     cy.get(".nhsuk-error-summary").should("not.be.visible");
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
+    cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
 
     // -------- Section 3 Declarations relating to Good Medical Practice -----------
     cy.get("[data-cy=legendFieldset3]").should("include.text", "Section 3");
@@ -178,16 +171,12 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=declarations]").should("be.visible");
     cy.get("[data-cy=healthStatement]").should("be.visible");
     // Navigate back to section 2
-    cy.get(
-      ".nhsuk-pagination-item--previous > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
+    cy.get("[data-cy=BacklinkToSection2] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=mainWarning2]").should("be.visible");
     // Section 2 data is unchanged
     cy.get("#totalLeave").should("be.visible").should("contain.value", "11");
     // Return to section 3
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
+    cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=isHonest0]")
       .should("be.visible")
       .should("contain.value", "")
@@ -202,14 +191,12 @@ describe("Form R (Part B)", () => {
       .should("contain.value", "")
       .click();
     cy.get("[data-cy=isComplying0]").should("be.visible").click();
-    cy.get("[data-cy=healthStatementTextInput]")
+    cy.get(".nhsuk-form-group > [data-cy=healthStatement]")
       .should("be.visible")
       .type("I'm in astonishingly excellent health.");
 
-    // Go to view / edit / submit
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
+    // Navigate to submit page
+    cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=BtnEditSection1]").should("be.visible");
     cy.get("[data-cy=gmcNumber]").should("be.visible");
     cy.get("[data-cy=BtnEditSection2]").should("be.visible");
@@ -220,29 +207,42 @@ describe("Form R (Part B)", () => {
     cy.get(".nhsuk-back-link__link").should("be.visible");
     cy.get("[data-cy=BtnEditSection1]").should("be.visible").click();
     cy.get("#gmcNumber").clear().type("22222222");
-    cy.get(".nhsuk-pagination__page").click();
 
-    cy.get("[data-cy=workTypeInput2]").should(
+    // Navigate to section 2
+    cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+
+    cy.get('[data-cy="work[2].typeOfWork"]').should(
       "contain.value",
       "Another type of work"
     );
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
 
-    cy.get("[data-cy=healthStatementTextInput]").should(
+    // Navigate to section 3
+    cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+
+    cy.get(".nhsuk-form-group > [data-cy=healthStatement]").should(
       "contain.value",
       "I'm in astonishingly excellent health."
     );
-    cy.get(
-      ".nhsuk-pagination-item--next > .nhsuk-pagination__link > .nhsuk-pagination__page"
-    ).click();
-    cy.get("[data-cy=gmcNumber]").should("have.text", "22222222");
 
-    cy.get(':nth-child(2) > [type="submit"]').should("be.visible").click();
+    // Navigate to submit
+    cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
+
+    cy.get("[data-cy=gmcNumber]").should("have.text", "22222222");
+    cy.get("[data-cy=BtnSubmitPartB]").should("be.visible").click();
 
     // See list of saved forms
     cy.contains("Submitted forms").should("be.visible");
-    cy.get("[data-cy=submittedForm0]").should("be.visible");
+    //open the form just saved
+    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
+    cy.get("[data-cy=gmcNumber]")
+      .should("be.visible")
+      .should("have.text", "22222222");
+    cy.get("[data-cy=localOfficeName]").should(
+      "have.text",
+      "Health Education England Wessex"
+    );
+    // Navigate back to the list
+    cy.get(".nhsuk-back-link__link").should("be.visible").click();
+    cy.contains("Submitted forms").should("be.visible");
   });
 });

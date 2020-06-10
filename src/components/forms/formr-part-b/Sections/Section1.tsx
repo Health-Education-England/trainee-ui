@@ -120,7 +120,11 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
           ) : null}
 
           <Pagination>
-            <Pagination.Link next onClick={() => handleSubmit()}>
+            <Pagination.Link
+              next
+              onClick={() => handleSubmit()}
+              data-cy="linkToSection2"
+            >
               Section 2
             </Pagination.Link>
           </Pagination>

@@ -45,7 +45,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Deanery / HEE Local Office</SummaryList.Key>
-                <SummaryList.Value>
+                <SummaryList.Value data-cy="localOfficeName">
                   {formData.localOfficeName}
                 </SummaryList.Value>
               </SummaryList.Row>
@@ -107,7 +107,9 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Mobile</SummaryList.Key>
-                <SummaryList.Value>{formData.mobileNumber}</SummaryList.Value>
+                <SummaryList.Value data-cy="mobileNumber">
+                  {formData.mobileNumber}
+                </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Email</SummaryList.Key>

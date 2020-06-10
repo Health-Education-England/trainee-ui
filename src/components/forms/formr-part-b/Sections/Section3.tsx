@@ -157,11 +157,19 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
             ) : null}
 
             <Pagination>
-              <Pagination.Link previous onClick={() => previousSection(values)}>
+              <Pagination.Link
+                previous
+                onClick={() => previousSection(values)}
+                data-cy="BacklinkToSection2"
+              >
                 Section 2
               </Pagination.Link>
 
-              <Pagination.Link next onClick={() => handleSubmit()}>
+              <Pagination.Link
+                next
+                onClick={() => handleSubmit()}
+                data-cy="linkToSubmit"
+              >
                 Continue to Submit
               </Pagination.Link>
             </Pagination>
