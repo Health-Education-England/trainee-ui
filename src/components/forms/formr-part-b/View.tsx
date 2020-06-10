@@ -1,4 +1,5 @@
 import React from "react";
+import ScrollTo from "../ScrollTo";
 import { BackLink, SummaryList, Panel, Button } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
@@ -41,6 +42,7 @@ class View extends React.PureComponent<ViewProps> {
             moveToSection(formData, section);
             history.push("/formr-b/create");
           }}
+          data-cy={`BtnEditSection${section}`}
         >
           Edit
         </Button>
@@ -50,17 +52,20 @@ class View extends React.PureComponent<ViewProps> {
     return (
       formData && (
         <>
-          <BackLink href="/formr-b">Go back to list</BackLink>
+          <ScrollTo />
+          <BackLink href="/formr-b" data-cy="backLink">
+            Go back to list
+          </BackLink>
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              <h2>Section 1: Doctor's details</h2>
+              <h2 data-cy="sectionHeader1">Section 1: Doctor's details</h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
               {SectionEditButton(1)}
             </div>
           </div>
 
-          <Panel label="Personal details">
+          <Panel label="Personal details" data-cy="personalDetails">
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>Forename(s)</SummaryList.Key>
@@ -72,7 +77,9 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>GMC Number</SummaryList.Key>
-                <SummaryList.Value>{formData.gmcNumber}</SummaryList.Value>
+                <SummaryList.Value data-cy="gmcNumber">
+                  {formData.gmcNumber}
+                </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>Email</SummaryList.Key>
@@ -82,7 +89,7 @@ class View extends React.PureComponent<ViewProps> {
                 <SummaryList.Key>
                   Current Deanery / HEE Local team
                 </SummaryList.Key>
-                <SummaryList.Value>
+                <SummaryList.Value data-cy="localOfficeName">
                   {formData.localOfficeName}
                 </SummaryList.Value>
               </SummaryList.Row>
@@ -121,7 +128,9 @@ class View extends React.PureComponent<ViewProps> {
 
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              <h2>Section 2: Whole Scope of Practice</h2>
+              <h2 data-cy="sectionHeader2">
+                Section 2: Whole Scope of Practice
+              </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
               {SectionEditButton(2)}
@@ -132,7 +141,7 @@ class View extends React.PureComponent<ViewProps> {
             {formData.work.length > 0
               ? formData.work.map((w, i) => (
                   <Panel key={i} className={classes.workPanel}>
-                    <h3>Type of work {i + 1}</h3>
+                    <h3 data-cy={`typeOfWork${i + 1}`}>Type of work {i + 1}</h3>
                     <SummaryList>
                       <SummaryList.Row>
                         <SummaryList.Key>Type of Work</SummaryList.Key>
@@ -144,7 +153,10 @@ class View extends React.PureComponent<ViewProps> {
                       </SummaryList.Row>
                       <SummaryList.Row>
                         <SummaryList.Key>Start Date</SummaryList.Key>
-                        <SummaryList.Value data-jest="startDate">
+                        <SummaryList.Value
+                          data-jest="startDate"
+                          data-cy={`startDate${i + 1}`}
+                        >
                           {DateUtilities.ToLocalDate(w.startDate || null)}
                         </SummaryList.Value>
                       </SummaryList.Row>
@@ -213,7 +225,7 @@ class View extends React.PureComponent<ViewProps> {
                   <b>Total</b>
                 </SummaryList.Key>
                 <SummaryList.Key>
-                  <b>{formData.totalLeave}</b>
+                  <b data-cy="totalLeave">{formData.totalLeave}</b>
                 </SummaryList.Key>
               </SummaryList.Row>
             </SummaryList>
@@ -221,7 +233,9 @@ class View extends React.PureComponent<ViewProps> {
 
           <div className="nhsuk-grid-row">
             <div className="nhsuk-grid-column-two-thirds">
-              <h2>Section 3: Declarations relating to Good Medical Practice</h2>
+              <h2 data-cy="sectionHeader3">
+                Section 3: Declarations relating to Good Medical Practice
+              </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
               {SectionEditButton(3)}
@@ -265,7 +279,7 @@ class View extends React.PureComponent<ViewProps> {
                     If yes, are you complying with these conditions /
                     undertakings?
                   </SummaryList.Key>
-                  <SummaryList.Value>
+                  <SummaryList.Value data-cy="isComplying">
                     {BooleanUtilities.ToYesNo(formData.isComplying)}
                   </SummaryList.Value>
                 </SummaryList.Row>

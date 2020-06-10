@@ -2,6 +2,7 @@
 
 describe("Mobile app sign-in", () => {
   it("should show the Menu button on successful mobile sign-in", () => {
+    cy.viewport("iphone-6");
     cy.location("pathname", { timeout: 10000 }).should("include", "/profile");
     cy.get("#profile").should("be.visible");
     cy.contains("Personal details").should("be.visible");

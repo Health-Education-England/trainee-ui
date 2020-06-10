@@ -37,7 +37,11 @@ class Confirm extends React.PureComponent<ConfirmProps> {
       <div>
         <View canEdit={true} history={this.props.history}></View>
 
-        <Button type="submit" onClick={() => this.handleSubmit(formData)}>
+        <Button
+          type="submit"
+          onClick={() => this.handleSubmit(formData)}
+          data-cy="BtnSubmitPartB"
+        >
           Submit
         </Button>
       </div>

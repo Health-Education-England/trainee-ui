@@ -21,6 +21,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
   return (
     <div
       data-jest={props.name}
+      data-cy={props.name}
       className={
         error ? "nhsuk-form-group nhsuk-form-group--error" : "nhsuk-form-group"
       }
@@ -28,6 +29,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
       <Label>{props.label}</Label>
       <FormElement
         name={props.name}
+        data-cy={props.name}
         id={props.id || props.name}
         error={error || ""}
         onChange={field.onChange}
@@ -39,6 +41,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                 key={item.value}
                 value={item.value}
                 id={item.id || "item_" + index}
+                data-cy={`${props.name}${index}`}
                 checked={
                   typeof field.value === "boolean"
                     ? field.value

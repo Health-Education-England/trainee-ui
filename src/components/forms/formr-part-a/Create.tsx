@@ -308,7 +308,9 @@ class Create extends React.PureComponent<CreateProps> {
                     <ErrorMessage>Please check highlighted fields</ErrorMessage>
                   </ErrorSummary>
                 ) : null}
-                <Button type="submit">Continue</Button>
+                <Button type="submit" data-cy="BtnContinue">
+                  Continue
+                </Button>
               </Form>
             )}
           </Formik>

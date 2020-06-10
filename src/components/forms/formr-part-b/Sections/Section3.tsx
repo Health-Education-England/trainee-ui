@@ -43,10 +43,18 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
               disableErrorLine={true}
               name="declarationsOfGMP"
             >
-              <Fieldset.Legend headingLevel="H2" size="l">
+              <Fieldset.Legend
+                headingLevel="H2"
+                size="l"
+                data-cy="legendFieldset3"
+              >
                 Section 3: Declarations relating to Good Medical Practice
               </Fieldset.Legend>
-              <WarningCallout data-jest="mainWarning" label="Important">
+              <WarningCallout
+                data-jest="mainWarning"
+                data-cy="mainWarning3"
+                label="Important"
+              >
                 <p>
                   These declarations are compulsory and relate to the Good
                   Medical Practice guidance issued by the GMC. Honesty &
@@ -60,7 +68,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                   in Good Medical Practice.
                 </p>
               </WarningCallout>
-              <Panel label="Declarations">
+              <Panel label="Declarations" data-cy="declarations">
                 <MultiChoiceInputField
                   label="Please tick to confirm your acceptance."
                   id="isHonest"
@@ -119,11 +127,12 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                 ) : null}
               </Panel>
 
-              <Panel label="Health statement">
+              <Panel label="Health statement" data-cy="healthStatement">
                 <TextInputField
                   name="healthStatement"
                   rows={15}
                   label="Health statement"
+                  data-cy="healthStatementTextInput"
                   hint={
                     <span>
                       Writing something in this section below is{" "}
@@ -148,11 +157,19 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
             ) : null}
 
             <Pagination>
-              <Pagination.Link previous onClick={() => previousSection(values)}>
+              <Pagination.Link
+                previous
+                onClick={() => previousSection(values)}
+                data-cy="BacklinkToSection2"
+              >
                 Section 2
               </Pagination.Link>
 
-              <Pagination.Link next onClick={() => handleSubmit()}>
+              <Pagination.Link
+                next
+                onClick={() => handleSubmit()}
+                data-cy="linkToSubmit"
+              >
                 Continue to Submit
               </Pagination.Link>
             </Pagination>

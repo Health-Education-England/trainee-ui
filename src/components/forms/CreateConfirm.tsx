@@ -69,7 +69,11 @@ export const CreateConfirm = (
           >
             Edit
           </Button>
-          <Button type="submit" onClick={() => this.handleSubmit(formData)}>
+          <Button
+            type="submit"
+            onClick={() => this.handleSubmit(formData)}
+            data-cy="BtnSubmit"
+          >
             Submit
           </Button>
         </div>

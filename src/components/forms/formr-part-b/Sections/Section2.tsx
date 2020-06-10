@@ -56,10 +56,14 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
           <Form>
             <ScrollTo />
             <Fieldset disableErrorLine={true} name="scopeOfPractice">
-              <Fieldset.Legend headingLevel="H2" size="l">
+              <Fieldset.Legend
+                headingLevel="H2"
+                size="l"
+                data-cy="legendFieldset2"
+              >
                 Section 2: Whole Scope of Practice
               </Fieldset.Legend>
-              <WarningCallout label="Important">
+              <WarningCallout label="Important" data-cy="mainWarning2">
                 <p>
                   Read these instructions carefully! Please list all placements
                   in your capacity as a registered medical practitioner since
@@ -170,11 +174,19 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
             ) : null}
 
             <Pagination>
-              <Pagination.Link previous onClick={() => previousSection(values)}>
+              <Pagination.Link
+                previous
+                onClick={() => previousSection(values)}
+                data-cy="BacklinkToSection1"
+              >
                 Section 1
               </Pagination.Link>
 
-              <Pagination.Link next onClick={() => handleSubmit()}>
+              <Pagination.Link
+                next
+                onClick={() => handleSubmit()}
+                data-cy="linkToSection3"
+              >
                 Continue to Section 3
               </Pagination.Link>
             </Pagination>

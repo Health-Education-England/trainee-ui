@@ -16,7 +16,8 @@ const startDate = Cypress.moment(todaysDate)
 
 describe("Form R (Part A)", () => {
   it("Should complete a new Form R Part A.", () => {
-    cy.contains("Menu").click();
+    cy.viewport("iphone-6");
+    cy.get("[data-cy=BtnMenu]").should("be.visible").click();
     cy.contains("Form R-a").click();
 
     cy.contains("Submit").should("be.visible").click();
@@ -35,14 +36,9 @@ describe("Form R (Part A)", () => {
       .should("be.visible")
       .invoke("val")
       .should("not.be.empty");
-    cy.get("#localOfficeName > option")
-      .eq(1)
-      .then(element => {
-        const selectedItem = element.val().toString();
-        cy.get("#localOfficeName")
-          .select(selectedItem)
-          .should("not.have.value", "--Please select--");
-      });
+    cy.get("[data-cy=localOfficeName]").select(
+      "Health Education England Wessex"
+    );
     cy.get("#dateOfBirth")
       .should("be.visible")
       .invoke("val")
@@ -104,7 +100,7 @@ describe("Form R (Part A)", () => {
     //-- Declarations section --
     cy.get("#cctSpecialty1").should("not.be.visible");
     cy.get("#cctSpecialty2").should("not.be.visible");
-    cy.get('div[data-cy="radio-0"] > [data-cy=radio-0]').click();
+    cy.get("[data-cy=radio-0]").click();
     cy.get("#cctSpecialty1").should("be.visible");
     cy.get("#cctSpecialty2").should("be.visible");
 
@@ -156,38 +152,36 @@ describe("Form R (Part A)", () => {
     cy.get("#startDate").type(startDate).should("not.have.value", "");
     cy.get("#programmeMembershipType").should("be.visible").clear().type("LAT");
     //-- error msg when FTE not completed
-    cy.get("form > .nhsuk-button").click();
+    cy.get("[data-cy=BtnContinue]").click();
     cy.get(".nhsuk-error-summary").should("be.visible");
     cy.get("#wholeTimeEquivalent--error-message").should("be.visible");
     cy.get("#wholeTimeEquivalent").type("0.99");
 
     //submitting / editing the form
-    cy.contains("Continue").click();
+    cy.get("[data-cy=BtnContinue]").click();
     cy.get(".nhsuk-warning-callout").should("be.visible");
 
-    cy.contains("Submit").should("be.visible");
+    cy.get("[data-cy=BtnSubmit]").should("be.visible");
     cy.contains("Edit").should("be.visible").click();
     //TODO could do a cypress visual test of form here to check contents have remained the same
-    cy.contains("Submit").should("not.be.visible");
+    cy.get("[data-cy=BtnSubmit]").should("not.be.visible");
     cy.contains("Edit").should("not.be.visible");
-    cy.contains("Continue").should("be.visible");
+    cy.get("[data-cy=BtnContinue]").should("be.visible");
     cy.get("#wholeTimeEquivalent").clear().type("1").should("have.value", "1");
-    cy.contains("Continue").click();
-    cy.get(
-      ":nth-child(2) > .nhsuk-summary-list > :nth-child(1) > .nhsuk-summary-list__key"
-    )
-      .scrollIntoView()
-      .should("be.visible");
-    cy.contains("Submit").scrollIntoView().should("be.visible").click();
+    cy.get("[data-cy=BtnContinue]").click();
+    cy.get(".nhsuk-warning-callout").scrollIntoView().should("be.visible");
+    cy.get("[data-cy=BtnSubmit]").scrollIntoView().should("be.visible").click();
 
     //--Go to list of submitted/ saved forms (Form Part A)
     cy.contains("Submitted forms").should("be.visible");
-    cy.get(
-      ":nth-child(1) > td > .nhsuk-action-link > .nhsuk-action-link__link > .nhsuk-action-link__text"
-    )
-      .should("be.visible")
-      .click();
-    cy.contains("Personal Details").should("be.visible");
+    // Open the form just saved
+    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
+    cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
+    cy.get("[data-cy=localOfficeName]").should(
+      "have.text",
+      "Health Education England Wessex"
+    );
+    // Navigate back to the list
     cy.get(".nhsuk-back-link__link").should("be.visible").click();
     cy.contains("Submitted forms").should("be.visible");
   });
