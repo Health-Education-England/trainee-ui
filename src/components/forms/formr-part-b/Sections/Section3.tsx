@@ -22,7 +22,7 @@ interface Section3Props {
 }
 
 const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
-  const { formData, previousSection, nextSection, history } = props;
+  const { formData, previousSection, nextSection } = props;
   return (
     formData && (
       <Formik
@@ -30,7 +30,6 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
         validationSchema={Section3ValidationSchema}
         onSubmit={values => {
           nextSection(values);
-          history.push("/formr-b/confirm");
         }}
       >
         {({ values, errors, handleSubmit }) => (
@@ -166,9 +165,9 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
               <Pagination.Link
                 next
                 onClick={() => handleSubmit()}
-                data-cy="linkToSubmit"
+                data-cy="linkToSection4"
               >
-                Continue to Submit
+                Continue to Section 4
               </Pagination.Link>
             </Pagination>
           </Form>

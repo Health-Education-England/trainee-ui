@@ -35,10 +35,10 @@ export interface FormRPartB {
 }
 
 export interface Declaration {
-  declarationType: DeclarationType;
-  DateOfEntry: Date | undefined;
-  Title: string;
-  LocationOfEntry: string;
+  declarationType: DeclarationType | undefined;
+  dateOfEntry: Date | undefined;
+  title: string;
+  locationOfEntry: string;
 }
 
 export enum DeclarationType {

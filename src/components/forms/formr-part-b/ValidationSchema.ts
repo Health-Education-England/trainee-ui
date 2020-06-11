@@ -98,3 +98,11 @@ export const Section3ValidationSchema = yup.object({
     then: acceptanceValidation
   })
 });
+
+export const Section4ValidationSchema = yup.object({
+  havePreviousDeclarations: yup.boolean().required("You must select yes or no")
+});
+
+export const Section5ValidationSchema = yup.object({
+  havePreviousDeclarations: yup.boolean().required("You must select yes or no")
+});
