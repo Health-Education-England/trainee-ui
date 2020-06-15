@@ -1,27 +1,12 @@
-// ***********************************************************
-// This example support/index.js is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
-// ***********************************************************
-
-// Import commands.js using ES2015 syntax:
 import "./commands";
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
-// cyress testing defaults
 beforeEach(() => {
   cy.visit("./");
-  cy.get("input[name=username]").type(Cypress.env("username"));
-  cy.get("input[name=password]").type(`${Cypress.env("password")}{enter}`);
+
+  if (cy.get("input[name=username]")) {
+    cy.get("input[name=username]").type(Cypress.env("username"));
+    cy.get("input[name=password]").type(`${Cypress.env("password")}{enter}`, {
+      sensitive: true
+    });
+  }
 });

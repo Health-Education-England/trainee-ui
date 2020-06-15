@@ -57,11 +57,11 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
               <Fieldset.Legend
                 headingLevel="H2"
                 size="l"
-                data-cy="legendFieldset4"
+                data-cy="legendFieldset5"
               >
                 Section 5: Declarations since your previous Form R Part B
               </Fieldset.Legend>
-              <WarningCallout label="Important" data-cy="mainWarning4">
+              <WarningCallout label="Important" data-cy="mainWarning5">
                 <div>
                   <p>
                     <b>Significant Event:</b> The GMC states that a significant

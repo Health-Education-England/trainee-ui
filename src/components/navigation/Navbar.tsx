@@ -7,7 +7,7 @@ const Navbar = (_: {}) => {
   return (
     <Header className={styles.header}>
       <Header.Container>
-        <Header.Logo />
+        <Header.Logo href="/profile" />
         <Header.Content>
           <Header.MenuToggle data-cy="BtnMenu" />
           <Header.Search></Header.Search>
