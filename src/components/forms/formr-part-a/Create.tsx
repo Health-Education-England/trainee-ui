@@ -17,7 +17,7 @@ import SelectInputField from "../SelectInputField";
 import TextInputField from "../TextInputField";
 import { ValidationSchema } from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
-import { CCT_DECLARATION } from "./Constants";
+import { CCT_DECLARATION } from "../../../utilities/Constants";
 import Loading from "../../common/Loading";
 import { ProfileToFormRPartAInitialValues } from "../../../models/ProfileToFormRPartAInitialValues";
 import { loadTraineeProfile } from "../../../redux/actions/trainee-profile-actions";

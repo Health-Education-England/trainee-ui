@@ -1,7 +1,7 @@
 import React from "react";
 import { SummaryList, BackLink, Panel } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
-import { CCT_DECLARATION } from "./Constants";
+import { CCT_DECLARATION } from "../../../utilities/Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
