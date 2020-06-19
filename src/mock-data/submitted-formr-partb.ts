@@ -37,10 +37,24 @@ export const submittedFormRPartBs: FormRPartB[] = [
     isComplying: true,
     healthStatement: "I feel great etc.",
     havePreviousDeclarations: true,
-    previousDeclarations: [],
+    previousDeclarations: [
+      {
+        declarationType: "Significant Event",
+        dateOfEntry: new Date("2020-03-07"),
+        title: "Previous declaration title",
+        locationOfEntry: "Previous declaration location of entry"
+      }
+    ],
     previousDeclarationsSummary: "",
     haveCurrentDeclarations: true,
-    currentDeclarations: [],
+    currentDeclarations: [
+      {
+        declarationType: "Complaint",
+        dateOfEntry: new Date("2020-06-12"),
+        title: "Current declaration title",
+        locationOfEntry: "Current declaration location of entry"
+      }
+    ],
     currentDeclarationsSummary: "",
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
