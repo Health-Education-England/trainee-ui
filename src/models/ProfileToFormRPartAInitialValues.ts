@@ -1,6 +1,6 @@
 import { TraineeProfile } from "./TraineeProfile";
 import { FormRPartA } from "./FormRPartA";
-import { MEDICAL_CURRICULUM } from "../components/forms/formr-part-a/Constants";
+import { MEDICAL_CURRICULUM } from "../utilities/Constants";
 
 export function ProfileToFormRPartAInitialValues(
   traineeProfile: TraineeProfile | null

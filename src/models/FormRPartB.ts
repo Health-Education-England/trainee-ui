@@ -35,16 +35,10 @@ export interface FormRPartB {
 }
 
 export interface Declaration {
-  declarationType: DeclarationType | undefined;
+  declarationType: string | undefined;
   dateOfEntry: Date | undefined;
   title: string;
   locationOfEntry: string;
-}
-
-export enum DeclarationType {
-  SignificantEvent = "Significant event",
-  Complaint = "Complaint",
-  OtherInvestigation = "Other investigation"
 }
 
 export interface Work {
