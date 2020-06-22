@@ -60,10 +60,19 @@ describe("View", () => {
     expect(wrapper.find("[data-jest='endDate']").first().text()).toBe(
       "31/12/2020"
     );
+    expect(
+      wrapper.find("[data-jest='previousDateOfEntry']").first().text()
+    ).toBe("07/03/2020");
+    expect(
+      wrapper.find("[data-jest='currentDateOfEntry']").first().text()
+    ).toBe("12/06/2020");
   });
 
   it("should show date fields value empty when undefined", () => {
     const work = submittedFormRPartBs[0].work[0];
+    const prevDeclarations = submittedFormRPartBs[0].previousDeclarations[0];
+    const currDeclarations = submittedFormRPartBs[0].currentDeclarations[0];
+
     const formData = {
       ...submittedFormRPartBs[0],
       currRevalDate: undefined,
@@ -74,6 +83,18 @@ describe("View", () => {
           startDate: undefined,
           endDate: undefined
         }
+      ],
+      previousDeclarations: [
+        {
+          ...prevDeclarations,
+          dateOfEntry: undefined
+        }
+      ],
+      currentDeclarations: [
+        {
+          ...currDeclarations,
+          dateOfEntry: undefined
+        }
       ]
     };
 
@@ -83,6 +104,12 @@ describe("View", () => {
     expect(wrapper.find("[data-jest='prevRevalDate']").first().text()).toBe("");
     expect(wrapper.find("[data-jest='startDate']").first().text()).toBe("");
     expect(wrapper.find("[data-jest='endDate']").first().text()).toBe("");
+    expect(
+      wrapper.find("[data-jest='previousDateOfEntry']").first().text()
+    ).toBe("");
+    expect(
+      wrapper.find("[data-jest='currentDateOfEntry']").first().text()
+    ).toBe("");
   });
 
   it("should not add any work panels if no items found", () => {
@@ -90,6 +117,20 @@ describe("View", () => {
     const wrapper = mountComponent(formData, [], false);
 
     expect(wrapper.find("div.workPanel").length).toBe(0);
+  });
+
+  it("should not add any previous declaration event panels if no items found", () => {
+    const formData = { ...submittedFormRPartBs[0], previousDeclarations: [] };
+    const wrapper = mountComponent(formData, [], false);
+
+    expect(wrapper.find("div.previousDeclarationsPanel").length).toBe(0);
+  });
+
+  it("should not add any current declaration event panels if no items found", () => {
+    const formData = { ...submittedFormRPartBs[0], currentDeclarations: [] };
+    const wrapper = mountComponent(formData, [], false);
+
+    expect(wrapper.find("div.currentDeclarationsPanel").length).toBe(0);
   });
 
   it("should not load Edit buttons when canEdit is false", () => {
