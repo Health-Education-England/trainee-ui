@@ -1,0 +1,214 @@
+import React, { FunctionComponent } from "react";
+import TextInputField from "../../TextInputField";
+import MultiChoiceInputField from "../../MultiChoiceInputField";
+import ScrollTo from "../../ScrollTo";
+import {
+  Fieldset,
+  WarningCallout,
+  Pagination,
+  Panel,
+  Button,
+  ErrorSummary,
+  ErrorMessage
+} from "nhsuk-react-components";
+import { Form, Formik, FieldArray } from "formik";
+import DeclarationPanel from "./DeclarationPanel";
+import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
+import { Section5ValidationSchema } from "../ValidationSchema";
+import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
+import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
+import { YES_NO } from "../../../../utilities/Constants";
+
+interface Section5Props {
+  formData: FormRPartB;
+  previousSection: (formData: FormRPartB) => void;
+  handleSubmit: (formData: FormRPartB) => void;
+  history: any;
+  section: number;
+}
+
+const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
+  const { formData, previousSection, handleSubmit, history, section } = props;
+  const newDeclaration: Declaration = {
+    declarationType: undefined,
+    dateOfEntry: undefined,
+    title: "",
+    locationOfEntry: ""
+  };
+
+  return (
+    formData && (
+      <Formik
+        initialValues={formData}
+        validationSchema={Section5ValidationSchema}
+        onSubmit={values => {
+          handleSubmit(values);
+          history.push("/formr-b/confirm");
+        }}
+      >
+        {({ values, errors, handleSubmit }) => (
+          <Form>
+            <ScrollTo />
+            <Fieldset
+              disableErrorLine={true}
+              name="currentDeclarations"
+              data-jest="mainFieldset5"
+            >
+              <Fieldset.Legend
+                headingLevel="H2"
+                size="l"
+                data-cy="legendFieldset4"
+              >
+                Section 5: Declarations since your previous Form R Part B
+              </Fieldset.Legend>
+              <WarningCallout label="Important" data-cy="mainWarning4">
+                <div>
+                  <p>
+                    <b>Significant Event:</b> The GMC states that a significant
+                    event (also known as an untoward or critical incident) is
+                    any unintended or unexpected event, which could or did lead
+                    to harm of one or more patients. This includes incidents
+                    which did not cause harm but could have done, or where the
+                    event should have been prevented. All doctors as part of
+                    revalidation are required to record and reflect on
+                    Significant events in their work with the focus on what you
+                    have learnt as a result of those event/s. Use
+                    non-identifiable patient data only.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <b>Complaints:</b> A complaint is a formal expression of
+                    dissatisfaction or grievance. It can be about an individual
+                    doctor, the team or about the care of patients where a
+                    doctor could be expected to have had influence or
+                    responsibility. As a matter of honesty & integrity you are
+                    obliged to include all complaints, even when you are the
+                    only person aware of them. All doctors should reflect on how
+                    complaints influence their practice. Use non-identifiable
+                    patient data only.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <b>Other investigations:</b> Any on-going investigations,
+                    such as honesty, integrity, conduct, or any other matters
+                    that you feel the ARCP panel or Responsible Officer should
+                    be made aware of. Use non-identifiable patient data only.
+                  </p>
+                </div>
+              </WarningCallout>
+
+              <Panel label="Current Declarations" data-cy="declarations5">
+                <MultiChoiceInputField
+                  label="Do you have any new Significant Events, Complaints, Other investigations since your previous ARCP/RITA/Appraisal?"
+                  id="haveCurrentDeclarations"
+                  name="haveCurrentDeclarations"
+                  type="radios"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    DeclarationPanelUtilities.changeDeclarationsArray(
+                      e.target.value,
+                      values.currentDeclarations,
+                      newDeclaration
+                    );
+                  }}
+                  items={YES_NO}
+                  footer="If you wish to make any such declarations in relation to your previous Form R Part B then please do this in Section 4"
+                />
+              </Panel>
+
+              {BooleanUtilities.ToBoolean(values.haveCurrentDeclarations) ? (
+                <>
+                  <Panel label="Declarations">
+                    <FieldArray
+                      name="currentDeclarations"
+                      render={c => (
+                        <div>
+                          {values.currentDeclarations.map((_, i: number) => (
+                            <DeclarationPanel
+                              section={section}
+                              key={i}
+                              index={i}
+                              removeDeclaration={(index: number) =>
+                                c.remove(index)
+                              }
+                              data-jest="declarationPanel"
+                            ></DeclarationPanel>
+                          ))}
+                          <Button
+                            data-cy="btnAddDeclaration"
+                            type="button"
+                            secondary
+                            data-jest="btnAddDeclaration"
+                            onClick={() => c.push(newDeclaration)}
+                          >
+                            Add more...
+                          </Button>
+                        </div>
+                      )}
+                    ></FieldArray>
+                  </Panel>
+                  <Panel
+                    label="Summary of current unresolved declarations"
+                    data-cy="currentDeclarationsSummary"
+                  >
+                    <TextInputField
+                      name="currentDeclarationsSummary"
+                      rows={15}
+                      label=""
+                      data-cy="currentDeclarationsSummaryTextInput"
+                      hint={
+                        <span>
+                          If you know of any <strong>UNRESOLVED</strong>{" "}
+                          Significant Events, Complaints, Other investigations
+                          since your last ARCP/RITA/Appraisal, please provide a
+                          brief summary, including where you were working, the
+                          date of the event, and your reflection where
+                          appropriate. If known, please identify what
+                          investigations are pending relating to the event and
+                          which organisation is undertaking the investigation.
+                        </span>
+                      }
+                    />
+                  </Panel>
+                </>
+              ) : null}
+            </Fieldset>
+
+            {[...Object.values(errors)].length > 0 ? (
+              <ErrorSummary
+                aria-labelledby="errorSummaryTitle"
+                role="alert"
+                tabIndex={-1}
+              >
+                <ErrorMessage>Please check highlighted fields</ErrorMessage>
+              </ErrorSummary>
+            ) : null}
+
+            <Pagination>
+              <Pagination.Link
+                previous
+                onClick={() => previousSection(values)}
+                data-jest="BacklinkToSection4"
+                data-cy="BacklinkToSection4"
+              >
+                Section 4
+              </Pagination.Link>
+
+              <Pagination.Link
+                next
+                onClick={() => handleSubmit()}
+                data-jest="linkToSubmit"
+                data-cy="linkToSubmit"
+              >
+                Continue to Submit
+              </Pagination.Link>
+            </Pagination>
+          </Form>
+        )}
+      </Formik>
+    )
+  );
+};
+
+export default Section5;

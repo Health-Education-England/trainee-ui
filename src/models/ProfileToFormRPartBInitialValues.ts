@@ -1,6 +1,6 @@
 import { TraineeProfile } from "./TraineeProfile";
 import { FormRPartB, Work } from "./FormRPartB";
-import { MEDICAL_CURRICULUM } from "../components/forms/formr-part-a/Constants";
+import { MEDICAL_CURRICULUM } from "../utilities/Constants";
 
 export function ProfileToFormRPartBInitialValues(
   traineeProfile: TraineeProfile | null
@@ -60,6 +60,12 @@ export function ProfileToFormRPartBInitialValues(
     isWarned: "",
     isComplying: "",
     healthStatement: "",
+    havePreviousDeclarations: "",
+    previousDeclarations: [],
+    previousDeclarationsSummary: "",
+    haveCurrentDeclarations: "",
+    currentDeclarations: [],
+    currentDeclarationsSummary: "",
     submissionDate: null,
     lastModifiedDate: null
   };

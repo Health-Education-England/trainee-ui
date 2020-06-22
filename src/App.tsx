@@ -42,7 +42,7 @@ class App extends React.PureComponent<AppProps, AppState> {
     return isAuthenticated ? (
       <Fragment>
         <Navbar />
-        <main className="nhsuk-width-container">
+        <main className="nhsuk-width-container nhsuk-u-margin-top-5">
           <BrowserRouter>
             <Switch>
               <Route path="/profile" component={Profile} />

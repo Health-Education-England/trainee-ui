@@ -36,7 +36,7 @@ describe("Confirm", () => {
   it("renders the edit and confirm buttons when form data is avaialbe", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], null);
 
-    expect(wrapper.find("button")).toHaveLength(4);
+    expect(wrapper.find("button")).toHaveLength(6);
   });
 
   it("should push 'formr-b/create' along with formData page to history when edit button clicked", () => {

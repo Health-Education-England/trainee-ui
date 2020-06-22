@@ -46,6 +46,7 @@ export function FormRPartBReducer(
 ): FormRPartBState {
   switch (action.type) {
     case INITIALIZE_FORMR_PARTB_SUCCESS:
+    case SAVE_FORMR_PARTB_SUCCESS:
       return {
         ...state,
         formData: action.payload,
@@ -67,17 +68,8 @@ export function FormRPartBReducer(
         ...state,
         section: action.payload
       };
-    case SAVE_FORMR_PARTB_SUCCESS:
-      return {
-        ...state,
-        formData: action.payload,
-        section: 1
-      };
     case EDIT_FORMR_PARTB:
     case SAVE_FORMR_PARTB_FAILURE:
-      return {
-        ...state
-      };
     default:
       return {
         ...state

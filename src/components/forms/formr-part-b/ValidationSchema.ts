@@ -13,6 +13,29 @@ const leaveValidation = (fieldName: string) =>
     .max(999, `${fieldName} must not be more than 999`)
     .required(`${fieldName} is required`);
 
+const panelSchema = yup.object({
+  declarationType: yup.string(),
+  title: yup.string(),
+  locationOfEntry: yup.string(),
+  dateOfEntry: yup.date()
+});
+
+const panelSchemaValidation = yup.array(
+  yup.object({
+    declarationType: StringValidationSchema("Delaration type"),
+    title: StringValidationSchema("Title"),
+    locationOfEntry: StringValidationSchema("Location of entry"),
+    dateOfEntry: yup
+      .date()
+      .required("Date of entry is required")
+      .test(
+        "dateOfEntry",
+        "The date is outside the allowed date range",
+        value => DateUtilities.IsInsideDateRange(value)
+      )
+  })
+);
+
 export const Section1ValidationSchema = yup.object({
   forename: StringValidationSchema("Forename(s)"),
   surname: StringValidationSchema("Surname (GMC-Registered)", 30),
@@ -96,5 +119,23 @@ export const Section3ValidationSchema = yup.object({
   isComplying: yup.boolean().when("isWarned", {
     is: true,
     then: acceptanceValidation
+  })
+});
+
+export const Section4ValidationSchema = yup.object({
+  havePreviousDeclarations: yup.boolean().required("You must select yes or no"),
+  previousDeclarations: yup
+    .array(panelSchema)
+    .when("havePreviousDeclarations", {
+      is: true,
+      then: panelSchemaValidation
+    })
+});
+
+export const Section5ValidationSchema = yup.object({
+  haveCurrentDeclarations: yup.boolean().required("You must select yes or no"),
+  currentDeclarations: yup.array(panelSchema).when("haveCurrentDeclarations", {
+    is: true,
+    then: panelSchemaValidation
   })
 });

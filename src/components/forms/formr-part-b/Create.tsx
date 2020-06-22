@@ -14,6 +14,9 @@ import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
 import Section2 from "./Sections/Section2";
 import Section3 from "./Sections/Section3";
+import Section4 from "./Sections/Section4";
+import Section5 from "./Sections/Section5";
+
 import { FormRPartB } from "../../../models/FormRPartB";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
@@ -113,12 +116,31 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
           return (
             <Section3
               previousSection={this.previousSection}
-              nextSection={this.submitForm}
+              nextSection={this.nextSection}
               formData={formData}
               history={this.props.history}
             ></Section3>
           );
-
+        case 4:
+          return (
+            <Section4
+              previousSection={this.previousSection}
+              nextSection={this.nextSection}
+              formData={formData}
+              history={this.props.history}
+              section={this.props.section}
+            ></Section4>
+          );
+        case 5:
+          return (
+            <Section5
+              previousSection={this.previousSection}
+              handleSubmit={this.submitForm}
+              formData={formData}
+              history={this.props.history}
+              section={this.props.section}
+            ></Section5>
+          );
         default:
           return <Loading data-jest="loading" />;
       }

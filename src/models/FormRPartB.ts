@@ -24,8 +24,21 @@ export interface FormRPartB {
   isWarned: boolean | string;
   isComplying: boolean | string;
   healthStatement: string;
+  havePreviousDeclarations: boolean | string;
+  previousDeclarations: Declaration[];
+  previousDeclarationsSummary: string;
+  haveCurrentDeclarations: boolean | string;
+  currentDeclarations: Declaration[];
+  currentDeclarationsSummary: string;
   submissionDate: Date | null;
   lastModifiedDate: Date | null;
+}
+
+export interface Declaration {
+  declarationType: string | undefined;
+  dateOfEntry: Date | undefined;
+  title: string;
+  locationOfEntry: string;
 }
 
 export interface Work {

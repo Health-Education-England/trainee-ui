@@ -33,4 +33,8 @@ export class TraineeReferenceService extends ApiService {
   getCurricula(): Promise<AxiosResponse<any>> {
     return this.get("/curriculum");
   }
+
+  getDeclarationType(): Promise<AxiosResponse<any>> {
+    return this.get("/declaration-type");
+  }
 }

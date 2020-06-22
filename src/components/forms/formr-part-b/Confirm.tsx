@@ -67,11 +67,11 @@ class Confirm extends React.PureComponent<ConfirmProps> {
             editSection={this.editSection}
           ></View>
 
-        <Button
-          type="submit"
-          onClick={() => this.handleSubmit(formData)}
-          data-cy="BtnSubmitPartB"
-        >
+          <Button
+            type="submit"
+            onClick={() => this.handleSubmit(formData)}
+            data-cy="BtnSubmitPartB"
+          >
             Submit
           </Button>
         </div>
