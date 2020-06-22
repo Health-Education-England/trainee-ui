@@ -46,7 +46,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
           nextSection(values);
         }}
       >
-        {({ values, errors }) => (
+        {({ values, errors, handleSubmit }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -179,7 +179,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
 
               <Pagination.Link
                 next
-                onClick={() => nextSection(values)}
+                onClick={() => handleSubmit()}
                 data-cy="linkToSection5"
                 data-jest="linkToSection5"
               >
