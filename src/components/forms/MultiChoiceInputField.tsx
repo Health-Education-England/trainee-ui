@@ -11,6 +11,7 @@ interface Props {
   id?: string;
   hint?: any;
   footer?: any;
+  onChange?: any;
 }
 
 const MultiChoiceInputField: React.FC<Props> = props => {
@@ -32,7 +33,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
         data-cy={props.name}
         id={props.id || props.name}
         error={error || ""}
-        onChange={field.onChange}
+        onChange={props.onChange ? props.onChange : field.onChange}
         hint={props.hint}
       >
         {props.items

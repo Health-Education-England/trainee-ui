@@ -15,6 +15,9 @@ import { Form, Formik, FieldArray } from "formik";
 import DeclarationPanel from "./DeclarationPanel";
 import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
 import { Section4ValidationSchema } from "../ValidationSchema";
+import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
+import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
+import { YES_NO } from "../../../../utilities/Constants";
 
 interface Section4Props {
   formData: FormRPartB;
@@ -25,18 +28,14 @@ interface Section4Props {
 }
 
 const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
-  console.log(props);
   const { formData, previousSection, nextSection, section } = props;
+
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
     title: "",
     locationOfEntry: ""
   };
-
-  if (formData && formData.previousDeclarations.length === 0) {
-    formData.previousDeclarations.push(newDeclaration);
-  }
 
   return (
     formData && (
@@ -47,10 +46,14 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors }) => (
           <Form>
             <ScrollTo />
-            <Fieldset disableErrorLine={true} name="currentDeclarations">
+            <Fieldset
+              disableErrorLine={true}
+              name="previousDeclarations"
+              data-jest="mainFieldset4"
+            >
               <Fieldset.Legend
                 headingLevel="H2"
                 size="l"
@@ -82,17 +85,20 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                   label="Do you have any Significant Events, Complaints, Other investigations on your previous Form R Part B?"
                   id="havePreviousDeclarations"
                   name="havePreviousDeclarations"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    DeclarationPanelUtilities.changeDeclarationsArray(
+                      e.target.value,
+                      values.previousDeclarations,
+                      newDeclaration
+                    );
+                  }}
                   type="radios"
-                  items={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
-                  ]}
+                  items={YES_NO}
                   footer="If you wish to make any such declarations in relation to your current Form R Part B then please do this in Section 5"
                 />
               </Panel>
 
-              {values.havePreviousDeclarations &&
-              values.havePreviousDeclarations.toString() === "true" ? (
+              {BooleanUtilities.ToBoolean(values.havePreviousDeclarations) ? (
                 <>
                   <Panel label="Declarations">
                     <FieldArray
@@ -107,7 +113,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                               removeDeclaration={(index: number) =>
                                 p.remove(index)
                               }
-                              data-jest="declarationPanel"
+                              data-jest="declarationPanel4"
                             ></DeclarationPanel>
                           ))}
                           <Button
@@ -132,6 +138,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                       rows={15}
                       label=""
                       data-cy="previousDeclarationsSummaryTextInput"
+                      data-jest="previousDeclarationsSummaryTextInput"
                       hint={
                         <span>
                           If any <strong>previously declared</strong>{" "}
@@ -165,14 +172,16 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                 previous
                 onClick={() => previousSection(values)}
                 data-cy="BacklinkToSection3"
+                data-jest="BacklinkToSection3"
               >
                 Section 3
               </Pagination.Link>
 
               <Pagination.Link
                 next
-                onClick={() => handleSubmit()}
+                onClick={() => nextSection(values)}
                 data-cy="linkToSection5"
+                data-jest="linkToSection5"
               >
                 Continue to Section 5
               </Pagination.Link>

@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import TextInputField from "../../TextInputField";
 import { Button, Panel, CloseIcon } from "nhsuk-react-components";
 import classes from "../FormRPartB.module.scss";
 import SelectInputField from "../../SelectInputField";
-import { DeclarationType } from "../../../../models/FormRPartB";
+import { TraineeReferenceService } from "../../../../services/TraineeReferenceService";
 
 interface Props {
   index: number;
@@ -12,6 +12,31 @@ interface Props {
 }
 
 const DeclarationPanel: FunctionComponent<Props> = (props: Props) => {
+  const [declarationTypes, setDeclarationTypes] = useState([]);
+
+  useEffect(() => {
+    let didCancel = false;
+    const fetchData = async () => {
+      const traineeReferenceService = new TraineeReferenceService();
+      const response = await traineeReferenceService.getDeclarationType();
+      const responseDeclarationTypes = response.data.map(
+        (d: { label: any }) => {
+          return {
+            label: d.label,
+            value: d.label
+          };
+        }
+      );
+      if (!didCancel) {
+        setDeclarationTypes(responseDeclarationTypes);
+      }
+    };
+    fetchData();
+    return () => {
+      didCancel = true;
+    };
+  }, []);
+
   const { index, removeDeclaration: removePanel, section } = props;
   return (
     <Panel className={classes.placementPanel}>
@@ -44,17 +69,7 @@ const DeclarationPanel: FunctionComponent<Props> = (props: Props) => {
                 ? `previousDeclarations[${index}].declarationType`
                 : `currentDeclarations[${index}].declarationType`
             }
-            options={[
-              {
-                label: "Significant event",
-                value: DeclarationType.SignificantEvent
-              },
-              { label: "Complaint", value: DeclarationType.Complaint },
-              {
-                label: "Other investigation",
-                value: DeclarationType.OtherInvestigation
-              }
-            ]}
+            options={declarationTypes}
           />
         </div>
         <div className="nhsuk-grid-column-one-third">
@@ -74,7 +89,11 @@ const DeclarationPanel: FunctionComponent<Props> = (props: Props) => {
         <div className="nhsuk-grid-column-one-half">
           <TextInputField
             label="Title/ Topic of reflection/ event"
-            name={`previousDeclarations[${index}].title`}
+            name={
+              section === 4
+                ? `previousDeclarations[${index}].title`
+                : `currentDeclarations[${index}].title`
+            }
             data-cy={`titleInput${index}`}
           />
         </div>

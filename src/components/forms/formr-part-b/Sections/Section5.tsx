@@ -13,23 +13,22 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import DeclarationPanel from "./DeclarationPanel";
-import {
-  Declaration,
-  FormRPartB,
-  DeclarationType
-} from "../../../../models/FormRPartB";
+import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
 import { Section5ValidationSchema } from "../ValidationSchema";
+import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
+import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
+import { YES_NO } from "../../../../utilities/Constants";
 
 interface Section5Props {
   formData: FormRPartB;
   previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
+  handleSubmit: (formData: FormRPartB) => void;
   history: any;
   section: number;
 }
 
 const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
-  const { formData, previousSection, nextSection, history, section } = props;
+  const { formData, previousSection, handleSubmit, history, section } = props;
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
@@ -37,24 +36,24 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
     locationOfEntry: ""
   };
 
-  if (formData && formData.currentDeclarations.length === 0) {
-    formData.currentDeclarations.push(newDeclaration);
-  }
-
   return (
     formData && (
       <Formik
         initialValues={formData}
         validationSchema={Section5ValidationSchema}
         onSubmit={values => {
-          nextSection(values);
+          handleSubmit(values);
           history.push("/formr-b/confirm");
         }}
       >
         {({ values, errors, handleSubmit }) => (
           <Form>
             <ScrollTo />
-            <Fieldset disableErrorLine={true} name="currentDeclarations">
+            <Fieldset
+              disableErrorLine={true}
+              name="currentDeclarations"
+              data-jest="mainFieldset5"
+            >
               <Fieldset.Legend
                 headingLevel="H2"
                 size="l"
@@ -106,16 +105,19 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
                   id="haveCurrentDeclarations"
                   name="haveCurrentDeclarations"
                   type="radios"
-                  items={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
-                  ]}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    DeclarationPanelUtilities.changeDeclarationsArray(
+                      e.target.value,
+                      values.currentDeclarations,
+                      newDeclaration
+                    );
+                  }}
+                  items={YES_NO}
                   footer="If you wish to make any such declarations in relation to your previous Form R Part B then please do this in Section 4"
                 />
               </Panel>
 
-              {values.haveCurrentDeclarations &&
-              values.haveCurrentDeclarations.toString() === "true" ? (
+              {BooleanUtilities.ToBoolean(values.haveCurrentDeclarations) ? (
                 <>
                   <Panel label="Declarations">
                     <FieldArray
@@ -187,6 +189,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
               <Pagination.Link
                 previous
                 onClick={() => previousSection(values)}
+                data-jest="BacklinkToSection4"
                 data-cy="BacklinkToSection4"
               >
                 Section 4
@@ -195,6 +198,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
               <Pagination.Link
                 next
                 onClick={() => handleSubmit()}
+                data-jest="linkToSubmit"
                 data-cy="linkToSubmit"
               >
                 Continue to Submit

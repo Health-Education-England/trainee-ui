@@ -49,14 +49,19 @@ class View extends React.PureComponent<ViewProps> {
             Go back to list
           </BackLink>
           <div className="nhsuk-grid-row">
-            <div className="nhsuk-grid-column-two-thirds">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
               <h2 data-cy="sectionHeader1">Section 1: Doctor's details</h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
               {SectionEditButton(1)}
             </div>
           </div>
-
           <Panel label="Personal details" data-cy="personalDetails">
             <SummaryList>
               <SummaryList.Row>
@@ -117,9 +122,14 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
           <div className="nhsuk-grid-row">
-            <div className="nhsuk-grid-column-two-thirds">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
               <h2 data-cy="sectionHeader2">
                 Section 2: Whole Scope of Practice
               </h2>
@@ -128,7 +138,6 @@ class View extends React.PureComponent<ViewProps> {
               {SectionEditButton(2)}
             </div>
           </div>
-
           <Panel label="Type of work">
             {formData.work.length > 0
               ? formData.work.map((w, i) => (
@@ -222,9 +231,14 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
           <div className="nhsuk-grid-row">
-            <div className="nhsuk-grid-column-two-thirds">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
               <h2 data-cy="sectionHeader3">
                 Section 3: Declarations relating to Good Medical Practice
               </h2>
@@ -233,7 +247,6 @@ class View extends React.PureComponent<ViewProps> {
               {SectionEditButton(3)}
             </div>
           </div>
-
           <Panel label="Declarations">
             <SummaryList>
               <SummaryList.Row>
@@ -284,6 +297,207 @@ class View extends React.PureComponent<ViewProps> {
                 </SummaryList.Value>
               </SummaryList.Row>
             </SummaryList>
+          </Panel>
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader4">
+                Section 4: Update to previous Form R Part B
+              </h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(4)}
+            </div>
+          </div>
+          <Panel label="Previously declared events">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  Do you have any Significant Events, Complaints, Other
+                  investigations on your previous Form R Part B?
+                </SummaryList.Key>
+                <SummaryList.Value data-jest="havePreviousDeclarations">
+                  {BooleanUtilities.ToYesNo(formData.havePreviousDeclarations)}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
+            {formData.previousDeclarations &&
+            formData.previousDeclarations.length > 0
+              ? formData.previousDeclarations.map((event, index) => (
+                  <Panel
+                    key={index}
+                    className={classes.previousDeclarationsPanel}
+                  >
+                    <h3 data-cy={`previousDeclaration${index + 1}`}>
+                      Previous declaration {index + 1}
+                    </h3>
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Declaration type</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`previousDeclarationType${index + 1}`}
+                          data-jest="previousDeclarationType"
+                        >
+                          {event.declarationType}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Date of entry</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`previousDateOfEntry${index + 1}`}
+                          data-jest="previousDateOfEntry"
+                        >
+                          {DateUtilities.ToLocalDate(event.dateOfEntry || null)}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Title</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`previousDeclarationTitle${index + 1}`}
+                          data-jest="previousDeclarationTitle"
+                        >
+                          {event.title}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Location of entry</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`previousLocationOfEntry${index + 1}`}
+                          data-jest="previousLocationOfEntry"
+                        >
+                          {event.locationOfEntry}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+                ))
+              : null}
+            {formData.previousDeclarations &&
+            formData.previousDeclarations.length > 0 ? (
+              <SummaryList>
+                <SummaryList.Row>
+                  <SummaryList.Key>
+                    If any previously declared Significant Events, Complaints or
+                    Other Investigations remain unresolved, please provide a
+                    brief summary below, including where you were working, the
+                    date of the event, and your reflection where appropriate. If
+                    known, please identify what investigations are pending
+                    relating to the event and which organisation is undertaking
+                    this investigation.
+                  </SummaryList.Key>
+                  <SummaryList.Value data-jest="previousDeclarationsSummary">
+                    {formData.previousDeclarationsSummary}
+                  </SummaryList.Value>
+                </SummaryList.Row>
+              </SummaryList>
+            ) : null}
+          </Panel>
+
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader5">
+                Section 5: New declarations since your previous{" "}
+                <span className="noWrap">Form R Part B</span>
+              </h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(5)}
+            </div>
+          </div>
+          <Panel label="New declared events">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>I confirm that</SummaryList.Key>
+                <SummaryList.Value data-jest="haveCurrentDeclarations">
+                  {BooleanUtilities.ToBoolean(formData.haveCurrentDeclarations)
+                    ? "I have been involved in significant events/complaints/other investigations since my last ARCP/RITA/Appraisal"
+                    : "I do not have anything new to declare since my last ARCP/RITA/Appraisal"}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
+
+            {formData.currentDeclarations &&
+            formData.currentDeclarations.length > 0
+              ? formData.currentDeclarations.map((event, index) => (
+                  <Panel
+                    key={index}
+                    className={classes.currentDeclarationsPanel}
+                  >
+                    <h3 data-cy={`currentDeclaration${index + 1}`}>
+                      Current declaration {index + 1}
+                    </h3>
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Declaration type</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`currentDeclarationType${index + 1}`}
+                          data-jest="currentDeclarationType"
+                        >
+                          {event.declarationType}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Date of entry</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`currentDateOfEntry${index + 1}`}
+                          data-jest="currentDateOfEntry"
+                        >
+                          {DateUtilities.ToLocalDate(event.dateOfEntry || null)}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Title</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`currentDeclarationTitle${index + 1}`}
+                          data-jest="currentDeclarationTitle"
+                        >
+                          {event.title}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>Location of entry</SummaryList.Key>
+                        <SummaryList.Value
+                          data-cy={`currentLocationOfEntry${index + 1}`}
+                          data-jest="currentLocationOfEntry"
+                        >
+                          {event.locationOfEntry}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+                ))
+              : null}
+
+            {formData.currentDeclarations &&
+            formData.currentDeclarations.length > 0 ? (
+              <SummaryList>
+                <SummaryList.Row>
+                  <SummaryList.Key>
+                    If you know of any unresolved significant
+                    events/complaints/other investigations since your last
+                    ARCP/RITA/Appraisal, please provide below a brief summary,
+                    including where you were working, the date of the event and
+                    your reflection where appropriate. If known, please identify
+                    what investigations are pending relating to the event and
+                    which organisation is undertaking the investigation.
+                  </SummaryList.Key>
+                  <SummaryList.Value data-jest="previousDeclarationsSummary">
+                    {formData.currentDeclarationsSummary}
+                  </SummaryList.Value>
+                </SummaryList.Row>
+              </SummaryList>
+            ) : null}
           </Panel>
         </>
       )
