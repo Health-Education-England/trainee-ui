@@ -28,7 +28,7 @@ describe("Form R (Part B)", () => {
     cy.get(".nhsuk-warning-callout > p").should("be.visible");
     cy.location("pathname", { timeout: 10000 }).should("include", "/formr-b");
 
-    //-- Section 1 - Doctor's details --
+    // -------- Section 1 - Doctor's details -----------
     cy.contains("Section 1: Doctor's details").should("be.visible");
     cy.get("[data-cy=mainWarning1]").should("be.visible");
     cy.get("[data-cy=legendFieldset1]").should("be.visible");
@@ -195,6 +195,107 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .type("I'm in astonishingly excellent health.");
 
+    // Click to navigate to section 4
+    cy.get(".nhsuk-error-summary").should("not.be.visible");
+    cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+
+    // -------- Section 4: Update to your previous Form R Part B -----------
+    cy.get("[data-cy=legendFieldset4]").should("include.text", "Section 4");
+    cy.get("[data-cy=mainWarning4]").should("be.visible");
+    cy.get("[data-cy=declarations4]").should("be.visible");
+
+    // Navigate back to section 3
+    cy.get("[data-cy=BacklinkToSection3] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=mainWarning3]").should("be.visible");
+    // Section 3 data is unchanged
+    cy.get(".nhsuk-form-group > [data-cy=healthStatement]")
+      .should("be.visible")
+      .type("I'm in astonishingly excellent health.");
+
+    // Return to section 4
+    cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+
+    // Fill section 4
+    cy.get("[data-cy=havePreviousDeclarations1]")
+      .should("be.visible")
+      .should("contain.value", "")
+      .click();
+
+    cy.get("#declarationPanel0").should("not.be.visible");
+
+    cy.get("[data-cy=havePreviousDeclarations0]")
+      .should("be.visible")
+      .should("contain.value", "")
+      .click();
+
+    // Fill declaration
+    cy.get("#declarationPanel0").should("be.visible");
+
+    cy.get('[data-cy="previousDeclarations[0].declarationType"]')
+      .should("be.visible")
+      .select("Complaint");
+
+    cy.get('[data-cy="previousDeclarations[0].dateOfEntry"]')
+      .should("be.visible")
+      .type(pastDate);
+
+    cy.get('[data-cy="previousDeclarations[0].title"]')
+      .should("be.visible")
+      .type("declaration title");
+
+    cy.get('[data-cy="previousDeclarations[0].locationOfEntry"]')
+      .should("be.visible")
+      .type("declaration location");
+
+    // Click to navigate to section 5
+    cy.get(".nhsuk-error-summary").should("not.be.visible");
+    cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+
+    // -------- Section 5: Update to your previous Form R Part B -----------
+    cy.get("[data-cy=legendFieldset5]").should("include.text", "Section 5");
+    cy.get("[data-cy=mainWarning5]").should("be.visible");
+    cy.get("[data-cy=declarations5]").should("be.visible");
+
+    // Navigate back to section 4
+    cy.get("[data-cy=BacklinkToSection4] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=mainWarning4]").should("be.visible");
+    // Section 4 data is unchanged
+
+    // Return to section 5
+    cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+
+    // Fill section 5
+    cy.get("[data-cy=haveCurrentDeclarations1]")
+      .should("be.visible")
+      .should("contain.value", "")
+      .click();
+
+    cy.get("#declarationPanel0").should("not.be.visible");
+
+    cy.get("[data-cy=haveCurrentDeclarations0]")
+      .should("be.visible")
+      .should("contain.value", "")
+      .click();
+
+    // Fill declaration
+    cy.get("#declarationPanel0").should("be.visible");
+
+    cy.get('[data-cy="currentDeclarations[0].declarationType"]')
+      .should("be.visible")
+      .select("Complaint");
+
+    cy.get('[data-cy="currentDeclarations[0].dateOfEntry"]')
+      .should("be.visible")
+      .type(pastDate);
+
+    cy.get('[data-cy="currentDeclarations[0].title"]')
+      .should("be.visible")
+      .type("declaration title");
+
+    cy.get('[data-cy="currentDeclarations[0].locationOfEntry"]')
+      .should("be.visible")
+      .type("declaration location");
+
     // Navigate to submit page
     cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=BtnEditSection1]").should("be.visible");
@@ -202,6 +303,8 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=BtnEditSection2]").should("be.visible");
     cy.get("[data-cy=typeOfWork3]").should("be.visible");
     cy.get("[data-cy=BtnEditSection3]").should("be.visible");
+    cy.get("[data-cy=BtnEditSection4]").should("be.visible");
+    cy.get("[data-cy=BtnEditSection5]").should("be.visible");
 
     // Click edit btn to edit section 1 details
     cy.get(".nhsuk-back-link__link").should("be.visible");
@@ -223,6 +326,20 @@ describe("Form R (Part B)", () => {
       "contain.value",
       "I'm in astonishingly excellent health."
     );
+
+    // Navigate to section 4
+    cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+
+    cy.get('[data-cy="previousDeclarations[0].declarationType"]')
+      .should("be.visible")
+      .select("Significant event");
+
+    // Navigate to section 5
+    cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+
+    cy.get('[data-cy="currentDeclarations[0].declarationType"]')
+      .should("be.visible")
+      .select("Significant event");
 
     // Navigate to submit
     cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();

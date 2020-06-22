@@ -39,7 +39,7 @@ const DeclarationPanel: FunctionComponent<Props> = (props: Props) => {
 
   const { index, removeDeclaration: removePanel, section } = props;
   return (
-    <Panel className={classes.placementPanel}>
+    <Panel className={classes.placementPanel} id={`declarationPanel${index}`}>
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-quarter">
           <h3>Declaration {index + 1}</h3>
