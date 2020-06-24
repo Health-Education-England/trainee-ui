@@ -11,17 +11,10 @@ import {
   ErrorMessage
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
-import { FormRPartB } from "../../../../models/FormRPartB";
 import { Section3ValidationSchema } from "../ValidationSchema";
+import { SectionProps } from "./SectionProps";
 
-interface Section3Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-}
-
-const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
+const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const { formData, previousSection, nextSection } = props;
   return (
     formData && (
@@ -167,7 +160,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                 onClick={() => handleSubmit()}
                 data-cy="linkToSection4"
               >
-                Continue to Section 4
+                Section 4
               </Pagination.Link>
             </Pagination>
           </Form>

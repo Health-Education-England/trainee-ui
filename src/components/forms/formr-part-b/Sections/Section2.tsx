@@ -13,18 +13,12 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import WorkPanel from "./WorkPanel";
-import { Work, FormRPartB } from "../../../../models/FormRPartB";
+import { Work } from "../../../../models/FormRPartB";
 import { Section2ValidationSchema } from "../ValidationSchema";
 import classes from "../FormRPartB.module.scss";
+import { SectionProps } from "./SectionProps";
 
-interface Section2Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-}
-
-const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
+const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const { formData, previousSection, nextSection } = props;
   const newWork: Work = {
     typeOfWork: "",
@@ -187,7 +181,7 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
                 onClick={() => handleSubmit()}
                 data-cy="linkToSection3"
               >
-                Continue to Section 3
+                Section 3
               </Pagination.Link>
             </Pagination>
           </Form>

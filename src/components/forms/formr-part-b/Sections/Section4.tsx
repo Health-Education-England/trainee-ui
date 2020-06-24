@@ -13,22 +13,15 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import DeclarationPanel from "./DeclarationPanel";
-import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
+import { Declaration } from "../../../../models/FormRPartB";
 import { Section4ValidationSchema } from "../ValidationSchema";
 import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
-import { YES_NO } from "../../../../utilities/Constants";
+import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
+import { SectionProps } from "./SectionProps";
 
-interface Section4Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-  section: number;
-}
-
-const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
-  const { formData, previousSection, nextSection, section } = props;
+const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
+  const { formData, previousSection, nextSection } = props;
 
   const newDeclaration: Declaration = {
     declarationType: undefined,
@@ -93,7 +86,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                     );
                   }}
                   type="radios"
-                  items={YES_NO}
+                  items={YES_NO_OPTIONS}
                   footer="If you wish to make any such declarations in relation to your current Form R Part B then please do this in Section 5"
                 />
               </Panel>
@@ -107,7 +100,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                         <div>
                           {values.previousDeclarations.map((_, i: number) => (
                             <DeclarationPanel
-                              section={section}
+                              section={4}
                               key={i}
                               index={i}
                               removeDeclaration={(index: number) =>
@@ -183,7 +176,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                 data-cy="linkToSection5"
                 data-jest="linkToSection5"
               >
-                Continue to Section 5
+                Section 5
               </Pagination.Link>
             </Pagination>
           </Form>

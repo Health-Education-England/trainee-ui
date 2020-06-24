@@ -17,7 +17,7 @@ import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
 import { Section5ValidationSchema } from "../ValidationSchema";
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
-import { YES_NO } from "../../../../utilities/Constants";
+import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 
 interface Section5Props {
   formData: FormRPartB;
@@ -112,7 +112,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
                       newDeclaration
                     );
                   }}
-                  items={YES_NO}
+                  items={YES_NO_OPTIONS}
                   footer="If you wish to make any such declarations in relation to your previous Form R Part B then please do this in Section 4"
                 />
               </Panel>
