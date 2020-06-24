@@ -182,7 +182,6 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
               <Pagination.Link
                 previous
                 onClick={() => previousSection(values)}
-                data-jest="BacklinkToSection4"
                 data-cy="BacklinkToSection4"
               >
                 Section 4
@@ -191,7 +190,6 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
               <Pagination.Link
                 next
                 onClick={() => handleSubmit()}
-                data-jest="linkToSubmit"
                 data-cy="linkToSubmit"
               >
                 Section 6

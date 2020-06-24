@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { FormRPartB } from "../../../../models/FormRPartB";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { act } from "react-test-renderer";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -33,10 +33,16 @@ describe("Confirm", () => {
     mountComponent(submittedFormRPartBs[0], null);
   });
 
+  it("should redirect to create page when no data availabe", () => {
+    const wrapper = mountComponent(null, null);
+
+    expect(wrapper.find(Redirect)).toHaveLength(1);
+  });
+
   it("renders the edit and confirm buttons when form data is avaialbe", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], null);
 
-    expect(wrapper.find("button")).toHaveLength(6);
+    expect(wrapper.find("button")).toHaveLength(8);
   });
 
   it("should push 'formr-b/create' along with formData page to history when edit button clicked", () => {

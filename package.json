@@ -90,8 +90,11 @@
       "!**/vendor/**",
       "!**/src/mock-data/*.{js,jsx,ts,tsx}",
       "!**/src/redux/store/*.{js,jsx,ts,tsx}",
+      "!**/src/redux/types.ts",
+      "!**/src/components/forms/formr-part-b/Sections/SectionProps.ts",
       "!**/src/*.{js,ts}",
       "!**/src/index.tsx",
+      "!**/src/models/*.ts",
       "!**/src/redux/reducers/index.ts",
       "**/src/**/*.{ts,tsx}"
     ],

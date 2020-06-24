@@ -3,6 +3,12 @@ import { shallow, mount } from "enzyme";
 import Section3 from "../Sections/Section3";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 
+jest.mock("../ValidationSchema", () => ({
+  get Section3ValidationSchema() {
+    return null;
+  }
+}));
+
 const prevSection = jest.fn();
 const nextSection = jest.fn();
 
@@ -74,5 +80,17 @@ describe("Form-R Part-B Section3", () => {
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
+  });
+
+  it("should submit the form", () => {
+    const wrapper = mount(<Section3 {...props} />);
+    const form = wrapper.find("form").first();
+
+    try {
+      form.simulate("submit");
+      expect(nextSection).toHaveBeenCalled();
+    } catch (e) {
+      expect(true).toBe(false);
+    }
   });
 });
