@@ -13,22 +13,15 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import DeclarationPanel from "./DeclarationPanel";
-import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
+import { Declaration } from "../../../../models/FormRPartB";
 import { Section5ValidationSchema } from "../ValidationSchema";
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
 import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
+import { SectionProps } from "./SectionProps";
 
-interface Section5Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  handleSubmit: (formData: FormRPartB) => void;
-  history: any;
-  section: number;
-}
-
-const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
-  const { formData, previousSection, handleSubmit, history, section } = props;
+const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
+  const { formData, previousSection, nextSection, history } = props;
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
@@ -42,7 +35,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
         initialValues={formData}
         validationSchema={Section5ValidationSchema}
         onSubmit={values => {
-          handleSubmit(values);
+          nextSection(values);
           history.push("/formr-b/confirm");
         }}
       >
@@ -126,7 +119,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
                         <div>
                           {values.currentDeclarations.map((_, i: number) => (
                             <DeclarationPanel
-                              section={section}
+                              section={5}
                               key={i}
                               index={i}
                               removeDeclaration={(index: number) =>
@@ -201,7 +194,7 @@ const Section5: FunctionComponent<Section5Props> = (props: Section5Props) => {
                 data-jest="linkToSubmit"
                 data-cy="linkToSubmit"
               >
-                Continue to Submit
+                Section 6
               </Pagination.Link>
             </Pagination>
           </Form>
