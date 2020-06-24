@@ -7,6 +7,10 @@ import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
+import {
+  FORMR_PARTB_ACCEPTANCE,
+  FORMR_PARTB_CONSENT
+} from "../../../utilities/Constants";
 
 interface ViewProps {
   formData: FormRPartB | null;
@@ -122,6 +126,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -231,6 +236,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -298,6 +304,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -407,8 +414,7 @@ class View extends React.PureComponent<ViewProps> {
               }
             >
               <h2 data-cy="sectionHeader5">
-                Section 5: New declarations since your previous{" "}
-                <span className="noWrap">Form R Part B</span>
+                Section 5: New declarations since your previous Form R Part B
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
@@ -498,6 +504,62 @@ class View extends React.PureComponent<ViewProps> {
                 </SummaryList.Row>
               </SummaryList>
             ) : null}
+          </Panel>
+
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader5">Section 6: Compliments</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(6)}
+            </div>
+          </div>
+          <Panel label="Compliments">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>Compliments</SummaryList.Key>
+                <SummaryList.Value data-jest="compliments">
+                  {formData.compliments}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
+          </Panel>
+
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader5">Section 7: Declaration</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(7)}
+            </div>
+          </div>
+          <Panel label="Declaration">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>I confirm that</SummaryList.Key>
+                <SummaryList.Value data-jest="dec">
+                  {FORMR_PARTB_ACCEPTANCE}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>I confirm that</SummaryList.Key>
+                <SummaryList.Value data-jest="dec">
+                  {FORMR_PARTB_CONSENT}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
           </Panel>
         </>
       )
