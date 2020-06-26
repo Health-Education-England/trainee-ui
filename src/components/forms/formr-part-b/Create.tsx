@@ -18,6 +18,9 @@ import Section4 from "./Sections/Section4";
 import Section5 from "./Sections/Section5";
 
 import { FormRPartB } from "../../../models/FormRPartB";
+import Section6 from "./Sections/Section6";
+import Section7 from "./Sections/Section7";
+import { SectionProps } from "./Sections/SectionProps";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -74,76 +77,58 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     const { formData, localOffices, curricula, isLoaded, section } = this.props;
 
     if (!isLoaded || !formData) {
-      return <Loading data-jest="loading" />;
-    } else {
-      if (localOffices.length > 0) {
-        if (!localOffices.some(l => l.label === formData.localOfficeName)) {
-          formData.localOfficeName = "";
-        }
+      return <Loading />;
+    }
 
-        if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
-          formData.prevRevalBody = "";
-        }
+    if (localOffices.length > 0) {
+      if (!localOffices.some(l => l.label === formData.localOfficeName)) {
+        formData.localOfficeName = "";
       }
 
-      if (
-        curricula.length > 0 &&
-        !curricula.some(l => l.label === formData.programmeSpecialty)
-      ) {
-        formData.programmeSpecialty = "";
+      if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
+        formData.prevRevalBody = "";
       }
+    }
 
-      switch (section) {
-        case 1:
-          return (
-            <Section1
-              localOffices={localOffices}
-              curricula={curricula}
-              formData={formData}
-              nextSection={this.nextSection}
-            ></Section1>
-          );
-        case 2:
-          return (
-            <Section2
-              formData={formData}
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              history={this.props.history}
-            ></Section2>
-          );
-        case 3:
-          return (
-            <Section3
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              formData={formData}
-              history={this.props.history}
-            ></Section3>
-          );
-        case 4:
-          return (
-            <Section4
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              formData={formData}
-              history={this.props.history}
-              section={this.props.section}
-            ></Section4>
-          );
-        case 5:
-          return (
-            <Section5
-              previousSection={this.previousSection}
-              handleSubmit={this.submitForm}
-              formData={formData}
-              history={this.props.history}
-              section={this.props.section}
-            ></Section5>
-          );
-        default:
-          return <Loading data-jest="loading" />;
-      }
+    if (
+      curricula.length > 0 &&
+      !curricula.some(l => l.label === formData.programmeSpecialty)
+    ) {
+      formData.programmeSpecialty = "";
+    }
+
+    const sectionProps: SectionProps = {
+      formData: formData,
+      previousSection: this.previousSection,
+      nextSection: this.nextSection
+    };
+
+    switch (section) {
+      case 1:
+        return (
+          <Section1
+            localOffices={localOffices}
+            curricula={curricula}
+            formData={formData}
+            nextSection={this.nextSection}
+          ></Section1>
+        );
+      case 2:
+        return <Section2 {...sectionProps} />;
+      case 3:
+        return <Section3 {...sectionProps} />;
+      case 4:
+        return <Section4 {...sectionProps} />;
+      case 5:
+        return <Section5 {...sectionProps} />;
+      case 6:
+        return <Section6 {...sectionProps} />;
+      case 7:
+        return (
+          <Section7 {...sectionProps} history={this.props.history}></Section7>
+        );
+      default:
+        return <Loading />;
     }
   }
 }

@@ -66,6 +66,7 @@ export function ProfileToFormRPartBInitialValues(
     haveCurrentDeclarations: "",
     currentDeclarations: [],
     currentDeclarationsSummary: "",
+    compliments: "",
     submissionDate: null,
     lastModifiedDate: null
   };

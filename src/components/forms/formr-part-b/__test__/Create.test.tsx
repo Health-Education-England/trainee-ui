@@ -6,6 +6,7 @@ import Create from "../Create";
 import { Provider } from "react-redux";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { FormRPartB } from "../../../../models/FormRPartB";
+import Loading from "../../../common/Loading";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -33,33 +34,23 @@ describe("Create", () => {
     );
   });
 
-  it("renders section 1 when section value is 1", () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
+  [1, 2, 3, 4, 5, 6, 7].forEach(section => {
+    it(`renders section ${section} when section value is ${section}`, () => {
+      const store = createStore(submittedFormRPartBs[0], section);
 
-    expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toBe(
-      "Section 1: Doctor's details"
-    );
+      const wrapper = mount(
+        <Provider store={store}>
+          <Create history={history} location={location} />
+        </Provider>
+      );
+
+      expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toContain(
+        `Section ${section}`
+      );
+    });
   });
 
-  it("render section 2 when section value is 2", () => {
-    const stores = createStore(submittedFormRPartBs[0], 2);
-
-    const wrapper = mount(
-      <Provider store={stores}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
-
-    expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toBe(
-      "Section 2: Whole Scope of Practice"
-    );
-  });
-
-  it("render loading when section value is not valid", () => {
+  it("render Loading when section value is not valid", () => {
     const stores = createStore(submittedFormRPartBs[0], 0);
 
     const wrapper = mount(
@@ -68,10 +59,10 @@ describe("Create", () => {
       </Provider>
     );
 
-    expect(wrapper.find("[data-jest='loading']").length).toBe(1);
+    expect(wrapper.find(Loading)).toHaveLength(1);
   });
 
-  it("should load Loading when reference data is not loaded", () => {
+  it("renders Loading when reference data is not loaded", () => {
     store = mockStore({
       formRPartB: { formData: submittedFormRPartBs[0], section: 1 },
       referenceData: {
@@ -87,6 +78,6 @@ describe("Create", () => {
       </Provider>
     );
 
-    expect(wrapper.find("[data-jest='loading']").length).toBe(1);
+    expect(wrapper.find(Loading)).toHaveLength(1);
   });
 });

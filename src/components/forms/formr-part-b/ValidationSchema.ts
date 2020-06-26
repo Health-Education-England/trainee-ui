@@ -139,3 +139,8 @@ export const Section5ValidationSchema = yup.object({
     then: panelSchemaValidation
   })
 });
+
+export const Section7ValidationSchema = yup.object({
+  isDeclarationAccepted: acceptanceValidation,
+  isConsentAccepted: acceptanceValidation
+});

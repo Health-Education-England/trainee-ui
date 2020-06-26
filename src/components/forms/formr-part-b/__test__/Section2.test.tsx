@@ -6,6 +6,12 @@ import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-part
 const prevSection = jest.fn();
 const nextSection = jest.fn();
 
+jest.mock("../ValidationSchema", () => ({
+  get Section2ValidationSchema() {
+    return null;
+  }
+}));
+
 const props = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
@@ -71,5 +77,17 @@ describe("Form-R Part-B Section2", () => {
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
+  });
+
+  it("should submit the form", () => {
+    const wrapper = mount(<Section2 {...props} />);
+    const form = wrapper.find("form").first();
+
+    try {
+      form.simulate("submit");
+      expect(nextSection).toHaveBeenCalled();
+    } catch (e) {
+      expect(true).toBe(false);
+    }
   });
 });

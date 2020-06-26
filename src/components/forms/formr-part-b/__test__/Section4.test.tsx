@@ -2,6 +2,13 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Section4 from "../Sections/Section4";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import DeclarationPanel from "../Sections/DeclarationPanel";
+
+jest.mock("../ValidationSchema", () => ({
+  get Section4ValidationSchema() {
+    return null;
+  }
+}));
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
@@ -82,6 +89,24 @@ describe("Form-R Part-B Section4", () => {
     ).toBeTruthy();
   });
 
+  it("Should not have any Declaration panel when havePreviousDeclarations is false", () => {
+    const wrapper = mount(<Section4 {...props} />);
+    expect(wrapper.find(DeclarationPanel)).toHaveLength(1);
+
+    wrapper
+      .find("[data-jest='havePreviousDeclarations'] input")
+      .last()
+      .simulate("change", {
+        persist: () => {},
+        target: {
+          name: "havePreviousDeclarations",
+          value: "false"
+        }
+      });
+
+    expect(wrapper.find(DeclarationPanel)).toHaveLength(0);
+  });
+
   it("should render previous section link buttons", () => {
     const wrapper = mount(<Section4 {...props} />);
     expect(wrapper.find("a[data-jest='BacklinkToSection3']").length).toBe(1);
@@ -92,5 +117,19 @@ describe("Form-R Part-B Section4", () => {
   it("should render next section link buttons", async () => {
     const wrapper = mount(<Section4 {...props} />);
     expect(wrapper.find("a[data-jest='linkToSection5']").length).toBe(1);
+
+    wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
+  });
+
+  it("should submit the form", () => {
+    const wrapper = mount(<Section4 {...props} />);
+    const form = wrapper.find("form").first();
+
+    try {
+      form.simulate("submit");
+      expect(nextSection).toHaveBeenCalled();
+    } catch (e) {
+      expect(true).toBe(false);
+    }
   });
 });

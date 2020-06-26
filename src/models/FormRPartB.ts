@@ -30,6 +30,7 @@ export interface FormRPartB {
   haveCurrentDeclarations: boolean | string;
   currentDeclarations: Declaration[];
   currentDeclarationsSummary: string;
+  compliments: string;
   submissionDate: Date | null;
   lastModifiedDate: Date | null;
 }

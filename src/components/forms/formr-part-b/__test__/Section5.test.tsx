@@ -2,16 +2,22 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Section5 from "../Sections/Section5";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import { SectionProps } from "../Sections/SectionProps";
+import DeclarationPanel from "../Sections/DeclarationPanel";
+
+jest.mock("../ValidationSchema", () => ({
+  get Section5ValidationSchema() {
+    return null;
+  }
+}));
 
 const prevSection = jest.fn();
-const handleSubmit = jest.fn();
+const nextSection = jest.fn();
 
-const props = {
+const props: SectionProps = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
-  handleSubmit: handleSubmit,
-  history: [],
-  section: 5
+  nextSection: nextSection
 };
 
 describe("Form-R Part-B Section5", () => {
@@ -76,23 +82,48 @@ describe("Form-R Part-B Section5", () => {
     ).toBeTruthy();
   });
 
+  it("Should not have any Declaration panel when haveCurrentDeclarations is false", () => {
+    const wrapper = mount(<Section5 {...props} />);
+    expect(wrapper.find(DeclarationPanel)).toHaveLength(1);
+
+    wrapper
+      .find("[data-jest='haveCurrentDeclarations'] input")
+      .last()
+      .simulate("change", {
+        persist: () => {},
+        target: {
+          name: "haveCurrentDeclarations",
+          value: "false"
+        }
+      });
+
+    expect(wrapper.find(DeclarationPanel)).toHaveLength(0);
+  });
+
   it("should render previous section link buttons", () => {
     const wrapper = mount(<Section5 {...props} />);
-    expect(wrapper.find("a[data-jest='BacklinkToSection4']").length).toBe(1);
-    wrapper.find("a[data-jest='BacklinkToSection4']").first().simulate("click");
+
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
-  it("should render 'continue to submit' link", () => {
+  it("should render next section link buttons", async () => {
     const wrapper = mount(<Section5 {...props} />);
-    expect(wrapper.find("a[data-jest='linkToSubmit']").length).toBe(1);
+
+    expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 
-  it("should call onClick when click on 'true' radio", async () => {
-    const component = mount(<Section5 {...props} />);
-    const wrapper = component.find(
-      "[data-jest='haveCurrentDeclarations'] input"
-    );
-    wrapper.first().simulate("click");
+  it("should submit the form", () => {
+    const wrapper = mount(<Section5 {...props} />);
+    const form = wrapper.find("form").first();
+
+    try {
+      form.simulate("submit");
+      expect(nextSection).toHaveBeenCalled();
+    } catch (e) {
+      expect(true).toBe(false);
+    }
   });
 });
