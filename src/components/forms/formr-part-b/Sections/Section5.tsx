@@ -21,7 +21,7 @@ import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 import { SectionProps } from "./SectionProps";
 
 const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection, history } = props;
+  const { formData, previousSection, nextSection } = props;
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
@@ -36,7 +36,6 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
         validationSchema={Section5ValidationSchema}
         onSubmit={values => {
           nextSection(values);
-          history.push("/formr-b/confirm");
         }}
       >
         {({ values, errors, handleSubmit }) => (
@@ -190,7 +189,8 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
               <Pagination.Link
                 next
                 onClick={() => handleSubmit()}
-                data-cy="linkToSubmit"
+                data-cy="linkToSection6"
+                data-jest="linkToSection6"
               >
                 Section 6
               </Pagination.Link>
