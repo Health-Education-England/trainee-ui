@@ -296,6 +296,64 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .type("declaration location");
 
+    // Click to navigate to section 6
+    cy.get(".nhsuk-error-summary").should("not.be.visible");
+    cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+
+    // -------- Section 6: Compliments -----------
+
+    cy.get("[data-cy=legendFieldset6]").should("include.text", "Section 6");
+
+    // Fill section 6
+    // should be blank to begin with
+    cy.get("[data-cy=compliments]")
+      .should("be.visible")
+      .should("contain.value", "");
+    cy.get("[data-cy=compliments]").type("Oh what a lovely pair of shoes!");
+
+    // Navigate back to section 5
+    cy.get("[data-cy=BacklinkToSection5] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=mainWarning5]").should("be.visible");
+    // Section 5 data is unchanged
+
+    // Return to section 6
+    cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=compliments]")
+      .should("be.visible")
+      .should("contain.value", "Oh what a lovely pair of shoes!");
+
+    // Click to navigate to section 7
+    cy.get(".nhsuk-error-summary").should("not.be.visible");
+    cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+
+    // -------- Section 7: Declarations -----------
+
+    // Initial state
+    cy.get("[data-cy=legendFieldset6]").should("include.text", "Section 7");
+    cy.get("[data-cy=isDeclarationAccepted0]")
+      .should("be.visible")
+      .should("contain.value", "true")
+      .should("not.be.checked");
+    cy.get("[data-cy=isConsentAccepted0]")
+      .should("be.visible")
+      .should("contain.value", "true")
+      .should("not.be.checked");
+    cy.get(".nhsuk-error-summary").should("not.be.visible");
+
+    cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
+    cy.get("[data-cy=isDeclarationAccepted0]").click().should("not.be.checked");
+    cy.get(".nhsuk-error-summary").should("be.visible");
+
+    cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
+    cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=compliments]").should("be.visible");
+
+    // Return to section 7
+    cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=isConsentAccepted0]")
+      .should("be.visible")
+      .should("be.checked");
+
     // Navigate to submit page
     cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=BtnEditSection1]").should("be.visible");
