@@ -1,6 +1,6 @@
 import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
 import {
-  LOAD_FORMR_PARTA_SUCCESS,
+  UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_FAILURE,
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE
@@ -26,14 +26,14 @@ describe("Load form-r part-a reducer", () => {
     );
   });
 
-  it("should return updated state when LOAD_FORMR_PARTA_SUCCESS action passed", () => {
+  it("should return updated state when UPDATE_FORMR_PARTA action passed", () => {
     const state: FormRPartAViewState = {
       ...initialState,
       formData: null
     };
 
     const successAction: ActionType = {
-      type: LOAD_FORMR_PARTA_SUCCESS,
+      type: UPDATE_FORMR_PARTA,
       payload: null
     };
 

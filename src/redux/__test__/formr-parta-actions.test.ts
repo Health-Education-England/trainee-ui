@@ -1,7 +1,7 @@
 import {
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE,
-  LOAD_FORMR_PARTA_SUCCESS,
+  UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 import thunk from "redux-thunk";
@@ -80,10 +80,10 @@ describe("loadFormRPartAList method", () => {
 });
 
 describe("loadFormRPartA method", () => {
-  it("should dispatch LOAD_FORMR_PARTA_SUCCESS if data is not null", () => {
+  it("should dispatch UPDATE_FORMR_PARTA if data is not null", () => {
     const formrParta = submittedFormRPartAs[0];
     const expectedActions = {
-      type: LOAD_FORMR_PARTA_SUCCESS,
+      type: UPDATE_FORMR_PARTA,
       payload: formrParta
     };
 

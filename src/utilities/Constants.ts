@@ -8,6 +8,15 @@ export const YES_NO_OPTIONS = [
   { label: "No", value: "false" }
 ];
 
+export const FORMR_PARTA_DECLARATIONS = [
+  CCT_DECLARATION,
+  "I will be seeking specialist registration by application for a CESR",
+  "I will be seeking specialist registration by application for a CESR CP",
+  "I will be seeking specialist registration by application for a CEGPR",
+  "I will be seeking specialist registration by application for a CEGPR CP",
+  "I am a CORE trainee, not yet eligible for CCT"
+];
+
 export const FORMR_PARTB_ACCEPTANCE =
   "This form is a true and accurate declaration at this point in time and will immediately notify the Deanery/HEE local team and my employer if I am aware of any changes to the information provided in this form.";
 

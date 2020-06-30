@@ -19,7 +19,7 @@ export const loadFormRPartBList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
   return formService
-    .getTraineeFormRPartB()
+    .getTraineeFormRPartBList()
     .then(response => {
       return dispatch({
         type: LOAD_FORMR_PARTB_LIST_SUCCESS,
