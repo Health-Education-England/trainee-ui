@@ -31,7 +31,7 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
               >
                 Section 6: Compliments
               </Fieldset.Legend>
-              <Panel label="Compliments" data-cy="compliments">
+              <Panel label="Compliments" data-cy="complimentsPanel">
                 <TextInputField
                   name="compliments"
                   rows={15}
@@ -55,8 +55,8 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
               <Pagination.Link
                 previous
                 onClick={() => previousSection(values)}
-                data-jest="BacklinkToSection4"
-                data-cy="BacklinkToSection4"
+                data-jest="BacklinkToSection5"
+                data-cy="BacklinkToSection5"
               >
                 Section 5
               </Pagination.Link>

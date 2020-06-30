@@ -72,8 +72,8 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
               <Pagination.Link
                 previous
                 onClick={() => previousSection(values)}
-                data-jest="BacklinkToSection4"
-                data-cy="BacklinkToSection4"
+                data-jest="BacklinkToSection6"
+                data-cy="BacklinkToSection6"
               >
                 Section 6
               </Pagination.Link>

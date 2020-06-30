@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { waitForDebugger } from "inspector";
+
 let currentDate = Cypress.moment().format("YYYY-MM-DD");
 let futureDate = Cypress.moment(currentDate).add(6, "M").format("YYYY-MM-DD");
 let pastDate = Cypress.moment(currentDate)
@@ -35,6 +37,7 @@ describe("Form R (Part B)", () => {
     cy.get(".nhsuk-warning-callout > p").should("be.visible");
 
     //--Personal Details section
+
     cy.get("#forename")
       .should("be.visible")
       .invoke("val")
@@ -47,11 +50,18 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .invoke("val")
       .should("not.be.empty");
+
+    cy.get("#gmcNumber").focus();
+    cy.get("#gmcNumber").clear();
+    cy.get("#gmcNumber").type("11111111");
+
     // intentionally left email blank
     cy.get("#email").should("be.visible");
-    cy.get("[data-cy=localOfficeName]").select(
-      "Health Education England Wessex"
-    );
+
+    cy.get("[data-cy='localOfficeName']")
+      .should("be.visible")
+      .focus()
+      .select("Health Education England Wessex");
     cy.get("#prevRevalBody > option")
       .eq(1)
       .then(element => {
@@ -309,7 +319,7 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=compliments]")
       .should("be.visible")
       .should("contain.value", "");
-    cy.get("[data-cy=compliments]").type("Oh what a lovely pair of shoes!");
+    cy.get("[data-cy=compliments]").type("This is the compliment text.");
 
     // Navigate back to section 5
     cy.get("[data-cy=BacklinkToSection5] > .nhsuk-pagination__page").click();
@@ -320,7 +330,7 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=compliments]")
       .should("be.visible")
-      .should("contain.value", "Oh what a lovely pair of shoes!");
+      .should("contain.value", "This is the compliment text.");
 
     // Click to navigate to section 7
     cy.get(".nhsuk-error-summary").should("not.be.visible");
@@ -329,7 +339,7 @@ describe("Form R (Part B)", () => {
     // -------- Section 7: Declarations -----------
 
     // Initial state
-    cy.get("[data-cy=legendFieldset6]").should("include.text", "Section 7");
+    cy.get("[data-cy=legendFieldset7]").should("include.text", "Section 7");
     cy.get("[data-cy=isDeclarationAccepted0]")
       .should("be.visible")
       .should("contain.value", "true")
@@ -338,19 +348,36 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .should("contain.value", "true")
       .should("not.be.checked");
-    cy.get(".nhsuk-error-summary").should("not.be.visible");
 
+    //Attempt to submit without checking boxes should fail
+    cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=isDeclarationAccepted] .nhsuk-error-message").should(
+      "be.visible"
+    );
+    cy.get("[data-cy=isConsentAccepted] .nhsuk-error-message").should(
+      "be.visible"
+    );
+
+    //Toggle error message when clicked
     cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
     cy.get("[data-cy=isDeclarationAccepted0]").click().should("not.be.checked");
-    cy.get(".nhsuk-error-summary").should("be.visible");
+    cy.get("[data-cy=isDeclarationAccepted] .nhsuk-error-message").should(
+      "be.visible"
+    );
 
+    // Go back to section 6
     cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
-    cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
+
+    cy.get("[data-cy=BacklinkToSection6] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=compliments]").should("be.visible");
 
     // Return to section 7
     cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=isConsentAccepted0]")
+      .should("be.visible")
+      .should("be.checked");
+    cy.get("[data-cy=isDeclarationAccepted0]")
       .should("be.visible")
       .should("be.checked");
 
@@ -367,7 +394,7 @@ describe("Form R (Part B)", () => {
     // Click edit btn to edit section 1 details
     cy.get(".nhsuk-back-link__link").should("be.visible");
     cy.get("[data-cy=BtnEditSection1]").should("be.visible").click();
-    cy.get("#gmcNumber").clear().type("22222222");
+    cy.get("#gmcNumber").clear().type("11111111");
 
     // Navigate to section 2
     cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
@@ -399,10 +426,26 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .select("Significant event");
 
+    // Navigate to section 6
+    cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+
+    cy.get("[data-cy=compliments]")
+      .should("be.visible")
+      .should("contain.value", "This is the compliment text.");
+
+    // Navigate to section 7
+    cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+    cy.get("[data-cy=isConsentAccepted0]")
+      .should("be.visible")
+      .should("be.checked");
+    cy.get("[data-cy=isDeclarationAccepted0]")
+      .should("be.visible")
+      .should("be.checked");
+
     // Navigate to submit
     cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
 
-    cy.get("[data-cy=gmcNumber]").should("have.text", "22222222");
+    cy.get("[data-cy=gmcNumber]").should("have.text", "11111111");
     cy.get("[data-cy=BtnSubmitPartB]").should("be.visible").click();
 
     // See list of saved forms
@@ -411,7 +454,7 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
     cy.get("[data-cy=gmcNumber]")
       .should("be.visible")
-      .should("have.text", "22222222");
+      .should("have.text", "11111111");
     cy.get("[data-cy=localOfficeName]").should(
       "have.text",
       "Health Education England Wessex"
