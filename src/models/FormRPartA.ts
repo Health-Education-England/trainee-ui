@@ -1,5 +1,6 @@
-export interface FormRPartA {
-  id?: string;
+import { IFormR } from "./IFormR";
+
+export interface FormRPartA extends IFormR {
   traineeTisId?: string;
   forename: string;
   surname: string;
@@ -29,8 +30,6 @@ export interface FormRPartA {
   startDate: Date;
   programmeMembershipType: string;
   wholeTimeEquivalent: number | undefined;
-  submissionDate: Date | null;
-  lastModifiedDate: Date | null;
   declarationType: string;
   otherImmigrationStatus: string;
 }

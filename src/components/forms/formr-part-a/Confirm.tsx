@@ -7,7 +7,11 @@ import { FormsService } from "../../../services/FormsService";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { LifeCycleState } from "../../../models/LifeCycleState";
 import { AxiosResponse } from "axios";
-import { saveTraineeFormRPartA } from "../../../redux/actions/formr-parta-actions";
+import {
+  saveTraineeFormRPartA,
+  updateFormData
+} from "../../../redux/actions/formr-parta-actions";
+import { Redirect } from "react-router-dom";
 
 interface ConfirmProps {
   formData: FormRPartA | null;
@@ -15,6 +19,7 @@ interface ConfirmProps {
     formService: FormsService,
     formData: FormRPartA
   ) => Promise<AxiosResponse<FormRPartA>>;
+  updateFormData: (formData: FormRPartA | null) => Promise<any>;
   history: any;
 }
 
@@ -23,7 +28,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchProps = {
-  saveTraineeFormRPartA
+  saveTraineeFormRPartA,
+  updateFormData
 };
 
 class Confirm extends React.PureComponent<ConfirmProps> {
@@ -37,9 +43,11 @@ class Confirm extends React.PureComponent<ConfirmProps> {
   saveForm = (formData: FormRPartA) => {
     formData.lastModifiedDate = new Date();
 
-    this.props
-      .saveTraineeFormRPartA(new FormsService(), formData)
-      .then(() => this.props.history.push(`/formr-a`));
+    this.props.saveTraineeFormRPartA(new FormsService(), formData).then(() => {
+      this.props
+        .updateFormData(null)
+        .then(_ => this.props.history.push(`/formr-a`));
+    });
   };
 
   saveDraft(formData: FormRPartA) {
@@ -59,8 +67,7 @@ class Confirm extends React.PureComponent<ConfirmProps> {
   render() {
     const { formData } = this.props;
     if (!formData) {
-      this.props.history.push(`/formr-a/create`);
-      return null;
+      return <Redirect to="/formr-a/create" />;
     }
 
     return (

@@ -3,8 +3,8 @@ import {
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE,
   UPDATE_FORMR_PARTA,
-  INITIALIZE_FORMR_PARTA_FAILURE,
-  INITIALIZE_FORMR_PARTA_SUCCESS
+  LOAD_FORMR_PARTA_FAILURE,
+  LOAD_FORMR_PARTA_SUCCESS
 } from "../action_types";
 import { FormRPartA } from "../../models/FormRPartA";
 import { FormsService } from "../../services/FormsService";
@@ -37,14 +37,14 @@ export const initializeForm = (
     .getTraineeProfile()
     .then(response => {
       dispatch({
-        type: INITIALIZE_FORMR_PARTA_SUCCESS,
+        type: LOAD_FORMR_PARTA_SUCCESS,
         payload: ProfileToFormRPartAInitialValues(response.data)
       });
     })
     .catch(error => {
       dispatch({
-        type: INITIALIZE_FORMR_PARTA_FAILURE,
-        payload: null
+        type: LOAD_FORMR_PARTA_FAILURE,
+        payload: error
       });
     });
 };
@@ -56,19 +56,19 @@ export const loadSavedForm = (formService: FormsService, formId: string) => (
     .getTraineeFormRPartAByFormId(formId)
     .then(response => {
       dispatch({
-        type: INITIALIZE_FORMR_PARTA_SUCCESS,
+        type: LOAD_FORMR_PARTA_SUCCESS,
         payload: response.data
       });
     })
     .catch(error => {
       dispatch({
-        type: INITIALIZE_FORMR_PARTA_FAILURE,
+        type: LOAD_FORMR_PARTA_FAILURE,
         payload: null
       });
     });
 };
 
-export const updateFormData = (formData: FormRPartA | null) => (
+export const updateFormData = (formData: FormRPartA | null) => async (
   dispatch: (action: ActionType) => any
 ) => {
   return dispatch({
@@ -81,5 +81,7 @@ export const saveTraineeFormRPartA = (
   formService: FormsService,
   formData: FormRPartA
 ) => (dispatch: (action: ActionType) => any) => {
-  return formService.saveTraineeFormRPartA(formData);
+  return formData.id
+    ? formService.updateTraineeFormRPartA(formData)
+    : formService.saveTraineeFormRPartA(formData);
 };

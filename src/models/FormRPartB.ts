@@ -1,5 +1,6 @@
-export interface FormRPartB {
-  id?: string;
+import { IFormR } from "./IFormR";
+
+export interface FormRPartB extends IFormR {
   traineeTisId?: string;
   forename: string;
   surname: string;
@@ -31,8 +32,6 @@ export interface FormRPartB {
   currentDeclarations: Declaration[];
   currentDeclarationsSummary: string;
   compliments: string;
-  submissionDate: Date | null;
-  lastModifiedDate: Date | null;
 }
 
 export interface Declaration {

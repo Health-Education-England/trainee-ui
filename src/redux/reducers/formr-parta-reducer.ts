@@ -1,27 +1,27 @@
-import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
+import { ActionType, FormRPartAState, FormRPartAListState } from "../types";
 import {
   UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE,
-  INITIALIZE_FORMR_PARTA_SUCCESS,
-  INITIALIZE_FORMR_PARTA_FAILURE
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 
-const formRPartAViewState: FormRPartAViewState = {
+const formRPartAState: FormRPartAState = {
   formData: null
 };
 
 export function FormRPartAReducer(
-  state = formRPartAViewState,
+  state = formRPartAState,
   action: ActionType
-): FormRPartAViewState {
+): FormRPartAState {
   switch (action.type) {
-    case INITIALIZE_FORMR_PARTA_SUCCESS:
+    case LOAD_FORMR_PARTA_SUCCESS:
       return {
         ...state,
         formData: action.payload
       };
-    case INITIALIZE_FORMR_PARTA_FAILURE:
+    case LOAD_FORMR_PARTA_FAILURE:
       return {
         ...state,
         formData: null
