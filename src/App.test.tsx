@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import Login from "./components/authentication/Login";
+import { BrowserRouter } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -17,7 +18,9 @@ beforeEach(() => {
   wrapper = mount(
     <Provider store={store}>
       <MemoryRouter initialEntries={["/"]}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </MemoryRouter>
     </Provider>
   );

@@ -1,6 +1,7 @@
 import { ProfileToFormRPartBInitialValues } from "./../ProfileToFormRPartBInitialValues";
 import { mockTraineeProfile } from "../../mock-data/trainee-profile";
 import { FormRPartB } from "../FormRPartB";
+import { LifeCycleState } from "../LifeCycleState";
 
 const formrPartB: FormRPartB = {
   traineeTisId: "123",
@@ -43,6 +44,7 @@ const formrPartB: FormRPartB = {
   currentDeclarations: [],
   currentDeclarationsSummary: "",
   compliments: "",
+  lifecycleState: LifeCycleState.New,
   submissionDate: null,
   lastModifiedDate: null
 };

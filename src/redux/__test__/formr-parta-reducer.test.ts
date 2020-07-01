@@ -1,17 +1,16 @@
-import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
+import { ActionType, FormRPartAState, FormRPartAListState } from "../types";
 import {
   UPDATE_FORMR_PARTA,
-  LOAD_FORMR_PARTA_FAILURE,
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE
 } from "../action_types";
 import {
-  LoadFormRPartAReducer,
-  LoadFormRPartAListReducer
+  FormRPartAReducer,
+  FormRPartAListReducer
 } from "../reducers/formr-parta-reducer";
 
 describe("Load form-r part-a reducer", () => {
-  const initialState: FormRPartAViewState = {
+  const initialState: FormRPartAState = {
     formData: null
   };
 
@@ -21,13 +20,11 @@ describe("Load form-r part-a reducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartAReducer(undefined, defaultAction)).toEqual(
-      initialState
-    );
+    expect(FormRPartAReducer(undefined, defaultAction)).toEqual(initialState);
   });
 
   it("should return updated state when UPDATE_FORMR_PARTA action passed", () => {
-    const state: FormRPartAViewState = {
+    const state: FormRPartAState = {
       ...initialState,
       formData: null
     };
@@ -37,20 +34,7 @@ describe("Load form-r part-a reducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartAReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_FORMR_PARTA_FAILURE action passed", () => {
-    const state: FormRPartAViewState = {
-      ...initialState
-    };
-
-    const failureAction: ActionType = {
-      type: LOAD_FORMR_PARTA_FAILURE,
-      payload: null
-    };
-
-    expect(LoadFormRPartAReducer(initialState, failureAction)).toEqual(state);
+    expect(FormRPartAReducer(initialState, successAction)).toEqual(state);
   });
 });
 
@@ -65,7 +49,7 @@ describe("Load form-r part-a list reducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartAListReducer(undefined, defaultAction)).toEqual(
+    expect(FormRPartAListReducer(undefined, defaultAction)).toEqual(
       initialState
     );
   });
@@ -81,9 +65,7 @@ describe("Load form-r part-a list reducer", () => {
       payload: []
     };
 
-    expect(LoadFormRPartAListReducer(initialState, successAction)).toEqual(
-      state
-    );
+    expect(FormRPartAListReducer(initialState, successAction)).toEqual(state);
   });
 
   it("should return updated state when LOAD_FORMR_PARTA_LIST_FAILURE action passed", () => {
@@ -96,8 +78,6 @@ describe("Load form-r part-a list reducer", () => {
       payload: null
     };
 
-    expect(LoadFormRPartAListReducer(initialState, failureAction)).toEqual(
-      state
-    );
+    expect(FormRPartAListReducer(initialState, failureAction)).toEqual(state);
   });
 });

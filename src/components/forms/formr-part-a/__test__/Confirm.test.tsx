@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { FormRPartA } from "../../../../models/FormRPartA";
 import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
 import { act } from "react-test-renderer";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -14,14 +15,16 @@ const mockStore = configureMockStore(middlewares);
 describe("Confirm", () => {
   const mountComponent = (form: FormRPartA | null, history: any) => {
     const store = mockStore({
-      formRPartAView: {
+      formRPartA: {
         formData: form
       }
     });
 
     return mount(
       <Provider store={store}>
-        <Confirm history={history} />
+        <BrowserRouter>
+          <Confirm history={history} />
+        </BrowserRouter>
       </Provider>
     );
   };
@@ -32,15 +35,15 @@ describe("Confirm", () => {
 
   it("should push 'formr-a/create' page to history when form data not available", () => {
     const history: any[] = [];
-    mountComponent(null, history);
+    const wrapper = mountComponent(null, history);
 
-    expect(history[0]).toEqual("/formr-a/create");
+    expect(wrapper.find(Redirect)).toHaveLength(1);
   });
 
   it("renders the edit and confirm buttons when form data is avaialbe", () => {
     const wrapper = mountComponent(submittedFormRPartAs[0], null);
 
-    expect(wrapper.find("button")).toHaveLength(2);
+    expect(wrapper.find("button")).toHaveLength(3);
   });
 
   it("should push 'formr-a/create' along with formData page to history when edit button clicked", () => {

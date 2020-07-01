@@ -16,7 +16,7 @@ describe("FormsService", () => {
 
     jest.spyOn(mockService, "get").mockReturnValue(successResponse);
 
-    expect(mockService.getTraineeFormRPartA()).toEqual(successResponse);
+    expect(mockService.getTraineeFormRPartAList()).toEqual(successResponse);
   });
 
   it("saveTraineeFormRPartA method should return success response", () => {
@@ -46,7 +46,7 @@ describe("FormsService", () => {
 
     jest.spyOn(mockService, "get").mockReturnValue(successResponse);
 
-    expect(mockService.getTraineeFormRPartB()).toEqual(successResponse);
+    expect(mockService.getTraineeFormRPartAList()).toEqual(successResponse);
   });
 
   it("saveTraineeFormRPartB method should return success response", () => {
