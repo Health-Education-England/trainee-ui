@@ -18,6 +18,7 @@
     "contentful": "^7.14.4",
     "eslint-plugin-cypress": "^2.11.1",
     "formik": "^2.1.4",
+    "mocha": "^5.0.0",
     "moment": "^2.26.0",
     "nhsuk-frontend": "^3.1.0",
     "nhsuk-react-components": "^1.2.3",
@@ -45,7 +46,11 @@
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx,.js --fix",
-    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\" --fix"
+    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\" --fix",
+    "merge": "mochawesome-merge cypress/reports/mochawesome-report/*.json > cypress/reports/output.json",
+    "generate_mochawesome_report": "merge cypress/reports/output.json --reportDir ./ --inline",
+    "posttest": "npm run merge && npm run generate_mochawesome_report",
+    "e2e": "npm run cypress:open --reporter mochawesome || npm run posttest"
   },
   "husky": {
     "hooks": {
@@ -81,6 +86,9 @@
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
     "jest-sonar-reporter": "^2.0.0",
+    "mochawesome": "^4.1.0",
+    "mochawesome-merge": "^4.0.0",
+    "mochawesome-report-generator": "^5.1.0",
     "prettier": "^2.0.5",
     "stylelint-prettier": "^1.1.2"
   },
