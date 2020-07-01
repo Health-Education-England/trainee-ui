@@ -40,7 +40,6 @@ describe("Form-R Part-B Section6", () => {
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
-    expect(nextSection).toHaveBeenCalled();
   });
 
   it("should submit the form", () => {
