@@ -36,6 +36,12 @@ export class FormsService extends ApiService {
   }
 
   async getTraineeFormRPartBList(): Promise<AxiosResponse<FormRPartB[]>> {
-    return this.get<FormRPartB[]>(`/formr-partb/${this.traineeTisId}`);
+    return this.get<FormRPartB[]>(`/formr-partbs/${this.traineeTisId}`);
+  }
+
+  async getTraineeFormRPartBByFormId(
+    id: string
+  ): Promise<AxiosResponse<FormRPartB>> {
+    return this.get<FormRPartB>(`/formr-partb/${id}`);
   }
 }

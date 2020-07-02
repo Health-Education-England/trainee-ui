@@ -2,9 +2,9 @@ import { CreateList } from "../CreateList";
 import {
   loadFormRPartBList,
   loadForm,
-  initializeForm
+  initializeForm,
+  loadSavedForm
 } from "../../../redux/actions/formr-partb-actions";
-import { loadSavedForm } from "../../../redux/actions/formr-parta-actions";
 
 export default CreateList(
   loadFormRPartBList,

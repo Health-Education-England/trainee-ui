@@ -11,6 +11,7 @@ import {
   loadForm
 } from "../../../redux/actions/formr-partb-actions";
 import { Redirect } from "react-router-dom";
+import { LifeCycleState } from "../../../models/LifeCycleState";
 
 interface ConfirmProps {
   formData: FormRPartB | null;
@@ -36,6 +37,7 @@ class Confirm extends React.PureComponent<ConfirmProps> {
   handleSubmit = (formData: FormRPartB) => {
     formData.submissionDate = new Date();
     formData.lastModifiedDate = new Date();
+    formData.lifecycleState = LifeCycleState.Submitted;
 
     this.props
       .saveForm(new FormsService(), formData)

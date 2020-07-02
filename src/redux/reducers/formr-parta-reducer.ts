@@ -7,16 +7,17 @@ import {
   LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 
-const formRPartAState: FormRPartAState = {
+const initialState: FormRPartAState = {
   formData: null
 };
 
 export function FormRPartAReducer(
-  state = formRPartAState,
+  state = initialState,
   action: ActionType
 ): FormRPartAState {
   switch (action.type) {
     case LOAD_FORMR_PARTA_SUCCESS:
+    case UPDATE_FORMR_PARTA:
       return {
         ...state,
         formData: action.payload
@@ -26,22 +27,17 @@ export function FormRPartAReducer(
         ...state,
         formData: null
       };
-    case UPDATE_FORMR_PARTA:
-      return {
-        ...state,
-        formData: action.payload
-      };
     default:
       return state;
   }
 }
 
-const formRPartAListState: FormRPartAListState = {
+const initialListState: FormRPartAListState = {
   submittedForms: []
 };
 
 export function FormRPartAListReducer(
-  state = formRPartAListState,
+  state = initialListState,
   action: ActionType
 ): FormRPartAListState {
   switch (action.type) {

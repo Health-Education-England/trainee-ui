@@ -62,6 +62,25 @@ export const loadForm = (formData: FormRPartB | null) => (
   });
 };
 
+export const loadSavedForm = (formService: FormsService, formId: string) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formService
+    .getTraineeFormRPartBByFormId(formId)
+    .then(response => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_FAILURE,
+        payload: null
+      });
+    });
+};
+
 export const editForm = (formData: FormRPartB, section: number) => (
   dispatch: (action: ActionType) => any
 ) => {
