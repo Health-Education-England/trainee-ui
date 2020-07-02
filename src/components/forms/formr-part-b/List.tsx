@@ -4,7 +4,7 @@ import {
   loadForm,
   initializeForm
 } from "../../../redux/actions/formr-partb-actions";
-import { loadSavedForm } from "../../../redux/actions/formr-parta-actions";
+import { loadSavedForm } from "../../../redux/actions/formr-partb-actions";
 
 export default CreateList(
   loadFormRPartBList,
