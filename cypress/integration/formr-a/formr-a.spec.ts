@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference path="../../support/index.d.ts" />
 
 const todaysDate = Cypress.moment().format("YYYY-MM-DD");
 
@@ -41,9 +42,10 @@ describe("Form R (Part A)", () => {
     );
     cy.get("#dateOfBirth")
       .should("be.visible")
+      .should("have.attr", "type", "date")
       .invoke("val")
       .should("not.be.empty");
-    //TODO need to test date picker too
+
     cy.get("#gender").should("be.visible").should("have.value", "Male");
     //Test for 'Other' immigration status
     cy.get("#immigrationStatus")
@@ -62,7 +64,11 @@ describe("Form R (Part A)", () => {
           .select(selectedItem)
           .should("not.have.value", "--Please select--");
       });
-    cy.get("#dateAttained").should("be.visible").clear().type(dateAttained);
+    cy.get("#dateAttained")
+      .should("be.visible")
+      .should("have.attr", "type", "date")
+      .clear()
+      .type(dateAttained);
     cy.get("#medicalSchool")
       .should("be.visible")
       .clear()
@@ -91,10 +97,11 @@ describe("Form R (Part A)", () => {
       .should("be.visible")
       .invoke("val")
       .should("not.be.empty");
+    cy.get("#mobileNumber").focus();
     cy.get("#mobileNumber").should("be.visible").clear().type("0777777777777");
     // Leave email blank intentionally to check for inline error message
     cy.get("#email").focus().should("be.visible").should("not.contain.text");
-    cy.get("#mobileNumber").focus();
+
     cy.get("#email").should("be.visible").type("traineeui.tester@hee.nhs.uk");
 
     //-- Declarations section --
@@ -152,7 +159,7 @@ describe("Form R (Part A)", () => {
     cy.get("#startDate").type(startDate).should("not.have.value", "");
     cy.get("#programmeMembershipType").should("be.visible").clear().type("LAT");
     //-- error msg when FTE not completed
-    cy.get("[data-cy=BtnContinue]").click();
+    cy.get("[data-cy=BtnContinue]").should("be.visible").click();
     cy.get(".nhsuk-error-summary").should("be.visible");
     cy.get("#wholeTimeEquivalent--error-message").should("be.visible");
     cy.get("#wholeTimeEquivalent").type("0.99");
@@ -162,27 +169,42 @@ describe("Form R (Part A)", () => {
     cy.get(".nhsuk-warning-callout").should("be.visible");
 
     cy.get("[data-cy=BtnSubmit]").should("be.visible");
+
+    // Re-edit form
     cy.contains("Edit").should("be.visible").click();
-    //TODO could do a cypress visual test of form here to check contents have remained the same
+    // Check form values persist
+    cy.checkFormRAValues(dateAttained, completionDate, startDate, "0.99");
+
     cy.get("[data-cy=BtnSubmit]").should("not.be.visible");
     cy.contains("Edit").should("not.be.visible");
     cy.get("[data-cy=BtnContinue]").should("be.visible");
     cy.get("#wholeTimeEquivalent").clear().type("1").should("have.value", "1");
+
+    // Save and exit
+
+    cy.get("[data-cy=BtnSaveDraft]").click();
+    cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+    cy.checkFormRAValues(dateAttained, completionDate, startDate, "1");
+
     cy.get("[data-cy=BtnContinue]").click();
     cy.get(".nhsuk-warning-callout").scrollIntoView().should("be.visible");
     cy.get("[data-cy=BtnSubmit]").scrollIntoView().should("be.visible").click();
 
     //--Go to list of submitted/ saved forms (Form Part A)
+    cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
+
     cy.contains("Submitted forms").should("be.visible");
     // Open the form just saved
-    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
+    cy.get("[data-cy=submittedForm]").last().should("be.visible").click();
     cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
     cy.get("[data-cy=localOfficeName]").should(
       "have.text",
       "Health Education England Wessex"
     );
     // Navigate back to the list
+
     cy.get(".nhsuk-back-link__link").should("be.visible").click();
     cy.contains("Submitted forms").should("be.visible");
+    cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
   });
 });
