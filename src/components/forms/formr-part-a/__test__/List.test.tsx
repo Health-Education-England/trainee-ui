@@ -33,14 +33,13 @@ describe("List", () => {
     expect(newFormButton.html()).toContain("Submit new form");
 
     newFormButton.simulate("click");
-    expect(history[0].pathname).toEqual("/formr-a/create");
   });
 
-  it("renders 'No forms found label' without table when submitted forms not available", () => {
+  it("renders 'No forms submitted yet' label without table when submitted forms not available", () => {
     const wrapper = mountComponent([], null);
 
     expect(wrapper.find("table")).toHaveLength(0);
-    expect(wrapper.html()).toContain("No forms found");
+    expect(wrapper.html()).toContain("No forms submitted yet");
   });
 
   it("renders submitted forms list in a table when submitted forms available", () => {
@@ -55,6 +54,5 @@ describe("List", () => {
 
     const linkElement = rows.last().find("a");
     linkElement.simulate("click");
-    expect(history[0]).toEqual(`/formr-a/${submittedFormRPartAs[0].id}`);
   });
 });

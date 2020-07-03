@@ -32,7 +32,7 @@ export interface ReferenceDataState {
   isLoaded: boolean;
 }
 
-export interface FormRPartAViewState {
+export interface FormRPartAState {
   formData: FormRPartA | null;
 }
 

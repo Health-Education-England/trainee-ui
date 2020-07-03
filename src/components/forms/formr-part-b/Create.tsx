@@ -3,12 +3,10 @@ import { RootState } from "../../../redux/reducers";
 import { GenericOwnProps } from "../../../redux/types";
 import { connect, ConnectedProps } from "react-redux";
 import {
-  initializeForm,
   loadForm,
   moveToSection
 } from "../../../redux/actions/formr-partb-actions";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
-import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
 import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
@@ -33,7 +31,6 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
 });
 
 const mapDispatchProps = {
-  initializeForm,
   loadReferenceData,
   loadForm,
   moveToSection
@@ -43,16 +40,7 @@ const connector = connect(mapStateToProps, mapDispatchProps);
 
 class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
-    const {
-      formData,
-      isLoaded,
-      initializeForm,
-      loadReferenceData
-    } = this.props;
-
-    if (!formData) {
-      initializeForm(new TraineeProfileService());
-    }
+    const { isLoaded, loadReferenceData } = this.props;
 
     if (!isLoaded) {
       loadReferenceData(new TraineeReferenceService());

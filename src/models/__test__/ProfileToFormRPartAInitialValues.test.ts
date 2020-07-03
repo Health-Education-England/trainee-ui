@@ -1,6 +1,7 @@
 import { ProfileToFormRPartAInitialValues } from "./../ProfileToFormRPartAInitialValues";
 import { mockTraineeProfile } from "../../mock-data/trainee-profile";
 import { FormRPartA } from "../FormRPartA";
+import { LifeCycleState } from "../LifeCycleState";
 
 const formrPartA: FormRPartA = {
   traineeTisId: "123",
@@ -32,6 +33,7 @@ const formrPartA: FormRPartA = {
   trainingGrade: "",
   startDate: new Date("2022-01-01"),
   programmeMembershipType: "LAT",
+  lifecycleState: LifeCycleState.New,
   wholeTimeEquivalent: undefined,
   submissionDate: null,
   lastModifiedDate: null,

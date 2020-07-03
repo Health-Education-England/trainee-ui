@@ -1,4 +1,5 @@
 import { FormRPartA } from "../models/FormRPartA";
+import { LifeCycleState } from "../models/LifeCycleState";
 
 export const submittedFormRPartAs: FormRPartA[] = [
   {
@@ -34,6 +35,7 @@ export const submittedFormRPartAs: FormRPartA[] = [
     startDate: new Date("2020-04-22"),
     programmeMembershipType: "General Practice",
     wholeTimeEquivalent: 0.69,
+    lifecycleState: LifeCycleState.Submitted,
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15"),
     otherImmigrationStatus: "Other status"

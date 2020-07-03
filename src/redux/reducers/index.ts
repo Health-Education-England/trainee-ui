@@ -2,8 +2,8 @@ import { combineReducers } from "redux";
 import TraineeProfileReducer from "./trainee-profile-reducer";
 import ReferenceDataReducer from "./reference-data-reducer";
 import {
-  LoadFormRPartAReducer,
-  LoadFormRPartAListReducer
+  FormRPartAReducer,
+  FormRPartAListReducer
 } from "./formr-parta-reducer";
 import {
   FormRPartBReducer,
@@ -13,8 +13,8 @@ import {
 export const rootReducer = combineReducers({
   profile: TraineeProfileReducer,
   referenceData: ReferenceDataReducer,
-  formRPartAView: LoadFormRPartAReducer,
-  formRPartAList: LoadFormRPartAListReducer,
+  formRPartA: FormRPartAReducer,
+  formRPartAList: FormRPartAListReducer,
   formRPartB: FormRPartBReducer,
   formRPartBList: FormRPartBListReducer
 });

@@ -1,4 +1,5 @@
 import { FormRPartB } from "../models/FormRPartB";
+import { LifeCycleState } from "../models/LifeCycleState";
 
 export const submittedFormRPartBs: FormRPartB[] = [
   {
@@ -57,6 +58,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
     ],
     currentDeclarationsSummary: "",
     compliments: "",
+    lifecycleState: LifeCycleState.Submitted,
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
   }

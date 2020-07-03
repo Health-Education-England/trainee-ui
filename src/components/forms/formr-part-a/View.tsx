@@ -12,7 +12,7 @@ interface ViewProps {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  formData: state.formRPartAView.formData
+  formData: state.formRPartA.formData
 });
 
 class View extends React.PureComponent<ViewProps> {

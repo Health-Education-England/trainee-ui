@@ -1,6 +1,7 @@
 import { TraineeProfile } from "./TraineeProfile";
 import { FormRPartB, Work } from "./FormRPartB";
 import { MEDICAL_CURRICULUM } from "../utilities/Constants";
+import { LifeCycleState } from "./LifeCycleState";
 
 export function ProfileToFormRPartBInitialValues(
   traineeProfile: TraineeProfile | null
@@ -67,6 +68,7 @@ export function ProfileToFormRPartBInitialValues(
     currentDeclarations: [],
     currentDeclarationsSummary: "",
     compliments: "",
+    lifecycleState: LifeCycleState.New,
     submissionDate: null,
     lastModifiedDate: null
   };

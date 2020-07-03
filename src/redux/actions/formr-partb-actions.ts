@@ -19,7 +19,7 @@ export const loadFormRPartBList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
   return formService
-    .getTraineeFormRPartB()
+    .getTraineeFormRPartBList()
     .then(response => {
       return dispatch({
         type: LOAD_FORMR_PARTB_LIST_SUCCESS,
@@ -60,6 +60,25 @@ export const loadForm = (formData: FormRPartB | null) => (
     type: LOAD_FORMR_PARTB,
     payload: formData
   });
+};
+
+export const loadSavedForm = (formService: FormsService, formId: string) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formService
+    .getTraineeFormRPartBByFormId(formId)
+    .then(response => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_FAILURE,
+        payload: null
+      });
+    });
 };
 
 export const editForm = (formData: FormRPartB, section: number) => (

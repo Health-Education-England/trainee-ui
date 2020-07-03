@@ -1,19 +1,20 @@
-import { ActionType, FormRPartAViewState, FormRPartAListState } from "../types";
+import { ActionType, FormRPartAState, FormRPartAListState } from "../types";
 import {
-  LOAD_FORMR_PARTA_SUCCESS,
-  LOAD_FORMR_PARTA_FAILURE,
+  UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_LIST_SUCCESS,
-  LOAD_FORMR_PARTA_LIST_FAILURE
+  LOAD_FORMR_PARTA_LIST_FAILURE,
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOAD_FORMR_PARTA_FAILURE
 } from "../action_types";
 
-const formRPartAViewState: FormRPartAViewState = {
+const formRPartAState: FormRPartAState = {
   formData: null
 };
 
-export function LoadFormRPartAReducer(
-  state = formRPartAViewState,
+export function FormRPartAReducer(
+  state = formRPartAState,
   action: ActionType
-): FormRPartAViewState {
+): FormRPartAState {
   switch (action.type) {
     case LOAD_FORMR_PARTA_SUCCESS:
       return {
@@ -25,6 +26,11 @@ export function LoadFormRPartAReducer(
         ...state,
         formData: null
       };
+    case UPDATE_FORMR_PARTA:
+      return {
+        ...state,
+        formData: action.payload
+      };
     default:
       return state;
   }
@@ -34,7 +40,7 @@ const formRPartAListState: FormRPartAListState = {
   submittedForms: []
 };
 
-export function LoadFormRPartAListReducer(
+export function FormRPartAListReducer(
   state = formRPartAListState,
   action: ActionType
 ): FormRPartAListState {

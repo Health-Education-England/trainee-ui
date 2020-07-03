@@ -55,7 +55,7 @@ describe("loadFormRPartBList method", () => {
     });
 
     jest
-      .spyOn(formsService, "getTraineeFormRPartB")
+      .spyOn(formsService, "getTraineeFormRPartBList")
       .mockReturnValue(successResponse);
 
     const expectedActions = [
@@ -80,7 +80,7 @@ describe("loadFormRPartBList method", () => {
     };
 
     jest
-      .spyOn(formsService, "getTraineeFormRPartB")
+      .spyOn(formsService, "getTraineeFormRPartBList")
       .mockReturnValue(Promise.reject(errorResponse));
 
     const expectedActions = [
