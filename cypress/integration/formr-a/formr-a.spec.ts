@@ -195,7 +195,7 @@ describe("Form R (Part A)", () => {
 
     cy.contains("Submitted forms").should("be.visible");
     // Open the form just saved
-    cy.get("[data-cy=submittedForm]").last().should("be.visible").click();
+    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
     cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
     cy.get("[data-cy=localOfficeName]").should(
       "have.text",
