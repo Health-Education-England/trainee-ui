@@ -105,6 +105,8 @@ export const CreateList = (
         <div>
           {draftForm.length === 1 ? (
             <Button
+              id="btnOpenForm"
+              data-cy="btnEditSavedForm"
               reverse
               type="submit"
               onClick={() => this.loadSavedForm(draftForm[0].id)}
@@ -112,7 +114,13 @@ export const CreateList = (
               Edit saved form
             </Button>
           ) : (
-            <Button reverse type="submit" onClick={this.handleNewFormClick}>
+            <Button
+              id="btnOpenForm"
+              data-cy="btnSubmitNewForm"
+              reverse
+              type="submit"
+              onClick={this.handleNewFormClick}
+            >
               Submit new form
             </Button>
           )}
