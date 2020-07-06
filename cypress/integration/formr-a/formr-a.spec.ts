@@ -23,7 +23,8 @@ describe("Form R (Part A)", () => {
 
     cy.get("#btnOpenForm")
       .should("be.visible")
-      .wait(2000)
+      .focus()
+
       .then((submitButton: JQuery) => {
         if (submitButton.attr("data-cy") === "btnSubmitNewForm") {
           cy.get("#btnOpenForm").click();
