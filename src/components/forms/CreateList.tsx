@@ -105,6 +105,7 @@ export const CreateList = (
         <div>
           {draftForm.length === 1 ? (
             <Button
+              id="btnOpenForm"
               data-cy="btnEditSavedForm"
               reverse
               type="submit"
@@ -114,6 +115,7 @@ export const CreateList = (
             </Button>
           ) : (
             <Button
+              id="btnOpenForm"
               data-cy="btnSubmitNewForm"
               reverse
               type="submit"
