@@ -85,7 +85,7 @@ describe("Form-R Part-B Section4", () => {
     );
     wrapper.first().simulate("click");
     expect(
-      component.find("[data-jest='previousDeclarationsSummaryTextInput']")
+      component.find("[data-jest='previousDeclarationSummaryTextInput']")
     ).toBeTruthy();
   });
 

@@ -124,14 +124,14 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   </Panel>
                   <Panel
                     label="Summary of previous unresolved declarations"
-                    data-cy="previousDeclarationsSummary"
+                    data-cy="previousDeclarationSummary"
                   >
                     <TextInputField
-                      name="previousDeclarationsSummary"
+                      name="previousDeclarationSummary"
                       rows={15}
                       label=""
-                      data-cy="previousDeclarationsSummaryTextInput"
-                      data-jest="previousDeclarationsSummaryTextInput"
+                      data-cy="previousDeclarationSummaryTextInput"
+                      data-jest="previousDeclarationSummaryTextInput"
                       hint={
                         <span>
                           If any <strong>previously declared</strong>{" "}

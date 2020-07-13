@@ -142,13 +142,13 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   </Panel>
                   <Panel
                     label="Summary of current unresolved declarations"
-                    data-cy="currentDeclarationsSummary"
+                    data-cy="currentDeclarationSummary"
                   >
                     <TextInputField
-                      name="currentDeclarationsSummary"
+                      name="currentDeclarationSummary"
                       rows={15}
                       label=""
-                      data-cy="currentDeclarationsSummaryTextInput"
+                      data-cy="currentDeclarationSummaryTextInput"
                       hint={
                         <span>
                           If you know of any <strong>UNRESOLVED</strong>{" "}

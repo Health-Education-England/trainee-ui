@@ -80,7 +80,7 @@ describe("Form-R Part-B Section5", () => {
     );
     wrapper.first().simulate("click");
     expect(
-      component.find("[data-jest='currentDeclarationsSummaryTextInput']")
+      component.find("[data-jest='currentDeclarationSummaryTextInput']")
     ).toBeTruthy();
   });
 

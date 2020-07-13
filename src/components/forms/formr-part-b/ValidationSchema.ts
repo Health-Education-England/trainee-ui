@@ -117,7 +117,7 @@ export const Section3ValidationSchema = yup.object({
   isHonest: acceptanceValidation,
   isHealthy: acceptanceValidation,
   isWarned: yup.boolean().nullable().required("You must select yes or no"),
-  isComplying: yup.boolean().when("isWarned", {
+  isComplying: yup.boolean().nullable().when("isWarned", {
     is: true,
     then: acceptanceValidation
   })

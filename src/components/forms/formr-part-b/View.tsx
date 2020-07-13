@@ -397,8 +397,8 @@ class View extends React.PureComponent<ViewProps> {
                     relating to the event and which organisation is undertaking
                     this investigation.
                   </SummaryList.Key>
-                  <SummaryList.Value data-jest="previousDeclarationsSummary">
-                    {formData.previousDeclarationsSummary}
+                  <SummaryList.Value data-jest="previousDeclarationSummary">
+                    {formData.previousDeclarationSummary}
                   </SummaryList.Value>
                 </SummaryList.Row>
               </SummaryList>
@@ -498,8 +498,8 @@ class View extends React.PureComponent<ViewProps> {
                     what investigations are pending relating to the event and
                     which organisation is undertaking the investigation.
                   </SummaryList.Key>
-                  <SummaryList.Value data-jest="previousDeclarationsSummary">
-                    {formData.currentDeclarationsSummary}
+                  <SummaryList.Value data-jest="previousDeclarationSummary">
+                    {formData.currentDeclarationSummary}
                   </SummaryList.Value>
                 </SummaryList.Row>
               </SummaryList>
