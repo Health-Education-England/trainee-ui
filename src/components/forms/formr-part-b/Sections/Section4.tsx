@@ -5,7 +5,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   Button,
   ErrorSummary,
@@ -19,9 +18,10 @@ import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPane
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection } = props;
+  const { formData, previousSection, nextSection, saveDraft } = props;
 
   const newDeclaration: Declaration = {
     declarationType: undefined,
@@ -160,25 +160,13 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection3"
-                data-jest="BacklinkToSection3"
-              >
-                Section 3
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection5"
-                data-jest="linkToSection5"
-              >
-                Section 5
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              section={4}
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+            />
           </Form>
         )}
       </Formik>

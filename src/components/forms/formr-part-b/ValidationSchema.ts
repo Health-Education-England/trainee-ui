@@ -109,13 +109,14 @@ export const Section2ValidationSchema = yup.object({
 
 const acceptanceValidation = yup
   .bool()
+  .nullable()
   .oneOf([true], "You must confirm your acceptance")
   .required("You must confirm your acceptance");
 
 export const Section3ValidationSchema = yup.object({
   isHonest: acceptanceValidation,
   isHealthy: acceptanceValidation,
-  isWarned: yup.boolean().required("You must select yes or no"),
+  isWarned: yup.boolean().nullable().required("You must select yes or no"),
   isComplying: yup.boolean().when("isWarned", {
     is: true,
     then: acceptanceValidation
@@ -123,7 +124,10 @@ export const Section3ValidationSchema = yup.object({
 });
 
 export const Section4ValidationSchema = yup.object({
-  havePreviousDeclarations: yup.boolean().required("You must select yes or no"),
+  havePreviousDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
   previousDeclarations: yup
     .array(panelSchema)
     .when("havePreviousDeclarations", {
@@ -133,7 +137,10 @@ export const Section4ValidationSchema = yup.object({
 });
 
 export const Section5ValidationSchema = yup.object({
-  haveCurrentDeclarations: yup.boolean().required("You must select yes or no"),
+  haveCurrentDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
   currentDeclarations: yup.array(panelSchema).when("haveCurrentDeclarations", {
     is: true,
     then: panelSchemaValidation

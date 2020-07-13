@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import { waitForDebugger } from "inspector";
-
 let currentDate = Cypress.moment().format("YYYY-MM-DD");
 let futureDate = Cypress.moment(currentDate).add(6, "M").format("YYYY-MM-DD");
 let pastDate = Cypress.moment(currentDate)

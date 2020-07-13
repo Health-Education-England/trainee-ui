@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from "react";
 import TextInputField from "../../TextInputField";
 import ScrollTo from "../../ScrollTo";
-import { Fieldset, Pagination, Panel } from "nhsuk-react-components";
+import { Fieldset, Panel } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection } = props;
+  const { formData, previousSection, nextSection, saveDraft } = props;
 
   return (
     formData && (
@@ -51,25 +52,13 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </Panel>
             </Fieldset>
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-jest="BacklinkToSection5"
-                data-cy="BacklinkToSection5"
-              >
-                Section 5
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-jest="linkToSection7"
-                data-cy="linkToSection7"
-              >
-                Section 7
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              section={6}
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+            />
           </Form>
         )}
       </Formik>

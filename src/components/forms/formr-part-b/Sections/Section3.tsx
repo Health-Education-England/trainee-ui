@@ -5,7 +5,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   ErrorSummary,
   ErrorMessage
@@ -13,9 +12,10 @@ import {
 import { Form, Formik } from "formik";
 import { Section3ValidationSchema } from "../ValidationSchema";
 import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection } = props;
+  const { formData, previousSection, nextSection, saveDraft } = props;
   return (
     formData && (
       <Formik
@@ -146,23 +146,13 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection2"
-              >
-                Section 2
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection4"
-              >
-                Section 4
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              section={3}
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+            />
           </Form>
         )}
       </Formik>
