@@ -45,7 +45,8 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                 data-cy={`${props.name}${index}`}
                 checked={
                   typeof field.value === "boolean"
-                    ? field.value
+                    ? field.value === item.value ||
+                      item.value === field.value.toString()
                     : (field.value && field.value.includes(item.value)) || false
                 }
                 onChange={() => {
