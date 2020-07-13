@@ -13,11 +13,13 @@ jest.mock("../ValidationSchema", () => ({
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
+const saveDraft = jest.fn();
 
 const props: SectionProps = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
-  nextSection: nextSection
+  nextSection: nextSection,
+  saveDraft: saveDraft
 };
 
 describe("Form-R Part-B Section5", () => {

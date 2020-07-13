@@ -146,14 +146,16 @@ describe("initializeForm method", () => {
 describe("loadForm method", () => {
   it("should dispatch LOAD_FORMR_PARTB if data is not null", () => {
     const formrPartb = submittedFormRPartBs[0];
-    const expectedActions = {
-      type: LOAD_FORMR_PARTB,
-      payload: formrPartb
-    };
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTB,
+        payload: formrPartb
+      }
+    ];
 
-    return expect(store.dispatch(loadForm(formrPartb))).toEqual(
-      expectedActions
-    );
+    return store.dispatch(loadForm(formrPartb)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });
 
