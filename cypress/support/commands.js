@@ -152,7 +152,7 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
   cy.get("#gmcNumber").type("11111111");
 
   cy.get("#email").should("be.visible");
-  cy.get("#email").type("traineeui.tester@hee.nhs.uk");
+  cy.get("#email").clear().type("traineeui.tester@hee.nhs.uk");
 
   cy.get("[data-cy='localOfficeName']")
     .should("be.visible")
@@ -226,6 +226,7 @@ Cypress.Commands.add("checkAndFillSection3", () => {
   cy.get("[data-cy=mainWarning3]").should("be.visible");
   cy.get("[data-cy=declarations]").should("be.visible");
   cy.get("[data-cy=healthStatement]").should("be.visible");
+
   cy.get("[data-cy=isHonest0]")
     .should("be.visible")
     .should("contain.value", "")
@@ -234,7 +235,6 @@ Cypress.Commands.add("checkAndFillSection3", () => {
     .should("be.visible")
     .should("contain.value", "")
     .click();
-  cy.get("[data-cy=isComplying0]").should("not.be.visible");
   cy.get("[data-cy=isWarned0]")
     .should("be.visible")
     .should("contain.value", "")

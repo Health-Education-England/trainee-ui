@@ -25,7 +25,8 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=BtnMenu]").should("be.visible").click();
     cy.contains("Form R-b").click();
 
-    cy.contains("Submit").should("be.visible").click();
+    cy.get("#btnOpenForm").click();
+
     cy.get(".nhsuk-warning-callout > p").should("be.visible");
     cy.location("pathname", { timeout: 10000 }).should("include", "/formr-b");
 
@@ -162,10 +163,10 @@ describe("Form R (Part B)", () => {
       "be.visible"
     );
 
-    // Go back to section 6
     cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
     cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
 
+    // Go back to section 6
     cy.get("[data-cy=BacklinkToSection6] > .nhsuk-pagination__page").click();
     cy.get("[data-cy=compliments]").should("be.visible");
 
@@ -183,7 +184,6 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=BtnEditSection1]").should("be.visible");
     cy.get("[data-cy=gmcNumber]").should("be.visible");
     cy.get("[data-cy=BtnEditSection2]").should("be.visible");
-    cy.get("[data-cy=typeOfWork3]").should("be.visible");
     cy.get("[data-cy=BtnEditSection3]").should("be.visible");
     cy.get("[data-cy=BtnEditSection4]").should("be.visible");
     cy.get("[data-cy=BtnEditSection5]").should("be.visible");
@@ -195,11 +195,6 @@ describe("Form R (Part B)", () => {
 
     // Navigate to section 2
     cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
-
-    cy.get('[data-cy="work[2].typeOfWork"]').should(
-      "contain.value",
-      "Another type of work"
-    );
 
     // Navigate to section 3
     cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
@@ -260,5 +255,102 @@ describe("Form R (Part B)", () => {
     // Navigate back to the list
     cy.get(".nhsuk-back-link__link").should("be.visible").click();
     cy.contains("Submitted forms").should("be.visible");
+  });
+
+  it("should be able save and edit the form", () => {
+    cy.viewport("iphone-6");
+    cy.get("[data-cy=BtnMenu]").should("be.visible").click();
+    cy.contains("Form R-b").click();
+
+    cy.get("#btnOpenForm")
+      .should("be.visible")
+      .focus()
+
+      .then((submitButton: JQuery) => {
+        cy.get("#btnOpenForm").click();
+
+        cy.get(".nhsuk-warning-callout > p").should("be.visible");
+        cy.location("pathname", { timeout: 10000 }).should(
+          "include",
+          "/formr-b"
+        );
+
+        cy.checkAndFillSection1(currRevalDate, prevRevalDate);
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.checkAndFillSection1(currRevalDate, prevRevalDate);
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.checkAndFillSection2(pastDate);
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.checkAndFillSection3();
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.checkAndFillSection4(pastDate);
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+        cy.checkAndFillSection5(pastDate);
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+        cy.checkAndFillSection6("This is the compliment text.");
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=BtnSaveDraft]").click();
+
+        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection3] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection4] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection5] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection6] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=linkToSection7] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=isConsentAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=isDeclarationAccepted0]").click().should("be.checked");
+        cy.get("[data-cy=linkToSubmit] > .nhsuk-pagination__page").click();
+        cy.get("[data-cy=BtnSubmitPartB]").should("be.visible").click();
+      });
   });
 });
