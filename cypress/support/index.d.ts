@@ -5,5 +5,12 @@
 declare namespace Cypress {
   interface Chainable {
     checkFormRAValues: any;
+    checkAndFillSection1: any;
+    checkAndFillSection2: any;
+    checkAndFillSection3: any;
+    checkAndFillSection4: any;
+    checkAndFillSection5: any;
+    checkAndFillSection6: any;
+    addWorkPanel: any;
   }
 }
