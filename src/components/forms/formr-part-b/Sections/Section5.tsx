@@ -5,7 +5,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   Button,
   ErrorSummary,
@@ -19,9 +18,10 @@ import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
 import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection } = props;
+  const { formData, previousSection, nextSection, saveDraft } = props;
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
@@ -142,13 +142,13 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   </Panel>
                   <Panel
                     label="Summary of current unresolved declarations"
-                    data-cy="currentDeclarationsSummary"
+                    data-cy="currentDeclarationSummary"
                   >
                     <TextInputField
-                      name="currentDeclarationsSummary"
+                      name="currentDeclarationSummary"
                       rows={15}
                       label=""
-                      data-cy="currentDeclarationsSummaryTextInput"
+                      data-cy="currentDeclarationSummaryTextInput"
                       hint={
                         <span>
                           If you know of any <strong>UNRESOLVED</strong>{" "}
@@ -177,24 +177,13 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection4"
-              >
-                Section 4
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection6"
-                data-jest="linkToSection6"
-              >
-                Section 6
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              section={5}
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+            />
           </Form>
         )}
       </Formik>

@@ -44,4 +44,10 @@ export class FormsService extends ApiService {
   ): Promise<AxiosResponse<FormRPartB>> {
     return this.get<FormRPartB>(`/formr-partb/${id}`);
   }
+
+  async updateTraineeFormRPartB(
+    formData: FormRPartB
+  ): Promise<AxiosResponse<FormRPartB>> {
+    return this.put<FormRPartB>("/formr-partb", formData);
+  }
 }

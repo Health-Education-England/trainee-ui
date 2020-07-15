@@ -32,21 +32,19 @@ export const loadFormRPartAList = (formService: FormsService) => (
 
 export const initializeForm = (
   traineeProfileService: TraineeProfileService
-) => (dispatch: (action: ActionType) => any) => {
-  return traineeProfileService
-    .getTraineeProfile()
-    .then(response => {
-      dispatch({
-        type: LOAD_FORMR_PARTA_SUCCESS,
-        payload: ProfileToFormRPartAInitialValues(response.data)
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: LOAD_FORMR_PARTA_FAILURE,
-        payload: error
-      });
+) => async (dispatch: (action: ActionType) => any) => {
+  try {
+    const response = await traineeProfileService.getTraineeProfile();
+    dispatch({
+      type: LOAD_FORMR_PARTA_SUCCESS,
+      payload: ProfileToFormRPartAInitialValues(response.data)
     });
+  } catch (error) {
+    dispatch({
+      type: LOAD_FORMR_PARTA_FAILURE,
+      payload: error
+    });
+  }
 };
 
 export const loadSavedForm = (formService: FormsService, formId: string) => (

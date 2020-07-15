@@ -46,7 +46,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
         locationOfEntry: "Previous declaration location of entry"
       }
     ],
-    previousDeclarationsSummary: "",
+    previousDeclarationSummary: "",
     haveCurrentDeclarations: true,
     currentDeclarations: [
       {
@@ -56,7 +56,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
         locationOfEntry: "Current declaration location of entry"
       }
     ],
-    currentDeclarationsSummary: "",
+    currentDeclarationSummary: "",
     compliments: "",
     lifecycleState: LifeCycleState.Submitted,
     submissionDate: new Date("2020-04-22"),

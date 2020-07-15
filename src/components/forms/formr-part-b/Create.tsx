@@ -4,11 +4,11 @@ import { GenericOwnProps } from "../../../redux/types";
 import { connect, ConnectedProps } from "react-redux";
 import {
   loadForm,
-  moveToSection
+  moveToSection,
+  saveForm
 } from "../../../redux/actions/formr-partb-actions";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
-import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
 import Section2 from "./Sections/Section2";
 import Section3 from "./Sections/Section3";
@@ -19,6 +19,9 @@ import { FormRPartB } from "../../../models/FormRPartB";
 import Section6 from "./Sections/Section6";
 import Section7 from "./Sections/Section7";
 import { SectionProps } from "./Sections/SectionProps";
+import { LifeCycleState } from "../../../models/LifeCycleState";
+import { FormsService } from "../../../services/FormsService";
+import Loading from "../../common/Loading";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -33,7 +36,8 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
 const mapDispatchProps = {
   loadReferenceData,
   loadForm,
-  moveToSection
+  moveToSection,
+  saveForm
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
@@ -59,6 +63,22 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
 
   submitForm = (formData: FormRPartB) => {
     this.props.loadForm(formData);
+  };
+
+  saveDraft = (formData: FormRPartB) => {
+    formData.submissionDate = null;
+    formData.lifecycleState = LifeCycleState.Draft;
+
+    this.props
+      .saveForm(new FormsService(), formData)
+      .then(_ => {
+        // show success toast / popup
+        this.props.history.push("/formr-b");
+        this.props.loadForm(null);
+      })
+      .catch(_ => {
+        // show failure toast / popup
+      });
   };
 
   render() {
@@ -88,7 +108,8 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     const sectionProps: SectionProps = {
       formData: formData,
       previousSection: this.previousSection,
-      nextSection: this.nextSection
+      nextSection: this.nextSection,
+      saveDraft: this.saveDraft
     };
 
     switch (section) {
@@ -99,6 +120,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
             curricula={curricula}
             formData={formData}
             nextSection={this.nextSection}
+            saveDraft={this.saveDraft}
           ></Section1>
         );
       case 2:

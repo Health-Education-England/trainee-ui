@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import ScrollTo from "../../ScrollTo";
-import { Fieldset, Pagination, Panel } from "nhsuk-react-components";
+import { Fieldset, Pagination, Panel, Button } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
 import MultiChoiceInputField from "../../MultiChoiceInputField";
@@ -9,9 +9,10 @@ import {
   FORMR_PARTB_ACCEPTANCE,
   FORMR_PARTB_CONSENT
 } from "../../../../utilities/Constants";
+import classes from "../FormRPartB.module.scss";
 
 const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection, history } = props;
+  const { formData, previousSection, nextSection, saveDraft, history } = props;
 
   return (
     formData && (
@@ -68,7 +69,7 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </Panel>
             </Fieldset>
 
-            <Pagination>
+            <Pagination className={classes.heePagination}>
               <Pagination.Link
                 previous
                 onClick={() => previousSection(values)}
@@ -76,6 +77,12 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
                 data-cy="BacklinkToSection6"
               >
                 Section 6
+              </Pagination.Link>
+
+              <Pagination.Link onClick={() => saveDraft(values)}>
+                <Button type="button" data-cy="BtnSaveDraft">
+                  Save & Exit
+                </Button>
               </Pagination.Link>
 
               <Pagination.Link

@@ -6,9 +6,7 @@ import {
   INITIALIZE_FORMR_PARTB_FAILURE,
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
-  EDIT_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE
+  EDIT_FORMR_PARTB
 } from "../action_types";
 import { FormRPartB } from "../../models/FormRPartB";
 import { FormsService } from "../../services/FormsService";
@@ -36,24 +34,22 @@ export const loadFormRPartBList = (formService: FormsService) => (
 
 export const initializeForm = (
   traineeProfileService: TraineeProfileService
-) => (dispatch: (action: ActionType) => any) => {
-  return traineeProfileService
-    .getTraineeProfile()
-    .then(response => {
-      dispatch({
-        type: INITIALIZE_FORMR_PARTB_SUCCESS,
-        payload: ProfileToFormRPartBInitialValues(response.data)
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: INITIALIZE_FORMR_PARTB_FAILURE,
-        payload: error
-      });
+) => async (dispatch: (action: ActionType) => any) => {
+  try {
+    const response = await traineeProfileService.getTraineeProfile();
+    dispatch({
+      type: INITIALIZE_FORMR_PARTB_SUCCESS,
+      payload: ProfileToFormRPartBInitialValues(response.data)
     });
+  } catch (error) {
+    dispatch({
+      type: INITIALIZE_FORMR_PARTB_FAILURE,
+      payload: error
+    });
+  }
 };
 
-export const loadForm = (formData: FormRPartB | null) => (
+export const loadForm = (formData: FormRPartB | null) => async (
   dispatch: (action: ActionType) => any
 ) => {
   return dispatch({
@@ -90,24 +86,12 @@ export const editForm = (formData: FormRPartB, section: number) => (
   });
 };
 
-export const saveForm = (
-  formsService: FormsService,
-  formData: FormRPartB
-) => async (dispatch: (action: ActionType) => any) => {
-  return formsService
-    .saveTraineeFormRPartB(formData)
-    .then(response =>
-      dispatch({
-        type: SAVE_FORMR_PARTB_SUCCESS,
-        payload: response.data
-      })
-    )
-    .catch(error =>
-      dispatch({
-        type: SAVE_FORMR_PARTB_FAILURE,
-        payload: error
-      })
-    );
+export const saveForm = (formService: FormsService, formData: FormRPartB) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formData.id
+    ? formService.updateTraineeFormRPartB(formData)
+    : formService.saveTraineeFormRPartB(formData);
 };
 
 export const moveToSection = (section: number) => (

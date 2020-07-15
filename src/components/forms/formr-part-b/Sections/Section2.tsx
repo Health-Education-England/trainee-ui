@@ -4,7 +4,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   InsetText,
   Button,
@@ -17,9 +16,10 @@ import { Work } from "../../../../models/FormRPartB";
 import { Section2ValidationSchema } from "../ValidationSchema";
 import classes from "../FormRPartB.module.scss";
 import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection } = props;
+  const { formData, previousSection, nextSection, saveDraft } = props;
   const newWork: Work = {
     typeOfWork: "",
     startDate: undefined,
@@ -167,23 +167,13 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection1"
-              >
-                Section 1
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection3"
-              >
-                Section 3
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              section={2}
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+            />
           </Form>
         )}
       </Formik>

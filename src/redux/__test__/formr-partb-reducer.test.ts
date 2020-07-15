@@ -6,8 +6,6 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE,
   LOAD_FORMR_PARTB
 } from "../action_types";
 import {
@@ -184,33 +182,5 @@ describe("FormRPartBReducer", () => {
     };
 
     expect(FormRPartBReducer(state, successAction)).toEqual(state);
-  });
-
-  it("should return initial state when SAVE_FORMR_PARTB_SUCCESS action passed", () => {
-    const state: FormRPartBState = {
-      ...initialState,
-      section: 3
-    };
-
-    const successAction: ActionType = {
-      type: SAVE_FORMR_PARTB_SUCCESS,
-      payload: null
-    };
-
-    expect(FormRPartBReducer(state, successAction)).toEqual(initialState);
-  });
-
-  it("should return the  samestate when SAVE_FORMR_PARTB_FAILURE action passed", () => {
-    const state: FormRPartBState = {
-      ...initialState,
-      section: 3
-    };
-
-    const failureAction: ActionType = {
-      type: SAVE_FORMR_PARTB_FAILURE,
-      payload: {}
-    };
-
-    expect(FormRPartBReducer(state, failureAction)).toEqual(state);
   });
 });

@@ -12,13 +12,13 @@ jest.mock("../ValidationSchema", () => ({
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
+const saveDraft = jest.fn();
 
 const props = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
   nextSection: nextSection,
-  history: [],
-  section: 4
+  saveDraft: saveDraft
 };
 
 describe("Form-R Part-B Section4", () => {
@@ -85,7 +85,7 @@ describe("Form-R Part-B Section4", () => {
     );
     wrapper.first().simulate("click");
     expect(
-      component.find("[data-jest='previousDeclarationsSummaryTextInput']")
+      component.find("[data-jest='previousDeclarationSummaryTextInput']")
     ).toBeTruthy();
   });
 
@@ -109,15 +109,16 @@ describe("Form-R Part-B Section4", () => {
 
   it("should render previous section link buttons", () => {
     const wrapper = mount(<Section4 {...props} />);
-    expect(wrapper.find("a[data-jest='BacklinkToSection3']").length).toBe(1);
-    wrapper.find("a[data-jest='BacklinkToSection3']").first().simulate("click");
+
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
   it("should render next section link buttons", async () => {
     const wrapper = mount(<Section4 {...props} />);
-    expect(wrapper.find("a[data-jest='linkToSection5']").length).toBe(1);
 
+    expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 

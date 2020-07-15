@@ -8,22 +8,25 @@ import {
   WarningCallout,
   Pagination,
   Panel,
-  ErrorMessage
+  ErrorMessage,
+  Button
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { Section1ValidationSchema } from "../ValidationSchema";
 import { KeyValue } from "../../../../models/KeyValue";
 import { FormRPartB } from "../../../../models/FormRPartB";
+import classes from "../FormRPartB.module.scss";
 
 interface Section1Props {
   localOffices: KeyValue[];
   curricula: KeyValue[];
   formData: FormRPartB;
   nextSection: (formData: FormRPartB) => void;
+  saveDraft: (formData: FormRPartB) => void;
 }
 
 const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
-  const { localOffices, curricula, formData, nextSection } = props;
+  const { localOffices, curricula, formData, nextSection, saveDraft } = props;
   return (
     <Formik
       initialValues={formData}
@@ -32,7 +35,7 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
         nextSection(values);
       }}
     >
-      {({ errors, handleSubmit }) => (
+      {({ values, errors, handleSubmit }) => (
         <Form>
           <ScrollTo />
           <Fieldset disableErrorLine={true} name="doctorsDetails">
@@ -119,7 +122,14 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
             </ErrorSummary>
           ) : null}
 
-          <Pagination>
+          <Pagination className={classes.heePagination}>
+            <Pagination.Link></Pagination.Link>
+            <Pagination.Link onClick={() => saveDraft(values)}>
+              <Button type="button" data-cy="BtnSaveDraft">
+                Save & Exit
+              </Button>
+            </Pagination.Link>
+
             <Pagination.Link
               next
               onClick={() => handleSubmit()}

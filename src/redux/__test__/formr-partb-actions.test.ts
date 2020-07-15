@@ -5,9 +5,7 @@ import {
   INITIALIZE_FORMR_PARTB_FAILURE,
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
-  EDIT_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE
+  EDIT_FORMR_PARTB
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
@@ -17,8 +15,7 @@ import {
   loadFormRPartBList,
   initializeForm,
   moveToSection,
-  editForm,
-  saveForm
+  editForm
 } from "../actions/formr-partb-actions";
 import { FormRPartB } from "../../models/FormRPartB";
 import { AxiosResponse } from "axios";
@@ -149,14 +146,16 @@ describe("initializeForm method", () => {
 describe("loadForm method", () => {
   it("should dispatch LOAD_FORMR_PARTB if data is not null", () => {
     const formrPartb = submittedFormRPartBs[0];
-    const expectedActions = {
-      type: LOAD_FORMR_PARTB,
-      payload: formrPartb
-    };
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTB,
+        payload: formrPartb
+      }
+    ];
 
-    return expect(store.dispatch(loadForm(formrPartb))).toEqual(
-      expectedActions
-    );
+    return store.dispatch(loadForm(formrPartb)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 });
 
@@ -186,59 +185,5 @@ describe("editForm", () => {
     return expect(store.dispatch(editForm(formrPartb, sectionNumber))).toEqual(
       expectedActions
     );
-  });
-});
-
-describe("saveForm", () => {
-  it("should dispatch SAVE_FORMR_PARTB_SUCCESS when form is posted successfully", () => {
-    const formrPartb = submittedFormRPartBs[0];
-
-    const successResponse: Promise<AxiosResponse<FormRPartB>> = Promise.resolve(
-      {
-        data: formrPartb,
-        status: 200,
-        statusText: "OK",
-        headers: {},
-        config: {}
-      }
-    );
-
-    jest
-      .spyOn(formsService, "saveTraineeFormRPartB")
-      .mockReturnValue(successResponse);
-
-    const expectedAction = {
-      type: SAVE_FORMR_PARTB_SUCCESS,
-      payload: formrPartb
-    };
-
-    return store.dispatch(saveForm(formsService, formrPartb)).then(() => {
-      expect(store.getActions()).toContainEqual(expectedAction);
-    });
-  });
-
-  it("should dispatch SAVE_FORMR_PARTB_FAILURE when form couddn't posted", () => {
-    const errorResponse = {
-      data: null,
-      status: 500,
-      statusText: "Internal server error",
-      headers: {},
-      config: {}
-    };
-
-    jest
-      .spyOn(formsService, "saveTraineeFormRPartB")
-      .mockReturnValue(Promise.reject(errorResponse));
-
-    const expectedAction = {
-      type: SAVE_FORMR_PARTB_FAILURE,
-      payload: errorResponse
-    };
-
-    return store
-      .dispatch(saveForm(formsService, submittedFormRPartBs[0]))
-      .then(() => {
-        expect(store.getActions()).toContainEqual(expectedAction);
-      });
   });
 });

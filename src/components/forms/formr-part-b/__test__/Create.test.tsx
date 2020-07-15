@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { FormRPartB } from "../../../../models/FormRPartB";
 import Loading from "../../../common/Loading";
+import { BrowserRouter } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -29,7 +30,9 @@ describe("Create", () => {
   it("renders without crashing", () => {
     shallow(
       <Provider store={store}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
   });
@@ -40,7 +43,9 @@ describe("Create", () => {
 
       const wrapper = mount(
         <Provider store={store}>
-          <Create history={history} location={location} />
+          <BrowserRouter>
+            <Create history={history} location={location} />
+          </BrowserRouter>
         </Provider>
       );
 
@@ -50,19 +55,21 @@ describe("Create", () => {
     });
   });
 
-  it("render Loading when section value is not valid", () => {
+  it("should render Loading when section value is not valid", () => {
     const stores = createStore(submittedFormRPartBs[0], 0);
 
     const wrapper = mount(
       <Provider store={stores}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
 
     expect(wrapper.find(Loading)).toHaveLength(1);
   });
 
-  it("renders Loading when reference data is not loaded", () => {
+  it("should render Loading when reference data is not loaded", () => {
     store = mockStore({
       formRPartB: { formData: submittedFormRPartBs[0], section: 1 },
       referenceData: {
@@ -74,7 +81,9 @@ describe("Create", () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
 

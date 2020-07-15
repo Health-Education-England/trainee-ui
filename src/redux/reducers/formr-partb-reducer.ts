@@ -6,9 +6,7 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  LOAD_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE
+  LOAD_FORMR_PARTB
 } from "../action_types";
 
 const formRPartAListState: FormRPartBListState = {
@@ -46,7 +44,6 @@ export function FormRPartBReducer(
 ): FormRPartBState {
   switch (action.type) {
     case INITIALIZE_FORMR_PARTB_SUCCESS:
-    case SAVE_FORMR_PARTB_SUCCESS:
       return {
         ...state,
         formData: action.payload,
@@ -69,7 +66,6 @@ export function FormRPartBReducer(
         section: action.payload
       };
     case EDIT_FORMR_PARTB:
-    case SAVE_FORMR_PARTB_FAILURE:
     default:
       return {
         ...state

@@ -16,6 +16,7 @@ export function FormRPartAReducer(
   action: ActionType
 ): FormRPartAState {
   switch (action.type) {
+    case UPDATE_FORMR_PARTA:
     case LOAD_FORMR_PARTA_SUCCESS:
       return {
         ...state,
@@ -25,11 +26,6 @@ export function FormRPartAReducer(
       return {
         ...state,
         formData: null
-      };
-    case UPDATE_FORMR_PARTA:
-      return {
-        ...state,
-        formData: action.payload
       };
     default:
       return state;

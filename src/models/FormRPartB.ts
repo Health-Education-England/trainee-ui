@@ -27,10 +27,10 @@ export interface FormRPartB extends IFormR {
   healthStatement: string;
   havePreviousDeclarations: boolean | string;
   previousDeclarations: Declaration[];
-  previousDeclarationsSummary: string;
+  previousDeclarationSummary: string;
   haveCurrentDeclarations: boolean | string;
   currentDeclarations: Declaration[];
-  currentDeclarationsSummary: string;
+  currentDeclarationSummary: string;
   compliments: string;
 }
 
