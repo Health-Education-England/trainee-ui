@@ -12,5 +12,7 @@ declare namespace Cypress {
     checkAndFillSection5: any;
     checkAndFillSection6: any;
     addWorkPanel: any;
+    logout: any;
+    login: any;
   }
 }
