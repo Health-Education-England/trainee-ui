@@ -278,11 +278,14 @@ describe("Form R (Part B)", () => {
         cy.checkAndFillSection1(currRevalDate, prevRevalDate);
         cy.get("[data-cy=BtnSaveDraft]").click();
 
-        cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
-        cy.checkAndFillSection1(currRevalDate, prevRevalDate);
-        cy.get("[data-cy=BtnSaveDraft]").click();
+        cy.logout();
+        cy.login();
+        cy.get("[data-cy=BtnMenu]").should("be.visible").click();
+        cy.contains("Form R-b").click();
 
         cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
+        cy.get("[data-cy=gmcNumber]").should("have.value", "11111111");
+
         cy.get("[data-cy=linkToSection2] > .nhsuk-pagination__page").click();
         cy.checkAndFillSection2(pastDate);
         cy.get("[data-cy=BtnSaveDraft]").click();

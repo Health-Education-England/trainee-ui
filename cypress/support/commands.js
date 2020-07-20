@@ -352,3 +352,20 @@ Cypress.Commands.add("addWorkPanel", (startDate, endDate) => {
     .should("be.visible")
     .type("Location");
 });
+
+Cypress.Commands.add("logout", () => {
+  cy.viewport("iphone-6");
+  cy.get("[data-cy=BtnMenu]").should("be.visible").click();
+  cy.contains("Logout").click();
+});
+
+Cypress.Commands.add("login", () => {
+  cy.viewport("iphone-6");
+
+  if (cy.get("input[name=username]")) {
+    cy.get("input[name=username]").type(Cypress.env("username"));
+    cy.get("input[name=password]").type(`${Cypress.env("password")}{enter}`, {
+      log: false
+    });
+  }
+});
