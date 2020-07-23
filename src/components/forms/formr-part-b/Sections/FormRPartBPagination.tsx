@@ -4,23 +4,33 @@ import { FormRPartB } from "../../../../models/FormRPartB";
 import classes from "../FormRPartB.module.scss";
 
 interface Props {
-  section: number;
+  nextSection?: number;
+  prevSection: number;
   values: FormRPartB;
-  previousSection: (v: FormRPartB) => void;
+  previousSection: (v: FormRPartB, prevSection?: number) => void;
   handleSubmit: (e?: FormEvent<HTMLFormElement> | undefined) => void;
   saveDraft: (v: FormRPartB) => void;
+  prevSectionLabel?: string;
+  nextSectionLabel?: string;
 }
 
 const FormRPartBPagination: React.FC<Props> = (props: Props) => {
-  const { values, section } = props;
+  const {
+    values,
+    prevSection,
+    nextSection,
+    nextSectionLabel,
+    prevSectionLabel
+  } = props;
+
   return (
     <Pagination className={classes.heePagination}>
       <Pagination.Link
         previous
-        onClick={() => props.previousSection(values)}
-        data-cy={`BacklinkToSection${section - 1}`}
+        onClick={() => props.previousSection(values, prevSection)}
+        data-cy={`BacklinkToSection${prevSection}`}
       >
-        Section {section - 1}
+        {prevSectionLabel ? prevSectionLabel : `Section ${prevSection}`}
       </Pagination.Link>
 
       <Pagination.Link onClick={() => props.saveDraft(values)}>
@@ -32,9 +42,9 @@ const FormRPartBPagination: React.FC<Props> = (props: Props) => {
       <Pagination.Link
         next
         onClick={() => props.handleSubmit()}
-        data-cy={`linkToSection${section + 1}`}
+        data-cy={`linkToSection${nextSection}`}
       >
-        Section {section + 1}
+        {nextSectionLabel ? nextSectionLabel : `Section ${nextSection}`}
       </Pagination.Link>
     </Pagination>
   );

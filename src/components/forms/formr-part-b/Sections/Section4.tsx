@@ -161,7 +161,8 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
             ) : null}
 
             <FormRPartBPagination
-              section={4}
+              prevSection={3}
+              nextSection={5}
               values={values}
               previousSection={previousSection}
               handleSubmit={handleSubmit}

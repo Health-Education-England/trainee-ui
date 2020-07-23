@@ -22,6 +22,7 @@ import { SectionProps } from "./Sections/SectionProps";
 import { LifeCycleState } from "../../../models/LifeCycleState";
 import { FormsService } from "../../../services/FormsService";
 import Loading from "../../common/Loading";
+import CovidDeclaration from "./Sections/CovidDeclaration";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -30,7 +31,8 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   isLoaded: state.referenceData.isLoaded,
   section: state.formRPartB.section,
   history: ownProps.history,
-  location: ownProps.location
+  location: ownProps.location,
+  formSwitches: state.formSwitches.formSwitches
 });
 
 const mapDispatchProps = {
@@ -41,6 +43,7 @@ const mapDispatchProps = {
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
+const formsService = new FormsService();
 
 class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   componentDidMount() {
@@ -51,14 +54,14 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     }
   }
 
-  nextSection = (formData: FormRPartB) => {
+  nextSection = (formData: FormRPartB, section?: number) => {
     this.props.loadForm(formData);
-    this.props.moveToSection(this.props.section + 1);
+    this.props.moveToSection(section ? section : this.props.section + 1);
   };
 
-  previousSection = (formData: FormRPartB) => {
+  previousSection = (formData: FormRPartB, section?: number) => {
     this.props.loadForm(formData);
-    this.props.moveToSection(this.props.section - 1);
+    this.props.moveToSection(section ? section : this.props.section - 1);
   };
 
   submitForm = (formData: FormRPartB) => {
@@ -70,7 +73,7 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
     formData.lifecycleState = LifeCycleState.Draft;
 
     this.props
-      .saveForm(new FormsService(), formData)
+      .saveForm(formsService, formData)
       .then(_ => {
         // show success toast / popup
         this.props.history.push("/formr-b");
@@ -82,7 +85,16 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
   };
 
   render() {
-    const { formData, localOffices, curricula, isLoaded, section } = this.props;
+    const {
+      formData,
+      localOffices,
+      curricula,
+      isLoaded,
+      section,
+      formSwitches
+    } = this.props;
+    const enableCovidDeclaration: boolean =
+      formSwitches.find(s => s.name === "COVID")?.enabled || false;
 
     if (!isLoaded || !formData) {
       return <Loading />;
@@ -109,7 +121,8 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
       formData: formData,
       previousSection: this.previousSection,
       nextSection: this.nextSection,
-      saveDraft: this.saveDraft
+      saveDraft: this.saveDraft,
+      showCovidDeclaration: enableCovidDeclaration
     };
 
     switch (section) {
@@ -133,10 +146,14 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
         return <Section5 {...sectionProps} />;
       case 6:
         return <Section6 {...sectionProps} />;
-      case 7:
-        return (
-          <Section7 {...sectionProps} history={this.props.history}></Section7>
+      case 67:
+        return enableCovidDeclaration ? (
+          <CovidDeclaration {...sectionProps} />
+        ) : (
+          <Loading />
         );
+      case 7:
+        return <Section7 {...sectionProps} history={this.props.history} />;
       default:
         return <Loading />;
     }

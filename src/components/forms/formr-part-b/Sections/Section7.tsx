@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import ScrollTo from "../../ScrollTo";
-import { Fieldset, Pagination, Panel, Button } from "nhsuk-react-components";
+import { Fieldset, Panel } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
 import MultiChoiceInputField from "../../MultiChoiceInputField";
@@ -9,10 +9,17 @@ import {
   FORMR_PARTB_ACCEPTANCE,
   FORMR_PARTB_CONSENT
 } from "../../../../utilities/Constants";
-import classes from "../FormRPartB.module.scss";
+import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection, saveDraft, history } = props;
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    history,
+    showCovidDeclaration
+  } = props;
 
   return (
     formData && (
@@ -69,31 +76,19 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
               </Panel>
             </Fieldset>
 
-            <Pagination className={classes.heePagination}>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-jest="BacklinkToSection6"
-                data-cy="BacklinkToSection6"
-              >
-                Section 6
-              </Pagination.Link>
-
-              <Pagination.Link onClick={() => saveDraft(values)}>
-                <Button type="button" data-cy="BtnSaveDraft">
-                  Save & Exit
-                </Button>
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-jest="linkToSubmit"
-                data-cy="linkToSubmit"
-              >
-                Continue to Submit
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              prevSection={showCovidDeclaration ? 67 : 6}
+              values={values}
+              previousSection={() =>
+                previousSection(values, showCovidDeclaration ? 67 : 6)
+              }
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+              prevSectionLabel={
+                showCovidDeclaration ? "Covid declaration" : "Section 6"
+              }
+              nextSectionLabel={"Continue to Submit"}
+            />
           </Form>
         )}
       </Formik>
