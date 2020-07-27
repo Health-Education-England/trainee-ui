@@ -51,7 +51,7 @@ export class FormsService extends ApiService {
     return this.put<FormRPartB>("/formr-partb", formData);
   }
 
-  async getFormSwitches(): Promise<AxiosResponse<FormSwitch>> {
-    return this.get<FormSwitch>("/form-switches");
+  async getFormSwitches(): Promise<AxiosResponse<FormSwitch[]>> {
+    return this.get<FormSwitch[]>("/form-switches");
   }
 }

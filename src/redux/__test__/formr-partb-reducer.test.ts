@@ -1,4 +1,9 @@
-import { ActionType, FormRPartBState, FormRPartBListState } from "../types";
+import {
+  ActionType,
+  FormRPartBState,
+  FormRPartBListState,
+  FormSwitchesState
+} from "../types";
 import {
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
@@ -6,13 +11,17 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  LOAD_FORMR_PARTB
+  LOAD_FORMR_PARTB,
+  LOAD_FORM_SWITCHES_SUCCESS,
+  LOAD_FORM_SWITCHES_FAILURE
 } from "../action_types";
 import {
   FormRPartBListReducer,
-  FormRPartBReducer
+  FormRPartBReducer,
+  FormSwitchesReducer
 } from "../reducers/formr-partb-reducer";
-import { FormRPartB } from "../../models/FormRPartB";
+import { FormRPartB, FormSwitch } from "../../models/FormRPartB";
+import { LifeCycleState } from "../../models/LifeCycleState";
 
 const formrPartB: FormRPartB = {
   traineeTisId: "123",
@@ -30,7 +39,7 @@ const formrPartB: FormRPartB = {
     {
       endDate: new Date("2020-12-31"),
       site: "Addenbrookes Hospital",
-      siteLocation: undefined,
+      siteLocation: "Site location",
       startDate: new Date("2020-01-01"),
       trainingPost: "Yes",
       typeOfWork: "In Post ST1 Dermatology"
@@ -43,14 +52,26 @@ const formrPartB: FormRPartB = {
   unauthorisedLeave: 0,
   otherLeave: 0,
   totalLeave: 0,
-  isHonest: true,
-  isHealthy: true,
-  isWarned: true,
-  isComplying: true,
-  healthStatement: "I feel great etc.",
+  isHonest: "",
+  isHealthy: "",
+  isWarned: "",
+  isComplying: "",
+  healthStatement: "",
+  havePreviousDeclarations: "",
+  previousDeclarations: [],
+  previousDeclarationSummary: "",
+  haveCurrentDeclarations: "",
+  currentDeclarations: [],
+  currentDeclarationSummary: "",
+  compliments: "",
+  haveCovidDeclarations: "",
+  covidDeclarationDto: null,
+  lifecycleState: LifeCycleState.New,
   submissionDate: null,
   lastModifiedDate: null
 };
+
+const formSwitches: FormSwitch[] = [{ id: "1", name: "COVID", enabled: false }];
 
 describe("FormRPartBListReducer", () => {
   const initialState: FormRPartBListState = {
@@ -182,5 +203,47 @@ describe("FormRPartBReducer", () => {
     };
 
     expect(FormRPartBReducer(state, successAction)).toEqual(state);
+  });
+});
+
+describe("FormSwitchesReducer", () => {
+  const initialState: FormSwitchesState = {
+    formSwitches: []
+  };
+
+  it("should return initial state when no action passed", () => {
+    const defaultAction: ActionType = {
+      type: "",
+      payload: null
+    };
+
+    expect(FormSwitchesReducer(undefined, defaultAction)).toEqual(initialState);
+  });
+
+  it("should return updated state when LOAD_FORM_SWITCHES_SUCCESS action passed", () => {
+    const state: FormSwitchesState = {
+      ...initialState,
+      formSwitches
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_FORM_SWITCHES_SUCCESS,
+      payload: formSwitches
+    };
+
+    expect(FormSwitchesReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_FORM_SWITCHES_FAILURE action passed", () => {
+    const state: FormSwitchesState = {
+      ...initialState
+    };
+
+    const failureAction: ActionType = {
+      type: LOAD_FORM_SWITCHES_FAILURE,
+      payload: null
+    };
+
+    expect(FormSwitchesReducer(initialState, failureAction)).toEqual(state);
   });
 });

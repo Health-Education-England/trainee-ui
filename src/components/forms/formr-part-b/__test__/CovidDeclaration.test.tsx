@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import Section1 from "../Sections/Section1";
+import CovidDeclaration from "../Sections/CovidDeclaration";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 
 jest.mock("../ValidationSchema", () => ({
-  get Section1ValidationSchema() {
+  get CovidSectionValidationSchema() {
     return null;
   }
 }));
@@ -12,38 +12,25 @@ jest.mock("../ValidationSchema", () => ({
 const mockFn = jest.fn();
 
 const props = {
-  localOffices: [],
-  curricula: [],
   formData: submittedFormRPartBs[0],
+  previousSection: mockFn,
   nextSection: mockFn,
   saveDraft: mockFn
 };
 
-describe("Form-R Part-B Section1", () => {
+describe("Form-R Part-B CovidDeclaration", () => {
   it("renders without crashing", () => {
-    shallow(<Section1 {...props} />);
+    shallow(<CovidDeclaration {...props} />);
   });
 
   it("mounts without crashing", () => {
-    mount(<Section1 {...props} />);
+    mount(<CovidDeclaration {...props} />);
   });
 
   it("should render next section link buttons", async () => {
-    const wrapper = mount(<Section1 {...props} />);
+    const wrapper = mount(<CovidDeclaration {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
-  });
-
-  it("should submit the form", () => {
-    const wrapper = mount(<Section1 {...props} />);
-    const form = wrapper.find("form").first();
-
-    try {
-      form.simulate("submit");
-      expect(mockFn).toHaveBeenCalled();
-    } catch (e) {
-      expect(true).toBe(false);
-    }
   });
 });
