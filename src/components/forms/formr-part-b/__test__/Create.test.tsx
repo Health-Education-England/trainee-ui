@@ -21,6 +21,14 @@ const createStore = (form: FormRPartB | null, section: number = 1) =>
       localOffices: [{ label: "localOffice", value: "localOffice" }],
       curricula: [{ label: "curriculum", value: "curriculum" }],
       isLoaded: true
+    },
+    formSwitches: {
+      formSwitches: [
+        {
+          name: "COVID",
+          enabled: false
+        }
+      ]
     }
   });
 
@@ -76,6 +84,14 @@ describe("Create", () => {
         localOffices: [],
         curricula: [],
         isLoaded: false
+      },
+      formSwitches: {
+        formSwitches: [
+          {
+            name: "COVID",
+            enabled: false
+          }
+        ]
       }
     });
 

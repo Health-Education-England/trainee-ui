@@ -19,7 +19,7 @@ const formrPartB: FormRPartB = {
     {
       endDate: new Date("2020-12-31"),
       site: "Addenbrookes Hospital",
-      siteLocation: undefined,
+      siteLocation: "Site location",
       startDate: new Date("2020-01-01"),
       trainingPost: "Yes",
       typeOfWork: "In Post ST1 Dermatology"
@@ -44,6 +44,8 @@ const formrPartB: FormRPartB = {
   currentDeclarations: [],
   currentDeclarationSummary: "",
   compliments: "",
+  haveCovidDeclarations: "",
+  covidDeclarationDto: null,
   lifecycleState: LifeCycleState.New,
   submissionDate: null,
   lastModifiedDate: null
