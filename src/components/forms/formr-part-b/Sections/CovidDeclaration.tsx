@@ -19,7 +19,15 @@ import { KeyValue } from "../../../../models/KeyValue";
 const CovidDeclaration: FunctionComponent<SectionProps> = (
   props: SectionProps
 ) => {
-  const { formData, previousSection, nextSection, saveDraft } = props;
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
 
   return (
     formData && (
@@ -27,7 +35,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
         initialValues={formData}
         validationSchema={CovidSectionValidationSchema}
         onSubmit={values => {
-          nextSection(values, 7);
+          nextSection(values);
         }}
       >
         {({ values, setFieldValue, handleSubmit }) => (
@@ -188,12 +196,13 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
             </Fieldset>
 
             <FormRPartBPagination
-              prevSection={6}
-              nextSection={7}
               values={values}
               previousSection={previousSection}
               handleSubmit={handleSubmit}
               saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
             />
           </Form>
         )}

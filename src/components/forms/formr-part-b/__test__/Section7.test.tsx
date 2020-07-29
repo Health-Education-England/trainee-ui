@@ -10,6 +10,8 @@ jest.mock("../ValidationSchema", () => ({
   }
 }));
 
+const showCovidDeclarationFeature: boolean = true;
+
 const prevSection = jest.fn();
 const nextSection = jest.fn();
 const saveDraft = jest.fn();
@@ -19,7 +21,12 @@ const props: SectionProps = {
   previousSection: prevSection,
   nextSection: nextSection,
   saveDraft: saveDraft,
-  history: []
+  history: [],
+  section: 6,
+  nextSectionLabel: "Continue to save",
+  prevSectionLabel: showCovidDeclarationFeature
+    ? "Covid declarartion"
+    : "Section 6"
 };
 
 describe("Form-R Part-B Section7", () => {

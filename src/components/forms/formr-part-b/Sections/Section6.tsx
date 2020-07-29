@@ -12,7 +12,9 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
     previousSection,
     nextSection,
     saveDraft,
-    showCovidDeclaration
+    prevSectionLabel,
+    nextSectionLabel,
+    section
   } = props;
 
   return (
@@ -20,7 +22,7 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
       <Formik
         initialValues={formData}
         onSubmit={values => {
-          nextSection(values, showCovidDeclaration ? 67 : 7);
+          nextSection(values);
         }}
       >
         {({ values, handleSubmit }) => (
@@ -59,15 +61,13 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
             </Fieldset>
 
             <FormRPartBPagination
-              prevSection={5}
-              nextSection={showCovidDeclaration ? 67 : 7}
               values={values}
               previousSection={previousSection}
               handleSubmit={handleSubmit}
               saveDraft={saveDraft}
-              nextSectionLabel={
-                showCovidDeclaration ? "Covid declaration" : "Section 7"
-              }
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
             />
           </Form>
         )}

@@ -42,7 +42,7 @@ export function FormRPartBListReducer(
 
 const initialState: FormRPartBState = {
   formData: null,
-  section: 1
+  section: 0
 };
 
 export function FormRPartBReducer(
@@ -54,13 +54,13 @@ export function FormRPartBReducer(
       return {
         ...state,
         formData: action.payload,
-        section: 1
+        section: 0
       };
     case INITIALIZE_FORMR_PARTB_FAILURE:
       return {
         ...state,
         formData: null,
-        section: 1
+        section: 0
       };
     case LOAD_FORMR_PARTB:
       return {

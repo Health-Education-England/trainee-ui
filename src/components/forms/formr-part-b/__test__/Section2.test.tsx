@@ -5,6 +5,7 @@ import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-part
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
+const saveDraft = jest.fn();
 
 jest.mock("../ValidationSchema", () => ({
   get Section2ValidationSchema() {
@@ -16,7 +17,11 @@ const props = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
   nextSection: nextSection,
-  history: []
+  history: [],
+  saveDraft: saveDraft,
+  section: 1,
+  prevSectionLabel: "Section 1",
+  nextSectionLabel: "Section 3"
 };
 
 describe("Form-R Part-B Section2", () => {

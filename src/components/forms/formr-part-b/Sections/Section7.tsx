@@ -18,7 +18,8 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
     nextSection,
     saveDraft,
     history,
-    showCovidDeclaration
+    prevSectionLabel,
+    section
   } = props;
 
   return (
@@ -77,17 +78,13 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
             </Fieldset>
 
             <FormRPartBPagination
-              prevSection={showCovidDeclaration ? 67 : 6}
               values={values}
-              previousSection={() =>
-                previousSection(values, showCovidDeclaration ? 67 : 6)
-              }
+              previousSection={previousSection}
               handleSubmit={handleSubmit}
               saveDraft={saveDraft}
-              prevSectionLabel={
-                showCovidDeclaration ? "Covid declaration" : "Section 6"
-              }
-              nextSectionLabel={"Continue to Submit"}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel="Continue to submit"
+              section={section}
             />
           </Form>
         )}

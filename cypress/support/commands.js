@@ -369,3 +369,18 @@ Cypress.Commands.add("login", () => {
     });
   }
 });
+
+Cypress.Commands.add("checkFlags", name => {
+  return cy
+    .request({
+      method: "GET",
+      url: `http://localhost:8207/forms/api/form-switches`
+    })
+    .then(response => {
+      expect(response.status).to.eq(200);
+      expect(response.body.length).to.be.greaterThan(0);
+      const data = response.body.filter(flag => flag.name === name);
+      expect(data.length).to.eq(1);
+      return data[0].enabled;
+    });
+});

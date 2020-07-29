@@ -9,6 +9,8 @@ import { FormRPartB } from "../../../../models/FormRPartB";
 import Loading from "../../../common/Loading";
 import { BrowserRouter } from "react-router-dom";
 
+const covidEnabled: boolean = true;
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const history: any[] = [];
@@ -26,7 +28,7 @@ const createStore = (form: FormRPartB | null, section: number = 1) =>
       formSwitches: [
         {
           name: "COVID",
-          enabled: false
+          enabled: covidEnabled
         }
       ]
     }
@@ -45,9 +47,22 @@ describe("Create", () => {
     );
   });
 
-  [1, 2, 3, 4, 5, 6, 7].forEach(section => {
-    it(`renders section ${section} when section value is ${section}`, () => {
-      const store = createStore(submittedFormRPartBs[0], section);
+  let sections = [
+    "Section 1",
+    "Section 2",
+    "Section 3",
+    "Section 4",
+    "Section 5",
+    "Section 6",
+    "Section 7"
+  ];
+  if (covidEnabled) {
+    sections.splice(6, 0, "COVID");
+  }
+
+  sections.forEach((section, index) => {
+    it(`renders section ${section} when section value is ${index}`, () => {
+      const store = createStore(submittedFormRPartBs[0], index);
 
       const wrapper = mount(
         <Provider store={store}>
@@ -58,13 +73,13 @@ describe("Create", () => {
       );
 
       expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toContain(
-        `Section ${section}`
+        section
       );
     });
   });
 
   it("should render Loading when section value is not valid", () => {
-    const stores = createStore(submittedFormRPartBs[0], 0);
+    const stores = createStore(submittedFormRPartBs[0], 999);
 
     const wrapper = mount(
       <Provider store={stores}>
@@ -89,7 +104,7 @@ describe("Create", () => {
         formSwitches: [
           {
             name: "COVID",
-            enabled: false
+            enabled: covidEnabled
           }
         ]
       }

@@ -123,7 +123,7 @@ describe("FormRPartBReducer", () => {
   beforeEach(() => {
     initialState = {
       formData: null,
-      section: 1
+      section: 0
     };
   });
 
@@ -140,7 +140,7 @@ describe("FormRPartBReducer", () => {
     const state: FormRPartBState = {
       ...initialState,
       formData: formrPartB,
-      section: 1
+      section: 0
     };
 
     const successAction: ActionType = {
@@ -155,7 +155,7 @@ describe("FormRPartBReducer", () => {
     const state: FormRPartBState = {
       ...initialState,
       formData: formrPartB,
-      section: 1
+      section: 0
     };
 
     const successAction: ActionType = {

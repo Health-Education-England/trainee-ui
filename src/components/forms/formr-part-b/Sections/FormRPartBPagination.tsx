@@ -4,34 +4,37 @@ import { FormRPartB } from "../../../../models/FormRPartB";
 import classes from "../FormRPartB.module.scss";
 
 interface Props {
-  nextSection?: number;
-  prevSection: number;
   values: FormRPartB;
   previousSection: (v: FormRPartB, prevSection?: number) => void;
   handleSubmit: (e?: FormEvent<HTMLFormElement> | undefined) => void;
   saveDraft: (v: FormRPartB) => void;
+  section: number;
   prevSectionLabel?: string;
   nextSectionLabel?: string;
 }
 
 const FormRPartBPagination: React.FC<Props> = (props: Props) => {
-  const {
-    values,
-    prevSection,
-    nextSection,
-    nextSectionLabel,
-    prevSectionLabel
-  } = props;
+  const { values, nextSectionLabel, prevSectionLabel, section } = props;
 
+  const paginationClasses = [
+    classes.heePagination,
+    section === 0 ? classes.twoCol : null
+  ]
+    .filter(c => c)
+    .join(" ");
   return (
-    <Pagination className={classes.heePagination}>
-      <Pagination.Link
-        previous
-        onClick={() => props.previousSection(values, prevSection)}
-        data-cy={`BacklinkToSection${prevSection}`}
-      >
-        {prevSectionLabel ? prevSectionLabel : `Section ${prevSection}`}
-      </Pagination.Link>
+    <Pagination className={paginationClasses}>
+      {prevSectionLabel ? (
+        <Pagination.Link
+          previous
+          onClick={() => props.previousSection(values, section && section - 1)}
+          data-cy="LinkToPreviousSection"
+        >
+          {prevSectionLabel.split("\n").map((item, index) => (
+            <div key={index}>{item}</div>
+          ))}
+        </Pagination.Link>
+      ) : null}
 
       <Pagination.Link onClick={() => props.saveDraft(values)}>
         <Button type="button" data-cy="BtnSaveDraft">
@@ -42,9 +45,13 @@ const FormRPartBPagination: React.FC<Props> = (props: Props) => {
       <Pagination.Link
         next
         onClick={() => props.handleSubmit()}
-        data-cy={`linkToSection${nextSection}`}
+        data-cy="LinkToNextSection"
       >
-        {nextSectionLabel ? nextSectionLabel : `Section ${nextSection}`}
+        {nextSectionLabel
+          ? nextSectionLabel
+              .split("\n")
+              .map((item, index) => <div key={index}>{item}</div>)
+          : null}
       </Pagination.Link>
     </Pagination>
   );

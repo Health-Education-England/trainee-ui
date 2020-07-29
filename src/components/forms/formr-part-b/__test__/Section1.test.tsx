@@ -10,13 +10,17 @@ jest.mock("../ValidationSchema", () => ({
 }));
 
 const mockFn = jest.fn();
+const saveDraft = jest.fn();
 
 const props = {
   localOffices: [],
   curricula: [],
   formData: submittedFormRPartBs[0],
   nextSection: mockFn,
-  saveDraft: mockFn
+  previousSection: null,
+  saveDraft: saveDraft,
+  section: 0,
+  nextSectionLabel: "Section 2"
 };
 
 describe("Form-R Part-B Section1", () => {

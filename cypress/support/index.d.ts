@@ -14,5 +14,6 @@ declare namespace Cypress {
     addWorkPanel: any;
     logout: any;
     login: any;
+    checkFlags: any;
   }
 }

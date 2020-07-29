@@ -4,6 +4,7 @@ import Section6 from "../Sections/Section6";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { SectionProps } from "../Sections/SectionProps";
 
+const showCovidDeclarationFeature: boolean = true;
 const prevSection = jest.fn();
 const nextSection = jest.fn();
 const saveDraft = jest.fn();
@@ -12,7 +13,12 @@ const props: SectionProps = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
   nextSection: nextSection,
-  saveDraft: saveDraft
+  saveDraft: saveDraft,
+  section: 5,
+  prevSectionLabel: "Section 4",
+  nextSectionLabel: showCovidDeclarationFeature
+    ? "Covid declarartion"
+    : "Section 7"
 };
 
 describe("Form-R Part-B Section6", () => {

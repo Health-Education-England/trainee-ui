@@ -50,7 +50,7 @@ class View extends React.PureComponent<ViewProps> {
           type="button"
           className={classes.sectionEditButton}
           onClick={() => editSection(section)}
-          data-cy={`BtnEditSection${section}`}
+          data-cy={`BtnEditSection${section + 1}`}
         >
           Edit
         </Button>
@@ -75,7 +75,7 @@ class View extends React.PureComponent<ViewProps> {
               <h2 data-cy="sectionHeader1">Section 1: Doctor's details</h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(1)}
+              {SectionEditButton(0)}
             </div>
           </div>
           <Panel label="Personal details" data-cy="personalDetails">
@@ -152,7 +152,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(2)}
+              {SectionEditButton(1)}
             </div>
           </div>
           <Panel label="Type of work">
@@ -262,7 +262,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(3)}
+              {SectionEditButton(2)}
             </div>
           </div>
           <Panel label="Declarations">
@@ -330,7 +330,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(4)}
+              {SectionEditButton(3)}
             </div>
           </div>
           <Panel label="Previously declared events">
@@ -430,7 +430,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(5)}
+              {SectionEditButton(4)}
             </div>
           </div>
           <Panel label="New declared events">
@@ -529,7 +529,7 @@ class View extends React.PureComponent<ViewProps> {
               <h2 data-cy="sectionHeader5">Section 6: Compliments</h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(6)}
+              {SectionEditButton(5)}
             </div>
           </div>
           <Panel label="Compliments">
@@ -557,7 +557,7 @@ class View extends React.PureComponent<ViewProps> {
                   <h2 data-cy="sectionHeader5">Covid declarations</h2>
                 </div>
                 <div className="nhsuk-grid-column-one-third">
-                  {SectionEditButton(67)}
+                  {SectionEditButton(6)}
                 </div>
               </div>
               <Panel label="Section 1: Trainee self-assessment of progress">

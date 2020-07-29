@@ -18,7 +18,10 @@ const props = {
   previousSection: prevSection,
   nextSection: nextSection,
   saveDraft: saveDraft,
-  history: []
+  history: [],
+  section: 2,
+  prevSectionLabel: "Section 2",
+  nextSectionLabel: "Section 4"
 };
 
 describe("Form-R Part-B Section3", () => {

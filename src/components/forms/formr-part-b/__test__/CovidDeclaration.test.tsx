@@ -15,7 +15,10 @@ const props = {
   formData: submittedFormRPartBs[0],
   previousSection: mockFn,
   nextSection: mockFn,
-  saveDraft: mockFn
+  saveDraft: mockFn,
+  section: 6,
+  prevSectionLabel: "Section 6",
+  nextSectionLabel: "Section 7"
 };
 
 describe("Form-R Part-B CovidDeclaration", () => {

@@ -45,7 +45,15 @@ const mapDispatchProps = {
 const connector = connect(mapStateToProps, mapDispatchProps);
 const formsService = new FormsService();
 
-class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
+interface ISection {
+  component: any;
+  title: string;
+}
+
+class Create extends React.PureComponent<
+  ConnectedProps<typeof connector>,
+  ISection
+> {
   componentDidMount() {
     const { isLoaded, loadReferenceData } = this.props;
 
@@ -122,40 +130,64 @@ class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
       previousSection: this.previousSection,
       nextSection: this.nextSection,
       saveDraft: this.saveDraft,
-      showCovidDeclaration: enableCovidDeclaration
+      showCovidDeclaration: enableCovidDeclaration,
+      section: section
     };
 
-    switch (section) {
-      case 1:
-        return (
-          <Section1
-            localOffices={localOffices}
-            curricula={curricula}
-            formData={formData}
-            nextSection={this.nextSection}
-            saveDraft={this.saveDraft}
-          ></Section1>
-        );
-      case 2:
-        return <Section2 {...sectionProps} />;
-      case 3:
-        return <Section3 {...sectionProps} />;
-      case 4:
-        return <Section4 {...sectionProps} />;
-      case 5:
-        return <Section5 {...sectionProps} />;
-      case 6:
-        return <Section6 {...sectionProps} />;
-      case 67:
-        return enableCovidDeclaration ? (
-          <CovidDeclaration {...sectionProps} />
-        ) : (
-          <Loading />
-        );
-      case 7:
-        return <Section7 {...sectionProps} history={this.props.history} />;
-      default:
-        return <Loading />;
+    const sections: ISection[] = [
+      {
+        component: Section1,
+        title: "Section 1:\nDoctor's details"
+      },
+
+      {
+        component: Section2,
+        title: "Section 2:\nWhole Scope of Practice"
+      },
+
+      {
+        component: Section3,
+        title: "Section 3:\nDeclarations relating to\nGood Medical Practice"
+      },
+      {
+        component: Section4,
+        title: "Section 4:\nUpdate to your previous Form R Part B"
+      },
+      {
+        component: Section5,
+        title: "Section 5:\nDeclarations since your previous Form R Part B"
+      },
+      {
+        component: Section6,
+        title: "Section 6:\nCompliments"
+      },
+
+      {
+        component: Section7,
+        title: "Section 7:\nDeclaration"
+      }
+    ];
+
+    const covidSection: ISection = {
+      component: CovidDeclaration,
+      title: "Covid declaration"
+    };
+
+    if (enableCovidDeclaration) {
+      sections.splice(6, 0, covidSection);
+    }
+    if (section < sections.length) {
+      return React.createElement(sections[section].component, {
+        ...sectionProps,
+        localOffices: this.props.localOffices,
+        curricula: curricula,
+        history: this.props.history,
+        prevSectionLabel: section > 0 ? sections[section - 1].title : "",
+        nextSectionLabel:
+          section < sections.length - 1 ? sections[section + 1].title : ""
+      });
+    } else {
+      return <Loading />;
     }
   }
 }

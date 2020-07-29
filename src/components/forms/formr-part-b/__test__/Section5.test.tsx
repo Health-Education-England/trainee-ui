@@ -19,7 +19,10 @@ const props: SectionProps = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
   nextSection: nextSection,
-  saveDraft: saveDraft
+  saveDraft: saveDraft,
+  section: 4,
+  prevSectionLabel: "Section 6",
+  nextSectionLabel: "Section 4"
 };
 
 describe("Form-R Part-B Section5", () => {
