@@ -54,7 +54,7 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
 
     // -------- Section 2 Whole Scope Types of Work -----------
-    cy.checkAndFillSection2(pastDate);
+    cy.checkAndFillSection2(pastDate, currentDate);
 
     cy.get('[data-cy="work[0].startDate"]')
       .should("be.visible")
@@ -310,7 +310,7 @@ describe("Form R (Part B)", () => {
 
         // Navigate to and complete section 2
         cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
-        cy.checkAndFillSection2(pastDate);
+        cy.checkAndFillSection2(pastDate, currentDate);
         cy.get("[data-cy=BtnSaveDraft]").click();
 
         // Navigate to and complete section 3
