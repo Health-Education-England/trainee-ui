@@ -8,9 +8,15 @@ import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
 import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
 import FormRPartB from "./components/forms/formr-part-b/FormRPartB";
+import { CacheUtilities } from "./utilities/CacheUtilities";
+import packageJson from "../package.json";
+
+const globalAny: any = global;
+globalAny.appVersion = packageJson.version;
 
 interface AppState {
   isAuthenticated: boolean;
+  isLatestVersion: boolean;
 }
 
 interface AppProps {}
@@ -20,8 +26,28 @@ class App extends React.PureComponent<AppProps, AppState> {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      isLatestVersion: false
     };
+  }
+
+  componentDidMount() {
+    fetch("/meta.json")
+      .then(response => response.json())
+      .then(meta => {
+        const latestVersion = meta.version;
+        const currentVersion = globalAny.appVersion;
+        const shouldForceRefresh = CacheUtilities.SemverGreaterThan(
+          latestVersion,
+          currentVersion
+        );
+        if (shouldForceRefresh) {
+          CacheUtilities.RefreshCacheAndReload();
+          this.setState({ isLatestVersion: true });
+        } else {
+          this.setState({ isLatestVersion: true });
+        }
+      });
   }
 
   setAuthenticationStatus = async (state: string) => {
@@ -37,9 +63,9 @@ class App extends React.PureComponent<AppProps, AppState> {
   };
 
   render() {
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated, isLatestVersion } = this.state;
 
-    return isAuthenticated ? (
+    return isAuthenticated && isLatestVersion ? (
       <Fragment>
         <Navbar />
         <main className="nhsuk-width-container nhsuk-u-margin-top-5">
