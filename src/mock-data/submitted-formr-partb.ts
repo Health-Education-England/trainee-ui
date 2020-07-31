@@ -58,7 +58,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
     ],
     currentDeclarationSummary: "",
     compliments: "",
-    haveCovidDeclarations: false,
+    haveCovidDeclarations: null,
     covidDeclarationDto: null,
     lifecycleState: LifeCycleState.Submitted,
     submissionDate: new Date("2020-04-22"),

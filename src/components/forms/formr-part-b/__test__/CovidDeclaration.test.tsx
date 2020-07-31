@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import CovidDeclaration from "../Sections/CovidDeclaration";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import DeclarationPanel from "../Sections/DeclarationPanel";
 
 jest.mock("../ValidationSchema", () => ({
   get CovidSectionValidationSchema() {
@@ -9,16 +10,18 @@ jest.mock("../ValidationSchema", () => ({
   }
 }));
 
-const mockFn = jest.fn();
+const prevSection = jest.fn();
+const nextSection = jest.fn();
+const saveDraft = jest.fn();
 
 const props = {
   formData: submittedFormRPartBs[0],
-  previousSection: mockFn,
-  nextSection: mockFn,
-  saveDraft: mockFn,
+  previousSection: prevSection,
+  nextSection: nextSection,
+  saveDraft: saveDraft,
   section: 6,
-  prevSectionLabel: "Section 6",
-  nextSectionLabel: "Section 7"
+  prevSectionLabel: "Previous section navigation label",
+  nextSectionLabel: "Next section navigation label"
 };
 
 describe("Form-R Part-B CovidDeclaration", () => {
@@ -30,10 +33,145 @@ describe("Form-R Part-B CovidDeclaration", () => {
     mount(<CovidDeclaration {...props} />);
   });
 
+  it("should render page heading", () => {
+    const wrapper = mount(<CovidDeclaration {...props} />);
+    expect(wrapper.find("[data-jest='mainFieldset6'] legend").length).toBe(1);
+    expect(wrapper.find("[data-jest='mainFieldset6'] legend").text()).toContain(
+      "COVID"
+    );
+  });
+
+  it("should render 2 radio buttons to flag whether the user has been affected by Covid", () => {
+    const wrapper = mount(<CovidDeclaration {...props} />);
+    expect(
+      wrapper.find("[data-jest='haveCovidDeclarations'] input").length
+    ).toBe(2);
+  });
+
+  it("should render values of two radio buttons for flagging Covid affect as true and false", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    expect(wrapper.first().prop("value")).toBe("true");
+    expect(wrapper.last().prop("value")).toBe("false");
+  });
+
+  it("should render two radio buttons for flagging Covid affect unchecked", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    expect(wrapper.first().prop("checked")).toBe(false);
+    expect(wrapper.last().prop("checked")).toBe(false);
+  });
+
+  it("should render the affected by Covid form when 'yes' is selected and remove when 'no' selected", () => {
+    //props.formData.haveCovidDeclarations = true;
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("click");
+    setTimeout(() => {
+      expect(component.find(["data-jest='covidForm"]).length).toBe(1);
+    }, 300);
+    wrapper.last().simulate("click");
+    setTimeout(() => {
+      expect(component.find(["data-jest='covidForm"]).length).toBe(0);
+    }, 300);
+  });
+
+  describe("When form is visible", () => {
+    it("should render 3 radio buttons for flagging self-rated progress, all unchecked", () => {
+      const component = mount(<CovidDeclaration {...props} />);
+      const wrapper = component.find(
+        "[data-jest='haveCovidDeclarations'] input"
+      );
+      wrapper.first().simulate("click");
+      setTimeout(() => {
+        expect(
+          component.find(
+            "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
+          ).length
+        ).toBe(3);
+        expect(
+          component
+            .find(
+              "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
+            )
+            .at(1)
+            .prop("checked")
+        ).toBe(false);
+
+        expect(
+          component
+            .find(
+              "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
+            )
+            .at(2)
+            .prop("checked")
+        ).toBe(false);
+
+        expect(
+          component
+            .find(
+              "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
+            )
+            .at(3)
+            .prop("checked")
+        ).toBe(false);
+      }, 300);
+    });
+
+    it("should render a conditional textarea when self-rated progress radio is checked", () => {
+      const component = mount(<CovidDeclaration {...props} />);
+      const wrapper = component.find(
+        "[data-jest='haveCovidDeclarations'] input"
+      );
+      wrapper.first().simulate("click");
+      setTimeout(() => {
+        component
+          .find(
+            "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
+          )
+          .at(1)
+          .simulate("click");
+        expect(
+          component.find(
+            "[data-jest='covidDeclarationDto.selfRateForCovid] .nhsuk-radios__conditional"
+          ).length
+        ).toBe(1);
+      }, 300);
+    });
+
+    it("should render other information textarea", () => {
+      const component = mount(<CovidDeclaration {...props} />);
+      const wrapper = component.find(
+        "[data-jest='haveCovidDeclarations'] input"
+      );
+      wrapper.first().simulate("click");
+      setTimeout(() => {
+        expect(
+          component.find(
+            "textarea[data-jest='covidDeclarationDto.otherInformationForPanel']"
+          ).length
+        ).toBe(1);
+      }, 300);
+    });
+  });
+  it("should render previous section link buttons with correct label", () => {
+    const wrapper = mount(<CovidDeclaration {...props} />);
+
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
+      "Previous section navigation label"
+    );
+    wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
+    expect(prevSection).toHaveBeenCalled();
+  });
+
   it("should render next section link buttons", async () => {
     const wrapper = mount(<CovidDeclaration {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
+      "Next section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 });

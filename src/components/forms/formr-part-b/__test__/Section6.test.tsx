@@ -4,7 +4,6 @@ import Section6 from "../Sections/Section6";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { SectionProps } from "../Sections/SectionProps";
 
-const showCovidDeclarationFeature: boolean = true;
 const prevSection = jest.fn();
 const nextSection = jest.fn();
 const saveDraft = jest.fn();
@@ -15,10 +14,8 @@ const props: SectionProps = {
   nextSection: nextSection,
   saveDraft: saveDraft,
   section: 5,
-  prevSectionLabel: "Section 4",
-  nextSectionLabel: showCovidDeclarationFeature
-    ? "Covid declarartion"
-    : "Section 7"
+  prevSectionLabel: "Previous section navigation label",
+  nextSectionLabel: "Next section navigation label"
 };
 
 describe("Form-R Part-B Section6", () => {
@@ -35,18 +32,24 @@ describe("Form-R Part-B Section6", () => {
     expect(wrapper.find("[data-jest='mainFieldset6'] legend").length).toBe(1);
   });
 
-  it("should render previous section link buttons", () => {
+  it("should render previous section link buttons with correct label", () => {
     const wrapper = mount(<Section6 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
+      "Previous section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
-  it("should render next section link buttons", () => {
+  it("should render next section link buttons with correct label", () => {
     const wrapper = mount(<Section6 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
+      "Next section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 

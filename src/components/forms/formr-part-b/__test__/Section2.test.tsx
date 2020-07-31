@@ -20,8 +20,8 @@ const props = {
   history: [],
   saveDraft: saveDraft,
   section: 1,
-  prevSectionLabel: "Section 1",
-  nextSectionLabel: "Section 3"
+  prevSectionLabel: "Previous section navigation label",
+  nextSectionLabel: "Next section navigation label"
 };
 
 describe("Form-R Part-B Section2", () => {
@@ -69,18 +69,24 @@ describe("Form-R Part-B Section2", () => {
     );
   });
 
-  it("should render previous section link buttons", () => {
+  it("should render previous section link buttons with correct label", () => {
     const wrapper = mount(<Section2 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
+      "Previous section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
-  it("should render next section link buttons", async () => {
+  it("should render next section link buttons with correct label", async () => {
     const wrapper = mount(<Section2 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
+      "Next section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 

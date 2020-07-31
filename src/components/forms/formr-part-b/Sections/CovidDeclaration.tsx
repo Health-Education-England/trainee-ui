@@ -59,7 +59,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                 Doctors in Training ARCPs during COVID 19 Pandemic
               </Label>
 
-              <WarningCallout label="Important" data-cy="mainWarning5">
+              <WarningCallout label="Important" data-cy="mainWarningCovid">
                 <div>
                   <p>
                     <b>IMPORTANT:</b> Please pre-populate this form with the
@@ -120,7 +120,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
               </Panel>
 
               {BooleanUtilities.ToBoolean(values.haveCovidDeclarations) ? (
-                <>
+                <div data-jest="covidForm" data-cy="covidForm">
                   <Panel label="Section 1: Trainee self-assessment of progress">
                     <Label>
                       <b>
@@ -134,6 +134,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       id="covidDeclarationDto.selfRateForCovid"
                       type="radios"
                       name="covidDeclarationDto.selfRateForCovid"
+                      data-jest="selfRateForCovid"
                       hint=""
                       items={COVID_RESULT_DECLARATIONS.map<KeyValue>(d => {
                         return {
@@ -158,6 +159,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                     <TextInputField
                       label=""
                       name="covidDeclarationDto.otherInformationForPanel"
+                      data-jest="covidDeclarationDto.otherInformationForPanel"
                       rows={10}
                     />
                   </Panel>
@@ -191,7 +193,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       ]}
                     />
                   </Panel>
-                </>
+                </div>
               ) : null}
             </Fieldset>
 
