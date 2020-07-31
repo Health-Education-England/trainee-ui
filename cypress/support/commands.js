@@ -452,7 +452,7 @@ Cypress.Commands.add("checkFlags", name => {
   return cy
     .request({
       method: "GET",
-      url: `http://localhost:8207/forms/api/form-switches`
+      url: `/forms/api/form-switches`
     })
     .then(response => {
       expect(response.status).to.eq(200);
