@@ -142,9 +142,13 @@ describe("Form R (Part B)", () => {
     cy.get(".nhsuk-error-summary").should("not.be.visible");
     cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
 
+    // -------- COVID Section -----------
     if (isCovid) {
       cy.log("### COVID SECTION CHECK ###");
-      cy.get("[data-cy=haveCovidDeclarations1]").click().should("be.checked");
+      cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
+      cy.get("#haveCovidDeclarations--error-message").should("be.visible");
+
+      cy.checkAndFillCovidSection();
       cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
     }
     // -------- Section 7: Declarations -----------
@@ -182,7 +186,7 @@ describe("Form R (Part B)", () => {
     // Go back to section 6
     cy.get("[data-cy=LinkToPreviousSection] > .nhsuk-pagination__page").click();
     if (isCovid) {
-      cy.log("### BACK TO COVID SECTION FROM SECTION 7 ###");
+      cy.get("[data-cy='covidForm']").should("be.visible");
     } else {
       cy.get("[data-cy=compliments]").should("be.visible");
     }
@@ -241,14 +245,18 @@ describe("Form R (Part B)", () => {
       .should("be.visible")
       .should("contain.value", "This is the compliment text.");
 
+    cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
     // Navigate to COVID
     if (isCovid) {
-      cy.log("### CHECK COVID SECTION  ###");
+      cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']")
+        .should("be.visible")
+        .should("contain.value", "Covid Training Progress Reason");
+
       cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
     }
 
     // Navigate to section 7
-    cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
+
     cy.get("[data-cy=isConsentAccepted0]")
       .should("be.visible")
       .should("be.checked");
@@ -262,10 +270,10 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=gmcNumber]").should("have.text", "11111111");
     cy.get("[data-cy=BtnSubmitPartB]").should("be.visible").click();
 
-    // See list of saved forms
+    // See list of submitted forms
     cy.contains("Submitted forms").should("be.visible");
 
-    //open the form just saved
+    //open the form just submitted
     cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
     cy.get("[data-cy=gmcNumber]")
       .should("be.visible")
@@ -296,6 +304,8 @@ describe("Form R (Part B)", () => {
           "include",
           "/formr-b"
         );
+
+        // #### SAVE DRAFTS ####
         // Fill in section 1
         cy.checkAndFillSection1(currRevalDate, prevRevalDate);
         cy.get("[data-cy=BtnSaveDraft]").click();
@@ -369,7 +379,7 @@ describe("Form R (Part B)", () => {
           cy.get(
             "[data-cy=LinkToNextSection] > .nhsuk-pagination__page"
           ).click();
-          cy.log("### CHECK AND FILL COVID SECTION");
+          cy.checkAndFillCovidSection();
           cy.get("[data-cy=BtnSaveDraft]").click();
         }
 
@@ -390,9 +400,7 @@ describe("Form R (Part B)", () => {
 
         if (isCovid) {
           // On section COVID
-          cy.get("[data-cy=haveCovidDeclarations1]")
-            .click()
-            .should("be.checked");
+
           cy.get(
             "[data-cy=LinkToNextSection] > .nhsuk-pagination__page"
           ).click();

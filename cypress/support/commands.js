@@ -135,15 +135,20 @@ Cypress.Commands.add(
   }
 );
 
+// ### SECTION 1: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
   cy.contains("Section 1: Doctor's details").should("be.visible");
   cy.get("[data-cy=mainWarning1]").should("be.visible");
   cy.get("[data-cy=legendFieldset1]").should("be.visible");
   cy.get(".nhsuk-warning-callout > p").should("be.visible");
 
-  cy.get("#forename").should("be.visible").invoke("val");
-  cy.get("#forename").clear();
-  cy.get("#forename").type("Fore name");
+  cy.get("#forename")
+    .should("be.visible")
+    .invoke("val")
+    .then(() => {
+      cy.get("#forename").clear();
+      cy.get("#forename").type("Fore name");
+    });
 
   cy.get("#surname").should("be.visible").invoke("val");
   cy.get("#surname").clear();
@@ -189,6 +194,7 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
     });
 });
 
+// ### SECTION 2: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection2", (workStartDate, endDate) => {
   // This command fills the section with default work panel only
 
@@ -235,6 +241,7 @@ Cypress.Commands.add("checkAndFillSection2", (workStartDate, endDate) => {
   cy.get("[data-cy=BtnAddWorkType]").should("be.visible");
 });
 
+// ### SECTION 3: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection3", () => {
   cy.get("[data-cy=legendFieldset3]").should("include.text", "Section 3");
   cy.get("[data-cy=mainWarning3]").should("be.visible");
@@ -263,6 +270,7 @@ Cypress.Commands.add("checkAndFillSection3", () => {
     .type("I'm in astonishingly excellent health.");
 });
 
+// ### SECTION 4: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection4", pastDate => {
   cy.get("[data-cy=legendFieldset4]").should("include.text", "Section 4");
   cy.get("[data-cy=mainWarning4]").should("be.visible");
@@ -303,6 +311,7 @@ Cypress.Commands.add("checkAndFillSection4", pastDate => {
     .type("declaration location");
 });
 
+// ### SECTION 5: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection5", pastDate => {
   cy.get("[data-cy=legendFieldset5]").should("include.text", "Section 5");
   cy.get("[data-cy=mainWarning5]").should("be.visible");
@@ -343,6 +352,7 @@ Cypress.Commands.add("checkAndFillSection5", pastDate => {
     .type("declaration location");
 });
 
+// ### SECTION 6: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection6", compliments => {
   cy.get("[data-cy=legendFieldset6]").should("include.text", "Section 6");
 
@@ -351,6 +361,39 @@ Cypress.Commands.add("checkAndFillSection6", compliments => {
     .should("contain.value", "")
     .clear()
     .type(compliments);
+});
+
+// ### COVID SECTION: CHECK AND FILL
+
+Cypress.Commands.add("checkAndFillCovidSection", () => {
+  cy.get("[data-cy=legendFieldsetCovid]").should("include.text", "COVID");
+  cy.get("[data-cy='haveCovidDeclarations0']").should("be.visible").check();
+  cy.get("[data-cy='covidForm']").should("be.visible");
+  cy.get("[data-cy='covidDeclarationDto.selfRateForCovid0']")
+    .should("be.visible")
+    .check();
+  cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").should(
+    "be.visible"
+  );
+  cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").clear();
+  cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").type(
+    "Covid Training Progress Reason"
+  );
+
+  cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").should(
+    "be.visible"
+  );
+  cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").clear();
+  cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").type(
+    "Other Covid information"
+  );
+
+  cy.get("[data-cy='covidDeclarationDto.discussWithSupervisorChecked0']")
+    .should("be.visible")
+    .check();
+  cy.get("[data-cy='covidDeclarationDto.discussWithSomeoneChecked0']")
+    .should("be.visible")
+    .check();
 });
 
 Cypress.Commands.add("addWorkPanel", (startDate, endDate) => {

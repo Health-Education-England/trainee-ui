@@ -49,7 +49,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
               <Fieldset.Legend
                 headingLevel="H2"
                 size="l"
-                data-cy="legendFieldset6"
+                data-cy="legendFieldsetCovid"
               >
                 Trainee Self-assessment & declaration for use in ARCPs during
                 COVID 19 Pandemic

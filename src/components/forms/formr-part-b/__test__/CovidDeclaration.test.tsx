@@ -2,7 +2,6 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import CovidDeclaration from "../Sections/CovidDeclaration";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
-import DeclarationPanel from "../Sections/DeclarationPanel";
 
 jest.mock("../ValidationSchema", () => ({
   get CovidSectionValidationSchema() {
