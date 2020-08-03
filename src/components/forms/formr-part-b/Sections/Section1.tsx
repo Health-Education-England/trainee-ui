@@ -2,31 +2,39 @@ import React, { FunctionComponent } from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
 import ScrollTo from "../../ScrollTo";
+import FormRPartBPagination from "./FormRPartBPagination";
+import { SectionProps } from "./SectionProps";
 import {
   Fieldset,
   ErrorSummary,
   WarningCallout,
-  Pagination,
   Panel,
-  ErrorMessage,
-  Button
+  ErrorMessage
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { Section1ValidationSchema } from "../ValidationSchema";
 import { KeyValue } from "../../../../models/KeyValue";
-import { FormRPartB } from "../../../../models/FormRPartB";
-import classes from "../FormRPartB.module.scss";
 
 interface Section1Props {
   localOffices: KeyValue[];
   curricula: KeyValue[];
-  formData: FormRPartB;
-  nextSection: (formData: FormRPartB) => void;
-  saveDraft: (formData: FormRPartB) => void;
 }
+type CombinedSectionProps = SectionProps & Section1Props;
 
-const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
-  const { localOffices, curricula, formData, nextSection, saveDraft } = props;
+const Section1: FunctionComponent<CombinedSectionProps> = (
+  props: CombinedSectionProps
+) => {
+  const {
+    localOffices,
+    curricula,
+    formData,
+    nextSection,
+    previousSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
   return (
     <Formik
       initialValues={formData}
@@ -121,23 +129,15 @@ const Section1: FunctionComponent<Section1Props> = (props: Section1Props) => {
               <ErrorMessage>Please check highlighted fields</ErrorMessage>
             </ErrorSummary>
           ) : null}
-
-          <Pagination className={classes.heePagination}>
-            <Pagination.Link></Pagination.Link>
-            <Pagination.Link onClick={() => saveDraft(values)}>
-              <Button type="button" data-cy="BtnSaveDraft">
-                Save & Exit
-              </Button>
-            </Pagination.Link>
-
-            <Pagination.Link
-              next
-              onClick={() => handleSubmit()}
-              data-cy="linkToSection2"
-            >
-              Section 2
-            </Pagination.Link>
-          </Pagination>
+          <FormRPartBPagination
+            values={values}
+            previousSection={previousSection}
+            handleSubmit={handleSubmit}
+            saveDraft={saveDraft}
+            prevSectionLabel={prevSectionLabel}
+            nextSectionLabel={nextSectionLabel}
+            section={section}
+          />
         </Form>
       )}
     </Formik>

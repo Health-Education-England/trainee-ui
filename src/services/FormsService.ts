@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import ApiService from "./apiService";
 import { FormRPartA } from "../models/FormRPartA";
-import { FormRPartB } from "../models/FormRPartB";
+import { FormRPartB, FormSwitch } from "../models/FormRPartB";
 
 export class FormsService extends ApiService {
   constructor() {
@@ -49,5 +49,9 @@ export class FormsService extends ApiService {
     formData: FormRPartB
   ): Promise<AxiosResponse<FormRPartB>> {
     return this.put<FormRPartB>("/formr-partb", formData);
+  }
+
+  async getFormSwitches(): Promise<AxiosResponse<FormSwitch[]>> {
+    return this.get<FormSwitch[]>("/form-switches");
   }
 }

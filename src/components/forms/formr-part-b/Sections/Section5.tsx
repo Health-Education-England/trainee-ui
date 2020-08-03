@@ -21,7 +21,15 @@ import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection, saveDraft } = props;
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
   const newDeclaration: Declaration = {
     declarationType: undefined,
     dateOfEntry: undefined,
@@ -178,11 +186,13 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
             ) : null}
 
             <FormRPartBPagination
-              section={5}
               values={values}
               previousSection={previousSection}
               handleSubmit={handleSubmit}
               saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
             />
           </Form>
         )}

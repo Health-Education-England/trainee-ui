@@ -14,7 +14,8 @@ import { submittedFormRPartAs } from "../../mock-data/submitted-formr-parta";
 import {
   loadFormRPartAList,
   updateFormData,
-  initializeForm
+  initializeForm,
+  loadSavedForm
 } from "../actions/formr-parta-actions";
 import { FormRPartA } from "../../models/FormRPartA";
 import { TraineeProfile } from "../../models/TraineeProfile";
@@ -159,5 +160,65 @@ describe("initializeForm method", () => {
     return store.dispatch(initializeForm(traineeProfileService)).then(() => {
       expect(store.getActions()).toEqual(expectedAction);
     });
+  });
+});
+
+describe("loadSavedForm method", () => {
+  it("Should dispatch LOAD_FORMR_PARTA_SUCCESS on successfull api call", () => {
+    const formrParta = submittedFormRPartAs[0];
+
+    const successResponse: Promise<AxiosResponse<FormRPartA>> = Promise.resolve(
+      {
+        data: formrParta,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      }
+    );
+
+    jest
+      .spyOn(formRPartAService, "getTraineeFormRPartAByFormId")
+      .mockReturnValue(successResponse);
+
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTA_SUCCESS,
+        payload: formrParta
+      }
+    ];
+
+    return store
+      .dispatch(loadSavedForm(formRPartAService, "fomrId"))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it("Should dispatch LOAD_FORMR_PARTA_FAILURE if api call fails", () => {
+    const errorResponse = {
+      data: null,
+      status: 500,
+      statusText: "Internal server error",
+      headers: {},
+      config: {}
+    };
+
+    jest
+      .spyOn(formRPartAService, "getTraineeFormRPartAByFormId")
+      .mockReturnValue(Promise.reject(errorResponse));
+
+    const expectedActions = [
+      {
+        type: LOAD_FORMR_PARTA_FAILURE,
+        payload: null
+      }
+    ];
+
+    return store
+      .dispatch(loadSavedForm(formRPartAService, "formId"))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
 });

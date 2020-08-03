@@ -15,7 +15,15 @@ import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
 
 const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
-  const { formData, previousSection, nextSection, saveDraft } = props;
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
   return (
     formData && (
       <Formik
@@ -147,11 +155,13 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
             ) : null}
 
             <FormRPartBPagination
-              section={3}
               values={values}
               previousSection={previousSection}
               handleSubmit={handleSubmit}
               saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
             />
           </Form>
         )}

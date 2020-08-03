@@ -65,7 +65,7 @@ export const Section2ValidationSchema = yup.object({
   work: yup
     .array(
       yup.object({
-        typeOfWork: StringValidationSchema("Type of work"),
+        typeOfWork: StringValidationSchema("Type of Work"),
         trainingPost: StringValidationSchema("Training Post"),
         site: StringValidationSchema("Site Name"),
         siteLocation: StringValidationSchema("Site Location"),
@@ -150,4 +150,31 @@ export const Section5ValidationSchema = yup.object({
 export const Section7ValidationSchema = yup.object({
   isDeclarationAccepted: acceptanceValidation,
   isConsentAccepted: acceptanceValidation
+});
+
+export const CovidSectionValidationSchema = yup.object({
+  haveCovidDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
+  covidDeclarationDto: yup
+    .object()
+    .nullable()
+    .when("haveCovidDeclarations", {
+      is: true,
+      then: yup.object({
+        selfRateForCovid: StringValidationSchema(
+          "Covid Training Progress",
+          300
+        ),
+        reasonOfSelfRate: StringValidationSchema(
+          "Covid Training Progress Reason",
+          1000
+        ),
+        otherInformationForPanel: StringValidationSchema(
+          "Other Information for Panel",
+          2000
+        )
+      })
+    })
 });

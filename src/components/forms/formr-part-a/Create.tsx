@@ -3,8 +3,6 @@ import { Formik, Form } from "formik";
 import { connect } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import {
-  Label,
-  Radios,
   Button,
   ErrorSummary,
   BackLink,
@@ -27,13 +25,13 @@ import {
 import Loading from "../../common/Loading";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
-import styles from "./FormRPartA.module.scss";
 import { KeyValue } from "../../../models/KeyValue";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { LifeCycleState } from "../../../models/LifeCycleState";
 import { AxiosResponse } from "axios";
 import { FormsService } from "../../../services/FormsService";
 import { Redirect } from "react-router-dom";
+import MultiChoiceInputField from "../MultiChoiceInputField";
 
 interface CreateProps extends GenericOwnProps {
   formData: FormRPartA | null;
@@ -237,21 +235,19 @@ class Create extends React.PureComponent<CreateProps> {
               </Panel>
 
               <Panel label="Declarations">
-                <Radios name="declarationType" className={styles.panelRadios}>
-                  <Label>I confirm that,</Label>
-
-                  {FORMR_PARTA_DECLARATIONS.map((label, index) => (
-                    <Radios.Radio
-                      className={styles.radios}
-                      key={label}
-                      data-cy={`radio-${index}`}
-                      checked={values.declarationType === label}
-                      onChange={() => setFieldValue("declarationType", label)}
-                    >
-                      {label}
-                    </Radios.Radio>
-                  ))}
-                </Radios>
+                <MultiChoiceInputField
+                  label="I confirm that"
+                  id="declarationType"
+                  type="radios"
+                  name="declarationType"
+                  hint=""
+                  items={FORMR_PARTA_DECLARATIONS.map<KeyValue>(d => {
+                    return {
+                      label: d,
+                      value: d
+                    };
+                  })}
+                />
 
                 <SelectInputField
                   label="Programme Specialty"

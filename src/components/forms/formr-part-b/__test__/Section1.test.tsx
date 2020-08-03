@@ -10,12 +10,17 @@ jest.mock("../ValidationSchema", () => ({
 }));
 
 const mockFn = jest.fn();
+const saveDraft = jest.fn();
 
 const props = {
   localOffices: [],
   curricula: [],
   formData: submittedFormRPartBs[0],
-  nextSection: mockFn
+  nextSection: mockFn,
+  previousSection: null,
+  saveDraft: saveDraft,
+  section: 0,
+  nextSectionLabel: "Next section navigation label"
 };
 
 describe("Form-R Part-B Section1", () => {
@@ -27,10 +32,14 @@ describe("Form-R Part-B Section1", () => {
     mount(<Section1 {...props} />);
   });
 
-  it("should render next section link buttons", async () => {
+  it("should render next section link buttons with correct label", async () => {
     const wrapper = mount(<Section1 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
+      "Next section navigation label"
+    );
+
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
   });
 

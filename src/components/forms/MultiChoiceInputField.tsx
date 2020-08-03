@@ -12,6 +12,7 @@ interface Props {
   hint?: any;
   footer?: any;
   onChange?: any;
+  conditional?: any;
 }
 
 const MultiChoiceInputField: React.FC<Props> = props => {
@@ -52,6 +53,7 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                 onChange={() => {
                   helpers.setValue(item.value);
                 }}
+                conditional={props.conditional}
               >
                 {item.label}
               </FormChildElement>

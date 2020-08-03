@@ -6,7 +6,9 @@ import {
   INITIALIZE_FORMR_PARTB_FAILURE,
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
-  EDIT_FORMR_PARTB
+  EDIT_FORMR_PARTB,
+  LOAD_FORM_SWITCHES_SUCCESS,
+  LOAD_FORM_SWITCHES_FAILURE
 } from "../action_types";
 import { FormRPartB } from "../../models/FormRPartB";
 import { FormsService } from "../../services/FormsService";
@@ -101,4 +103,23 @@ export const moveToSection = (section: number) => (
     type: MOVE_TO_SECTION,
     payload: section
   });
+};
+
+export const loadFormSwitches = (formService: FormsService) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formService
+    .getFormSwitches()
+    .then(response => {
+      dispatch({
+        type: LOAD_FORM_SWITCHES_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: LOAD_FORM_SWITCHES_FAILURE,
+        payload: null
+      });
+    });
 };

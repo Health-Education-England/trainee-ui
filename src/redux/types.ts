@@ -2,7 +2,7 @@ import { rootReducer } from "./reducers";
 import { TraineeProfile } from "../models/TraineeProfile";
 import { FormRPartA } from "../models/FormRPartA";
 import { KeyValue } from "../models/KeyValue";
-import { FormRPartB } from "../models/FormRPartB";
+import { FormRPartB, FormSwitch } from "../models/FormRPartB";
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -42,6 +42,10 @@ export interface FormRPartAListState {
 
 export interface FormRPartBListState {
   submittedForms: FormRPartB[];
+}
+
+export interface FormSwitchesState {
+  formSwitches: FormSwitch[];
 }
 
 export interface FormRPartBState {

@@ -9,14 +9,23 @@ import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-part
 import { act } from "react-test-renderer";
 import { BrowserRouter, Redirect } from "react-router-dom";
 
+const showCovidDeclarationFeature: boolean = true;
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-
+let btnLength = showCovidDeclarationFeature ? 10 : 9;
 describe("Confirm", () => {
   const mountComponent = (form: FormRPartB | null, history: any) => {
     const store = mockStore({
       formRPartB: {
         formData: form
+      },
+      formSwitches: {
+        formSwitches: [
+          {
+            name: "COVID",
+            enabled: false
+          }
+        ]
       }
     });
 
@@ -42,7 +51,7 @@ describe("Confirm", () => {
   it("renders the edit and confirm buttons when form data is avaialbe", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], null);
 
-    expect(wrapper.find("button")).toHaveLength(9);
+    expect(wrapper.find("button")).toHaveLength(btnLength);
   });
 
   it("should push 'formr-b/create' along with formData page to history when edit button clicked", () => {

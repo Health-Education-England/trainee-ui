@@ -32,6 +32,8 @@ export interface FormRPartB extends IFormR {
   currentDeclarations: Declaration[];
   currentDeclarationSummary: string;
   compliments: string;
+  haveCovidDeclarations: boolean | string;
+  covidDeclarationDto: CovidDeclaration | null;
 }
 
 export interface Declaration {
@@ -48,4 +50,18 @@ export interface Work {
   trainingPost: string;
   site: string;
   siteLocation: string;
+}
+
+export interface CovidDeclaration {
+  selfRateForCovid: string;
+  reasonOfSelfRate: string;
+  otherInformationForPanel: string;
+  discussWithSupervisorChecked: boolean | string;
+  discussWithSomeoneChecked: boolean | string;
+}
+
+export interface FormSwitch {
+  id: string;
+  name: string;
+  enabled: boolean;
 }
