@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
 import MultiChoiceInputField from "../../MultiChoiceInputField";
+import SelectInputField from "../../SelectInputField";
 import {
   YES_NO_OPTIONS,
   COVID_RESULT_DECLARATIONS,
@@ -59,46 +60,9 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                 Doctors in Training ARCPs during COVID 19 Pandemic
               </Label>
 
-              <WarningCallout label="Important" data-cy="mainWarningCovid">
-                <div>
-                  <p>
-                    <b>IMPORTANT:</b> Please pre-populate this form with the
-                    information about your training since your last ARCP review,
-                    or this is the first scheduled ARCP in your programme, since
-                    the start of your current period of training.
-                  </p>
-                </div>
-                <div>
-                  Please comment on:
-                  <ul>
-                    <li>
-                      Your self-assessment of progress up to the point of COVID
-                      19
-                    </li>
-                    <li>
-                      How your training may have been impacted by COVID 19 you
-                      have not been able to acquire required
-                      competencies/capabilities through lack of appropriate
-                      learning opportunities or cancellation of required
-                      exams/courses
-                    </li>
-                    <li>Any other relevant information</li>
-                  </ul>
-                </div>
-                <div>
-                  <p>
-                    By signing this document, you are confirming that ALL
-                    details are correct and that you have made an honest
-                    declaration on accordance with the professional standards
-                    set out by the General Medica Council in Good Medical
-                    Practice.
-                  </p>
-                </div>
-              </WarningCallout>
-
               <Panel label="Covid declarations" data-cy="complimentsPanel">
                 <MultiChoiceInputField
-                  label="Does your placement has been affected by Covid-19?"
+                  label="Do you wish to complete the Covid 19 self declaration?"
                   id="haveCovidDeclarations"
                   name="haveCovidDeclarations"
                   type="radios"
@@ -121,6 +85,43 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
 
               {BooleanUtilities.ToBoolean(values.haveCovidDeclarations) ? (
                 <div data-jest="covidForm" data-cy="covidForm">
+                  <WarningCallout label="Important" data-cy="mainWarningCovid">
+                    <div>
+                      <p>
+                        <b>IMPORTANT:</b> Please pre-populate this form with the
+                        information about your training since your last ARCP
+                        review, or this is the first scheduled ARCP in your
+                        programme, since the start of your current period of
+                        training.
+                      </p>
+                    </div>
+                    <div>
+                      Please comment on:
+                      <ul>
+                        <li>
+                          Your self-assessment of progress up to the point of
+                          COVID 19
+                        </li>
+                        <li>
+                          How your training may have been impacted by COVID 19
+                          you have not been able to acquire required
+                          competencies/capabilities through lack of appropriate
+                          learning opportunities or cancellation of required
+                          exams/courses
+                        </li>
+                        <li>Any other relevant information</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p>
+                        By signing this document, you are confirming that ALL
+                        details are correct and that you have made an honest
+                        declaration on accordance with the professional
+                        standards set out by the General Medica Council in Good
+                        Medical Practice.
+                      </p>
+                    </div>
+                  </WarningCallout>
                   <Panel label="Section 1: Trainee self-assessment of progress">
                     <Label>
                       <b>
@@ -191,6 +192,86 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           value: true
                         }
                       ]}
+                    />
+                  </Panel>
+
+                  <Panel label="Section 3: Trainee placement changes">
+                    <Label>
+                      <p>
+                        Please indicate any changes to your placement caused by
+                        your individual circumstances e.g. moving from frontline
+                        services for those in high-risk groups. Include as much
+                        information as possible including details of any periods
+                        of self-isolation with dates
+                      </p>
+                    </Label>
+
+                    <MultiChoiceInputField
+                      label="Changes were made to my placement due to my individual circumstances?"
+                      id="changesToPlacement"
+                      name="haveCovidDeclarachangesToPlacement"
+                      type="radios"
+                      items={YES_NO_OPTIONS}
+                    />
+
+                    <SelectInputField
+                      label="Circumstance of change"
+                      name="changeCircumstance"
+                      options={[
+                        {
+                          label: "Any Period of self-isolation",
+                          value: "Any Period of self-isolation"
+                        },
+                        {
+                          label:
+                            "Moving from front line services for those in high risk groups",
+                          value:
+                            "Moving from front line services for those in high risk groups"
+                        },
+                        {
+                          label: "Redeployed to support Covid-19 services",
+                          value: "Redeployed to support Covid-19 services"
+                        },
+                        {
+                          label:
+                            "Limited opportunities to curricula requirements",
+                          value:
+                            "Limited opportunities to curricula requirements"
+                        },
+                        { label: "Other", value: "Other" }
+                      ]}
+                    />
+                    <TextInputField
+                      label="If other, please explain"
+                      name="changeCircumstanceOther"
+                    />
+                    <TextInputField
+                      label="Please explain further how your placement was adjusted"
+                      name="howPlacementAdjusted"
+                      rows={5}
+                    />
+                  </Panel>
+
+                  <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
+                    <Label>
+                      <p>
+                        Please provide details of your Educational Supervisor in
+                        this section. A copy of this form will need to be sent
+                        to your ES when you submit this form. This will give
+                        your ES the opportunity to review the information
+                        provided in the self-assessment declaration, comment and
+                        confirm / validate them and make a recommendation for
+                        the ARCP during COVID 19. This will be completed by the
+                        ES in your ePortfolio.
+                      </p>
+                    </Label>
+                    <TextInputField
+                      label="Education Supervisor Name"
+                      name="educationSupervisorName"
+                    />
+                    <TextInputField
+                      label="Education Supervisor Email Address"
+                      name="educationSupervisorEmail"
                     />
                   </Panel>
                 </div>

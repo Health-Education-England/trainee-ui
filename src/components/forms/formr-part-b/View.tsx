@@ -543,8 +543,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          {enableCovidDeclaration ||
-          BooleanUtilities.ToYesNo(formData.haveCovidDeclarations) ? (
+          {enableCovidDeclaration || formData.haveCovidDeclarations ? (
             <>
               <div className="nhsuk-grid-row">
                 <div
