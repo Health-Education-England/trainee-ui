@@ -543,7 +543,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          {enableCovidDeclaration || formData.haveCovidDeclarations ? (
+          {enableCovidDeclaration || formData.haveCovidDeclarations || true ? (
             <>
               <div className="nhsuk-grid-row">
                 <div
@@ -624,8 +624,67 @@ class View extends React.PureComponent<ViewProps> {
                   </SummaryList.Row>
                 </SummaryList>
               </Panel>
+
+              <Panel label="Section 3: Trainee placement changes">
+                <SummaryList>
+                  <SummaryList.Row>
+                    <SummaryList.Key>
+                      Changes were made to my placement due to my individual
+                      circumstances
+                    </SummaryList.Key>
+                    <SummaryList.Value>
+                      {BooleanUtilities.ToYesNo(
+                        formData.covidDeclarationDto?.haveChangesToPlacement
+                      )}
+                    </SummaryList.Value>
+                  </SummaryList.Row>
+
+                  {BooleanUtilities.ToBoolean(
+                    formData.covidDeclarationDto?.haveChangesToPlacement
+                  ) ? (
+                    <>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Circumstance of change
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {formData.covidDeclarationDto?.changeCircumstances}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Please explain further how your placement was adjusted
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {formData.covidDeclarationDto?.howPlacementAdjusted}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </>
+                  ) : null}
+                </SummaryList>
+              </Panel>
             </>
           ) : null}
+
+          <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>Education Supervisor Name</SummaryList.Key>
+                <SummaryList.Value>
+                  {formData.covidDeclarationDto?.educationSupervisorName}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>
+                  Education Supervisor Email Address
+                </SummaryList.Key>
+                <SummaryList.Value>
+                  {formData.covidDeclarationDto?.educationSupervisorEmail}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
+          </Panel>
 
           <div className="nhsuk-grid-row">
             <div
