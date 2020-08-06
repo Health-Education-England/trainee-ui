@@ -68,17 +68,29 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                   type="radios"
                   items={YES_NO_OPTIONS}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    values.covidDeclarationDto = BooleanUtilities.ToBoolean(
-                      e.target.value
-                    )
-                      ? {
+                    if (!BooleanUtilities.ToBoolean(e.target.value)) {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to clear the Covid form data?"
+                        )
+                      ) {
+                        setFieldValue("covidDeclarationDto", {
                           selfRateForCovid: "",
                           reasonOfSelfRate: "",
                           otherInformationForPanel: "",
                           discussWithSupervisorChecked: false,
-                          discussWithSomeoneChecked: false
-                        }
-                      : null;
+                          discussWithSomeoneChecked: false,
+                          haveChangesToPlacement: null,
+                          changeCircumstances: "",
+                          changeCircumstanceOther: "",
+                          howPlacementAdjusted: "",
+                          educationSupervisorName: "",
+                          educationSupervisorEmail: ""
+                        });
+                      } else {
+                        setFieldValue("haveCovidDeclarations", true);
+                      }
+                    }
                   }}
                 />
               </Panel>
@@ -208,48 +220,76 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
 
                     <MultiChoiceInputField
                       label="Changes were made to my placement due to my individual circumstances?"
-                      id="changesToPlacement"
-                      name="haveCovidDeclarachangesToPlacement"
+                      id="covidDeclarationDto.haveChangesToPlacement"
+                      name="covidDeclarationDto.haveChangesToPlacement"
                       type="radios"
                       items={YES_NO_OPTIONS}
+                      data-jest="haveChangesToPlacement"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setFieldValue(
+                          "covidDeclarationDto.changeCircumstances",
+                          ""
+                        );
+                        setFieldValue(
+                          "covidDeclarationDto.changeCircumstanceOther",
+                          ""
+                        );
+                        setFieldValue(
+                          "covidDeclarationDto.howPlacementAdjusted",
+                          ""
+                        );
+                      }}
                     />
 
-                    <SelectInputField
-                      label="Circumstance of change"
-                      name="changeCircumstance"
-                      options={[
-                        {
-                          label: "Any Period of self-isolation",
-                          value: "Any Period of self-isolation"
-                        },
-                        {
-                          label:
-                            "Moving from front line services for those in high risk groups",
-                          value:
-                            "Moving from front line services for those in high risk groups"
-                        },
-                        {
-                          label: "Redeployed to support Covid-19 services",
-                          value: "Redeployed to support Covid-19 services"
-                        },
-                        {
-                          label:
-                            "Limited opportunities to curricula requirements",
-                          value:
-                            "Limited opportunities to curricula requirements"
-                        },
-                        { label: "Other", value: "Other" }
-                      ]}
-                    />
-                    <TextInputField
-                      label="If other, please explain"
-                      name="changeCircumstanceOther"
-                    />
-                    <TextInputField
-                      label="Please explain further how your placement was adjusted"
-                      name="howPlacementAdjusted"
-                      rows={5}
-                    />
+                    {BooleanUtilities.ToBoolean(
+                      values.covidDeclarationDto?.haveChangesToPlacement
+                    ) ? (
+                      <div
+                        data-jest="placementChanges"
+                        data-cy="placementChanges"
+                      >
+                        <SelectInputField
+                          label="Circumstance of change"
+                          name="covidDeclarationDto.changeCircumstances"
+                          data-jest="changeCircumstances"
+                          options={[
+                            {
+                              label: "Any Period of self-isolation",
+                              value: "Any Period of self-isolation"
+                            },
+                            {
+                              label:
+                                "Moving from front line services for those in high risk groups",
+                              value:
+                                "Moving from front line services for those in high risk groups"
+                            },
+                            {
+                              label: "Redeployed to support Covid-19 services",
+                              value: "Redeployed to support Covid-19 services"
+                            },
+                            {
+                              label:
+                                "Limited opportunities to curricula requirements",
+                              value:
+                                "Limited opportunities to curricula requirements"
+                            },
+                            { label: "Other", value: "Other" }
+                          ]}
+                        />
+
+                        <TextInputField
+                          label="If other, please explain"
+                          name="covidDeclarationDto.changeCircumstanceOther"
+                          data-jest="changeCircumstanceOther"
+                        />
+                        <TextInputField
+                          label="Please explain further how your placement was adjusted"
+                          name="covidDeclarationDto.howPlacementAdjusted"
+                          rows={5}
+                          data-jest="howPlacementAdjusted"
+                        />
+                      </div>
+                    ) : null}
                   </Panel>
 
                   <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
@@ -267,11 +307,13 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                     </Label>
                     <TextInputField
                       label="Education Supervisor Name"
-                      name="educationSupervisorName"
+                      name="covidDeclarationDto.educationSupervisorName"
+                      data-jest="educationSupervisorName"
                     />
                     <TextInputField
                       label="Education Supervisor Email Address"
-                      name="educationSupervisorEmail"
+                      name="covidDeclarationDto.educationSupervisorEmail"
+                      data-jest="educationSupervisorEmail"
                     />
                   </Panel>
                 </div>
