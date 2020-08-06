@@ -62,14 +62,13 @@ describe("Form-R Part-B CovidDeclaration", () => {
   });
 
   it("should render the affected by Covid form when 'yes' is selected and remove when 'no' selected", () => {
-    //props.formData.haveCovidDeclarations = true;
     const component = mount(<CovidDeclaration {...props} />);
     const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
-    wrapper.first().simulate("click");
+    wrapper.first().simulate("change", { target: { value: true } });
     setTimeout(() => {
       expect(component.find(["data-jest='covidForm"]).length).toBe(1);
     }, 300);
-    wrapper.last().simulate("click");
+    wrapper.last().simulate("change", { target: { value: true } });
     setTimeout(() => {
       expect(component.find(["data-jest='covidForm"]).length).toBe(0);
     }, 300);
@@ -81,7 +80,7 @@ describe("Form-R Part-B CovidDeclaration", () => {
       const wrapper = component.find(
         "[data-jest='haveCovidDeclarations'] input"
       );
-      wrapper.first().simulate("click");
+      wrapper.first().simulate("change", { target: { value: true } });
       setTimeout(() => {
         expect(
           component.find(
@@ -122,14 +121,14 @@ describe("Form-R Part-B CovidDeclaration", () => {
       const wrapper = component.find(
         "[data-jest='haveCovidDeclarations'] input"
       );
-      wrapper.first().simulate("click");
+      wrapper.first().simulate("change", { target: { value: true } });
       setTimeout(() => {
         component
           .find(
             "[data-jest='covidDeclarationDto.selfRateForCovid] input[type='radio']"
           )
           .at(1)
-          .simulate("click");
+          .simulate("change", { target: { value: true } });
         expect(
           component.find(
             "[data-jest='covidDeclarationDto.selfRateForCovid] .nhsuk-radios__conditional"
@@ -143,7 +142,7 @@ describe("Form-R Part-B CovidDeclaration", () => {
       const wrapper = component.find(
         "[data-jest='haveCovidDeclarations'] input"
       );
-      wrapper.first().simulate("click");
+      wrapper.first().simulate("change", { target: { value: true } });
       setTimeout(() => {
         expect(
           component.find(
@@ -153,6 +152,106 @@ describe("Form-R Part-B CovidDeclaration", () => {
       }, 300);
     });
   });
+
+  it("should render two radio buttons valued true and false flagging if changes have been made to placement both unchecked", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("change", { target: { value: true } });
+    setTimeout(() => {
+      expect(
+        component.find("[data-jest='haveChangesToPlacement'] input").length
+      ).toBe(2);
+      expect(
+        component
+          .find("[data-jest='haveChangesToPlacement'] input")
+          .first()
+          .prop("checked")
+      ).toBe(false);
+      expect(
+        component
+          .find("[data-jest='haveChangesToPlacement'] input")
+          .first()
+          .prop("value")
+      ).toBe("true");
+      expect(
+        component
+          .find("[data-jest='haveChangesToPlacement'] input")
+          .last()
+          .prop("checked")
+      ).toBe(false);
+      expect(
+        component
+          .find("[data-jest='haveChangesToPlacement'] input")
+          .last()
+          .prop("value")
+      ).toBe("false");
+    }, 300);
+  });
+
+  it("should conditionally render fields for entering placement change details", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("change", { target: { value: true } });
+    setTimeout(() => {
+      component
+        .find("[data-jest='haveChangesToPlacement'] input")
+        .first()
+        .simulate("change", { target: { value: true } });
+      expect(component.find("[data-jest='placementChanges']").length).toBe(1);
+    });
+  });
+
+  it("should clear typed values when toggling flag", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("change", { target: { value: true } });
+    setTimeout(() => {
+      component
+        .find("[data-jest='haveChangesToPlacement'] input")
+        .first()
+        .simulate("change", { target: { value: true } });
+      expect(
+        component.find("textarea[data-jest=howPlacementAdjusted]").length
+      ).toBe(1);
+      component
+        .find("textarea[data-jest=howPlacementAdjusted]")
+        .simulate("change", { target: { value: "Lorem ipsum" } });
+      component
+        .find("[data-jest='haveChangesToPlacement'] input")
+        .last()
+        .simulate("change", { target: { value: true } });
+      component
+        .find("[data-jest='haveChangesToPlacement'] input")
+        .first()
+        .simulate("change", { target: { value: true } });
+      expect(
+        component.find("textarea[data-jest=howPlacementAdjusted]").props().value
+      ).toBe("");
+    });
+  });
+
+  it("should render text box for typing supervisor name", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("change", { target: { value: true } });
+    setTimeout(() => {
+      expect(
+        component.find("[data-jest='educationSupervisorName']").length
+      ).toBe(1);
+    });
+  });
+
+  it("should render text box for typing supervisor email", () => {
+    const component = mount(<CovidDeclaration {...props} />);
+    const wrapper = component.find("[data-jest='haveCovidDeclarations'] input");
+    wrapper.first().simulate("change", { target: { value: true } });
+    setTimeout(() => {
+      expect(
+        component.find("[data-jest='educationSupervisorEmail']").length
+      ).toBe(1);
+    });
+  });
+
   it("should render previous section link buttons with correct label", () => {
     const wrapper = mount(<CovidDeclaration {...props} />);
 

@@ -33,13 +33,15 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
   return (
     formData && (
       <Formik
+        validateOnChange={false}
+        validateOnBlur={true}
         initialValues={formData}
         validationSchema={CovidSectionValidationSchema}
         onSubmit={values => {
           nextSection(values);
         }}
       >
-        {({ values, setFieldValue, handleSubmit }) => (
+        {({ values, setFieldValue, setFieldTouched, handleSubmit }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -68,25 +70,30 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                   type="radios"
                   items={YES_NO_OPTIONS}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (!BooleanUtilities.ToBoolean(e.target.value)) {
+                    setTimeout(() =>
+                      setFieldTouched("haveCovidDeclarations", true)
+                    );
+                    if (BooleanUtilities.ToBoolean(e.target.value)) {
+                      setFieldValue("covidDeclarationDto", {
+                        selfRateForCovid: "",
+                        reasonOfSelfRate: "",
+                        otherInformationForPanel: "",
+                        discussWithSupervisorChecked: false,
+                        discussWithSomeoneChecked: false,
+                        haveChangesToPlacement: "",
+                        changeCircumstances: "",
+                        changeCircumstanceOther: "",
+                        howPlacementAdjusted: "",
+                        educationSupervisorName: "",
+                        educationSupervisorEmail: ""
+                      });
+                    } else {
                       if (
                         window.confirm(
                           "Are you sure you want to clear the Covid form data?"
                         )
                       ) {
-                        setFieldValue("covidDeclarationDto", {
-                          selfRateForCovid: "",
-                          reasonOfSelfRate: "",
-                          otherInformationForPanel: "",
-                          discussWithSupervisorChecked: false,
-                          discussWithSomeoneChecked: false,
-                          haveChangesToPlacement: null,
-                          changeCircumstances: "",
-                          changeCircumstanceOther: "",
-                          howPlacementAdjusted: "",
-                          educationSupervisorName: "",
-                          educationSupervisorEmail: ""
-                        });
+                        setFieldValue("covidDeclarationDto", null);
                       } else {
                         setFieldValue("haveCovidDeclarations", true);
                       }
@@ -226,6 +233,9 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       items={YES_NO_OPTIONS}
                       data-jest="haveChangesToPlacement"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setTimeout(() =>
+                          setFieldTouched("haveChangesToPlacement", true)
+                        );
                         setFieldValue(
                           "covidDeclarationDto.changeCircumstances",
                           ""
