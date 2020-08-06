@@ -262,29 +262,6 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           label="Circumstance of change"
                           name="covidDeclarationDto.changeCircumstances"
                           data-jest="changeCircumstances"
-                          options={[
-                            {
-                              label: "Any Period of self-isolation",
-                              value: "Any Period of self-isolation"
-                            },
-                            {
-                              label:
-                                "Moving from front line services for those in high risk groups",
-                              value:
-                                "Moving from front line services for those in high risk groups"
-                            },
-                            {
-                              label: "Redeployed to support Covid-19 services",
-                              value: "Redeployed to support Covid-19 services"
-                            },
-                            {
-                              label:
-                                "Limited opportunities to curricula requirements",
-                              value:
-                                "Limited opportunities to curricula requirements"
-                            },
-                            { label: "Other", value: "Other" }
-                          ]}
                         />
 
                         <TextInputField
