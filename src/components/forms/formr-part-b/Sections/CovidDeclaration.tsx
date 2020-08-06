@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import ScrollTo from "../../ScrollTo";
 import { Fieldset, Panel, Label, WarningCallout } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
@@ -16,6 +16,7 @@ import { CovidSectionValidationSchema } from "../ValidationSchema";
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import TextInputField from "../../TextInputField";
 import { KeyValue } from "../../../../models/KeyValue";
+import { TraineeReferenceService } from "../../../../services/TraineeReferenceService";
 
 const CovidDeclaration: FunctionComponent<SectionProps> = (
   props: SectionProps
@@ -29,6 +30,25 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
     nextSectionLabel,
     section
   } = props;
+
+  const [changeCircumstances, setChangeCircumstances] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const traineeReferenceService = new TraineeReferenceService();
+      const response = await traineeReferenceService.getCovidChangeCircs();
+      const responseChangeCircumstances = response.data.map(
+        (d: { label: any }) => {
+          return {
+            label: d.label,
+            value: d.label
+          };
+        }
+      );
+      setChangeCircumstances(responseChangeCircumstances);
+    };
+    fetchData();
+  }, []);
 
   return (
     formData && (
@@ -262,6 +282,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           label="Circumstance of change"
                           name="covidDeclarationDto.changeCircumstances"
                           data-jest="changeCircumstances"
+                          options={changeCircumstances}
                         />
 
                         <TextInputField

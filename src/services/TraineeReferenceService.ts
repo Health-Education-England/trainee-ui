@@ -37,4 +37,8 @@ export class TraineeReferenceService extends ApiService {
   getDeclarationType(): Promise<AxiosResponse<any>> {
     return this.get("/declaration-type");
   }
+
+  getCovidChangeCircs(): Promise<AxiosResponse<any>> {
+    return this.get("/covid-change-circs");
+  }
 }
