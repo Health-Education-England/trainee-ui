@@ -652,6 +652,19 @@ class View extends React.PureComponent<ViewProps> {
                         </SummaryList.Value>
                       </SummaryList.Row>
 
+                      {formData.covidDeclarationDto?.changeCircumstances ===
+                      "Other" ? (
+                        <SummaryList.Row>
+                          <SummaryList.Key>Other circumstance</SummaryList.Key>
+                          <SummaryList.Value>
+                            {
+                              formData.covidDeclarationDto
+                                ?.changeCircumstanceOther
+                            }
+                          </SummaryList.Value>
+                        </SummaryList.Row>
+                      ) : null}
+
                       <SummaryList.Row>
                         <SummaryList.Key>
                           Please explain further how your placement was adjusted
