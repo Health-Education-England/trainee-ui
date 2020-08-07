@@ -10,6 +10,7 @@ interface Props {
   hint?: string;
   options?: any[];
   footer?: any;
+  onChange?: any;
 }
 
 const SelectInputField: React.FC<Props> = props => {
@@ -31,7 +32,7 @@ const SelectInputField: React.FC<Props> = props => {
           }}
           error={error || ""}
           label={props.label}
-          onChange={field.onChange}
+          onChange={props.onChange ? props.onChange : field.onChange}
           hint={props.hint}
           value={field.value || ""}
           data-cy={props.name}
