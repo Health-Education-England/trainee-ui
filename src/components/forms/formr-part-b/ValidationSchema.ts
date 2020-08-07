@@ -188,11 +188,16 @@ export const CovidSectionValidationSchema = yup.object({
           .boolean()
           .nullable()
           .required("You must select yes or no"),
+        changeCircumstances: StringValidationSchema("Circumstance of change"),
+        changeCircumstanceOther: yup.string().when("changeCircumstances", {
+          is: changeCircumstance => changeCircumstance === "Other",
+          then: yup.string().required("Other circumstance is required`")
+        }),
         howPlacementAdjusted: yup.string().when("haveChangesToPlacement", {
           is: true,
           then: yup
             .string()
-            .required("How your placement was adjusted is required`")
+            .required("How your placement was adjusted is required")
         })
       })
     })

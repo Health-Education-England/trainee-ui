@@ -45,7 +45,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
           };
         }
       );
-      console.log(responseChangeCircumstances);
+
       setChangeCircumstances(responseChangeCircumstances);
     };
     fetchData();
@@ -275,12 +275,15 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           data-jest="changeCircumstances"
                           options={changeCircumstances}
                         />
+                        {values.covidDeclarationDto?.changeCircumstances ===
+                        "Other" ? (
+                          <TextInputField
+                            label="If other, please explain"
+                            name="covidDeclarationDto.changeCircumstanceOther"
+                            data-jest="changeCircumstanceOther"
+                          />
+                        ) : null}
 
-                        <TextInputField
-                          label="If other, please explain"
-                          name="covidDeclarationDto.changeCircumstanceOther"
-                          data-jest="changeCircumstanceOther"
-                        />
                         <TextInputField
                           label="Please explain further how your placement was adjusted"
                           name="covidDeclarationDto.howPlacementAdjusted"
