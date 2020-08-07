@@ -45,6 +45,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
           };
         }
       );
+      console.log(responseChangeCircumstances);
       setChangeCircumstances(responseChangeCircumstances);
     };
     fetchData();
@@ -53,8 +54,6 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
   return (
     formData && (
       <Formik
-        validateOnChange={false}
-        validateOnBlur={true}
         initialValues={formData}
         validationSchema={CovidSectionValidationSchema}
         onSubmit={values => {
@@ -108,15 +107,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                         educationSupervisorEmail: ""
                       });
                     } else {
-                      if (
-                        window.confirm(
-                          "Are you sure you want to clear the Covid form data?"
-                        )
-                      ) {
-                        setFieldValue("covidDeclarationDto", null);
-                      } else {
-                        setFieldValue("haveCovidDeclarations", true);
-                      }
+                      setFieldValue("covidDeclarationDto", null);
                     }
                   }}
                 />
