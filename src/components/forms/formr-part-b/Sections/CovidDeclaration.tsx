@@ -274,6 +274,19 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           name="covidDeclarationDto.changeCircumstances"
                           data-jest="changeCircumstances"
                           options={changeCircumstances}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>
+                          ) => {
+                            setFieldValue(
+                              "covidDeclarationDto.changeCircumstances",
+                              e.target.value
+                            );
+                            setFieldTouched("changeCircumstanceOther", true);
+                            setFieldValue(
+                              "covidDeclarationDto.changeCircumstanceOther",
+                              ""
+                            );
+                          }}
                         />
                         {values.covidDeclarationDto?.changeCircumstances ===
                         "Other" ? (
