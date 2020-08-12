@@ -34,7 +34,7 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -104,6 +104,9 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   name="isWarned"
                   type="radios"
                   items={YES_NO_OPTIONS}
+                  onChange={() => {
+                    setFieldValue("isComplying", null, false);
+                  }}
                 />
 
                 {values.isWarned && values.isWarned.toString() === "true" ? (
