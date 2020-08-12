@@ -543,7 +543,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          {enableCovidDeclaration || formData.haveCovidDeclarations || true ? (
+          {enableCovidDeclaration ? (
             <>
               <div className="nhsuk-grid-row">
                 <div
@@ -599,105 +599,127 @@ class View extends React.PureComponent<ViewProps> {
                 ) : null}
               </Panel>
 
-              <Panel label="Section 2: Trainee Check-In">
-                <SummaryList>
-                  <SummaryList.Row>
-                    <SummaryList.Key>
-                      {NEED_DISCUSSION_WITH_SUPERVISOR}
-                    </SummaryList.Key>
-                    <SummaryList.Value>
-                      {BooleanUtilities.ToYesNo(
-                        formData.covidDeclarationDto
-                          ?.discussWithSupervisorChecked
-                      )}
-                    </SummaryList.Value>
-                  </SummaryList.Row>
-                  <SummaryList.Row>
-                    <SummaryList.Key>
-                      {NEED_DISCUSSION_WITH_SOMEONE}
-                    </SummaryList.Key>
-                    <SummaryList.Value>
-                      {BooleanUtilities.ToYesNo(
-                        formData.covidDeclarationDto?.discussWithSomeoneChecked
-                      )}
-                    </SummaryList.Value>
-                  </SummaryList.Row>
-                </SummaryList>
-              </Panel>
+              {BooleanUtilities.ToBoolean(formData.haveCovidDeclarations) ? (
+                <>
+                  <Panel label="Section 2: Trainee Check-In">
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          {NEED_DISCUSSION_WITH_SUPERVISOR}
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto
+                              ?.discussWithSupervisorChecked
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          {NEED_DISCUSSION_WITH_SOMEONE}
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto
+                              ?.discussWithSomeoneChecked
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
 
-              <Panel label="Section 3: Trainee placement changes">
-                <SummaryList>
-                  <SummaryList.Row>
-                    <SummaryList.Key>
-                      Changes were made to my placement due to my individual
-                      circumstances
-                    </SummaryList.Key>
-                    <SummaryList.Value>
-                      {BooleanUtilities.ToYesNo(
+                  <Panel label="Section 3: Trainee placement changes">
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Changes were made to my placement due to my individual
+                          circumstances
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto?.haveChangesToPlacement
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+
+                      {BooleanUtilities.ToBoolean(
                         formData.covidDeclarationDto?.haveChangesToPlacement
-                      )}
-                    </SummaryList.Value>
-                  </SummaryList.Row>
+                      ) ? (
+                        <>
+                          <SummaryList.Row>
+                            <SummaryList.Key>
+                              Circumstance of change
+                            </SummaryList.Key>
+                            <SummaryList.Value>
+                              {
+                                formData.covidDeclarationDto
+                                  ?.changeCircumstances
+                              }
+                            </SummaryList.Value>
+                          </SummaryList.Row>
 
-                  {BooleanUtilities.ToBoolean(
-                    formData.covidDeclarationDto?.haveChangesToPlacement
-                  ) ? (
-                    <>
-                      <SummaryList.Row>
-                        <SummaryList.Key>
-                          Circumstance of change
-                        </SummaryList.Key>
-                        <SummaryList.Value>
-                          {formData.covidDeclarationDto?.changeCircumstances}
-                        </SummaryList.Value>
-                      </SummaryList.Row>
+                          {formData.covidDeclarationDto?.changeCircumstances ===
+                          "Other" ? (
+                            <SummaryList.Row>
+                              <SummaryList.Key>
+                                Other circumstance
+                              </SummaryList.Key>
+                              <SummaryList.Value>
+                                {
+                                  formData.covidDeclarationDto
+                                    ?.changeCircumstanceOther
+                                }
+                              </SummaryList.Value>
+                            </SummaryList.Row>
+                          ) : null}
 
-                      {formData.covidDeclarationDto?.changeCircumstances ===
-                      "Other" ? (
-                        <SummaryList.Row>
-                          <SummaryList.Key>Other circumstance</SummaryList.Key>
-                          <SummaryList.Value>
-                            {
-                              formData.covidDeclarationDto
-                                ?.changeCircumstanceOther
-                            }
-                          </SummaryList.Value>
-                        </SummaryList.Row>
+                          <SummaryList.Row>
+                            <SummaryList.Key>
+                              Please explain further how your placement was
+                              adjusted
+                            </SummaryList.Key>
+                            <SummaryList.Value>
+                              {
+                                formData.covidDeclarationDto
+                                  ?.howPlacementAdjusted
+                              }
+                            </SummaryList.Value>
+                          </SummaryList.Row>
+                        </>
                       ) : null}
+                    </SummaryList>
+                  </Panel>
 
+                  <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
+                    <SummaryList>
                       <SummaryList.Row>
                         <SummaryList.Key>
-                          Please explain further how your placement was adjusted
+                          Education Supervisor Name
                         </SummaryList.Key>
                         <SummaryList.Value>
-                          {formData.covidDeclarationDto?.howPlacementAdjusted}
+                          {
+                            formData.covidDeclarationDto
+                              ?.educationSupervisorName
+                          }
                         </SummaryList.Value>
                       </SummaryList.Row>
-                    </>
-                  ) : null}
-                </SummaryList>
-              </Panel>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Education Supervisor Email Address
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {
+                            formData.covidDeclarationDto
+                              ?.educationSupervisorEmail
+                          }
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+                </>
+              ) : null}
             </>
           ) : null}
-
-          <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
-            <SummaryList>
-              <SummaryList.Row>
-                <SummaryList.Key>Education Supervisor Name</SummaryList.Key>
-                <SummaryList.Value>
-                  {formData.covidDeclarationDto?.educationSupervisorName}
-                </SummaryList.Value>
-              </SummaryList.Row>
-              <SummaryList.Row>
-                <SummaryList.Key>
-                  Education Supervisor Email Address
-                </SummaryList.Key>
-                <SummaryList.Value>
-                  {formData.covidDeclarationDto?.educationSupervisorEmail}
-                </SummaryList.Value>
-              </SummaryList.Row>
-            </SummaryList>
-          </Panel>
 
           <div className="nhsuk-grid-row">
             <div

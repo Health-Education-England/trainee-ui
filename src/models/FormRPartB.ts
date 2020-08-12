@@ -58,7 +58,7 @@ export interface CovidDeclaration {
   otherInformationForPanel: string;
   discussWithSupervisorChecked: boolean | string;
   discussWithSomeoneChecked: boolean | string;
-  haveChangesToPlacement: boolean | "";
+  haveChangesToPlacement: boolean | string;
   changeCircumstances: string;
   changeCircumstanceOther: string;
   howPlacementAdjusted: string;

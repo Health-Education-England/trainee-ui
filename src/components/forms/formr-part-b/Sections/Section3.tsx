@@ -13,6 +13,7 @@ import { Form, Formik } from "formik";
 import { Section3ValidationSchema } from "../ValidationSchema";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
+import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 
 const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -102,10 +103,7 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   id="isWarned"
                   name="isWarned"
                   type="radios"
-                  items={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
-                  ]}
+                  items={YES_NO_OPTIONS}
                 />
 
                 {values.isWarned && values.isWarned.toString() === "true" ? (

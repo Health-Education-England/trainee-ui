@@ -60,7 +60,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
           nextSection(values);
         }}
       >
-        {({ values, setFieldValue, setFieldTouched, handleSubmit }) => (
+        {({ values, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -88,27 +88,8 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                   name="haveCovidDeclarations"
                   type="radios"
                   items={YES_NO_OPTIONS}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setTimeout(() =>
-                      setFieldTouched("haveCovidDeclarations", true)
-                    );
-                    if (BooleanUtilities.ToBoolean(e.target.value)) {
-                      setFieldValue("covidDeclarationDto", {
-                        selfRateForCovid: "",
-                        reasonOfSelfRate: "",
-                        otherInformationForPanel: "",
-                        discussWithSupervisorChecked: false,
-                        discussWithSomeoneChecked: false,
-                        haveChangesToPlacement: "",
-                        changeCircumstances: "",
-                        changeCircumstanceOther: "",
-                        howPlacementAdjusted: "",
-                        educationSupervisorName: "",
-                        educationSupervisorEmail: ""
-                      });
-                    } else {
-                      setFieldValue("covidDeclarationDto", null);
-                    }
+                  onChange={() => {
+                    setFieldValue("covidDeclarationDto", null, false);
                   }}
                 />
               </Panel>
@@ -243,21 +224,21 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       type="radios"
                       items={YES_NO_OPTIONS}
                       data-jest="haveChangesToPlacement"
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setTimeout(() =>
-                          setFieldTouched("haveChangesToPlacement", true)
-                        );
+                      onChange={() => {
                         setFieldValue(
                           "covidDeclarationDto.changeCircumstances",
-                          ""
+                          null,
+                          false
                         );
                         setFieldValue(
                           "covidDeclarationDto.changeCircumstanceOther",
-                          ""
+                          null,
+                          false
                         );
                         setFieldValue(
                           "covidDeclarationDto.howPlacementAdjusted",
-                          ""
+                          null,
+                          false
                         );
                       }}
                     />
@@ -281,10 +262,10 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                               "covidDeclarationDto.changeCircumstances",
                               e.target.value
                             );
-                            setFieldTouched("changeCircumstanceOther", true);
                             setFieldValue(
                               "covidDeclarationDto.changeCircumstanceOther",
-                              ""
+                              null,
+                              false
                             );
                           }}
                         />

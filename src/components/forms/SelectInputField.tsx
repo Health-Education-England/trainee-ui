@@ -15,6 +15,7 @@ interface Props {
 
 const SelectInputField: React.FC<Props> = props => {
   const [field, { error }, helpers] = useField(props);
+  const { name, id, label, onChange, hint, footer } = props;
   return (
     <>
       <div
@@ -25,17 +26,17 @@ const SelectInputField: React.FC<Props> = props => {
         }
       >
         <Select
-          name={props.name}
-          id={props.id || props.name}
+          name={name}
+          id={id || name}
           onBlur={() => {
             helpers.setTouched(true);
           }}
           error={error || ""}
-          label={props.label}
-          onChange={props.onChange ? props.onChange : field.onChange}
-          hint={props.hint}
+          label={label}
+          onChange={onChange ? onChange : field.onChange}
+          hint={hint}
           value={field.value || ""}
-          data-cy={props.name}
+          data-cy={name}
         >
           <Select.Option value="">-- Please select --</Select.Option>
           {props.options
@@ -46,7 +47,7 @@ const SelectInputField: React.FC<Props> = props => {
               ))
             : null}
         </Select>
-        <InputFooterLabel label={props.footer || ""} />
+        <InputFooterLabel label={footer || ""} />
       </div>
     </>
   );

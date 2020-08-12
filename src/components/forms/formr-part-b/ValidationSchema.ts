@@ -181,6 +181,7 @@ export const CovidSectionValidationSchema = yup.object({
         ),
         educationSupervisorEmail: yup
           .string()
+          .nullable()
           .email("Email is invalid")
           .max(255, "Email must be shorter than 255 characters")
           .required("Email is required"),
@@ -189,16 +190,26 @@ export const CovidSectionValidationSchema = yup.object({
           .nullable()
           .required("You must select yes or no"),
         changeCircumstances: StringValidationSchema("Circumstance of change"),
-        changeCircumstanceOther: yup.string().when("changeCircumstances", {
-          is: changeCircumstance => changeCircumstance === "Other",
-          then: yup.string().required("Other circumstance is required`")
-        }),
-        howPlacementAdjusted: yup.string().when("haveChangesToPlacement", {
-          is: true,
-          then: yup
-            .string()
-            .required("How your placement was adjusted is required")
-        })
+        changeCircumstanceOther: yup
+          .string()
+          .nullable()
+          .when("changeCircumstances", {
+            is: changeCircumstance => changeCircumstance === "Other",
+            then: yup
+              .string()
+              .nullable()
+              .required("Other circumstance is required")
+          }),
+        howPlacementAdjusted: yup
+          .string()
+          .nullable()
+          .when("haveChangesToPlacement", {
+            is: true,
+            then: yup
+              .string()
+              .nullable()
+              .required("How your placement was adjusted is required")
+          })
       })
     })
 });
