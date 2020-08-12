@@ -98,7 +98,7 @@ Cypress.Commands.add(
       .should("be.visible")
       .should("have.value", "traineeui.tester@hee.nhs.uk");
 
-    cy.get("[data-cy=radio-0]").should("be.checked");
+    cy.get("[data-cy=declarationType0]").should("be.checked");
 
     cy.get("#programmeSpecialty")
       .should("be.visible")
@@ -394,6 +394,30 @@ Cypress.Commands.add("checkAndFillCovidSection", () => {
   cy.get("[data-cy='covidDeclarationDto.discussWithSomeoneChecked0']")
     .should("be.visible")
     .check();
+
+  cy.get("[data-cy='covidDeclarationDto.haveChangesToPlacement0']")
+    .should("be.visible")
+    .check();
+
+  cy.get("[data-cy='covidDeclarationDto.changeCircumstances']")
+    .should("be.visible")
+    .select("Other")
+    .should("have.value", "Other");
+  cy.get("[data-cy='covidDeclarationDto.changeCircumstanceOther']")
+    .should("be.visible")
+    .type("Other circumstance of change");
+  cy.get("[data-cy='covidDeclarationDto.howPlacementAdjusted']")
+    .should("be.visible")
+    .type("How your placement was adjusted");
+  cy.get("[data-cy='covidDeclarationDto.educationSupervisorName']")
+    .should("be.visible")
+    .type("Education Supervisor Name");
+  cy.get("[data-cy='covidDeclarationDto.educationSupervisorEmail']").should(
+    "be.visible"
+  );
+  cy.get("[data-cy='covidDeclarationDto.educationSupervisorEmail']").type(
+    "Education@Supervisor.Name"
+  );
 });
 
 Cypress.Commands.add("addWorkPanel", (startDate, endDate) => {
