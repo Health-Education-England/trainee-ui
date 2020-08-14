@@ -58,6 +58,12 @@ export interface CovidDeclaration {
   otherInformationForPanel: string;
   discussWithSupervisorChecked: boolean | string;
   discussWithSomeoneChecked: boolean | string;
+  haveChangesToPlacement: boolean | string;
+  changeCircumstances: string;
+  changeCircumstanceOther: string;
+  howPlacementAdjusted: string;
+  educationSupervisorName: string;
+  educationSupervisorEmail: string;
 }
 
 export interface FormSwitch {

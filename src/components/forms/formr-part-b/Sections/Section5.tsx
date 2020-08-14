@@ -46,7 +46,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -111,6 +111,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                       values.currentDeclarations,
                       newDeclaration
                     );
+                    setFieldValue("currentDeclarationSummary", null, false);
                   }}
                   items={YES_NO_OPTIONS}
                   footer="If you wish to make any such declarations in relation to your previous Form R Part B then please do this in Section 4"

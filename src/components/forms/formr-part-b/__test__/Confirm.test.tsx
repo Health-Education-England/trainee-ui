@@ -9,7 +9,7 @@ import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-part
 import { act } from "react-test-renderer";
 import { BrowserRouter, Redirect } from "react-router-dom";
 
-const showCovidDeclarationFeature: boolean = true;
+const showCovidDeclarationFeature: boolean = false;
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 let btnLength = showCovidDeclarationFeature ? 10 : 9;
@@ -42,13 +42,13 @@ describe("Confirm", () => {
     mountComponent(submittedFormRPartBs[0], null);
   });
 
-  it("should redirect to create page when no data availabe", () => {
+  it("should redirect to create page when no data available", () => {
     const wrapper = mountComponent(null, null);
 
     expect(wrapper.find(Redirect)).toHaveLength(1);
   });
 
-  it("renders the edit and confirm buttons when form data is avaialbe", () => {
+  it("renders the edit and confirm buttons when form data is available", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], null);
 
     expect(wrapper.find("button")).toHaveLength(btnLength);

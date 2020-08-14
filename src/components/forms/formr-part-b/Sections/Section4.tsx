@@ -47,7 +47,7 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -92,6 +92,7 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
                       values.previousDeclarations,
                       newDeclaration
                     );
+                    setFieldValue("previousDeclarationSummary", null, false);
                   }}
                   type="radios"
                   items={YES_NO_OPTIONS}

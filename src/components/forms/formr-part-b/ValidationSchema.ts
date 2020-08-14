@@ -174,7 +174,42 @@ export const CovidSectionValidationSchema = yup.object({
         otherInformationForPanel: StringValidationSchema(
           "Other Information for Panel",
           2000
-        )
+        ),
+        educationSupervisorName: StringValidationSchema(
+          "Education Supervisor Name",
+          300
+        ),
+        educationSupervisorEmail: yup
+          .string()
+          .nullable()
+          .email("Email is invalid")
+          .max(255, "Email must be shorter than 255 characters")
+          .required("Email is required"),
+        haveChangesToPlacement: yup
+          .boolean()
+          .nullable()
+          .required("You must select yes or no"),
+        changeCircumstances: StringValidationSchema("Circumstance of change"),
+        changeCircumstanceOther: yup
+          .string()
+          .nullable()
+          .when("changeCircumstances", {
+            is: changeCircumstance => changeCircumstance === "Other",
+            then: yup
+              .string()
+              .nullable()
+              .required("Other circumstance is required")
+          }),
+        howPlacementAdjusted: yup
+          .string()
+          .nullable()
+          .when("haveChangesToPlacement", {
+            is: true,
+            then: yup
+              .string()
+              .nullable()
+              .required("How your placement was adjusted is required")
+          })
       })
     })
 });

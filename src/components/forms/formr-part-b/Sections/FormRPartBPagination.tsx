@@ -29,6 +29,7 @@ const FormRPartBPagination: React.FC<Props> = (props: Props) => {
           previous
           onClick={() => props.previousSection(values, section && section - 1)}
           data-cy="LinkToPreviousSection"
+          data-jest={section ? "LinkToPreviousSection" + (section - 1) : ""}
         >
           {prevSectionLabel.split("\n").map((item, index) => (
             <div key={index}>{item}</div>
@@ -46,6 +47,7 @@ const FormRPartBPagination: React.FC<Props> = (props: Props) => {
         next
         onClick={() => props.handleSubmit()}
         data-cy="LinkToNextSection"
+        data-jest={section ? "LinkToNextSection" + (section + 1) : ""}
       >
         {nextSectionLabel
           ? nextSectionLabel

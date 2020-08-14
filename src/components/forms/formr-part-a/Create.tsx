@@ -129,7 +129,7 @@ class Create extends React.PureComponent<CreateProps> {
           validationSchema={ValidationSchema}
           onSubmit={values => this.handleSubmit(values)}
         >
-          {({ values, errors, setFieldValue }) => (
+          {({ values, errors }) => (
             <Form>
               <WarningCallout label="Important">
                 <p>
