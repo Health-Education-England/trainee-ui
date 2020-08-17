@@ -147,7 +147,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       <p>
                         By signing this document, you are confirming that ALL
                         details are correct and that you have made an honest
-                        declaration on accordance with the professional
+                        declaration in accordance with the professional
                         standards set out by the General Medica Council in Good
                         Medical Practice.
                       </p>
@@ -174,14 +174,23 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           value: d
                         };
                       })}
-                      conditional={
-                        <TextInputField
-                          label=""
-                          name="covidDeclarationDto.reasonOfSelfRate"
-                          rows={5}
-                        />
-                      }
+                      onChange={() => {
+                        setFieldValue(
+                          "covidDeclarationDto.reasonOfSelfRate",
+                          null,
+                          false
+                        );
+                      }}
                     />
+                    {values.covidDeclarationDto?.selfRateForCovid !==
+                    COVID_RESULT_DECLARATIONS[2] ? (
+                      <TextInputField
+                        label="Please explain your reason for your progress self-rating."
+                        name="covidDeclarationDto.reasonOfSelfRate"
+                        rows={5}
+                      />
+                    ) : null}
+
                     <Label>
                       <b>
                         2. Please add other information you wish to provide for

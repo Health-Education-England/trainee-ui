@@ -168,7 +168,7 @@ export const CovidSectionValidationSchema = yup.object({
           300
         ),
         reasonOfSelfRate: StringValidationSchema(
-          "Covid Training Progress Reason",
+          "Progress self-rate reason",
           1000
         ),
         otherInformationForPanel: StringValidationSchema(
