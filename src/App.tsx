@@ -47,7 +47,8 @@ class App extends React.PureComponent<AppProps, AppState> {
         } else {
           this.setState({ isLatestVersion: true });
         }
-      });
+      })
+      .catch(_error => console.log("Error: no meta.json file"));
   }
 
   setAuthenticationStatus = async (state: string) => {
