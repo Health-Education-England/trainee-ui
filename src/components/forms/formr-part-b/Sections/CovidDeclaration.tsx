@@ -88,8 +88,28 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                   name="haveCovidDeclarations"
                   type="radios"
                   items={YES_NO_OPTIONS}
-                  onChange={() => {
-                    setFieldValue("covidDeclarationDto", null, false);
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    if (BooleanUtilities.ToBoolean(e.target.value)) {
+                      setFieldValue(
+                        "covidDeclarationDto",
+                        {
+                          selfRateForCovid: "",
+                          reasonOfSelfRate: "",
+                          otherInformationForPanel: "",
+                          discussWithSupervisorChecked: false,
+                          discussWithSomeoneChecked: false,
+                          haveChangesToPlacement: "",
+                          changeCircumstances: "",
+                          changeCircumstanceOther: "",
+                          howPlacementAdjusted: "",
+                          educationSupervisorName: "",
+                          educationSupervisorEmail: ""
+                        },
+                        false
+                      );
+                    } else {
+                      setFieldValue("covidDeclarationDto", null, false);
+                    }
                   }}
                 />
               </Panel>
