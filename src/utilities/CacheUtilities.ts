@@ -20,13 +20,23 @@ export class CacheUtilities {
   }
 
   public static RefreshCacheAndReload() {
-    if (caches) {
-      // Clear Service Worker cache
-      caches.keys().then(keys => {
-        keys.forEach(name => {
-          caches.delete(name);
-        });
-      });
+    // Unregister Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .getRegistrations()
+        .then(registrations => {
+          registrations.forEach(registration => registration.unregister());
+        })
+        .catch(error => console.log(error));
+    }
+    // Clear Service Worker cache
+    if ("caches" in window) {
+      caches
+        .keys()
+        .then(keys => {
+          keys.forEach(name => caches.delete(name));
+        })
+        .catch(error => console.log(error));
     }
     // Delete browser cache and hard reload
     window.location.reload(true);
