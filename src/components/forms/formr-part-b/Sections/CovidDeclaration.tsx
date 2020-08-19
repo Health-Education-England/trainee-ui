@@ -244,7 +244,12 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       type="radios"
                       items={YES_NO_OPTIONS}
                       data-jest="haveChangesToPlacement"
-                      onChange={() => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setFieldValue(
+                          "covidDeclarationDto.haveChangesToPlacement",
+                          e.target.value,
+                          false
+                        );
                         setFieldValue(
                           "covidDeclarationDto.changeCircumstances",
                           null,
