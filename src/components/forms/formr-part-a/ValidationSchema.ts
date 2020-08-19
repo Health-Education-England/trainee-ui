@@ -94,7 +94,7 @@ export const ValidationSchema = yup.object({
     .test(
       "wholeTimeEquivalent",
       "Programme Full Time Equivalent in Training needs to be a number less than or equal to 1 and greater than zero (a maximum of 2 decimal places)",
-      value => wholeTimeEquivalentRegex.test(value)
+      value => (value ? wholeTimeEquivalentRegex.test(value) : false)
     )
     .nullable()
 });
