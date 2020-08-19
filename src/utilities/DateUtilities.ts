@@ -22,36 +22,60 @@ export class DateUtilities {
     return localDate;
   }
 
-  public static IsLegalAge(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    return momentDate.isValid() && moment().diff(momentDate, "years") >= 18;
+  public static IsLegalAge(value: Date | string | null | undefined): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      return momentDate.isValid() && moment().diff(momentDate, "years") >= 18;
+    }
+    return false;
   }
 
-  public static IsMoreThanMinDate(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    return momentDate.isValid() && moment().diff(momentDate, "years") < 100;
+  public static IsMoreThanMinDate(
+    value: Date | string | null | undefined
+  ): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      return momentDate.isValid() && moment().diff(momentDate, "years") < 100;
+    }
+    return false;
   }
 
-  public static IsLessThanMaxDate(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    const maxDate = moment().add(50, "y");
-    return momentDate.isValid() && momentDate < maxDate;
+  public static IsLessThanMaxDate(
+    value: Date | string | null | undefined
+  ): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      const maxDate = moment().add(50, "y");
+      return momentDate.isValid() && momentDate < maxDate;
+    }
+    return false;
   }
 
-  public static IsInsideDateRange(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    const minDate = moment().subtract(10, "y");
-    const maxDate = moment().add(10, "y");
-    return momentDate.isValid() && momentDate.isBetween(minDate, maxDate);
+  public static IsInsideDateRange(
+    value: Date | string | null | undefined
+  ): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      const minDate = moment().subtract(10, "y");
+      const maxDate = moment().add(10, "y");
+      return momentDate.isValid() && momentDate.isBetween(minDate, maxDate);
+    }
+    return false;
   }
 
-  public static IsPastDate(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    return momentDate.isValid() && moment().diff(momentDate, "years") >= 1;
+  public static IsPastDate(value: Date | string | null | undefined): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      return momentDate.isValid() && moment().diff(momentDate, "years") >= 1;
+    }
+    return false;
   }
 
-  public static IsFutureDate(value: Date | string): boolean {
-    const momentDate = moment(value, moment.ISO_8601);
-    return momentDate.isValid() && moment().diff(momentDate, "years") <= 1;
+  public static IsFutureDate(value: Date | string | null | undefined): boolean {
+    if (value) {
+      const momentDate = moment(value, moment.ISO_8601);
+      return momentDate.isValid() && moment().diff(momentDate, "years") <= 1;
+    }
+    return false;
   }
 }
