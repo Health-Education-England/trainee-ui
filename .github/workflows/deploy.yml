@@ -58,4 +58,5 @@ jobs:
         CYPRESS_baseUrl: https://trainee.tis.nhs.uk
         CYPRESS_password: ${{ secrets.E2E_TEST_PASS }}
         CYPRESS_username: ${{ secrets.E2E_TEST_USER }}
+      run: npm install  
       run: npm run cypress
