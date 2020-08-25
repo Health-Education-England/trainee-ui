@@ -2,7 +2,7 @@ export class CacheUtilities {
   public static SemverGreaterThan(
     latestVersion: string,
     currentVersion: string
-  ) {
+  ): boolean {
     if (
       typeof latestVersion === "string" &&
       typeof currentVersion === "string"
@@ -19,26 +19,43 @@ export class CacheUtilities {
     return false;
   }
 
-  public static RefreshCacheAndReload() {
-    // Unregister Service Worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .getRegistrations()
-        .then(registrations => {
-          registrations.forEach(registration => registration.unregister());
-        })
-        .catch(error => console.log(error));
+  public static async UnregisterServiceWorker(): Promise<null | undefined> {
+    try {
+      if ("serviceWorker" in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        registrations.forEach(registration => registration.unregister());
+      }
+    } catch (error) {
+      return null;
     }
-    // Clear Service Worker cache
-    if ("caches" in window) {
-      caches
-        .keys()
-        .then(keys => {
-          keys.forEach(name => caches.delete(name));
-        })
-        .catch(error => console.log(error));
+  }
+
+  public static async ClearCaches(): Promise<null | undefined> {
+    try {
+      if ("caches" in window) {
+        const keys: string[] = await caches.keys();
+        keys.forEach(async name => await caches.delete(name));
+      }
+    } catch (error) {
+      return null;
     }
-    // Delete browser cache and hard reload
-    window.location.reload(true);
+  }
+
+  public static async ReloadPage(): Promise<null | undefined> {
+    try {
+      window.location.reload();
+    } catch (error) {
+      return null;
+    }
+  }
+
+  public static async FetchMetaFile(): Promise<string | null> {
+    try {
+      const response = await fetch("/meta.json");
+      const meta = await response.json();
+      return meta.version;
+    } catch (error) {
+      return null;
+    }
   }
 }

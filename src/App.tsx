@@ -16,7 +16,8 @@ globalAny.appVersion = packageJson.version;
 
 interface AppState {
   isAuthenticated: boolean;
-  isLatestVersion: boolean;
+  checkLatestVersion: boolean;
+  appVersion: any;
 }
 
 interface AppProps {}
@@ -27,28 +28,28 @@ class App extends React.PureComponent<AppProps, AppState> {
 
     this.state = {
       isAuthenticated: false,
-      isLatestVersion: false
+      checkLatestVersion: false,
+      appVersion: globalAny.appVersion
     };
   }
 
-  componentDidMount() {
-    fetch("/meta.json")
-      .then(response => response.json())
-      .then(meta => {
-        const latestVersion = meta.version;
-        const currentVersion = globalAny.appVersion;
-        const shouldForceRefresh = CacheUtilities.SemverGreaterThan(
-          latestVersion,
-          currentVersion
-        );
-        if (shouldForceRefresh) {
-          CacheUtilities.RefreshCacheAndReload();
-          this.setState({ isLatestVersion: true });
-        } else {
-          this.setState({ isLatestVersion: true });
-        }
-      })
-      .catch(_error => console.log("Error: no meta.json file"));
+  async componentDidMount() {
+    const currentVersion = globalAny.appVersion;
+    const latestVersion = await CacheUtilities.FetchMetaFile();
+
+    if (latestVersion) {
+      const shouldForceRefresh = CacheUtilities.SemverGreaterThan(
+        latestVersion,
+        currentVersion
+      );
+      if (shouldForceRefresh) {
+        await CacheUtilities.UnregisterServiceWorker();
+        await CacheUtilities.ClearCaches();
+        await CacheUtilities.ReloadPage();
+        this.setState({ appVersion: latestVersion });
+      }
+    }
+    this.setState({ checkLatestVersion: true });
   }
 
   setAuthenticationStatus = async (state: string) => {
@@ -64,9 +65,9 @@ class App extends React.PureComponent<AppProps, AppState> {
   };
 
   render() {
-    const { isAuthenticated, isLatestVersion } = this.state;
+    const { isAuthenticated, checkLatestVersion, appVersion } = this.state;
 
-    return isAuthenticated && isLatestVersion ? (
+    return isAuthenticated && checkLatestVersion ? (
       <Fragment>
         <Navbar />
         <main className="nhsuk-width-container nhsuk-u-margin-top-5">
@@ -80,7 +81,7 @@ class App extends React.PureComponent<AppProps, AppState> {
             </Switch>
           </BrowserRouter>
         </main>
-        <HEEFooter />
+        <HEEFooter appVersion={appVersion} />
       </Fragment>
     ) : (
       <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>

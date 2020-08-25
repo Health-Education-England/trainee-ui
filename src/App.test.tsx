@@ -10,10 +10,22 @@ import { BrowserRouter } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let wrapper;
+
+const globalAny: any = global;
+
+let wrapper: any;
 
 beforeEach(() => {
   const store = mockStore({});
+
+  globalAny.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          version: "0.1.1"
+        })
+    })
+  );
 
   wrapper = mount(
     <Provider store={store}>
