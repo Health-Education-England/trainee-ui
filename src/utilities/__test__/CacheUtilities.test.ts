@@ -83,7 +83,7 @@ describe("CacheUtilities", () => {
 
       const result = await CacheUtilities.FetchMetaFile();
       expect(result).toEqual(null);
-      expect(globalAny.fetch).toHaveBeenCalledWith("/meta.json");
+      expect(fetch).toHaveBeenCalledWith("/meta.json");
     });
   });
 });

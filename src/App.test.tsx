@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import Login from "./components/authentication/Login";
 import { BrowserRouter } from "react-router-dom";
+import { signInButton } from "aws-amplify";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -41,6 +42,20 @@ beforeEach(() => {
 describe("App", () => {
   it("renders without crashing", () => {
     shallow(<App />);
+  });
+
+  it("should call componentDidMount", () => {
+    const spy = jest.spyOn(App.prototype, "componentDidMount");
+    shallow(<App />);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("should call checkAppVersion on componentDidMount", async () => {
+    wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "checkAppVersion");
+    await instance.componentDidMount();
+    expect(instance.checkAppVersion).toHaveBeenCalledTimes(2);
   });
 
   it("should load login page by default", () => {

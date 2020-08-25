@@ -37,19 +37,11 @@ class App extends React.PureComponent<AppProps, AppState> {
     const currentVersion = globalAny.appVersion;
     const latestVersion = await CacheUtilities.FetchMetaFile();
 
-    if (latestVersion) {
-      const shouldForceRefresh = CacheUtilities.SemverGreaterThan(
-        latestVersion,
-        currentVersion
-      );
-      if (shouldForceRefresh) {
-        await CacheUtilities.UnregisterServiceWorker();
-        await CacheUtilities.ClearCaches();
-        await CacheUtilities.ReloadPage();
-        this.setState({ appVersion: latestVersion });
-      }
-    }
-    this.setState({ checkLatestVersion: true });
+    await this.checkAppVersion(latestVersion, currentVersion);
+    this.setState(prevState => ({
+      ...prevState,
+      checkLatestVersion: true
+    }));
   }
 
   setAuthenticationStatus = async (state: string) => {
@@ -61,6 +53,27 @@ class App extends React.PureComponent<AppProps, AppState> {
       this.setState({
         isAuthenticated: false
       });
+    }
+  };
+
+  checkAppVersion = async (
+    latestV: string | null,
+    currentV: string
+  ): Promise<void> => {
+    if (latestV) {
+      const shouldForceRefresh = CacheUtilities.SemverGreaterThan(
+        latestV,
+        currentV
+      );
+      if (shouldForceRefresh) {
+        await CacheUtilities.UnregisterServiceWorker();
+        await CacheUtilities.ClearCaches();
+        await CacheUtilities.ReloadPage();
+        this.setState(prevState => ({
+          ...prevState,
+          appVersion: latestV
+        }));
+      }
     }
   };
 
