@@ -2,8 +2,9 @@ import React from "react";
 import { Footer } from "nhsuk-react-components";
 import styles from "./HEEFooter.module.scss";
 
-const HEEFooter = () => {
-  return (
+const HEEFooter = (props: any) => {
+  const { appVersion } = props;
+  return appVersion ? (
     <Footer>
       <Footer.List>
         <Footer.ListItem
@@ -30,6 +31,7 @@ const HEEFooter = () => {
         <Footer.ListItem className={styles.refLink} href="/about/cookies">
           Cookie policy
         </Footer.ListItem>
+        <Footer.ListItem>{`App version: ${appVersion}`}</Footer.ListItem>
       </Footer.List>
       <Footer.Copyright>
         See our{" "}
@@ -39,7 +41,7 @@ const HEEFooter = () => {
         on Twitter.
       </Footer.Copyright>
     </Footer>
-  );
+  ) : null;
 };
 
 export default HEEFooter;
