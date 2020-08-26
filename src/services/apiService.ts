@@ -13,7 +13,7 @@ export class ApiService {
 
     this.axiosInstance.interceptors.request.use(async function (config) {
       let user = await Auth.currentAuthenticatedUser();
-      config.headers.authorization = `Bearer ${user.signInUserSession.accessToken.jwtToken}`;
+      config.headers.authorization = `Bearer ${user.signInUserSession.idToken.jwtToken}`;
 
       return config;
     });
