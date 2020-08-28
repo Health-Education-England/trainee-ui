@@ -7,7 +7,6 @@ import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import Login from "./components/authentication/Login";
 import { BrowserRouter } from "react-router-dom";
-import { signInButton } from "aws-amplify";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

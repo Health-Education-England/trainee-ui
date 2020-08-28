@@ -12,7 +12,7 @@ var jsonContent = JSON.stringify(jsonData);
 
 fs.writeFile("./public/meta.json", jsonContent, "utf8", (err: any) =>
   err
-    ? console.log(err)
+    ? console.log(`Something went wrong writing meta.json file: ${err}`)
     : console.log(
         `meta.json file with latest version (${appVersion}) successfully written`
       )
