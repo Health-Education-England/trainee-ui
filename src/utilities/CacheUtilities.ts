@@ -31,6 +31,7 @@ export class CacheUtilities {
     if ("caches" in window) {
       const keys: string[] = await caches.keys();
       keys.forEach(async name => await caches.delete(name));
+      console.log("caches cleared");
     } else console.log("no caches to clear");
   }
   public static async ReloadPage(): Promise<void> {
