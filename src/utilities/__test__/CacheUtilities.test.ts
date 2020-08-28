@@ -61,6 +61,10 @@ describe("CacheUtilities", () => {
   describe("FetchMetaFile", () => {
     const globalAny: any = global;
 
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
     it("should fetch a meta.json file", async () => {
       globalAny.fetch = jest.fn(() =>
         Promise.resolve({
@@ -83,7 +87,7 @@ describe("CacheUtilities", () => {
 
       const result = await CacheUtilities.FetchMetaFile();
       expect(result).toEqual(null);
-      expect(fetch).toHaveBeenCalledWith("/meta.json");
+      expect(fetch).toBeCalledTimes(1);
     });
   });
 });
