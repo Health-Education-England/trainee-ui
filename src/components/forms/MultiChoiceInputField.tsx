@@ -49,7 +49,9 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                   typeof field.value === "boolean"
                     ? field.value === item.value ||
                       item.value === field.value.toString()
-                    : (field.value && field.value === item.value) || false
+                    : (field.value &&
+                        field.value.toString() === item.value.toString()) ||
+                      false
                 }
                 onChange={() => {
                   helpers.setValue(item.value);
