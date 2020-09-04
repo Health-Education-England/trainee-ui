@@ -1,12 +1,13 @@
 {
   "baseUrl": "https://trainee.tis.nhs.uk",
-  "reporter": "mochawesome",
+  "reporter": "./node_modules/mochawesome/src/mochawesome.js",
   "reporterOptions": {
     "charts": true,
     "overwrite": false,
     "html": false,
     "json": true,
-    "reportDir": "cypress/reports/mochawesome-report",
+    "timestamp": "mmddyyyy_HHMMss",
+    "reportDir": "cypress/reports",
     "reportFilename": "e2e",
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 15000
