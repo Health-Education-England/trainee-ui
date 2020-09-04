@@ -2,21 +2,23 @@ import { combineReducers } from "redux";
 import TraineeProfileReducer from "./trainee-profile-reducer";
 import ReferenceDataReducer from "./reference-data-reducer";
 import {
-  LoadFormRPartAReducer,
-  LoadFormRPartAListReducer
+  FormRPartAReducer,
+  FormRPartAListReducer
 } from "./formr-parta-reducer";
 import {
   FormRPartBReducer,
-  FormRPartBListReducer
+  FormRPartBListReducer,
+  FormSwitchesReducer
 } from "./formr-partb-reducer";
 
 export const rootReducer = combineReducers({
   profile: TraineeProfileReducer,
   referenceData: ReferenceDataReducer,
-  formRPartAView: LoadFormRPartAReducer,
-  formRPartAList: LoadFormRPartAListReducer,
+  formRPartA: FormRPartAReducer,
+  formRPartAList: FormRPartAListReducer,
   formRPartB: FormRPartBReducer,
-  formRPartBList: FormRPartBListReducer
+  formRPartBList: FormRPartBListReducer,
+  formSwitches: FormSwitchesReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -4,7 +4,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   InsetText,
   Button,
@@ -13,19 +12,22 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import WorkPanel from "./WorkPanel";
-import { Work, FormRPartB } from "../../../../models/FormRPartB";
+import { Work } from "../../../../models/FormRPartB";
 import { Section2ValidationSchema } from "../ValidationSchema";
 import classes from "../FormRPartB.module.scss";
+import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
-interface Section2Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-}
-
-const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
-  const { formData, previousSection, nextSection } = props;
+const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
   const newWork: Work = {
     typeOfWork: "",
     startDate: undefined,
@@ -173,23 +175,15 @@ const Section2: FunctionComponent<Section2Props> = (props: Section2Props) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection1"
-              >
-                Section 1
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection3"
-              >
-                Continue to Section 3
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
+            />
           </Form>
         )}
       </Formik>

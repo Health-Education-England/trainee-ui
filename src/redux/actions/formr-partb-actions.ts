@@ -7,8 +7,8 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE
+  LOAD_FORM_SWITCHES_SUCCESS,
+  LOAD_FORM_SWITCHES_FAILURE
 } from "../action_types";
 import { FormRPartB } from "../../models/FormRPartB";
 import { FormsService } from "../../services/FormsService";
@@ -19,7 +19,7 @@ export const loadFormRPartBList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
   return formService
-    .getTraineeFormRPartB()
+    .getTraineeFormRPartBList()
     .then(response => {
       return dispatch({
         type: LOAD_FORMR_PARTB_LIST_SUCCESS,
@@ -36,30 +36,47 @@ export const loadFormRPartBList = (formService: FormsService) => (
 
 export const initializeForm = (
   traineeProfileService: TraineeProfileService
-) => (dispatch: (action: ActionType) => any) => {
-  return traineeProfileService
-    .getTraineeProfile()
-    .then(response => {
-      dispatch({
-        type: INITIALIZE_FORMR_PARTB_SUCCESS,
-        payload: ProfileToFormRPartBInitialValues(response.data)
-      });
-    })
-    .catch(error => {
-      dispatch({
-        type: INITIALIZE_FORMR_PARTB_FAILURE,
-        payload: error
-      });
+) => async (dispatch: (action: ActionType) => any) => {
+  try {
+    const response = await traineeProfileService.getTraineeProfile();
+    dispatch({
+      type: INITIALIZE_FORMR_PARTB_SUCCESS,
+      payload: ProfileToFormRPartBInitialValues(response.data)
     });
+  } catch (error) {
+    dispatch({
+      type: INITIALIZE_FORMR_PARTB_FAILURE,
+      payload: error
+    });
+  }
 };
 
-export const loadForm = (formData: FormRPartB | null) => (
+export const loadForm = (formData: FormRPartB | null) => async (
   dispatch: (action: ActionType) => any
 ) => {
   return dispatch({
     type: LOAD_FORMR_PARTB,
     payload: formData
   });
+};
+
+export const loadSavedForm = (formService: FormsService, formId: string) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formService
+    .getTraineeFormRPartBByFormId(formId)
+    .then(response => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: INITIALIZE_FORMR_PARTB_FAILURE,
+        payload: null
+      });
+    });
 };
 
 export const editForm = (formData: FormRPartB, section: number) => (
@@ -71,24 +88,12 @@ export const editForm = (formData: FormRPartB, section: number) => (
   });
 };
 
-export const saveForm = (
-  formsService: FormsService,
-  formData: FormRPartB
-) => async (dispatch: (action: ActionType) => any) => {
-  return formsService
-    .saveTraineeFormRPartB(formData)
-    .then(response =>
-      dispatch({
-        type: SAVE_FORMR_PARTB_SUCCESS,
-        payload: response.data
-      })
-    )
-    .catch(error =>
-      dispatch({
-        type: SAVE_FORMR_PARTB_FAILURE,
-        payload: error
-      })
-    );
+export const saveForm = (formService: FormsService, formData: FormRPartB) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formData.id
+    ? formService.updateTraineeFormRPartB(formData)
+    : formService.saveTraineeFormRPartB(formData);
 };
 
 export const moveToSection = (section: number) => (
@@ -98,4 +103,23 @@ export const moveToSection = (section: number) => (
     type: MOVE_TO_SECTION,
     payload: section
   });
+};
+
+export const loadFormSwitches = (formService: FormsService) => (
+  dispatch: (action: ActionType) => any
+) => {
+  return formService
+    .getFormSwitches()
+    .then(response => {
+      dispatch({
+        type: LOAD_FORM_SWITCHES_SUCCESS,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: LOAD_FORM_SWITCHES_FAILURE,
+        payload: null
+      });
+    });
 };

@@ -11,13 +11,18 @@ import {
   loadForm
 } from "../../../redux/actions/formr-partb-actions";
 import { Redirect } from "react-router-dom";
+import { LifeCycleState } from "../../../models/LifeCycleState";
+import { AxiosResponse } from "axios";
 
 interface ConfirmProps {
   formData: FormRPartB | null;
   history: any;
   moveToSection: (section: number) => any;
-  saveForm: (formsService: FormsService, formData: FormRPartB) => Promise<void>;
-  loadForm: (formData: FormRPartB | null) => any;
+  saveForm: (
+    formsService: FormsService,
+    formData: FormRPartB
+  ) => Promise<AxiosResponse<FormRPartB>>;
+  loadForm: (formData: FormRPartB | null) => Promise<any>;
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -35,24 +40,35 @@ class Confirm extends React.PureComponent<ConfirmProps> {
 
   handleSubmit = (formData: FormRPartB) => {
     formData.submissionDate = new Date();
-    formData.lastModifiedDate = new Date();
+    formData.lifecycleState = LifeCycleState.Submitted;
 
-    this.props
-      .saveForm(new FormsService(), formData)
-      .then(_ => {
-        // show success toast / popup
-        this.props.history.push("/formr-b");
-        this.props.loadForm(null);
-      })
-      .catch(_ => {
-        // show failure toast / popup
-      });
+    this.saveForm(formData);
   };
 
   editSection = (section: number) => {
     this.props.moveToSection(section);
     this.props.history.push("/formr-b/create");
   };
+
+  saveDraft(formData: FormRPartB) {
+    formData.lifecycleState = LifeCycleState.Draft;
+
+    this.saveForm(formData);
+  }
+
+  private saveForm(formData: FormRPartB) {
+    formData.lastModifiedDate = new Date();
+
+    this.props
+      .saveForm(new FormsService(), formData)
+      .then(_ => {
+        // show success toast / popup
+        this.props
+          .loadForm(null)
+          .then(() => this.props.history.push("/formr-b"));
+      })
+      .catch(_ => {});
+  }
 
   render() {
     const { formData } = this.props;
@@ -67,13 +83,29 @@ class Confirm extends React.PureComponent<ConfirmProps> {
             editSection={this.editSection}
           ></View>
 
-          <Button
-            type="submit"
-            onClick={() => this.handleSubmit(formData)}
-            data-cy="BtnSubmitPartB"
-          >
-            Submit
-          </Button>
+          <div className="nhsuk-grid-row">
+            <div className="nhsuk-grid-column-two-thirds">
+              <div className="nhsuk-grid-row">
+                <div className="nhsuk-grid-column-one-third">
+                  <Button
+                    onClick={() => this.saveDraft(formData)}
+                    data-cy="BtnSaveDraft"
+                  >
+                    Save & Exit
+                  </Button>
+                </div>
+                <div className="nhsuk-grid-column-one-quarter">
+                  <Button
+                    type="submit"
+                    onClick={() => this.handleSubmit(formData)}
+                    data-cy="BtnSubmitPartB"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }

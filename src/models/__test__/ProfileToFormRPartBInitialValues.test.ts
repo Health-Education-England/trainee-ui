@@ -1,6 +1,7 @@
 import { ProfileToFormRPartBInitialValues } from "./../ProfileToFormRPartBInitialValues";
 import { mockTraineeProfile } from "../../mock-data/trainee-profile";
 import { FormRPartB } from "../FormRPartB";
+import { LifeCycleState } from "../LifeCycleState";
 
 const formrPartB: FormRPartB = {
   traineeTisId: "123",
@@ -18,7 +19,7 @@ const formrPartB: FormRPartB = {
     {
       endDate: new Date("2020-12-31"),
       site: "Addenbrookes Hospital",
-      siteLocation: undefined,
+      siteLocation: "Site location",
       startDate: new Date("2020-01-01"),
       trainingPost: "Yes",
       typeOfWork: "In Post ST1 Dermatology"
@@ -38,10 +39,14 @@ const formrPartB: FormRPartB = {
   healthStatement: "",
   havePreviousDeclarations: "",
   previousDeclarations: [],
-  previousDeclarationsSummary: "",
+  previousDeclarationSummary: "",
   haveCurrentDeclarations: "",
   currentDeclarations: [],
-  currentDeclarationsSummary: "",
+  currentDeclarationSummary: "",
+  compliments: "",
+  haveCovidDeclarations: "",
+  covidDeclarationDto: null,
+  lifecycleState: LifeCycleState.New,
   submissionDate: null,
   lastModifiedDate: null
 };

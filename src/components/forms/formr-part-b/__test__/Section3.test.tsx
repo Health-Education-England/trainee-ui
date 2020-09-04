@@ -3,14 +3,25 @@ import { shallow, mount } from "enzyme";
 import Section3 from "../Sections/Section3";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 
+jest.mock("../ValidationSchema", () => ({
+  get Section3ValidationSchema() {
+    return null;
+  }
+}));
+
 const prevSection = jest.fn();
 const nextSection = jest.fn();
+const saveDraft = jest.fn();
 
 const props = {
   formData: submittedFormRPartBs[0],
   previousSection: prevSection,
   nextSection: nextSection,
-  history: []
+  saveDraft: saveDraft,
+  history: [],
+  section: 2,
+  prevSectionLabel: "Previous section navigation label",
+  nextSectionLabel: "Next section navigation label"
 };
 
 describe("Form-R Part-B Section3", () => {
@@ -61,18 +72,36 @@ describe("Form-R Part-B Section3", () => {
     expect(component.find("[data-jest='isComplying']").length).toBe(1);
   });
 
-  it("should render previous section link buttons", () => {
+  it("should render previous section link buttons with correct label", () => {
     const wrapper = mount(<Section3 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
+      "Previous section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--prev").first().simulate("click");
     expect(prevSection).toHaveBeenCalled();
   });
 
-  it("should render next section link buttons", async () => {
+  it("should render next section link buttons  with correct label", async () => {
     const wrapper = mount(<Section3 {...props} />);
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
+    expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
+      "Next section navigation label"
+    );
     wrapper.find("a.nhsuk-pagination__link--next").first().simulate("click");
+  });
+
+  it("should submit the form", () => {
+    const wrapper = mount(<Section3 {...props} />);
+    const form = wrapper.find("form").first();
+
+    try {
+      form.simulate("submit");
+      expect(nextSection).toHaveBeenCalled();
+    } catch (e) {
+      expect(true).toBe(false);
+    }
   });
 });

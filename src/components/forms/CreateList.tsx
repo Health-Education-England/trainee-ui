@@ -5,60 +5,129 @@ import { connect } from "react-redux";
 import { FormsService } from "../../services/FormsService";
 import { DateUtilities } from "../../utilities/DateUtilities";
 import styles from "./FormR.module.scss";
+import { IFormR } from "../../models/IFormR";
+import { LifeCycleState } from "../../models/LifeCycleState";
+import Loading from "../common/Loading";
+import { TraineeProfileService } from "../../services/TraineeProfileService";
+import { loadFormSwitches } from "../../redux/actions/formr-partb-actions";
 
 export const CreateList = (
   loadFormList: (
     formService: FormsService
   ) => (dispatch: (action: ActionType) => any) => Promise<void>,
-  loadForm: (data: any | null) => any,
+  updateForm: (
+    data: any | null
+  ) => (dispatch: (action: ActionType) => any) => Promise<any>,
+  loadSavedForm: (
+    formService: FormsService,
+    formId: string
+  ) => (dispatch: (action: ActionType) => any) => Promise<void>,
+  initializeForm: (
+    traineeProfileService: TraineeProfileService
+  ) => (dispatch: (action: ActionType) => any) => Promise<void>,
   rootPath: string
 ) => {
   interface ListProps {
-    submittedForms: any[];
+    forms: IFormR[];
     history: any;
     loadFormList: (service: FormsService) => Promise<void>;
-    loadForm: (data: any | null) => any;
+    loadSavedForm: (service: FormsService, formId: string) => Promise<void>;
+    updateForm: (data: any | null) => Promise<any>;
+    initializeForm: (
+      traineeProfileService: TraineeProfileService
+    ) => Promise<void>;
+    loadFormSwitches: (service: FormsService) => Promise<void>;
   }
 
+  const formsService = new FormsService();
+
   const mapStateToProps = (state: RootState) => ({
-    submittedForms:
+    forms:
       rootPath === "formr-a"
         ? state.formRPartAList.submittedForms
         : state.formRPartBList.submittedForms
   });
 
   const mapDispatchToProps = {
-    loadForm,
-    loadFormList
+    updateForm,
+    loadFormList,
+    loadSavedForm,
+    initializeForm,
+    loadFormSwitches
   };
 
   class List extends React.PureComponent<ListProps> {
     componentDidMount() {
-      this.props.loadFormList(new FormsService());
+      this.props.loadFormList(formsService);
+      this.props.loadFormSwitches(formsService);
     }
 
-    handleRowClick = (formData: any) => {
-      this.props.loadForm(formData);
-      this.props.history.push(`/${rootPath}/${formData.id}`);
+    getFormDataByFormId = (formId: string) => {
+      return this.props.loadSavedForm(formsService, formId);
+    };
+
+    handleRowClick = (formId: string | undefined) => {
+      if (formId) {
+        this.props
+          .loadSavedForm(formsService, formId)
+          .then(_ => this.props.history.push(`/${rootPath}/${formId}`));
+      }
     };
 
     handleNewFormClick = () => {
-      const { history } = this.props;
+      this.props.initializeForm(new TraineeProfileService()).then(_ =>
+        this.props.history.push({
+          pathname: `/${rootPath}/create`,
+          history: this.props.history
+        })
+      );
+    };
 
-      history.push({
-        pathname: `/${rootPath}/create`,
-        history: this.props.history,
-        formData: undefined
-      });
+    loadSavedForm = (formId: string | undefined) => {
+      if (formId) {
+        this.props
+          .loadSavedForm(formsService, formId)
+          .then(_ => this.props.history.push(`/${rootPath}/create`));
+      }
     };
 
     render() {
-      const { submittedForms } = this.props;
+      const { forms } = this.props;
+      const draftForm = forms.filter(
+        form => form.lifecycleState === LifeCycleState.Draft
+      );
+
+      const submittedForms = forms.filter(
+        form => form.lifecycleState === LifeCycleState.Submitted
+      );
+
+      if (draftForm.length > 1) {
+        return <Loading />;
+      }
+
       return (
         <div>
-          <Button reverse type="submit" onClick={this.handleNewFormClick}>
-            Submit new form
-          </Button>
+          {draftForm.length === 1 ? (
+            <Button
+              id="btnOpenForm"
+              data-cy="btnEditSavedForm"
+              reverse
+              type="submit"
+              onClick={() => this.loadSavedForm(draftForm[0].id)}
+            >
+              Edit saved form
+            </Button>
+          ) : (
+            <Button
+              id="btnOpenForm"
+              data-cy="btnSubmitNewForm"
+              reverse
+              type="submit"
+              onClick={this.handleNewFormClick}
+            >
+              Submit new form
+            </Button>
+          )}
           {submittedForms.length > 0 ? (
             <Table>
               <Table.Head>
@@ -69,11 +138,11 @@ export const CreateList = (
                 </Table.Row>
               </Table.Head>
               <Table.Body>
-                {submittedForms.map((formData: any, index: number) => (
+                {submittedForms.map((formData: IFormR, index: number) => (
                   <Table.Row key={formData.id} className={styles.listTableRow}>
                     <td>
                       <ActionLink
-                        onClick={() => this.handleRowClick(formData)}
+                        onClick={() => this.handleRowClick(formData.id)}
                         data-cy="submittedForm"
                       >
                         form submitted on{" "}
@@ -85,7 +154,7 @@ export const CreateList = (
               </Table.Body>
             </Table>
           ) : (
-            <LedeText>No forms found.</LedeText>
+            <LedeText>No forms submitted yet.</LedeText>
           )}
         </div>
       );

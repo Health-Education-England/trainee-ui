@@ -6,6 +6,10 @@ import Create from "../Create";
 import { Provider } from "react-redux";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { FormRPartB } from "../../../../models/FormRPartB";
+import Loading from "../../../common/Loading";
+import { BrowserRouter } from "react-router-dom";
+
+const covidEnabled: boolean = true;
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -19,6 +23,14 @@ const createStore = (form: FormRPartB | null, section: number = 1) =>
       localOffices: [{ label: "localOffice", value: "localOffice" }],
       curricula: [{ label: "curriculum", value: "curriculum" }],
       isLoaded: true
+    },
+    formSwitches: {
+      formSwitches: [
+        {
+          name: "COVID",
+          enabled: covidEnabled
+        }
+      ]
     }
   });
 
@@ -28,65 +40,84 @@ describe("Create", () => {
   it("renders without crashing", () => {
     shallow(
       <Provider store={store}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
   });
 
-  it("renders section 1 when section value is 1", () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
+  let sections = [
+    "Section 1",
+    "Section 2",
+    "Section 3",
+    "Section 4",
+    "Section 5",
+    "Section 6",
+    "Section 7"
+  ];
+  if (covidEnabled) {
+    sections.splice(6, 0, "COVID");
+  }
 
-    expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toBe(
-      "Section 1: Doctor's details"
-    );
+  sections.forEach((section, index) => {
+    it(`renders section ${section} when section value is ${index}`, () => {
+      const store = createStore(submittedFormRPartBs[0], index);
+
+      const wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Create history={history} location={location} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toContain(
+        section
+      );
+    });
   });
 
-  it("render section 2 when section value is 2", () => {
-    const stores = createStore(submittedFormRPartBs[0], 2);
+  it("should render Loading when section value is not valid", () => {
+    const stores = createStore(submittedFormRPartBs[0], 999);
 
     const wrapper = mount(
       <Provider store={stores}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
 
-    expect(wrapper.find("legend.nhsuk-fieldset__legend").text()).toBe(
-      "Section 2: Whole Scope of Practice"
-    );
+    expect(wrapper.find(Loading)).toHaveLength(1);
   });
 
-  it("render loading when section value is not valid", () => {
-    const stores = createStore(submittedFormRPartBs[0], 0);
-
-    const wrapper = mount(
-      <Provider store={stores}>
-        <Create history={history} location={location} />
-      </Provider>
-    );
-
-    expect(wrapper.find("[data-jest='loading']").length).toBe(1);
-  });
-
-  it("should load Loading when reference data is not loaded", () => {
+  it("should render Loading when reference data is not loaded", () => {
     store = mockStore({
       formRPartB: { formData: submittedFormRPartBs[0], section: 1 },
       referenceData: {
         localOffices: [],
         curricula: [],
         isLoaded: false
+      },
+      formSwitches: {
+        formSwitches: [
+          {
+            name: "COVID",
+            enabled: covidEnabled
+          }
+        ]
       }
     });
 
     const wrapper = mount(
       <Provider store={store}>
-        <Create history={history} location={location} />
+        <BrowserRouter>
+          <Create history={history} location={location} />
+        </BrowserRouter>
       </Provider>
     );
 
-    expect(wrapper.find("[data-jest='loading']").length).toBe(1);
+    expect(wrapper.find(Loading)).toHaveLength(1);
   });
 });

@@ -6,7 +6,10 @@ export const StringValidationSchema = (
 ) =>
   yup
     .string()
-    .transform(value => (value as string).trim())
+    .nullable()
+    .transform(value => {
+      if (value) return (value as string).trim();
+    })
     .min(1)
     .max(maxLength, `${fieldName} must be shorter than ${maxLength} characters`)
     .required(`${fieldName} is required`);

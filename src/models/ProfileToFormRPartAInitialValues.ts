@@ -1,5 +1,6 @@
 import { TraineeProfile } from "./TraineeProfile";
 import { FormRPartA } from "./FormRPartA";
+import { LifeCycleState } from "./LifeCycleState";
 import { MEDICAL_CURRICULUM } from "../utilities/Constants";
 
 export function ProfileToFormRPartAInitialValues(
@@ -59,6 +60,7 @@ export function ProfileToFormRPartAInitialValues(
     declarationType: "",
     otherImmigrationStatus: "",
     traineeTisId: traineeProfile.traineeTisId,
+    lifecycleState: LifeCycleState.New,
     submissionDate: null,
     lastModifiedDate: null
   };

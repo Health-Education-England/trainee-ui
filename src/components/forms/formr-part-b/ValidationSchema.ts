@@ -65,7 +65,7 @@ export const Section2ValidationSchema = yup.object({
   work: yup
     .array(
       yup.object({
-        typeOfWork: StringValidationSchema("Type of work"),
+        typeOfWork: StringValidationSchema("Type of Work"),
         trainingPost: StringValidationSchema("Training Post"),
         site: StringValidationSchema("Site Name"),
         siteLocation: StringValidationSchema("Site Location"),
@@ -109,21 +109,25 @@ export const Section2ValidationSchema = yup.object({
 
 const acceptanceValidation = yup
   .bool()
+  .nullable()
   .oneOf([true], "You must confirm your acceptance")
   .required("You must confirm your acceptance");
 
 export const Section3ValidationSchema = yup.object({
   isHonest: acceptanceValidation,
   isHealthy: acceptanceValidation,
-  isWarned: yup.boolean().required("You must select yes or no"),
-  isComplying: yup.boolean().when("isWarned", {
+  isWarned: yup.boolean().nullable().required("You must select yes or no"),
+  isComplying: yup.boolean().nullable().when("isWarned", {
     is: true,
     then: acceptanceValidation
   })
 });
 
 export const Section4ValidationSchema = yup.object({
-  havePreviousDeclarations: yup.boolean().required("You must select yes or no"),
+  havePreviousDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
   previousDeclarations: yup
     .array(panelSchema)
     .when("havePreviousDeclarations", {
@@ -133,9 +137,88 @@ export const Section4ValidationSchema = yup.object({
 });
 
 export const Section5ValidationSchema = yup.object({
-  haveCurrentDeclarations: yup.boolean().required("You must select yes or no"),
+  haveCurrentDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
   currentDeclarations: yup.array(panelSchema).when("haveCurrentDeclarations", {
     is: true,
     then: panelSchemaValidation
   })
+});
+
+export const Section7ValidationSchema = yup.object({
+  isDeclarationAccepted: acceptanceValidation,
+  isConsentAccepted: acceptanceValidation
+});
+
+export const CovidSectionValidationSchema = yup.object({
+  haveCovidDeclarations: yup
+    .boolean()
+    .nullable()
+    .required("You must select yes or no"),
+  covidDeclarationDto: yup
+    .object()
+    .nullable()
+    .when("haveCovidDeclarations", {
+      is: true,
+      then: yup.object({
+        selfRateForCovid: StringValidationSchema(
+          "Covid Training Progress",
+          300
+        ),
+        reasonOfSelfRate: StringValidationSchema(
+          "Covid Training Progress Reason",
+          1000
+        ),
+        otherInformationForPanel: StringValidationSchema(
+          "Other Information for Panel",
+          2000
+        ),
+        educationSupervisorName: StringValidationSchema(
+          "Education Supervisor Name",
+          300
+        ),
+        educationSupervisorEmail: yup
+          .string()
+          .nullable()
+          .email("Email is invalid")
+          .max(255, "Email must be shorter than 255 characters")
+          .required("Email is required"),
+        haveChangesToPlacement: yup
+          .boolean()
+          .nullable()
+          .required("You must select yes or no"),
+        changeCircumstances: yup
+          .string()
+          .nullable()
+          .when("haveChangesToPlacement", {
+            is: true,
+            then: yup
+              .string()
+              .nullable()
+              .required("Circumstance of change is required")
+          }),
+        changeCircumstanceOther: yup
+          .string()
+          .nullable()
+          .when("changeCircumstances", {
+            is: changeCircumstance => changeCircumstance === "Other",
+            then: yup
+              .string()
+              .nullable()
+              .required("Other circumstance is required")
+          }),
+        howPlacementAdjusted: yup
+          .string()
+          .nullable()
+          .when("haveChangesToPlacement", {
+            is: true,
+            then: yup
+              .string()
+              .nullable()
+              .required("How your placement was adjusted is required")
+          })
+      })
+    })
 });

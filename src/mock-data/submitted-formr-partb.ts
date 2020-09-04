@@ -1,4 +1,5 @@
 import { FormRPartB } from "../models/FormRPartB";
+import { LifeCycleState } from "../models/LifeCycleState";
 
 export const submittedFormRPartBs: FormRPartB[] = [
   {
@@ -45,7 +46,7 @@ export const submittedFormRPartBs: FormRPartB[] = [
         locationOfEntry: "Previous declaration location of entry"
       }
     ],
-    previousDeclarationsSummary: "",
+    previousDeclarationSummary: "",
     haveCurrentDeclarations: true,
     currentDeclarations: [
       {
@@ -55,7 +56,11 @@ export const submittedFormRPartBs: FormRPartB[] = [
         locationOfEntry: "Current declaration location of entry"
       }
     ],
-    currentDeclarationsSummary: "",
+    currentDeclarationSummary: "",
+    compliments: "",
+    haveCovidDeclarations: null,
+    covidDeclarationDto: null,
+    lifecycleState: LifeCycleState.Submitted,
     submissionDate: new Date("2020-04-22"),
     lastModifiedDate: new Date("2020-04-15")
   }

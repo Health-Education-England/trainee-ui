@@ -3,14 +3,12 @@ import { RootState } from "../../../redux/reducers";
 import { GenericOwnProps } from "../../../redux/types";
 import { connect, ConnectedProps } from "react-redux";
 import {
-  initializeForm,
   loadForm,
-  moveToSection
+  moveToSection,
+  saveForm
 } from "../../../redux/actions/formr-partb-actions";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
-import { TraineeProfileService } from "../../../services/TraineeProfileService";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
-import Loading from "../../common/Loading";
 import Section1 from "./Sections/Section1";
 import Section2 from "./Sections/Section2";
 import Section3 from "./Sections/Section3";
@@ -18,6 +16,13 @@ import Section4 from "./Sections/Section4";
 import Section5 from "./Sections/Section5";
 
 import { FormRPartB } from "../../../models/FormRPartB";
+import Section6 from "./Sections/Section6";
+import Section7 from "./Sections/Section7";
+import { SectionProps } from "./Sections/SectionProps";
+import { LifeCycleState } from "../../../models/LifeCycleState";
+import { FormsService } from "../../../services/FormsService";
+import Loading from "../../common/Loading";
+import CovidDeclaration from "./Sections/CovidDeclaration";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -26,124 +31,163 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   isLoaded: state.referenceData.isLoaded,
   section: state.formRPartB.section,
   history: ownProps.history,
-  location: ownProps.location
+  location: ownProps.location,
+  formSwitches: state.formSwitches.formSwitches
 });
 
 const mapDispatchProps = {
-  initializeForm,
   loadReferenceData,
   loadForm,
-  moveToSection
+  moveToSection,
+  saveForm
 };
 
 const connector = connect(mapStateToProps, mapDispatchProps);
+const formsService = new FormsService();
 
-class Create extends React.PureComponent<ConnectedProps<typeof connector>> {
+interface ISection {
+  component: any;
+  title: string;
+}
+
+class Create extends React.PureComponent<
+  ConnectedProps<typeof connector>,
+  ISection
+> {
   componentDidMount() {
-    const {
-      formData,
-      isLoaded,
-      initializeForm,
-      loadReferenceData
-    } = this.props;
-
-    if (!formData) {
-      initializeForm(new TraineeProfileService());
-    }
+    const { isLoaded, loadReferenceData } = this.props;
 
     if (!isLoaded) {
       loadReferenceData(new TraineeReferenceService());
     }
   }
 
-  nextSection = (formData: FormRPartB) => {
+  nextSection = (formData: FormRPartB, section?: number) => {
     this.props.loadForm(formData);
-    this.props.moveToSection(this.props.section + 1);
+    this.props.moveToSection(section ? section : this.props.section + 1);
   };
 
-  previousSection = (formData: FormRPartB) => {
+  previousSection = (formData: FormRPartB, section?: number) => {
     this.props.loadForm(formData);
-    this.props.moveToSection(this.props.section - 1);
+    this.props.moveToSection(section ? section : this.props.section - 1);
   };
 
   submitForm = (formData: FormRPartB) => {
     this.props.loadForm(formData);
   };
 
+  saveDraft = (formData: FormRPartB) => {
+    formData.submissionDate = null;
+    formData.lifecycleState = LifeCycleState.Draft;
+
+    this.props
+      .saveForm(formsService, formData)
+      .then(_ => {
+        // show success toast / popup
+        this.props.history.push("/formr-b");
+        this.props.loadForm(null);
+      })
+      .catch(_ => {
+        // show failure toast / popup
+      });
+  };
+
   render() {
-    const { formData, localOffices, curricula, isLoaded, section } = this.props;
+    const {
+      formData,
+      localOffices,
+      curricula,
+      isLoaded,
+      section,
+      formSwitches
+    } = this.props;
+    const enableCovidDeclaration: boolean =
+      formSwitches.find(s => s.name === "COVID")?.enabled || false;
 
     if (!isLoaded || !formData) {
-      return <Loading data-jest="loading" />;
+      return <Loading />;
+    }
+
+    if (localOffices.length > 0) {
+      if (!localOffices.some(l => l.label === formData.localOfficeName)) {
+        formData.localOfficeName = "";
+      }
+
+      if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
+        formData.prevRevalBody = "";
+      }
+    }
+
+    if (
+      curricula.length > 0 &&
+      !curricula.some(l => l.label === formData.programmeSpecialty)
+    ) {
+      formData.programmeSpecialty = "";
+    }
+
+    const sectionProps: SectionProps = {
+      formData: formData,
+      previousSection: this.previousSection,
+      nextSection: this.nextSection,
+      saveDraft: this.saveDraft,
+      showCovidDeclaration: enableCovidDeclaration,
+      section: section
+    };
+
+    const sections: ISection[] = [
+      {
+        component: Section1,
+        title: "Section 1:\nDoctor's details"
+      },
+
+      {
+        component: Section2,
+        title: "Section 2:\nWhole Scope of Practice"
+      },
+
+      {
+        component: Section3,
+        title: "Section 3:\nDeclarations relating to\nGood Medical Practice"
+      },
+      {
+        component: Section4,
+        title: "Section 4:\nUpdate to your previous Form R Part B"
+      },
+      {
+        component: Section5,
+        title: "Section 5:\nDeclarations since your previous Form R Part B"
+      },
+      {
+        component: Section6,
+        title: "Section 6:\nCompliments"
+      },
+
+      {
+        component: Section7,
+        title: "Section 7:\nDeclaration"
+      }
+    ];
+
+    const covidSection: ISection = {
+      component: CovidDeclaration,
+      title: "Covid declaration"
+    };
+
+    if (enableCovidDeclaration) {
+      sections.splice(6, 0, covidSection);
+    }
+    if (section < sections.length) {
+      return React.createElement(sections[section].component, {
+        ...sectionProps,
+        localOffices: this.props.localOffices,
+        curricula: curricula,
+        history: this.props.history,
+        prevSectionLabel: section > 0 ? sections[section - 1].title : "",
+        nextSectionLabel:
+          section < sections.length - 1 ? sections[section + 1].title : ""
+      });
     } else {
-      if (localOffices.length > 0) {
-        if (!localOffices.some(l => l.label === formData.localOfficeName)) {
-          formData.localOfficeName = "";
-        }
-
-        if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
-          formData.prevRevalBody = "";
-        }
-      }
-
-      if (
-        curricula.length > 0 &&
-        !curricula.some(l => l.label === formData.programmeSpecialty)
-      ) {
-        formData.programmeSpecialty = "";
-      }
-
-      switch (section) {
-        case 1:
-          return (
-            <Section1
-              localOffices={localOffices}
-              curricula={curricula}
-              formData={formData}
-              nextSection={this.nextSection}
-            ></Section1>
-          );
-        case 2:
-          return (
-            <Section2
-              formData={formData}
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              history={this.props.history}
-            ></Section2>
-          );
-        case 3:
-          return (
-            <Section3
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              formData={formData}
-              history={this.props.history}
-            ></Section3>
-          );
-        case 4:
-          return (
-            <Section4
-              previousSection={this.previousSection}
-              nextSection={this.nextSection}
-              formData={formData}
-              history={this.props.history}
-              section={this.props.section}
-            ></Section4>
-          );
-        case 5:
-          return (
-            <Section5
-              previousSection={this.previousSection}
-              handleSubmit={this.submitForm}
-              formData={formData}
-              history={this.props.history}
-              section={this.props.section}
-            ></Section5>
-          );
-        default:
-          return <Loading data-jest="loading" />;
-      }
+      return <Loading />;
     }
   }
 }

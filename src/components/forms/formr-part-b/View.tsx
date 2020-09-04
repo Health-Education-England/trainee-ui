@@ -3,25 +3,41 @@ import ScrollTo from "../ScrollTo";
 import { BackLink, SummaryList, Panel, Button } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
-import { FormRPartB } from "../../../models/FormRPartB";
+import { FormRPartB, FormSwitch } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
+import {
+  FORMR_PARTB_ACCEPTANCE,
+  FORMR_PARTB_CONSENT,
+  NEED_DISCUSSION_WITH_SOMEONE,
+  NEED_DISCUSSION_WITH_SUPERVISOR
+} from "../../../utilities/Constants";
 
 interface ViewProps {
   formData: FormRPartB | null;
+  formSwitches: FormSwitch[];
   editSection: (section: number) => any;
   canEdit: boolean;
   history: any;
 }
 
 const mapStateToProps = (state: RootState) => ({
-  formData: state.formRPartB.formData
+  formData: state.formRPartB.formData,
+  formSwitches: state.formSwitches.formSwitches
 });
 
 class View extends React.PureComponent<ViewProps> {
   render() {
-    const { formData, history, editSection, canEdit } = this.props;
+    const {
+      formData,
+      history,
+      editSection,
+      canEdit,
+      formSwitches
+    } = this.props;
+    const enableCovidDeclaration: boolean =
+      formSwitches.find(s => s.name === "COVID")?.enabled || false;
 
     if (!formData) {
       history.push("/formr-b");
@@ -34,7 +50,7 @@ class View extends React.PureComponent<ViewProps> {
           type="button"
           className={classes.sectionEditButton}
           onClick={() => editSection(section)}
-          data-cy={`BtnEditSection${section}`}
+          data-cy={`BtnEditSection${section + 1}`}
         >
           Edit
         </Button>
@@ -59,7 +75,7 @@ class View extends React.PureComponent<ViewProps> {
               <h2 data-cy="sectionHeader1">Section 1: Doctor's details</h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(1)}
+              {SectionEditButton(0)}
             </div>
           </div>
           <Panel label="Personal details" data-cy="personalDetails">
@@ -122,6 +138,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -135,7 +152,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(2)}
+              {SectionEditButton(1)}
             </div>
           </div>
           <Panel label="Type of work">
@@ -231,6 +248,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -244,7 +262,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(3)}
+              {SectionEditButton(2)}
             </div>
           </div>
           <Panel label="Declarations">
@@ -298,6 +316,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
+
           <div className="nhsuk-grid-row">
             <div
               className={
@@ -311,7 +330,7 @@ class View extends React.PureComponent<ViewProps> {
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(4)}
+              {SectionEditButton(3)}
             </div>
           </div>
           <Panel label="Previously declared events">
@@ -390,8 +409,8 @@ class View extends React.PureComponent<ViewProps> {
                     relating to the event and which organisation is undertaking
                     this investigation.
                   </SummaryList.Key>
-                  <SummaryList.Value data-jest="previousDeclarationsSummary">
-                    {formData.previousDeclarationsSummary}
+                  <SummaryList.Value data-jest="previousDeclarationSummary">
+                    {formData.previousDeclarationSummary}
                   </SummaryList.Value>
                 </SummaryList.Row>
               </SummaryList>
@@ -407,12 +426,11 @@ class View extends React.PureComponent<ViewProps> {
               }
             >
               <h2 data-cy="sectionHeader5">
-                Section 5: New declarations since your previous{" "}
-                <span className="noWrap">Form R Part B</span>
+                Section 5: New declarations since your previous Form R Part B
               </h2>
             </div>
             <div className="nhsuk-grid-column-one-third">
-              {SectionEditButton(5)}
+              {SectionEditButton(4)}
             </div>
           </div>
           <Panel label="New declared events">
@@ -492,12 +510,246 @@ class View extends React.PureComponent<ViewProps> {
                     what investigations are pending relating to the event and
                     which organisation is undertaking the investigation.
                   </SummaryList.Key>
-                  <SummaryList.Value data-jest="previousDeclarationsSummary">
-                    {formData.currentDeclarationsSummary}
+                  <SummaryList.Value data-jest="previousDeclarationSummary">
+                    {formData.currentDeclarationSummary}
                   </SummaryList.Value>
                 </SummaryList.Row>
               </SummaryList>
             ) : null}
+          </Panel>
+
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader5">Section 6: Compliments</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(5)}
+            </div>
+          </div>
+          <Panel label="Compliments">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>Compliments</SummaryList.Key>
+                <SummaryList.Value data-jest="compliments">
+                  {formData.compliments}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
+          </Panel>
+
+          {enableCovidDeclaration ? (
+            <>
+              <div className="nhsuk-grid-row">
+                <div
+                  className={
+                    canEdit
+                      ? "nhsuk-grid-column-two-thirds"
+                      : "nhs-grid-column-full"
+                  }
+                >
+                  <h2 data-cy="sectionHeader5">Covid declarations</h2>
+                </div>
+                <div className="nhsuk-grid-column-one-third">
+                  {SectionEditButton(6)}
+                </div>
+              </div>
+              <Panel label="Section 1: Trainee self-assessment of progress">
+                <SummaryList>
+                  <SummaryList.Row>
+                    <SummaryList.Key>
+                      Has covid effected placement?
+                    </SummaryList.Key>
+                    <SummaryList.Value>
+                      {BooleanUtilities.ToYesNo(formData.haveCovidDeclarations)}
+                    </SummaryList.Value>
+                  </SummaryList.Row>
+                </SummaryList>
+
+                {BooleanUtilities.ToBoolean(formData.haveCovidDeclarations) ? (
+                  <SummaryList>
+                    <SummaryList.Row>
+                      <SummaryList.Key>Covid Training Progress</SummaryList.Key>
+                      <SummaryList.Value>
+                        {formData.covidDeclarationDto?.selfRateForCovid}
+                      </SummaryList.Value>
+                    </SummaryList.Row>
+                    <SummaryList.Row>
+                      <SummaryList.Key>
+                        Covid Training Progress Reason
+                      </SummaryList.Key>
+                      <SummaryList.Value>
+                        {formData.covidDeclarationDto?.reasonOfSelfRate}
+                      </SummaryList.Value>
+                    </SummaryList.Row>
+                    <SummaryList.Row>
+                      <SummaryList.Key>
+                        Other Information for ARCP Panel
+                      </SummaryList.Key>
+                      <SummaryList.Value>
+                        {formData.covidDeclarationDto?.otherInformationForPanel}
+                      </SummaryList.Value>
+                    </SummaryList.Row>
+                  </SummaryList>
+                ) : null}
+              </Panel>
+
+              {BooleanUtilities.ToBoolean(formData.haveCovidDeclarations) ? (
+                <>
+                  <Panel label="Section 2: Trainee Check-In">
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          {NEED_DISCUSSION_WITH_SUPERVISOR}
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto
+                              ?.discussWithSupervisorChecked
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          {NEED_DISCUSSION_WITH_SOMEONE}
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto
+                              ?.discussWithSomeoneChecked
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+
+                  <Panel label="Section 3: Trainee placement changes">
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Changes were made to my placement due to my individual
+                          circumstances
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {BooleanUtilities.ToYesNo(
+                            formData.covidDeclarationDto?.haveChangesToPlacement
+                          )}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+
+                      {BooleanUtilities.ToBoolean(
+                        formData.covidDeclarationDto?.haveChangesToPlacement
+                      ) ? (
+                        <>
+                          <SummaryList.Row>
+                            <SummaryList.Key>
+                              Circumstance of change
+                            </SummaryList.Key>
+                            <SummaryList.Value>
+                              {
+                                formData.covidDeclarationDto
+                                  ?.changeCircumstances
+                              }
+                            </SummaryList.Value>
+                          </SummaryList.Row>
+
+                          {formData.covidDeclarationDto?.changeCircumstances ===
+                          "Other" ? (
+                            <SummaryList.Row>
+                              <SummaryList.Key>
+                                Other circumstance
+                              </SummaryList.Key>
+                              <SummaryList.Value>
+                                {
+                                  formData.covidDeclarationDto
+                                    ?.changeCircumstanceOther
+                                }
+                              </SummaryList.Value>
+                            </SummaryList.Row>
+                          ) : null}
+
+                          <SummaryList.Row>
+                            <SummaryList.Key>
+                              Please explain further how your placement was
+                              adjusted
+                            </SummaryList.Key>
+                            <SummaryList.Value>
+                              {
+                                formData.covidDeclarationDto
+                                  ?.howPlacementAdjusted
+                              }
+                            </SummaryList.Value>
+                          </SummaryList.Row>
+                        </>
+                      ) : null}
+                    </SummaryList>
+                  </Panel>
+
+                  <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
+                    <SummaryList>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Education Supervisor Name
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {
+                            formData.covidDeclarationDto
+                              ?.educationSupervisorName
+                          }
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Education Supervisor Email Address
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {
+                            formData.covidDeclarationDto
+                              ?.educationSupervisorEmail
+                          }
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    </SummaryList>
+                  </Panel>
+                </>
+              ) : null}
+            </>
+          ) : null}
+
+          <div className="nhsuk-grid-row">
+            <div
+              className={
+                canEdit
+                  ? "nhsuk-grid-column-two-thirds"
+                  : "nhs-grid-column-full"
+              }
+            >
+              <h2 data-cy="sectionHeader5">Section 7: Declaration</h2>
+            </div>
+            <div className="nhsuk-grid-column-one-third">
+              {SectionEditButton(7)}
+            </div>
+          </div>
+          <Panel label="Declaration">
+            <SummaryList>
+              <SummaryList.Row>
+                <SummaryList.Key>I confirm that</SummaryList.Key>
+                <SummaryList.Value data-jest="dec">
+                  {FORMR_PARTB_ACCEPTANCE}
+                </SummaryList.Value>
+              </SummaryList.Row>
+              <SummaryList.Row>
+                <SummaryList.Key>I confirm that</SummaryList.Key>
+                <SummaryList.Value data-jest="dec">
+                  {FORMR_PARTB_CONSENT}
+                </SummaryList.Value>
+              </SummaryList.Row>
+            </SummaryList>
           </Panel>
         </>
       )

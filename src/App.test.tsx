@@ -6,18 +6,33 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
 import Login from "./components/authentication/Login";
+import { BrowserRouter } from "react-router-dom";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let wrapper;
+
+const globalAny: any = global;
+
+let wrapper: any;
 
 beforeEach(() => {
   const store = mockStore({});
 
+  globalAny.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          version: "0.1.1"
+        })
+    })
+  );
+
   wrapper = mount(
     <Provider store={store}>
       <MemoryRouter initialEntries={["/"]}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </MemoryRouter>
     </Provider>
   );
@@ -26,6 +41,20 @@ beforeEach(() => {
 describe("App", () => {
   it("renders without crashing", () => {
     shallow(<App />);
+  });
+
+  it("should call componentDidMount", () => {
+    const spy = jest.spyOn(App.prototype, "componentDidMount");
+    shallow(<App />);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("should call checkAppVersion on componentDidMount", async () => {
+    wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "checkAppVersion");
+    await instance.componentDidMount();
+    expect(instance.checkAppVersion).toHaveBeenCalledTimes(2);
   });
 
   it("should load login page by default", () => {

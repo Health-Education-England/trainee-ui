@@ -1,5 +1,6 @@
-export interface FormRPartB {
-  id?: string;
+import { IFormR } from "./IFormR";
+
+export interface FormRPartB extends IFormR {
   traineeTisId?: string;
   forename: string;
   surname: string;
@@ -26,12 +27,13 @@ export interface FormRPartB {
   healthStatement: string;
   havePreviousDeclarations: boolean | string;
   previousDeclarations: Declaration[];
-  previousDeclarationsSummary: string;
+  previousDeclarationSummary: string;
   haveCurrentDeclarations: boolean | string;
   currentDeclarations: Declaration[];
-  currentDeclarationsSummary: string;
-  submissionDate: Date | null;
-  lastModifiedDate: Date | null;
+  currentDeclarationSummary: string;
+  compliments: string;
+  haveCovidDeclarations: boolean | string;
+  covidDeclarationDto: CovidDeclaration | null;
 }
 
 export interface Declaration {
@@ -48,4 +50,24 @@ export interface Work {
   trainingPost: string;
   site: string;
   siteLocation: string;
+}
+
+export interface CovidDeclaration {
+  selfRateForCovid: string;
+  reasonOfSelfRate: string;
+  otherInformationForPanel: string;
+  discussWithSupervisorChecked: boolean | string;
+  discussWithSomeoneChecked: boolean | string;
+  haveChangesToPlacement: boolean | string;
+  changeCircumstances: string;
+  changeCircumstanceOther: string;
+  howPlacementAdjusted: string;
+  educationSupervisorName: string;
+  educationSupervisorEmail: string;
+}
+
+export interface FormSwitch {
+  id: string;
+  name: string;
+  enabled: boolean;
 }

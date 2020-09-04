@@ -5,7 +5,6 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   Button,
   ErrorSummary,
@@ -13,22 +12,24 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik, FieldArray } from "formik";
 import DeclarationPanel from "./DeclarationPanel";
-import { Declaration, FormRPartB } from "../../../../models/FormRPartB";
+import { Declaration } from "../../../../models/FormRPartB";
 import { Section4ValidationSchema } from "../ValidationSchema";
 import { DeclarationPanelUtilities } from "../../../../utilities/DeclarationPanelUtilities";
 import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
-import { YES_NO } from "../../../../utilities/Constants";
+import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
+import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
 
-interface Section4Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-  section: number;
-}
-
-const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
-  const { formData, previousSection, nextSection, section } = props;
+const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
 
   const newDeclaration: Declaration = {
     declarationType: undefined,
@@ -46,7 +47,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -91,9 +92,10 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                       values.previousDeclarations,
                       newDeclaration
                     );
+                    setFieldValue("previousDeclarationSummary", null, false);
                   }}
                   type="radios"
-                  items={YES_NO}
+                  items={YES_NO_OPTIONS}
                   footer="If you wish to make any such declarations in relation to your current Form R Part B then please do this in Section 5"
                 />
               </Panel>
@@ -107,7 +109,7 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                         <div>
                           {values.previousDeclarations.map((_, i: number) => (
                             <DeclarationPanel
-                              section={section}
+                              section={4}
                               key={i}
                               index={i}
                               removeDeclaration={(index: number) =>
@@ -131,14 +133,14 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
                   </Panel>
                   <Panel
                     label="Summary of previous unresolved declarations"
-                    data-cy="previousDeclarationsSummary"
+                    data-cy="previousDeclarationSummary"
                   >
                     <TextInputField
-                      name="previousDeclarationsSummary"
+                      name="previousDeclarationSummary"
                       rows={15}
                       label=""
-                      data-cy="previousDeclarationsSummaryTextInput"
-                      data-jest="previousDeclarationsSummaryTextInput"
+                      data-cy="previousDeclarationSummaryTextInput"
+                      data-jest="previousDeclarationSummaryTextInput"
                       hint={
                         <span>
                           If any <strong>previously declared</strong>{" "}
@@ -167,25 +169,15 @@ const Section4: FunctionComponent<Section4Props> = (props: Section4Props) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection3"
-                data-jest="BacklinkToSection3"
-              >
-                Section 3
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection5"
-                data-jest="linkToSection5"
-              >
-                Continue to Section 5
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
+            />
           </Form>
         )}
       </Formik>

@@ -109,6 +109,7 @@ export const mockPlacements = [
     placementTisId: "315",
     placementType: "In Post",
     site: "Addenbrookes Hospital",
+    siteLocation: "Site location",
     specialty: "Dermatology",
     startDate: new Date("2020-01-01"),
     status: Status.Current

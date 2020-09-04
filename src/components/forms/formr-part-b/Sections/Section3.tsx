@@ -5,24 +5,26 @@ import ScrollTo from "../../ScrollTo";
 import {
   Fieldset,
   WarningCallout,
-  Pagination,
   Panel,
   ErrorSummary,
   ErrorMessage
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
-import { FormRPartB } from "../../../../models/FormRPartB";
 import { Section3ValidationSchema } from "../ValidationSchema";
+import { SectionProps } from "./SectionProps";
+import FormRPartBPagination from "./FormRPartBPagination";
+import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 
-interface Section3Props {
-  formData: FormRPartB;
-  previousSection: (formData: FormRPartB) => void;
-  nextSection: (formData: FormRPartB) => void;
-  history: any;
-}
-
-const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
-  const { formData, previousSection, nextSection } = props;
+const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
+  const {
+    formData,
+    previousSection,
+    nextSection,
+    saveDraft,
+    prevSectionLabel,
+    nextSectionLabel,
+    section
+  } = props;
   return (
     formData && (
       <Formik
@@ -32,7 +34,7 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
           nextSection(values);
         }}
       >
-        {({ values, errors, handleSubmit }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -101,10 +103,10 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
                   id="isWarned"
                   name="isWarned"
                   type="radios"
-                  items={[
-                    { label: "Yes", value: "true" },
-                    { label: "No", value: "false" }
-                  ]}
+                  items={YES_NO_OPTIONS}
+                  onChange={() => {
+                    setFieldValue("isComplying", null, false);
+                  }}
                 />
 
                 {values.isWarned && values.isWarned.toString() === "true" ? (
@@ -153,23 +155,15 @@ const Section3: FunctionComponent<Section3Props> = (props: Section3Props) => {
               </ErrorSummary>
             ) : null}
 
-            <Pagination>
-              <Pagination.Link
-                previous
-                onClick={() => previousSection(values)}
-                data-cy="BacklinkToSection2"
-              >
-                Section 2
-              </Pagination.Link>
-
-              <Pagination.Link
-                next
-                onClick={() => handleSubmit()}
-                data-cy="linkToSection4"
-              >
-                Continue to Section 4
-              </Pagination.Link>
-            </Pagination>
+            <FormRPartBPagination
+              values={values}
+              previousSection={previousSection}
+              handleSubmit={handleSubmit}
+              saveDraft={saveDraft}
+              prevSectionLabel={prevSectionLabel}
+              nextSectionLabel={nextSectionLabel}
+              section={section}
+            />
           </Form>
         )}
       </Formik>

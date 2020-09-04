@@ -1,4 +1,9 @@
-import { ActionType, FormRPartBListState, FormRPartBState } from "../types";
+import {
+  ActionType,
+  FormRPartBListState,
+  FormRPartBState,
+  FormSwitchesState
+} from "../types";
 import {
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
@@ -7,17 +12,12 @@ import {
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
   LOAD_FORMR_PARTB,
-  SAVE_FORMR_PARTB_SUCCESS,
-  SAVE_FORMR_PARTB_FAILURE
+  LOAD_FORM_SWITCHES_SUCCESS,
+  LOAD_FORM_SWITCHES_FAILURE
 } from "../action_types";
 
 const formRPartAListState: FormRPartBListState = {
   submittedForms: []
-};
-
-const initialState: FormRPartBState = {
-  formData: null,
-  section: 1
 };
 
 export function FormRPartBListReducer(
@@ -40,23 +40,27 @@ export function FormRPartBListReducer(
   }
 }
 
+const initialState: FormRPartBState = {
+  formData: null,
+  section: 0
+};
+
 export function FormRPartBReducer(
   state = { ...initialState },
   action: ActionType
 ): FormRPartBState {
   switch (action.type) {
     case INITIALIZE_FORMR_PARTB_SUCCESS:
-    case SAVE_FORMR_PARTB_SUCCESS:
       return {
         ...state,
         formData: action.payload,
-        section: 1
+        section: 0
       };
     case INITIALIZE_FORMR_PARTB_FAILURE:
       return {
         ...state,
         formData: null,
-        section: 1
+        section: 0
       };
     case LOAD_FORMR_PARTB:
       return {
@@ -69,10 +73,33 @@ export function FormRPartBReducer(
         section: action.payload
       };
     case EDIT_FORMR_PARTB:
-    case SAVE_FORMR_PARTB_FAILURE:
     default:
       return {
         ...state
       };
+  }
+}
+
+const formSwitchesState: FormSwitchesState = {
+  formSwitches: []
+};
+
+export function FormSwitchesReducer(
+  state = formSwitchesState,
+  action: ActionType
+): FormSwitchesState {
+  switch (action.type) {
+    case LOAD_FORM_SWITCHES_SUCCESS:
+      return {
+        ...state,
+        formSwitches: action.payload
+      };
+    case LOAD_FORM_SWITCHES_FAILURE:
+      return {
+        ...state,
+        formSwitches: []
+      };
+    default:
+      return state;
   }
 }

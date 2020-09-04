@@ -13,7 +13,7 @@ const mockStore = configureMockStore(middlewares);
 describe("View", () => {
   const mountComponent = (form: FormRPartA | null, history: any) => {
     const store = mockStore({
-      formRPartAView: {
+      formRPartA: {
         formData: form
       }
     });

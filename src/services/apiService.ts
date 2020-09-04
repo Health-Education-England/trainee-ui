@@ -13,7 +13,7 @@ export class ApiService {
 
     this.axiosInstance.interceptors.request.use(async function (config) {
       let user = await Auth.currentAuthenticatedUser();
-      config.headers.authorization = `Bearer ${user.signInUserSession.accessToken.jwtToken}`;
+      config.headers.authorization = `Bearer ${user.signInUserSession.idToken.jwtToken}`;
 
       return config;
     });
@@ -25,6 +25,10 @@ export class ApiService {
 
   post<T = any>(endpoint: string, formData: T): Promise<AxiosResponse<T>> {
     return this.axiosInstance.post(endpoint, formData);
+  }
+
+  put<T = any>(endpoint: string, formData: T): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.put(endpoint, formData);
   }
 }
 
