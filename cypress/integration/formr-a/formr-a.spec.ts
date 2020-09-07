@@ -67,14 +67,10 @@ describe("Form R (Part A)", () => {
             .should("be.visible")
             .type("My special status")
             .should("have.value", "My special status");
-          cy.get("#qualification > option")
-            .eq(1)
-            .then(element => {
-              const selectedItem = element.val().toString();
-              cy.get("#qualification")
-                .select(selectedItem)
-                .should("not.have.value", "--Please select--");
-            });
+          cy.get("#qualification")
+            .should("be.visible")
+            .invoke("val")
+            .should("not.be.empty");
           cy.get("#dateAttained")
             .should("be.visible")
             .should("have.attr", "type", "date")
