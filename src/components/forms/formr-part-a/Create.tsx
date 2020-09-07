@@ -36,7 +36,6 @@ import MultiChoiceInputField from "../MultiChoiceInputField";
 interface CreateProps extends GenericOwnProps {
   formData: FormRPartA | null;
   genders: KeyValue[];
-  qualifications: KeyValue[];
   colleges: KeyValue[];
   localOffices: KeyValue[];
   trainingGrades: KeyValue[];
@@ -56,7 +55,6 @@ interface CreateProps extends GenericOwnProps {
 const mapStateToProps = (state: RootState) => ({
   formData: state.formRPartA.formData,
   genders: state.referenceData.genders,
-  qualifications: state.referenceData.qualifications,
   colleges: state.referenceData.colleges,
   localOffices: state.referenceData.localOffices,
   trainingGrades: state.referenceData.grades,
@@ -98,7 +96,6 @@ class Create extends React.PureComponent<CreateProps> {
     const {
       formData,
       genders,
-      qualifications,
       colleges,
       localOffices,
       trainingGrades,
@@ -183,10 +180,9 @@ class Create extends React.PureComponent<CreateProps> {
                     placeholder="Please add your 'Other' immigration status"
                   />
                 ) : null}
-                <SelectInputField
+                <TextInputField
                   label="Primary Qualification (most recent)"
                   name="qualification"
-                  options={qualifications}
                 />
                 <TextInputField
                   label="Date Awarded"
