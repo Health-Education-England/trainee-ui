@@ -4,10 +4,8 @@ import {
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
@@ -20,7 +18,6 @@ const initialState: ReferenceDataState = {
   genders: [],
   colleges: [],
   localOffices: [],
-  qualifications: [],
   grades: [],
   immigrationStatus: [],
   curricula: [],
@@ -43,13 +40,6 @@ export default function ReferenceDataReducer(
       return {
         ...state,
         colleges: action.payload,
-        isLoaded: true
-      };
-
-    case LOAD_REFERENCE_QUALIFICATIONS_SUCCESS:
-      return {
-        ...state,
-        qualifications: action.payload,
         isLoaded: true
       };
 
@@ -83,7 +73,6 @@ export default function ReferenceDataReducer(
 
     case LOAD_REFERENCE_GENDER_FAILURE:
     case LOAD_REFERENCE_COLLEGES_FAILURE:
-    case LOAD_REFERENCE_QUALIFICATIONS_FAILURE:
     case LOAD_REFERENCE_LOCAL_OFFICES_FAILURE:
     case LOAD_REFERENCE_GRADES_FAILURE:
     case LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE:
