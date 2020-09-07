@@ -142,14 +142,10 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
   cy.get("[data-cy=legendFieldset1]").should("be.visible");
   cy.get(".nhsuk-warning-callout > p").should("be.visible");
 
-  cy.get("#forename")
-    .should("be.visible")
-    .invoke("val")
-    .then(() => {
-      cy.get("#forename").clear();
-      cy.get("#forename").type("Fore name");
-    });
-
+  cy.get("#forename").should("be.visible").invoke("val");
+  cy.get("#forename").focus();
+  cy.get("#forename").clear();
+  cy.get("#forename").type("Fore name");
   cy.get("#surname").should("be.visible").invoke("val");
   cy.get("#surname").clear();
   cy.get("#surname").type("Last name");
