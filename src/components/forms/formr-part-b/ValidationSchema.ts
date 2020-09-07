@@ -171,10 +171,10 @@ export const CovidSectionValidationSchema = yup.object({
           "Progress self-rate reason",
           1000
         ),
-        otherInformationForPanel: StringValidationSchema(
-          "Other Information for Panel",
-          2000
-        ),
+        otherInformationForPanel: yup
+          .string()
+          .nullable()
+          .max(1000, "You have reached the maximum length allowed"),
         educationSupervisorName: StringValidationSchema(
           "Education Supervisor Name",
           300
