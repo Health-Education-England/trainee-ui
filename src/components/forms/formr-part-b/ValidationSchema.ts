@@ -167,10 +167,18 @@ export const CovidSectionValidationSchema = yup.object({
           "Covid Training Progress",
           300
         ),
-        reasonOfSelfRate: StringValidationSchema(
-          "Progress self-rate reason",
-          1000
-        ),
+        reasonOfSelfRate: yup
+          .string()
+          .nullable()
+          .when("selfRateForCovid", {
+            is: selfRate =>
+              selfRate !==
+              "Satisfactory progress for stage of training and required competencies met",
+            then: yup
+              .string()
+              .nullable()
+              .required("Reason for self-rate is required")
+          }),
         otherInformationForPanel: yup
           .string()
           .nullable()
