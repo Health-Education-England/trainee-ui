@@ -167,14 +167,22 @@ export const CovidSectionValidationSchema = yup.object({
           "Covid Training Progress",
           300
         ),
-        reasonOfSelfRate: StringValidationSchema(
-          "Covid Training Progress Reason",
-          1000
-        ),
-        otherInformationForPanel: StringValidationSchema(
-          "Other Information for Panel",
-          2000
-        ),
+        reasonOfSelfRate: yup
+          .string()
+          .nullable()
+          .when("selfRateForCovid", {
+            is: selfRate =>
+              selfRate !==
+              "Satisfactory progress for stage of training and required competencies met",
+            then: yup
+              .string()
+              .nullable()
+              .required("Reason for self-rate is required")
+          }),
+        otherInformationForPanel: yup
+          .string()
+          .nullable()
+          .max(1000, "You have reached the maximum length allowed"),
         educationSupervisorName: StringValidationSchema(
           "Education Supervisor Name",
           300
