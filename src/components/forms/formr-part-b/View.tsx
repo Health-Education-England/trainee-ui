@@ -579,14 +579,16 @@ class View extends React.PureComponent<ViewProps> {
                         {formData.covidDeclarationDto?.selfRateForCovid}
                       </SummaryList.Value>
                     </SummaryList.Row>
-                    <SummaryList.Row>
-                      <SummaryList.Key>
-                        Covid Training Progress Reason
-                      </SummaryList.Key>
-                      <SummaryList.Value>
-                        {formData.covidDeclarationDto?.reasonOfSelfRate}
-                      </SummaryList.Value>
-                    </SummaryList.Row>
+                    {formData.covidDeclarationDto?.reasonOfSelfRate ? (
+                      <SummaryList.Row>
+                        <SummaryList.Key>
+                          Covid Training Progress Reason
+                        </SummaryList.Key>
+                        <SummaryList.Value>
+                          {formData.covidDeclarationDto?.reasonOfSelfRate}
+                        </SummaryList.Value>
+                      </SummaryList.Row>
+                    ) : null}
                     <SummaryList.Row>
                       <SummaryList.Key>
                         Other Information for ARCP Panel
