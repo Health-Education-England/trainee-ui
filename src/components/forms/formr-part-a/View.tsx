@@ -63,12 +63,18 @@ class View extends React.PureComponent<ViewProps> {
                 <SummaryList.Key>Immigration Status</SummaryList.Key>
                 <SummaryList.Value>
                   {formData.immigrationStatus}
-
-                  {formData.immigrationStatus === "Other" ? (
-                    <span>, {formData.otherImmigrationStatus}</span>
-                  ) : null}
                 </SummaryList.Value>
               </SummaryList.Row>
+
+              {formData.immigrationStatus.toLowerCase().includes("other") ? (
+                <SummaryList.Row>
+                  <SummaryList.Key>Other Immigration Status</SummaryList.Key>
+                  <SummaryList.Value>
+                    {formData.otherImmigrationStatus}
+                  </SummaryList.Value>
+                </SummaryList.Row>
+              ) : null}
+
               <SummaryList.Row>
                 <SummaryList.Key>
                   Primary Qualification (most recent)
