@@ -20,8 +20,10 @@ import { ValidationSchema } from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import {
   FORMR_PARTA_DECLARATIONS,
-  CCT_DECLARATION
+  CCT_DECLARATION,
+  IMMIGRATION_STATUS_OTHER_TISIDS
 } from "../../../utilities/Constants";
+import { ReferenceDataUtilities } from "../../../utilities/ReferenceDataUtilities";
 import Loading from "../../common/Loading";
 import { loadReferenceData } from "../../../redux/actions/reference-data-actions";
 import { TraineeReferenceService } from "../../../services/TraineeReferenceService";
@@ -173,11 +175,14 @@ class Create extends React.PureComponent<CreateProps> {
                   name="immigrationStatus"
                   options={immigrationStatus}
                 />
-                {values.immigrationStatus === "Other" ? (
+                {ReferenceDataUtilities.isMatchInReferenceData(
+                  IMMIGRATION_STATUS_OTHER_TISIDS,
+                  values.immigrationStatus,
+                  immigrationStatus
+                ) ? (
                   <TextInputField
                     name="otherImmigrationStatus"
-                    label="Other"
-                    placeholder="Please add your 'Other' immigration status"
+                    label="Please add your 'Other' immigration status"
                   />
                 ) : null}
                 <TextInputField
