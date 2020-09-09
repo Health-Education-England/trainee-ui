@@ -25,7 +25,6 @@ export interface ReferenceDataState {
   genders: KeyValue[];
   colleges: KeyValue[];
   localOffices: KeyValue[];
-  qualifications: KeyValue[];
   grades: KeyValue[];
   immigrationStatus: KeyValue[];
   curricula: KeyValue[];

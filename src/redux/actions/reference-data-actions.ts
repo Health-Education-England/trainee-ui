@@ -2,8 +2,6 @@ import { ActionType } from "../types";
 import {
   LOAD_REFERENCE_GENDER_SUCCESS,
   LOAD_REFERENCE_GENDER_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
@@ -33,21 +31,6 @@ export const loadReferenceData = (
     .catch(error =>
       dispatch({
         type: LOAD_REFERENCE_GENDER_FAILURE,
-        payload: error
-      })
-    );
-
-  const qualifications = referenceService
-    .getQualifications()
-    .then(response => {
-      dispatch({
-        type: LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-        payload: getKeyValuesFromResponse(response)
-      });
-    })
-    .catch(error =>
-      dispatch({
-        type: LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
         payload: error
       })
     );
@@ -130,7 +113,6 @@ export const loadReferenceData = (
   return [
     genders,
     colleges,
-    qualifications,
     immigrationStatus,
     localOffices,
     trainingGrades,

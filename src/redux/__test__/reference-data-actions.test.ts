@@ -2,14 +2,12 @@ import { TraineeReferenceService } from "../../services/TraineeReferenceService"
 import { loadReferenceData } from "../actions/reference-data-actions";
 import {
   LOAD_REFERENCE_GENDER_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
   LOAD_REFERENCE_CURRICULA_SUCCESS,
   LOAD_REFERENCE_GENDER_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
   LOAD_REFERENCE_COLLEGES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_GRADES_FAILURE,
@@ -42,9 +40,6 @@ describe("loadReferenceData method", () => {
 
     jest.spyOn(referenceService, "getGenders").mockReturnValue(successResponse);
     jest
-      .spyOn(referenceService, "getQualifications")
-      .mockReturnValue(successResponse);
-    jest
       .spyOn(referenceService, "getColleges")
       .mockReturnValue(successResponse);
     jest
@@ -70,10 +65,7 @@ describe("loadReferenceData method", () => {
         type: LOAD_REFERENCE_GENDER_SUCCESS,
         payload: returnValue
       },
-      {
-        type: LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-        payload: returnValue
-      },
+
       {
         type: LOAD_REFERENCE_COLLEGES_SUCCESS,
         payload: returnValue
@@ -119,9 +111,7 @@ describe("loadReferenceData method", () => {
     jest
       .spyOn(referenceService, "getGenders")
       .mockReturnValue(Promise.reject(errorResponse));
-    jest
-      .spyOn(referenceService, "getQualifications")
-      .mockReturnValue(Promise.reject(errorResponse));
+
     jest
       .spyOn(referenceService, "getColleges")
       .mockReturnValue(Promise.reject(errorResponse));
@@ -143,10 +133,7 @@ describe("loadReferenceData method", () => {
         type: LOAD_REFERENCE_GENDER_FAILURE,
         payload: errorResponse
       },
-      {
-        type: LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
-        payload: errorResponse
-      },
+
       {
         type: LOAD_REFERENCE_COLLEGES_FAILURE,
         payload: errorResponse

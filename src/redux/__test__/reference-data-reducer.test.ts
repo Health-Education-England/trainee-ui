@@ -5,8 +5,6 @@ import {
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
-  LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
-  LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_FAILURE,
@@ -22,7 +20,6 @@ describe("form-r part-a reducer", () => {
     genders: [],
     colleges: [],
     localOffices: [],
-    qualifications: [],
     grades: [],
     immigrationStatus: [],
     curricula: [],
@@ -64,21 +61,6 @@ describe("form-r part-a reducer", () => {
 
     const successAction: ActionType = {
       type: LOAD_REFERENCE_COLLEGES_SUCCESS,
-      payload: []
-    };
-
-    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
-  });
-
-  it("should return updated state when LOAD_REFERENCE_QUALIFICATIONS_SUCCESS action passed", () => {
-    const state: ReferenceDataState = {
-      ...initialState,
-      colleges: [],
-      isLoaded: true
-    };
-
-    const successAction: ActionType = {
-      type: LOAD_REFERENCE_QUALIFICATIONS_SUCCESS,
       payload: []
     };
 
@@ -149,7 +131,6 @@ describe("form-r part-a reducer", () => {
     LOAD_REFERENCE_GENDER_FAILURE,
     LOAD_REFERENCE_COLLEGES_FAILURE,
     LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
-    LOAD_REFERENCE_QUALIFICATIONS_FAILURE,
     LOAD_REFERENCE_GRADES_FAILURE,
     LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
     LOAD_REFERENCE_CURRICULA_FAILURE
