@@ -26,7 +26,7 @@ export const ValidationSchema = yup.object({
       value => DateUtilities.IsMoreThanMinDate(value)
     ),
   gender: StringValidationSchema("Gender"),
-  immigrationStatus: StringValidationSchema("Immigration Status"),
+  immigrationStatus: StringValidationSchema("Immigration Status", 200),
   qualification: StringValidationSchema("Qualification"),
   dateAttained: dateValidationSchema("Date awarded (most recent qualification)")
     .test(
@@ -59,7 +59,7 @@ export const ValidationSchema = yup.object({
     .string()
     .email("Email is invalid")
     .max(255, "Email must be shorter than 255 characters")
-    .required("Email"),
+    .required("Email address is required"),
   declarationType: yup
     .string()
     .required("You need to choose at least one Declaration")
