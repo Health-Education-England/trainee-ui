@@ -61,8 +61,13 @@ describe("Form R (Part A)", () => {
           //Test for 'Other' immigration status
           cy.get("#immigrationStatus")
             .should("be.visible")
-            .select("Other")
-            .should("have.value", "Other");
+            .select(
+              "Other immigration categories i.e. overseas government employees, innovators etc."
+            )
+            .should(
+              "have.value",
+              "Other immigration categories i.e. overseas government employees, innovators etc."
+            );
           cy.get("#otherImmigrationStatus")
             .should("be.visible")
             .type("My special status")
@@ -206,8 +211,13 @@ describe("Form R (Part A)", () => {
           //Test for 'Other' immigration status
           cy.get("#immigrationStatus")
             .should("be.visible")
-            .select("Other")
-            .should("have.value", "Other");
+            .select(
+              "Other immigration categories i.e. overseas government employees, innovators etc."
+            )
+            .should(
+              "have.value",
+              "Other immigration categories i.e. overseas government employees, innovators etc."
+            );
           cy.get("#otherImmigrationStatus")
             .should("be.visible")
             .clear()

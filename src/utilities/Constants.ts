@@ -34,3 +34,5 @@ export const NEED_DISCUSSION_WITH_SUPERVISOR =
 
 export const NEED_DISCUSSION_WITH_SOMEONE =
   "I have concerns with my training and / or wellbeing at the moment and would like to discuss with someone";
+
+export const IMMIGRATION_STATUS_OTHER_TISIDS = ["12", "13"];

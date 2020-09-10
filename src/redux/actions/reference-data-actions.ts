@@ -123,6 +123,7 @@ export const loadReferenceData = (
 function getKeyValuesFromResponse(response: AxiosResponse<any[]>): KeyValue[] {
   return response.data.map<KeyValue>(d => {
     return {
+      tisId: d.tisId,
       label: d.label,
       value: d.label
     };
