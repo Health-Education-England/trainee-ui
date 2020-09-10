@@ -5,27 +5,14 @@ export class ReferenceDataUtilities {
       (item: KeyValue) => item.label === label
     );
 
-    if (typeof myObj !== "undefined") {
-      return myObj.tisId;
-    }
-    return null;
+    return myObj?.tisId;
   }
 
   public static isMatchInReferenceData(
-    tisId: string | string[],
+    tisId: string[],
     label: string,
     refData: KeyValue[]
   ) {
-    if (Array.isArray(tisId)) {
-      return tisId.some(id => {
-        return this.getIdFromLabel(refData, label) === id;
-      });
-    } else {
-      if (this.getIdFromLabel(refData, label) === tisId) {
-        return true;
-      }
-    }
-
-    return false;
+    return [...tisId].some(id => this.getIdFromLabel(refData, label) === id);
   }
 }
