@@ -4,9 +4,7 @@
 let isCovid = false;
 
 before(() => {
-  cy.checkFlags("COVID").then(flag => {
-    isCovid = flag;
-  });
+  isCovid = true;
 });
 
 let currentDate = Cypress.moment().format("YYYY-MM-DD");
