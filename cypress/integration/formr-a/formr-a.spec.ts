@@ -97,18 +97,15 @@ describe("Form R (Part A)", () => {
             .should("be.visible")
             .invoke("val")
             .should("not.be.empty");
-          cy.get("#address4")
-            .should("be.visible")
-            .invoke("val")
-            .should("not.be.empty");
+          cy.get("#address4").should("be.visible").focus().clear().type("UK");
           cy.get("#postCode")
             .should("be.visible")
             .invoke("val")
             .should("not.be.empty");
           cy.get("#telephoneNumber")
             .should("be.visible")
-            .invoke("val")
-            .should("not.be.empty");
+            .clear()
+            .type("01234567890");
           cy.get("#mobileNumber").focus();
           cy.get("#mobileNumber")
             .should("be.visible")
