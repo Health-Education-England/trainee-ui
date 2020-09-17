@@ -130,3 +130,4 @@ build/
 cypress.env.json
 videos/
 screenshots/
+reports/

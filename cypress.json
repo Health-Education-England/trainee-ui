@@ -1,15 +1,15 @@
 {
-  "baseUrl": "https://trainee.tis.nhs.uk",
-  "reporter": "./node_modules/mochawesome/src/mochawesome.js",
+  "baseUrl": "http://local.tis-selfservice.com",
+  "reporter":"mochawesome",
   "reporterOptions": {
     "charts": true,
     "overwrite": false,
     "html": false,
     "json": true,
     "timestamp": "mmddyyyy_HHMMss",
-    "reportDir": "cypress/reports",
-    "reportFilename": "e2e",
-  "chromeWebSecurity": false,
-  "defaultCommandTimeout": 15000
-}
+    "reportDir": "cypress/reports/mochawesome-report",
+    "reportFilename": "report",
+    "defaultCommandTimeout": 15000,
+    "chromeWebSecurity": false
+  }
 }
