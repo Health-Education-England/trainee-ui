@@ -5,7 +5,7 @@ import { FormRPartB, FormSwitch } from "../models/FormRPartB";
 
 export class FormsService extends ApiService {
   constructor() {
-    super("/forms/api");
+    super("/api/forms");
   }
 
   async saveTraineeFormRPartA(
@@ -21,7 +21,7 @@ export class FormsService extends ApiService {
   }
 
   async getTraineeFormRPartAList(): Promise<AxiosResponse<FormRPartA[]>> {
-    return this.get<FormRPartA[]>(`/formr-partas/${this.traineeTisId}`);
+    return this.get<FormRPartA[]>("/formr-partas");
   }
 
   async getTraineeFormRPartAByFormId(
@@ -36,7 +36,7 @@ export class FormsService extends ApiService {
   }
 
   async getTraineeFormRPartBList(): Promise<AxiosResponse<FormRPartB[]>> {
-    return this.get<FormRPartB[]>(`/formr-partbs/${this.traineeTisId}`);
+    return this.get<FormRPartB[]>("/formr-partbs");
   }
 
   async getTraineeFormRPartBByFormId(

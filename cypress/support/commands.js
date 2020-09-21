@@ -477,7 +477,7 @@ Cypress.Commands.add("checkFlags", name => {
   return cy
     .request({
       method: "GET",
-      url: `/forms/api/form-switches`
+      url: `/api/forms/form-switches`
     })
     .then(response => {
       expect(response.status).to.eq(200);
