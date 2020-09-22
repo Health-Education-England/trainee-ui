@@ -3,7 +3,6 @@ import { Auth } from "aws-amplify";
 
 export class ApiService {
   axiosInstance: AxiosInstance;
-  traineeTisId = 47165;
 
   constructor(baseUrl: string) {
     this.axiosInstance = axios.create({

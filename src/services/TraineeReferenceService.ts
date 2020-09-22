@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 
 export class TraineeReferenceService extends ApiService {
   constructor() {
-    super("/reference/api");
+    super("/api/reference");
   }
 
   getGenders(): Promise<AxiosResponse<any>> {
