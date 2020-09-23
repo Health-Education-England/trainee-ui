@@ -10,7 +10,7 @@ interface IProps {
 
 const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
   if (!personalDetails) {
-    return <div>Failed to laod data.</div>;
+    return <div>Failed to load data.</div>;
   }
 
   const fullName = `${personalDetails.title}. ${personalDetails.forenames} ${personalDetails.surname}`;
