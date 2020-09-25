@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "./App.scss";
 import Profile from "./components/profile/Profile";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
-import Navbar from "./components/navigation/Navbar";
+import HEEHeader from "./components/navigation/HEEHeader";
 import Login from "./components/authentication/Login";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
@@ -80,24 +80,27 @@ class App extends React.PureComponent<AppProps, AppState> {
   render() {
     const { isAuthenticated, checkLatestVersion, appVersion } = this.state;
 
-    return isAuthenticated && checkLatestVersion ? (
+    return (
       <Fragment>
-        <Navbar />
-        <main className="nhsuk-width-container nhsuk-u-margin-top-5">
-          <BrowserRouter>
-            <Switch>
-              <Route path="/profile" component={Profile} />
-              <Route path="/formr-a" component={FormRPartA} />
-              <Route path="/formr-b" component={FormRPartB} />
-              <Redirect exact path="/" to="/profile" />
-              <Route path="/*" component={PageNotFound} />
-            </Switch>
-          </BrowserRouter>
-        </main>
+        <HEEHeader isAuthenticated={isAuthenticated} />
+        {isAuthenticated && checkLatestVersion ? (
+          <main className="nhsuk-width-container nhsuk-u-margin-top-5">
+            <BrowserRouter>
+              <Switch>
+                <Route path="/profile" component={Profile} />
+                <Route path="/formr-a" component={FormRPartA} />
+                <Route path="/formr-b" component={FormRPartB} />
+                <Redirect exact path="/" to="/profile" />
+                <Route path="/*" component={PageNotFound} />
+              </Switch>
+            </BrowserRouter>
+          </main>
+        ) : (
+          <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
+        )}
+        ;
         <HEEFooter appVersion={appVersion} />
       </Fragment>
-    ) : (
-      <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
     );
   }
 }
