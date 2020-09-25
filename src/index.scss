@@ -61,6 +61,16 @@ fieldset {
   white-space: nowrap;
 }
 
+button:disabled {
+  opacity: 0.4 !important;
+}
+
+@media only screen and (max-width: 40.0525em) {
+  .nhsuk-header__menu-toggle {
+    right: 0;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .MuiTypography-h5 {
     display: none;
