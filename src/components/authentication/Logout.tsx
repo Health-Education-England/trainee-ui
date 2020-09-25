@@ -1,18 +1,22 @@
 import React from "react";
-import { Button } from "nhsuk-react-components";
 import { SignOut } from "aws-amplify-react";
+import { Auth } from "aws-amplify";
 import styles from "./Logout.module.scss";
 
 class Logout extends SignOut {
   render() {
     return (
-      <Button
-        className={styles.logout}
-        type="button"
-        onClick={() => super.signOut()}
-      >
-        Logout
-      </Button>
+      <li className="nhsuk-header__navigation-item">
+        <button
+          type="button"
+          className={styles.logout}
+          onClick={async () => {
+            await Auth.signOut();
+          }}
+        >
+          Logout
+        </button>
+      </li>
     );
   }
 }
