@@ -1,24 +1,20 @@
 import React from "react";
-import { SignOut } from "aws-amplify-react";
-import { Auth } from "aws-amplify";
-import styles from "./Logout.module.scss";
 
-class Logout extends SignOut {
-  render() {
-    return (
-      <li className="nhsuk-header__navigation-item">
-        <button
-          type="button"
-          className={styles.logout}
-          onClick={async () => {
-            await Auth.signOut();
-          }}
-        >
-          Logout
-        </button>
-      </li>
-    );
-  }
+interface LogoutProps {
+  onClick: any;
 }
+const Logout = (props: LogoutProps) => {
+  return (
+    <li className="nhsuk-header__navigation-item">
+      <a
+        href="/"
+        className="nhsuk-header__navigation-link"
+        onClick={props.onClick}
+      >
+        Logout
+      </a>
+    </li>
+  );
+};
 
 export default Logout;

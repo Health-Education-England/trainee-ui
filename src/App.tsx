@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./App.scss";
 import Profile from "./components/profile/Profile";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
@@ -81,26 +81,24 @@ class App extends React.PureComponent<AppProps, AppState> {
     const { isAuthenticated, checkLatestVersion, appVersion } = this.state;
 
     return (
-      <Fragment>
+      <BrowserRouter>
         <HEEHeader isAuthenticated={isAuthenticated} />
         {isAuthenticated && checkLatestVersion ? (
           <main className="nhsuk-width-container nhsuk-u-margin-top-5">
-            <BrowserRouter>
-              <Switch>
-                <Route path="/profile" component={Profile} />
-                <Route path="/formr-a" component={FormRPartA} />
-                <Route path="/formr-b" component={FormRPartB} />
-                <Redirect exact path="/" to="/profile" />
-                <Route path="/*" component={PageNotFound} />
-              </Switch>
-            </BrowserRouter>
+            <Switch>
+              <Route path="/profile" component={Profile} />
+              <Route path="/formr-a" component={FormRPartA} />
+              <Route path="/formr-b" component={FormRPartB} />
+              <Redirect exact path="/" to="/profile" />
+              <Route path="/*" component={PageNotFound} />
+            </Switch>
           </main>
         ) : (
           <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
         )}
         ;
         <HEEFooter appVersion={appVersion} />
-      </Fragment>
+      </BrowserRouter>
     );
   }
 }
