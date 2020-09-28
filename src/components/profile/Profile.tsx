@@ -8,7 +8,7 @@ import Placements from "./placements/Placements";
 import Loading from "../common/Loading";
 import { Fieldset, Details } from "nhsuk-react-components";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
-
+import ScrollTo from "../forms/ScrollTo";
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.profile.traineeProfile,
   isLoaded: state.profile.isLoaded
@@ -35,6 +35,7 @@ class Profile extends React.PureComponent<profileProps> {
       return (
         traineeProfile && (
           <div id="profile">
+            <ScrollTo />
             <Fieldset>
               <Fieldset.Legend isPageHeading>Profile</Fieldset.Legend>
             </Fieldset>
