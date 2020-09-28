@@ -4,44 +4,34 @@ import styles from "./HEEFooter.module.scss";
 
 const HEEFooter = (props: any) => {
   const { appVersion } = props;
-  return appVersion ? (
+  return (
     <Footer>
       <Footer.List>
-        <Footer.ListItem
-          className={styles.refLink}
-          href="http://jobs.hee.nhs.uk"
-        >
-          Jobs at HEE
-        </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="/about/contact-us">
+        <Footer.ListItem className={styles.refLink} href="#">
           Contact us
         </Footer.ListItem>
-        <Footer.ListItem
-          className={styles.refLink}
-          href="/about/privacy-notice"
-        >
+        <Footer.ListItem className={styles.refLink} href="#">
           Privacy policy
         </Footer.ListItem>
-        <Footer.ListItem
-          className={styles.refLink}
-          href="/about/terms-conditions"
-        >
+        <Footer.ListItem className={styles.refLink} href="#">
           Terms and conditions
         </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="/about/cookies">
+        <Footer.ListItem className={styles.refLink} href="#">
           Cookie policy
         </Footer.ListItem>
-        <Footer.ListItem>{`App version: ${appVersion}`}</Footer.ListItem>
       </Footer.List>
       <Footer.Copyright>
-        See our{" "}
-        <a href="https://twitter.com/NHS_HealthEdEng/lists/local-offices/members">
-          local offices
-        </a>{" "}
-        on Twitter.
+        &copy; <a href="https://www.hee.nhs.uk">hee.nhs.uk</a>
       </Footer.Copyright>
+      {appVersion ? (
+        <Footer.List>
+          <Footer.ListItem>
+            <span style={{ fontSize: "10pt" }}>{`version: ${appVersion}`}</span>
+          </Footer.ListItem>
+        </Footer.List>
+      ) : null}
     </Footer>
-  ) : null;
+  );
 };
 
 export default HEEFooter;
