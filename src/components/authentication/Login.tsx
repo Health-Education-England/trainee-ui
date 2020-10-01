@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
-import { Header } from "nhsuk-react-components";
-import HEEFooter from "../navigation/HEEFooter";
+import React from "react";
+import { Container } from "nhsuk-react-components";
 import {
   Authenticator,
   SignIn,
@@ -9,6 +8,7 @@ import {
 } from "aws-amplify-react";
 
 import styles from "./Login.module.scss";
+import { LoginTheme } from "./LoginTheme";
 
 interface LoginProps {
   setAuthenticationStatus: (state: string) => Promise<void>;
@@ -16,24 +16,35 @@ interface LoginProps {
 
 const Login = (props: LoginProps) => {
   return (
-    <Fragment>
-      <Header className={styles.header}>
-        <Header.Container>
-          <Header.Logo></Header.Logo>
-        </Header.Container>
-      </Header>
-      <main className="nhsuk-main-wrapper" id="maincontent">
-        <Authenticator
-          hideDefault={true}
-          onStateChange={props.setAuthenticationStatus}
-        >
-          <SignIn />
-          <ForgotPassword />
-          <RequireNewPassword />
-        </Authenticator>
-      </main>
-      <HEEFooter></HEEFooter>
-    </Fragment>
+    <main className="nhsuk-main-wrapper" id="maincontent">
+      <Container>
+        <div className={styles.row}>
+          <div className={styles.colText}>
+            <h1 className="nhsuk-u-padding-0 nhsuk-u-margin-bottom-2">
+              Trainee Self-Service
+            </h1>
+            <hr className="nhsuk-u-padding-0 nhsuk-u-margin-3" />
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Quibusdam deleniti placeat eos molestias numquam debitis
+              repellendus quidem, sit non doloremque vero similique tempora odio
+              molestiae rem dignissimos adipisci assumenda laboriosam?
+            </p>
+          </div>
+          <div className={styles.colForm}>
+            <Authenticator
+              theme={LoginTheme}
+              hideDefault={true}
+              onStateChange={props.setAuthenticationStatus}
+            >
+              <SignIn />
+              <ForgotPassword />
+              <RequireNewPassword />
+            </Authenticator>
+          </div>
+        </div>
+      </Container>
+    </main>
   );
 };
 

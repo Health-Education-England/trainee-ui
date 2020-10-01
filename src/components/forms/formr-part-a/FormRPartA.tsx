@@ -5,11 +5,12 @@ import Create from "./Create";
 import Confirm from "./Confirm";
 import View from "./View";
 import List from "./List";
-
+import ScrollTo from "../ScrollTo";
 class FormRPartA extends React.PureComponent {
   render() {
     return (
       <div>
+        <ScrollTo />
         <Fieldset>
           <Fieldset.Legend isPageHeading>Form-R (Part A)</Fieldset.Legend>
           <Label>

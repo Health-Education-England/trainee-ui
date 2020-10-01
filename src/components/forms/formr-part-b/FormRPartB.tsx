@@ -5,10 +5,11 @@ import Create from "./Create";
 import List from "./List";
 import View from "./View";
 import Confirm from "./Confirm";
-
+import ScrollTo from "../ScrollTo";
 const FormRPartB: React.FC = () => {
   return (
     <div>
+      <ScrollTo />
       <Fieldset>
         <Fieldset.Legend isPageHeading>Form-R (Part B)</Fieldset.Legend>
         <Label>
