@@ -25,10 +25,19 @@ const Login = (props: LoginProps) => {
             </h1>
             <hr className="nhsuk-u-padding-0 nhsuk-u-margin-3" />
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Quibusdam deleniti placeat eos molestias numquam debitis
-              repellendus quidem, sit non doloremque vero similique tempora odio
-              molestiae rem dignissimos adipisci assumenda laboriosam?
+              Trainee Self-Service enables trainees to log in and see some data
+              HEE hold about them and undertake the Form R process for junior
+              doctors.
+            </p>
+            <p>
+              For further information and support, visit the{" "}
+              <a
+                style={{ whiteSpace: "nowrap" }}
+                href="https://tis-support.hee.nhs.uk"
+              >
+                TIS Support website
+              </a>
+              .
             </p>
           </div>
           <div className={styles.colForm}>
