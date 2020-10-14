@@ -53,7 +53,22 @@ Array [
             className="nhsuk-u-padding-0 nhsuk-u-margin-3"
           />
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam deleniti placeat eos molestias numquam debitis repellendus quidem, sit non doloremque vero similique tempora odio molestiae rem dignissimos adipisci assumenda laboriosam?
+            Trainee Self-Service enables trainees to log in and see some data HEE hold about them and undertake the Form R process for junior doctors.
+          </p>
+          <p>
+            For further information and support, visit the
+             
+            <a
+              href="https://tis-support.hee.nhs.uk"
+              style={
+                Object {
+                  "whiteSpace": "nowrap",
+                }
+              }
+            >
+              TIS Support website
+            </a>
+            .
           </p>
         </div>
         <div
@@ -150,7 +165,7 @@ Array [
                   }
                 }
               >
-                version: 0.5.3
+                version: 0.6.3
               </span>
             </a>
           </li>
@@ -158,5 +173,57 @@ Array [
       </div>
     </div>
   </footer>,
+  <div
+    className="cookieConsent-overlay"
+    style={Object {}}
+  >
+    <div
+      className="CookieConsent"
+      style={
+        Object {
+          "bottom": "0",
+        }
+      }
+    >
+      <div
+        className="cookieConsent-content"
+        style={Object {}}
+      >
+        <h3>
+          Your consent is required.
+        </h3>
+        <p>
+          We use necessary cookies to make our site work and analytics cookies to help us improve it. In order use this site, you must agree to the storing of such cookies on your device by clicking 'Accept and close'. To learn more about how we use cookies and your data, please see our
+           
+          <a
+            href="https://www.hee.nhs.uk/about/privacy-notice"
+            rel="noopener noreferrer nofollow"
+            style={
+              Object {
+                "color": "#ffffff",
+              }
+            }
+            target="_blank"
+          >
+            privacy policy
+          </a>
+          .
+        </p>
+      </div>
+      <div
+        className="cookieConsent-button-wrapper"
+      >
+        <button
+          aria-label="Accept cookies"
+          className="nhsuk-button nhsuk-button--reverse"
+          id="rcc-confirm-button"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Accept and close
+        </button>
+      </div>
+    </div>
+  </div>,
 ]
 `;
