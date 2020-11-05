@@ -20,7 +20,7 @@ export const mockPersonalDetails: PersonalDetails = {
   address1: "585-6360 Interdum Street",
   address2: "Goulburn",
   address3: "London",
-  address4: "UK",
+  address4: "",
   postCode: "WC1B 5DN",
   gmcNumber: "11111111",
   gmcStatus: "",
