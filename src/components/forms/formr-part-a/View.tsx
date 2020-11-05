@@ -141,13 +141,13 @@ class View extends React.PureComponent<ViewProps> {
               {formData.declarationType === CCT_DECLARATION ? (
                 <>
                   <SummaryList.Row>
-                    <SummaryList.Key>CCT Speciality 1</SummaryList.Key>
+                    <SummaryList.Key>CCT Specialty 1</SummaryList.Key>
                     <SummaryList.Value>
                       {formData.cctSpecialty1}
                     </SummaryList.Value>
                   </SummaryList.Row>
                   <SummaryList.Row>
-                    <SummaryList.Key>CCT Speciality 2</SummaryList.Key>
+                    <SummaryList.Key>CCT Specialty 2</SummaryList.Key>
                     <SummaryList.Value>
                       {formData.cctSpecialty2}
                     </SummaryList.Value>
@@ -163,7 +163,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>
-                  Anticipated Completion Date of Current Programme (if known
+                  Anticipated Completion Date of Current Programme (if known)
                 </SummaryList.Key>
                 <SummaryList.Value>
                   {DateUtilities.ToLocalDate(formData.completionDate)}

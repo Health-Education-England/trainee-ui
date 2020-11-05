@@ -76,7 +76,7 @@ class Confirm extends React.PureComponent<ConfirmProps> {
         <WarningCallout label="Warning">
           <p>
             By submitting this form, I confirm that the information above is
-            correct and I will keep my Designated Body, and the GMC, informed as
+            correct and I will keep my Designated Body and the GMC informed as
             soon as possible of any change to my contact details.
           </p>
         </WarningCallout>

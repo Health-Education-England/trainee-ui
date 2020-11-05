@@ -12,7 +12,7 @@ class FormRPartA extends React.PureComponent {
       <div>
         <ScrollTo />
         <Fieldset>
-          <Fieldset.Legend isPageHeading>Form-R (Part A)</Fieldset.Legend>
+          <Fieldset.Legend isPageHeading>Form R (Part A)</Fieldset.Legend>
           <Label>
             Trainee registration for Postgraduate Speciality Training
           </Label>

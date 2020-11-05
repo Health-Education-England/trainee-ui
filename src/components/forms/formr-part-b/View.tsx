@@ -269,7 +269,7 @@ class View extends React.PureComponent<ViewProps> {
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>
-                  I declare that I accept the professional obligations paced on
+                  I declare that I accept the professional obligations placed on
                   me in Good Medical Practice in relation to honesty and
                   integrity
                 </SummaryList.Key>

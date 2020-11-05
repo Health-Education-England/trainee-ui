@@ -276,7 +276,7 @@ class Create extends React.PureComponent<CreateProps> {
                   options={colleges}
                 />
                 <TextInputField
-                  label="Anticipated Completion Date of Current Programme"
+                  label="Anticipated Completion Date of Current Programme (if known)"
                   type="date"
                   name="completionDate"
                 />
@@ -299,7 +299,7 @@ class Create extends React.PureComponent<CreateProps> {
                   placeholder="programmeMembership type"
                 />
                 <TextInputField
-                  label="Full Time Equivalent in Training"
+                  label="Full Time or % of Full Time Training"
                   name="wholeTimeEquivalent"
                   placeholder="e.g. 0.1 for 10%; 0.25 for 25% etc. or 1 for Full Time"
                 />

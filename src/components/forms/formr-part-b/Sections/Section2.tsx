@@ -107,16 +107,16 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   )}
                 ></FieldArray>
               </Panel>
-              <Panel label="Reasons for TIME OUT OF TRAINING (‘TOOT’)">
+              <Panel label="Reasons for TIME OUT OF TRAINING (TOOT)">
                 <InsetText className={classes.tootInsetText}>
                   <p>
-                    <b>TIME OUT OF TRAINING (‘TOOT’)</b> Self-reported absence
+                    <b>TIME OUT OF TRAINING (TOOT)</b> Self-reported absence
                     whilst part of a training programme since last ARCP (or, if
                     no ARCP, since initial registration to programme). Time out
                     of training should reflect days absent from the training
                     programme and is considered by the ARCP panel/Deanery/HEE in
                     recalculation of the date you should end your current
-                    training programme. Partial days must be rounded up.{" "}
+                    training programme. Partial days must be rounded up.
                     <b>
                       Enter 0 for any reasons where you have not had Time Out Of
                       Training.
