@@ -10,7 +10,7 @@ import { LifeCycleState } from "../../models/LifeCycleState";
 import Loading from "../common/Loading";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { loadFormSwitches } from "../../redux/actions/formr-partb-actions";
-
+import ScrollTo from "./ScrollTo";
 export const CreateList = (
   loadFormList: (
     formService: FormsService
@@ -107,6 +107,7 @@ export const CreateList = (
 
       return (
         <div>
+          <ScrollTo />
           {draftForm.length === 1 ? (
             <Button
               id="btnOpenForm"

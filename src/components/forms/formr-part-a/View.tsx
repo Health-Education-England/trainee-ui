@@ -5,7 +5,7 @@ import { CCT_DECLARATION } from "../../../utilities/Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
-
+import ScrollTo from "../ScrollTo";
 interface ViewProps {
   formData: FormRPartA | null;
   history: any;
@@ -27,6 +27,7 @@ class View extends React.PureComponent<ViewProps> {
     return (
       formData && (
         <>
+          <ScrollTo />
           <BackLink href="/formr-a">Go back to list</BackLink>
 
           <Panel label="Personal Details">
