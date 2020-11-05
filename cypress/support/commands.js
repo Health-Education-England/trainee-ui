@@ -84,10 +84,7 @@ Cypress.Commands.add(
       .should("be.visible")
       .invoke("val")
       .should("not.be.empty");
-    cy.get("#address4")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
+
     cy.get("#postCode")
       .should("be.visible")
       .invoke("val")
