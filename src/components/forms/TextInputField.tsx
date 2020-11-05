@@ -5,7 +5,7 @@ import InputFooterLabel from "./InputFooterLabel";
 interface Props {
   name: string;
   label: string;
-  hideLabel?: boolean;
+  hidelabel?: boolean;
   id?: string;
   placeholder?: string;
   rows?: number;
@@ -25,12 +25,14 @@ const TextInputField: FunctionComponent<Props> = props => {
     return width < 20 ? 20 : Math.floor(width / 10) * 10;
   };
 
+  const { hidelabel, ...rest } = props;
+
   return (
     <div
       className={
         error
           ? "nhsuk-form-group nhsuk-form-group--error"
-          : props.hideLabel
+          : props.hidelabel
           ? "hide-label nhsuk-form-group"
           : "nhsuk-form-group"
       }
@@ -44,7 +46,7 @@ const TextInputField: FunctionComponent<Props> = props => {
         onBlur={field.onBlur}
         onChange={field.onChange}
         value={field.value != null ? field.value : ""}
-        {...props}
+        {...rest}
         readOnly={props.readOnly}
         min="1920-01-01"
         max="2119-31-12"

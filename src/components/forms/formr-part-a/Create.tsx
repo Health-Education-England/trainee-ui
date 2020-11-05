@@ -204,12 +204,12 @@ class Create extends React.PureComponent<CreateProps> {
                 />
                 <TextInputField
                   label="Address Line 2"
-                  hideLabel={true}
+                  hidelabel={true}
                   name="address2"
                   placeholder="Address Line 2"
                 />
                 <TextInputField
-                  hideLabel={true}
+                  hidelabel={true}
                   label="Address Line 3"
                   name="address3"
                   placeholder="Address Line 3"
