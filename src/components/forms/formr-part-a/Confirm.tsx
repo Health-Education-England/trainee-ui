@@ -6,6 +6,7 @@ import { RootState } from "../../../redux/reducers";
 import { FormsService } from "../../../services/FormsService";
 import { FormRPartA } from "../../../models/FormRPartA";
 import { LifeCycleState } from "../../../models/LifeCycleState";
+import ScrollTo from "../ScrollTo";
 import { AxiosResponse } from "axios";
 import {
   saveTraineeFormRPartA,
@@ -72,6 +73,7 @@ class Confirm extends React.PureComponent<ConfirmProps> {
 
     return (
       <div>
+        <ScrollTo />
         <View history={this.props.history}></View>
         <WarningCallout label="Warning">
           <p>
