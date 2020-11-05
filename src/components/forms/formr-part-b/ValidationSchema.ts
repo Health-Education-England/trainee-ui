@@ -37,12 +37,12 @@ const panelSchemaValidation = yup.array(
 );
 
 export const Section1ValidationSchema = yup.object({
-  forename: StringValidationSchema("Forename(s)"),
-  surname: StringValidationSchema("Surname (GMC-Registered)", 30),
+  forename: StringValidationSchema("Forename"),
+  surname: StringValidationSchema("GMC-Registered Surname", 30),
   gmcNumber: StringValidationSchema("GMC number", 20),
   email: yup
     .string()
-    .email("Email is invalid")
+    .email("Email address is invalid")
     .max(255, "Email must be shorter than 255 characters")
     .required("Email is required"),
   localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
@@ -190,7 +190,7 @@ export const CovidSectionValidationSchema = yup.object({
         educationSupervisorEmail: yup
           .string()
           .nullable()
-          .email("Email is invalid")
+          .email("Email address is invalid")
           .max(255, "Email must be shorter than 255 characters")
           .required("Email is required"),
         haveChangesToPlacement: yup

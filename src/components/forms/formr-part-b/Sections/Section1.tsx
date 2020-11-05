@@ -79,8 +79,8 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
             </WarningCallout>
 
             <Panel label="Personal details">
-              <TextInputField label="Forename(s)" name="forename" />
-              <TextInputField label="Surname (GMC-Registered)" name="surname" />
+              <TextInputField label="Forename" name="forename" />
+              <TextInputField label="GMC-Registered Surname" name="surname" />
               <TextInputField label="GMC Number" name="gmcNumber" />
               <TextInputField
                 label="Primary contact email address"
@@ -88,12 +88,12 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 hint="For reasons of security and due to frequent system failures with internet email accounts, you are strongly advised to provide an NHS.net email address."
               />
               <SelectInputField
-                label="Current Deanery / HEE Local team"
+                label="Deanery / HEE Local Team"
                 options={localOffices}
                 name="localOfficeName"
               />
               <SelectInputField
-                label="Previous Designated Body for Revalidation (if applicable)"
+                label="Previous Designated Body for Revalidation"
                 options={localOffices}
                 name="prevRevalBody"
               />
@@ -103,7 +103,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 name="currRevalDate"
               />
               <TextInputField
-                label="Date of Previous Revalidation (if applicable)"
+                label="Date of Previous Revalidation"
                 type="date"
                 name="prevRevalDate"
               />
