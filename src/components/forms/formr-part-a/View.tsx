@@ -5,7 +5,7 @@ import { CCT_DECLARATION } from "../../../utilities/Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
-
+import ScrollTo from "../ScrollTo";
 interface ViewProps {
   formData: FormRPartA | null;
   history: any;
@@ -27,16 +27,17 @@ class View extends React.PureComponent<ViewProps> {
     return (
       formData && (
         <>
+          <ScrollTo />
           <BackLink href="/formr-a">Go back to list</BackLink>
 
           <Panel label="Personal Details">
             <SummaryList>
               <SummaryList.Row>
-                <SummaryList.Key>Forname</SummaryList.Key>
+                <SummaryList.Key>Forename</SummaryList.Key>
                 <SummaryList.Value>{formData.forename}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Surname (GMC-Registered)</SummaryList.Key>
+                <SummaryList.Key>GMC-Registered Surname</SummaryList.Key>
                 <SummaryList.Value>{formData.surname}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
@@ -68,7 +69,7 @@ class View extends React.PureComponent<ViewProps> {
 
               {formData.immigrationStatus.toLowerCase().includes("other") ? (
                 <SummaryList.Row>
-                  <SummaryList.Key>Other Immigration Status</SummaryList.Key>
+                  <SummaryList.Key>Immigration Status (Other)</SummaryList.Key>
                   <SummaryList.Value>
                     {formData.otherImmigrationStatus}
                   </SummaryList.Value>
@@ -76,9 +77,7 @@ class View extends React.PureComponent<ViewProps> {
               ) : null}
 
               <SummaryList.Row>
-                <SummaryList.Key>
-                  Primary Qualification (most recent)
-                </SummaryList.Key>
+                <SummaryList.Key>Primary Qualification</SummaryList.Key>
                 <SummaryList.Value>{formData.qualification}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
@@ -95,30 +94,28 @@ class View extends React.PureComponent<ViewProps> {
                 <SummaryList.Value>{formData.medicalSchool}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Address</SummaryList.Key>
+                <SummaryList.Key>Home Address</SummaryList.Key>
                 <SummaryList.Value>
                   <p>{formData.address1}</p>
                   <p>{formData.address2}</p>
                   <p>{formData.address3}</p>
-                  <p>
-                    {formData.address4} - {formData.postCode}
-                  </p>
+                  <p>{formData.postCode}</p>
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Telephone</SummaryList.Key>
+                <SummaryList.Key>Contact Telephone</SummaryList.Key>
                 <SummaryList.Value>
                   {formData.telephoneNumber}
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Mobile</SummaryList.Key>
+                <SummaryList.Key>Contact Mobile</SummaryList.Key>
                 <SummaryList.Value data-cy="mobileNumber">
                   {formData.mobileNumber}
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Email</SummaryList.Key>
+                <SummaryList.Key>Email Address</SummaryList.Key>
                 <SummaryList.Value>{formData.email}</SummaryList.Value>
               </SummaryList.Row>
             </SummaryList>
@@ -141,13 +138,13 @@ class View extends React.PureComponent<ViewProps> {
               {formData.declarationType === CCT_DECLARATION ? (
                 <>
                   <SummaryList.Row>
-                    <SummaryList.Key>CCT Speciality 1</SummaryList.Key>
+                    <SummaryList.Key>CCT Specialty 1</SummaryList.Key>
                     <SummaryList.Value>
                       {formData.cctSpecialty1}
                     </SummaryList.Value>
                   </SummaryList.Row>
                   <SummaryList.Row>
-                    <SummaryList.Key>CCT Speciality 2</SummaryList.Key>
+                    <SummaryList.Key>CCT Specialty 2</SummaryList.Key>
                     <SummaryList.Value>
                       {formData.cctSpecialty2}
                     </SummaryList.Value>
@@ -163,7 +160,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
               <SummaryList.Row>
                 <SummaryList.Key>
-                  Anticipated Completion Date of Current Programme (if known
+                  Anticipated Completion Date of Current Programme (if known)
                 </SummaryList.Key>
                 <SummaryList.Value>
                   {DateUtilities.ToLocalDate(formData.completionDate)}
@@ -185,7 +182,7 @@ class View extends React.PureComponent<ViewProps> {
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Post type / Appointment</SummaryList.Key>
+                <SummaryList.Key>Post type or Appointment</SummaryList.Key>
                 <SummaryList.Value>
                   {formData.programmeMembershipType}
                 </SummaryList.Value>

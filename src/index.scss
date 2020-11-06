@@ -101,6 +101,17 @@ button:disabled {
   }
 }
 
+.hide-label {
+  label {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+}
+
 @media only screen and (max-width: 40.0525em) {
   .nhsuk-header__menu-toggle {
     right: 0;

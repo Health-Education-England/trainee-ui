@@ -61,9 +61,7 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
             <SummaryList.Value>
               <p>{personalDetails.address1}</p>
               <p>{personalDetails.address2}</p>
-              <p>
-                {personalDetails.address3}, {personalDetails.address4}
-              </p>
+              <p>{personalDetails.address3}</p>
               <p>{personalDetails.postCode}</p>
             </SummaryList.Value>
           </SummaryList.Row>

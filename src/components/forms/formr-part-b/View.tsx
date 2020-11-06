@@ -81,11 +81,11 @@ class View extends React.PureComponent<ViewProps> {
           <Panel label="Personal details" data-cy="personalDetails">
             <SummaryList>
               <SummaryList.Row>
-                <SummaryList.Key>Forename(s)</SummaryList.Key>
+                <SummaryList.Key>Forename</SummaryList.Key>
                 <SummaryList.Value>{formData.forename}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Surname (GMC-Registered)</SummaryList.Key>
+                <SummaryList.Key>GMC-Registered Surname</SummaryList.Key>
                 <SummaryList.Value>{formData.surname}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
@@ -95,13 +95,11 @@ class View extends React.PureComponent<ViewProps> {
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Email</SummaryList.Key>
+                <SummaryList.Key>Email Address</SummaryList.Key>
                 <SummaryList.Value>{formData.email}</SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>
-                  Current Deanery / HEE Local team
-                </SummaryList.Key>
+                <SummaryList.Key>Deanery / HEE Local Team</SummaryList.Key>
                 <SummaryList.Value data-cy="localOfficeName">
                   {formData.localOfficeName}
                 </SummaryList.Value>
@@ -119,7 +117,7 @@ class View extends React.PureComponent<ViewProps> {
                 </SummaryList.Value>
               </SummaryList.Row>
               <SummaryList.Row>
-                <SummaryList.Key>Previous Revalidation Date</SummaryList.Key>
+                <SummaryList.Key>Date of Previous Revalidation</SummaryList.Key>
                 <SummaryList.Value data-jest="prevRevalDate">
                   {DateUtilities.ToLocalDate(formData.prevRevalDate || null)}
                 </SummaryList.Value>
@@ -269,7 +267,7 @@ class View extends React.PureComponent<ViewProps> {
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>
-                  I declare that I accept the professional obligations paced on
+                  I declare that I accept the professional obligations placed on
                   me in Good Medical Practice in relation to honesty and
                   integrity
                 </SummaryList.Key>

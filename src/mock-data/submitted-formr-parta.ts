@@ -18,7 +18,7 @@ export const submittedFormRPartAs: FormRPartA[] = [
     address1: "585-6360 Interdum Street",
     address2: "Goulburn",
     address3: "London",
-    address4: "UK",
+    address4: "",
     postCode: "WC1B 5DN",
     telephoneNumber: "01632960363",
     mobileNumber: "07465879348",

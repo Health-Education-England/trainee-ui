@@ -149,11 +149,8 @@ class Create extends React.PureComponent<CreateProps> {
                 </p>
               </WarningCallout>
               <Panel label="Personal Details">
-                <TextInputField label="Forename(s)" name="forename" />
-                <TextInputField
-                  label="Surname (GMC-Registered)"
-                  name="surname"
-                />
+                <TextInputField label="Forename" name="forename" />
+                <TextInputField label="GMC-Registered Surname" name="surname" />
                 <TextInputField label="GMC Number" name="gmcNumber" />
                 <SelectInputField
                   label="Deanery / HEE Local Office"
@@ -182,11 +179,11 @@ class Create extends React.PureComponent<CreateProps> {
                 ) ? (
                   <TextInputField
                     name="otherImmigrationStatus"
-                    label="Please add your 'Other' immigration status"
+                    label="Immigration Status (Other)"
                   />
                 ) : null}
                 <TextInputField
-                  label="Primary Qualification (most recent)"
+                  label="Primary Qualification"
                   name="qualification"
                 />
                 <TextInputField
@@ -199,25 +196,23 @@ class Create extends React.PureComponent<CreateProps> {
                     country)"
                   name="medicalSchool"
                 />
+
                 <TextInputField
                   label="Home Address"
+                  placeholder="Address Line 1"
                   name="address1"
-                  placeholder="House number, name / road"
                 />
                 <TextInputField
-                  label="District"
+                  label="Address Line 2"
+                  hidelabel={true}
                   name="address2"
-                  placeholder="district"
+                  placeholder="Address Line 2"
                 />
                 <TextInputField
-                  label="Town or city"
+                  hidelabel={true}
+                  label="Address Line 3"
                   name="address3"
-                  placeholder="town or city"
-                />
-                <TextInputField
-                  label="Country"
-                  name="address4"
-                  placeholder="country"
+                  placeholder="Address Line 3"
                 />
                 <TextInputField
                   label="Postcode"
@@ -225,14 +220,11 @@ class Create extends React.PureComponent<CreateProps> {
                   placeholder="postcode"
                 />
                 <TextInputField
-                  label="Contact Telephone (landline)"
+                  label="Contact Telephone"
                   name="telephoneNumber"
                 />
-                <TextInputField
-                  label="Contact Telephone (Mobile)"
-                  name="mobileNumber"
-                />
-                <TextInputField label="Email" name="email" />
+                <TextInputField label="Contact Mobile" name="mobileNumber" />
+                <TextInputField label="Email Address" name="email" />
               </Panel>
 
               <Panel label="Declarations">
@@ -276,7 +268,7 @@ class Create extends React.PureComponent<CreateProps> {
                   options={colleges}
                 />
                 <TextInputField
-                  label="Anticipated Completion Date of Current Programme"
+                  label="Anticipated Completion Date of Current Programme (if known)"
                   type="date"
                   name="completionDate"
                 />
@@ -294,12 +286,12 @@ class Create extends React.PureComponent<CreateProps> {
                   name="startDate"
                 />
                 <TextInputField
-                  label="Post type / Appointment"
+                  label="Post type or Appointment"
                   name="programmeMembershipType"
                   placeholder="programmeMembership type"
                 />
                 <TextInputField
-                  label="Full Time Equivalent in Training"
+                  label="Full Time or % of Full Time Training"
                   name="wholeTimeEquivalent"
                   placeholder="e.g. 0.1 for 10%; 0.25 for 25% etc. or 1 for Full Time"
                 />

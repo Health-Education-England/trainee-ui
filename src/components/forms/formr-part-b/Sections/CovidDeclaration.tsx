@@ -119,7 +119,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                   <WarningCallout label="Important" data-cy="mainWarningCovid">
                     <div>
                       <p>
-                        <b>IMPORTANT:</b> Please pre-populate this form with the
+                        <b>IMPORTANT:</b> Please complete this form with the
                         information about your training since your last ARCP
                         review, or this is the first scheduled ARCP in your
                         programme, since the start of your current period of
@@ -127,7 +127,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       </p>
                     </div>
                     <div>
-                      Please comment on:
+                      <p>Please comment on:</p>
                       <ul>
                         <li>
                           Your self-assessment of progress up to the point of
@@ -135,7 +135,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                         </li>
                         <li>
                           How your training may have been impacted by COVID 19
-                          you have not been able to acquire required
+                          e.g. if you have not been able to acquire required
                           competencies/capabilities through lack of appropriate
                           learning opportunities or cancellation of required
                           exams/courses
@@ -148,7 +148,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                         By signing this document, you are confirming that ALL
                         details are correct and that you have made an honest
                         declaration in accordance with the professional
-                        standards set out by the General Medica Council in Good
+                        standards set out by the General Medical Council in Good
                         Medical Practice.
                       </p>
                     </div>
@@ -336,12 +336,12 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                       </p>
                     </Label>
                     <TextInputField
-                      label="Education Supervisor Name"
+                      label="Educational Supervisor Name"
                       name="covidDeclarationDto.educationSupervisorName"
                       data-jest="educationSupervisorName"
                     />
                     <TextInputField
-                      label="Education Supervisor Email Address"
+                      label="Educational Supervisor Email Address"
                       name="covidDeclarationDto.educationSupervisorEmail"
                       data-jest="educationSupervisorEmail"
                     />

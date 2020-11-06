@@ -20,7 +20,7 @@ describe("Form R (Part A)", () => {
     cy.viewport("iphone-6");
     cy.get("[data-cy=BtnMenu]").should("be.visible");
     cy.get("[data-cy=BtnMenu]").click();
-    cy.contains("Form R-a").click();
+    cy.contains("Form R (Part A)").click();
 
     cy.get("#btnOpenForm")
       .should("be.visible")
@@ -97,7 +97,7 @@ describe("Form R (Part A)", () => {
             .should("be.visible")
             .invoke("val")
             .should("not.be.empty");
-          cy.get("#address4").should("be.visible").focus().clear().type("UK");
+
           cy.get("#postCode")
             .should("be.visible")
             .invoke("val")
@@ -241,7 +241,6 @@ describe("Form R (Part A)", () => {
 
           cy.get("#address2").should("be.visible").clear().type("Goulburn");
           cy.get("#address3").should("be.visible").clear().type("London");
-          cy.get("#address4").should("be.visible").clear().type("UK");
 
           cy.get("#postCode").should("be.visible").clear().type("SW1A1AA");
           cy.get("#telephoneNumber")

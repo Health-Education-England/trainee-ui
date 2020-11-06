@@ -40,7 +40,7 @@ const WorkPanel: FunctionComponent<Props> = (props: Props) => {
             name={`work[${index}].typeOfWork`}
             data-cy={`workTypeInput${index}`}
             width="50"
-            hint="e.g. name and grade of specialty rotation, OOP, maternity leave, etc."
+            hint="e.g. name and grade of specialty rotation, OOP, parental leave, etc."
           />
         </div>
       </div>

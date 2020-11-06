@@ -12,8 +12,8 @@ const dateValidationSchema = (fieldName: string) =>
   yup.date().required(`${fieldName} is required`);
 
 export const ValidationSchema = yup.object({
-  forename: StringValidationSchema("Forename(s)"),
-  surname: StringValidationSchema("Surname (GMC-Registered)", 30),
+  forename: StringValidationSchema("Forename"),
+  surname: StringValidationSchema("GMC-Registered Surname", 30),
   gmcNumber: StringValidationSchema("GMC number", 20),
   localOfficeName: StringValidationSchema("Deanery / HEE Local Office"),
   dateOfBirth: dateValidationSchema("Your date of birth")
@@ -27,11 +27,11 @@ export const ValidationSchema = yup.object({
     ),
   gender: StringValidationSchema("Gender"),
   immigrationStatus: StringValidationSchema("Immigration Status", 200),
-  qualification: StringValidationSchema("Qualification"),
-  dateAttained: dateValidationSchema("Date awarded (most recent qualification)")
+  qualification: StringValidationSchema("Primary Qualification"),
+  dateAttained: dateValidationSchema("Date awarded")
     .test(
       "dateAttained",
-      "Date awarded (most recent qualification) - please choose a date from the past",
+      "Date awarded - please choose a date from the past",
       value => DateUtilities.IsPastDate(value)
     )
     .test(
@@ -39,25 +39,27 @@ export const ValidationSchema = yup.object({
       "This date is before the minumum date allowed",
       value => DateUtilities.IsMoreThanMinDate(value)
     ),
-  medicalSchool: StringValidationSchema("Medical school"),
-  address1: StringValidationSchema("Address - house number/ name and road"),
-  address2: StringValidationSchema("Address - district"),
-  address3: StringValidationSchema("Address - town or city"),
-  address4: StringValidationSchema("Address - country"),
+  medicalSchool: StringValidationSchema(
+    "Medical School Awarding Primary Qualification"
+  ),
+  address1: StringValidationSchema("Address Line 1"),
+  address2: StringValidationSchema("Address Line 2"),
+
   postCode: StringValidationSchema("Postcode", 8).matches(
     postcodeRegex,
     "Please enter a valid postcode"
   ),
-  telephoneNumber: StringValidationSchema(
-    "Contact (landline telephone)"
-  ).matches(phoneRegex, "Contact (landline) number - requires a valid number"),
-  mobileNumber: StringValidationSchema("Contact (mobile)").matches(
+  telephoneNumber: StringValidationSchema("Contact Telephone").matches(
+    phoneRegex,
+    "Contact Telephone - requires a valid number"
+  ),
+  mobileNumber: StringValidationSchema("Contact Mobile)").matches(
     mobileRegex,
-    "Contact (mobile) number - requires a valid number"
+    "Contact Mobile - requires a valid number"
   ),
   email: yup
     .string()
-    .email("Email is invalid")
+    .email("Email address is invalid")
     .max(255, "Email must be shorter than 255 characters")
     .required("Email address is required"),
   declarationType: yup
@@ -87,7 +89,7 @@ export const ValidationSchema = yup.object({
     "This date is outside the allowed date range",
     value => DateUtilities.IsInsideDateRange(value)
   ),
-  programmeMembershipType: StringValidationSchema("Post type / Appointment"),
+  programmeMembershipType: StringValidationSchema("Post type or Appointment"),
   wholeTimeEquivalent: yup
     .string()
     .required("Programme Full Time Equivalent in Training is required")

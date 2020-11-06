@@ -36,7 +36,7 @@ const Navbar = (props: navProps) => {
           className="nhsuk-header__navigation-link"
           to="/formr-a"
         >
-          Form R-a
+          Form R (Part A)
         </NavLink>
       </li>
 
@@ -46,7 +46,7 @@ const Navbar = (props: navProps) => {
           className="nhsuk-header__navigation-link"
           to="/formr-b"
         >
-          Form R-b
+          Form R (Part B)
         </NavLink>
       </li>
 
