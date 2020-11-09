@@ -293,7 +293,7 @@ class Create extends React.PureComponent<CreateProps> {
                 <TextInputField
                   label="Full Time or % of Full Time Training"
                   name="wholeTimeEquivalent"
-                  placeholder="e.g. 0.1 for 10%; 0.25 for 25% etc. or 1 for Full Time"
+                  placeholder="e.g. 0.1 for 10%, 0.25 for 25% etc."
                 />
               </Panel>
 

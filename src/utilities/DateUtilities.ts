@@ -66,7 +66,7 @@ export class DateUtilities {
   public static IsPastDate(value: Date | string | null | undefined): boolean {
     if (value) {
       const momentDate = moment(value, moment.ISO_8601);
-      return momentDate.isValid() && moment().diff(momentDate, "years") >= 1;
+      return momentDate.isValid() && moment().diff(momentDate, "days") >= 1;
     }
     return false;
   }

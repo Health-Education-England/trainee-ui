@@ -102,7 +102,14 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
 
               {BooleanUtilities.ToBoolean(values.havePreviousDeclarations) ? (
                 <>
-                  <Panel label="Declarations">
+                  <Panel label="Resolved Declarations">
+                    <p>
+                      If any <strong>previously declared</strong> significant
+                      events, complaints, or other investigations have been{" "}
+                      <strong>RESOLVED</strong> since your last
+                      ARCP/RITA/Appraisal, you are required to have written a
+                      reflection on these in your Portfolio.
+                    </p>
                     <FieldArray
                       name="previousDeclarations"
                       render={p => (
@@ -145,12 +152,12 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
                         <span>
                           If any <strong>previously declared</strong>{" "}
                           Significant Events, Complaints, Other investigations
-                          remain unresolved, please provide a brief summary
-                          below, including where you were working, the date of
-                          the event, and your reflection where appropriate. If
-                          known, please identify what investigations are pending
-                          relating to the event and which organisation is
-                          undertaking the investigation.
+                          remain <strong>UNRESOLVED</strong>, please provide a
+                          brief summary below, including where you were working,
+                          the date of the event, and your reflection where
+                          appropriate. If known, please identify what
+                          investigations are pending relating to the event and
+                          which organisation is undertaking the investigation.
                         </span>
                       }
                     />

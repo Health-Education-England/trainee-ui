@@ -1,6 +1,13 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import ScrollTo from "../../ScrollTo";
-import { Fieldset, Panel, Label, WarningCallout } from "nhsuk-react-components";
+import {
+  Fieldset,
+  Panel,
+  Label,
+  WarningCallout,
+  ErrorSummary,
+  ErrorMessage
+} from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
@@ -60,7 +67,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
           nextSection(values);
         }}
       >
-        {({ values, handleSubmit, setFieldValue }) => (
+        {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
             <ScrollTo />
             <Fieldset
@@ -349,6 +356,15 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                 </div>
               ) : null}
             </Fieldset>
+            {[...Object.values(errors)].length > 0 ? (
+              <ErrorSummary
+                aria-labelledby="errorSummaryTitle"
+                role="alert"
+                tabIndex={-1}
+              >
+                <ErrorMessage>Please check highlighted fields</ErrorMessage>
+              </ErrorSummary>
+            ) : null}
 
             <FormRPartBPagination
               values={values}

@@ -195,7 +195,7 @@ class View extends React.PureComponent<ViewProps> {
                 ))
               : null}
           </Panel>
-          <Panel label="Reasons for TIME OUT OF TRAINING (‘TOOT’)">
+          <Panel label="Reasons for TIME OUT OF TRAINING (TOOT)">
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>
