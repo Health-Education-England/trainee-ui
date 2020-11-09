@@ -78,6 +78,12 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
                     These should be added in <b>Section 5</b> (New Declarations
                     since your previous Form R Part B).
                   </p>
+                  <p>
+                    <strong>
+                      REMINDER: DO NOT INCLUDE ANY PATIENT-IDENTIFIABLE
+                      INFORMATION ON THIS FORM
+                    </strong>
+                  </p>
                 </div>
               </WarningCallout>
 

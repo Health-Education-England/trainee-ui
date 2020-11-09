@@ -59,7 +59,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                 size="l"
                 data-cy="legendFieldset5"
               >
-                Section 5: Declarations since your previous Form R Part B
+                Section 5: New declarations since your previous Form R Part B
               </Fieldset.Legend>
               <WarningCallout label="Important" data-cy="mainWarning5">
                 <div>
@@ -105,7 +105,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                 </div>
               </WarningCallout>
 
-              <Panel label="Current Declarations" data-cy="declarations5">
+              <Panel label="New Declarations" data-cy="declarations5">
                 <MultiChoiceInputField
                   label="Do you have any new Significant Events, Complaints, Other investigations since your previous ARCP/RITA/Appraisal?"
                   id="haveCurrentDeclarations"
