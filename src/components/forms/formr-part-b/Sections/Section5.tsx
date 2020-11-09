@@ -59,7 +59,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                 size="l"
                 data-cy="legendFieldset5"
               >
-                Section 5: Declarations since your previous Form R Part B
+                Section 5: New declarations since your previous Form R Part B
               </Fieldset.Legend>
               <WarningCallout label="Important" data-cy="mainWarning5">
                 <div>
@@ -96,10 +96,16 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                     that you feel the ARCP panel or Responsible Officer should
                     be made aware of. Use non-identifiable patient data only.
                   </p>
+                  <p>
+                    <strong>
+                      REMINDER: DO NOT INCLUDE ANY PATIENT-IDENTIFIABLE
+                      INFORMATION ON THIS FORM
+                    </strong>
+                  </p>
                 </div>
               </WarningCallout>
 
-              <Panel label="Current Declarations" data-cy="declarations5">
+              <Panel label="New Declarations" data-cy="declarations5">
                 <MultiChoiceInputField
                   label="Do you have any new Significant Events, Complaints, Other investigations since your previous ARCP/RITA/Appraisal?"
                   id="haveCurrentDeclarations"
@@ -120,7 +126,14 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
 
               {BooleanUtilities.ToBoolean(values.haveCurrentDeclarations) ? (
                 <>
-                  <Panel label="Declarations">
+                  <Panel label="Resolved Declarations">
+                    <p>
+                      If you know of any <strong>RESOLVED</strong> significant
+                      events/complaints/other investigations since your last
+                      ARCP/RITA/Appraisal, you are required to have written a
+                      reflection on these in your Portfolio. Please identify
+                      where in your Portfolio the reflection(s) can be found.
+                    </p>
                     <FieldArray
                       name="currentDeclarations"
                       render={c => (
@@ -150,7 +163,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
                     ></FieldArray>
                   </Panel>
                   <Panel
-                    label="Summary of current unresolved declarations"
+                    label="Summary of new unresolved declarations"
                     data-cy="currentDeclarationSummary"
                   >
                     <TextInputField

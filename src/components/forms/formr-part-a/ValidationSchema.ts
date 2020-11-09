@@ -53,7 +53,7 @@ export const ValidationSchema = yup.object({
     phoneRegex,
     "Contact Telephone - requires a valid number"
   ),
-  mobileNumber: StringValidationSchema("Contact Mobile)").matches(
+  mobileNumber: StringValidationSchema("Contact Mobile").matches(
     mobileRegex,
     "Contact Mobile - requires a valid number"
   ),
@@ -92,7 +92,7 @@ export const ValidationSchema = yup.object({
   programmeMembershipType: StringValidationSchema("Post type or Appointment"),
   wholeTimeEquivalent: yup
     .string()
-    .required("Programme Full Time Equivalent in Training is required")
+    .required("Full Time or % of Full Time Training is required")
     .test(
       "wholeTimeEquivalent",
       "Programme Full Time Equivalent in Training needs to be a number less than or equal to 1 and greater than zero (a maximum of 2 decimal places)",

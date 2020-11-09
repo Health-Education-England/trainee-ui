@@ -72,7 +72,9 @@ export function ProfileToFormRPartBInitialValues(
     covidDeclarationDto: null,
     lifecycleState: LifeCycleState.New,
     submissionDate: null,
-    lastModifiedDate: null
+    lastModifiedDate: null,
+    isDeclarationAccepted: false,
+    isConsentAccepted: false
   };
   return model;
 }

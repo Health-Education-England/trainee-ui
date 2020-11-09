@@ -13,8 +13,6 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
     return <div>Failed to load data.</div>;
   }
 
-  const fullName = `${personalDetails.title}. ${personalDetails.forenames} ${personalDetails.surname}`;
-
   const personalData: KeyValue[] = [
     { label: "Maiden name", value: personalDetails.maidenName },
     { label: "Known As", value: personalDetails.knownAs },
@@ -47,7 +45,11 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
         <SummaryList>
           <SummaryList.Row>
             <SummaryList.Key>Fullname</SummaryList.Key>
-            <SummaryList.Value>{fullName}</SummaryList.Value>
+            <SummaryList.Value>
+              {personalDetails.title && `${personalDetails.title} `}
+              {personalDetails.forenames && `${personalDetails.forenames} `}
+              {personalDetails.surname}
+            </SummaryList.Value>
           </SummaryList.Row>
           {personalData.map(pd => (
             <SummaryList.Row key={pd.label}>

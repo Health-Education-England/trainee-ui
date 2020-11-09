@@ -34,6 +34,8 @@ export interface FormRPartB extends IFormR {
   compliments: string;
   haveCovidDeclarations: boolean | string;
   covidDeclarationDto: CovidDeclaration | null;
+  isDeclarationAccepted?: boolean;
+  isConsentAccepted?: boolean;
 }
 
 export interface Declaration {
