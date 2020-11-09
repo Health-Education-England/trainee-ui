@@ -48,7 +48,9 @@ const formrPartB: FormRPartB = {
   covidDeclarationDto: null,
   lifecycleState: LifeCycleState.New,
   submissionDate: null,
-  lastModifiedDate: null
+  lastModifiedDate: null,
+  isDeclarationAccepted: false,
+  isConsentAccepted: false
 };
 
 describe("ProfileToFormRPartBInitialValues", () => {
