@@ -91,44 +91,69 @@ export const CreateList = (
       }
     };
 
-    render() {
+    renderEditFormButton = () => {
       const { forms } = this.props;
       const draftForm = forms.filter(
         form => form.lifecycleState === LifeCycleState.Draft
       );
 
-      const submittedForms = forms.filter(
-        form => form.lifecycleState === LifeCycleState.Submitted
+      const unsubmittedForm = forms.filter(
+        form => form.lifecycleState === LifeCycleState.Unsubmitted
       );
+
+      if (unsubmittedForm.length === 1) {
+        return (
+          <Button
+            id="btnOpenForm"
+            data-cy="btnEditUnsubmittedForm"
+            reverse
+            type="submit"
+            onClick={() => this.loadSavedForm(unsubmittedForm[0].id)}
+          >
+            Edit unsubmitted form
+          </Button>
+        );
+      }
+
+      if (draftForm.length === 1) {
+        return (
+          <Button
+            id="btnOpenForm"
+            data-cy="btnEditSavedForm"
+            reverse
+            type="submit"
+            onClick={() => this.loadSavedForm(draftForm[0].id)}
+          >
+            Edit saved form
+          </Button>
+        );
+      }
 
       if (draftForm.length > 1) {
         return <Loading />;
       }
+      return (
+        <Button
+          id="btnOpenForm"
+          data-cy="btnSubmitNewForm"
+          reverse
+          type="submit"
+          onClick={this.handleNewFormClick}
+        >
+          Submit new form
+        </Button>
+      );
+    };
 
+    render() {
+      const { forms } = this.props;
+      const submittedForms = forms.filter(
+        form => form.lifecycleState === LifeCycleState.Submitted
+      );
       return (
         <div>
           <ScrollTo />
-          {draftForm.length === 1 ? (
-            <Button
-              id="btnOpenForm"
-              data-cy="btnEditSavedForm"
-              reverse
-              type="submit"
-              onClick={() => this.loadSavedForm(draftForm[0].id)}
-            >
-              Edit saved form
-            </Button>
-          ) : (
-            <Button
-              id="btnOpenForm"
-              data-cy="btnSubmitNewForm"
-              reverse
-              type="submit"
-              onClick={this.handleNewFormClick}
-            >
-              Submit new form
-            </Button>
-          )}
+          {this.renderEditFormButton()}
           {submittedForms.length > 0 ? (
             <Table>
               <Table.Head>
