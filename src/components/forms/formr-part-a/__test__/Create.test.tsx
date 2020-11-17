@@ -32,7 +32,7 @@ const createStore = (form: FormRPartA | null) =>
     }
   });
 
-const getComponent = (form: FormRPartA | null, history: any = []) => (
+const getComponent = (form: FormRPartA | null) => (
   <Provider store={createStore(form)}>
     <BrowserRouter>
       <Create history={history} location={location} />
