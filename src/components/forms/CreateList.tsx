@@ -11,6 +11,7 @@ import Loading from "../common/Loading";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { loadFormSwitches } from "../../redux/actions/formr-partb-actions";
 import ScrollTo from "./ScrollTo";
+
 export const CreateList = (
   loadFormList: (
     formService: FormsService
@@ -28,6 +29,7 @@ export const CreateList = (
   rootPath: string
 ) => {
   interface ListProps {
+    isLoading: boolean;
     forms: IFormR[];
     history: any;
     loadFormList: (service: FormsService) => Promise<void>;
@@ -42,6 +44,10 @@ export const CreateList = (
   const formsService = new FormsService();
 
   const mapStateToProps = (state: RootState) => ({
+    isLoading:
+      rootPath === "formr-a"
+        ? state.formRPartAList.isLoading
+        : state.formRPartBList.isLoading,
     forms:
       rootPath === "formr-a"
         ? state.formRPartAList.submittedForms
@@ -153,34 +159,45 @@ export const CreateList = (
       return (
         <div>
           <ScrollTo />
-          {this.renderEditFormButton()}
-          {submittedForms.length > 0 ? (
-            <Table>
-              <Table.Head>
-                <Table.Row>
-                  <td>
-                    <b>Submitted forms</b>
-                  </td>
-                </Table.Row>
-              </Table.Head>
-              <Table.Body>
-                {submittedForms.map((formData: IFormR, index: number) => (
-                  <Table.Row key={formData.id} className={styles.listTableRow}>
-                    <td>
-                      <ActionLink
-                        onClick={() => this.handleRowClick(formData.id)}
-                        data-cy="submittedForm"
-                      >
-                        form submitted on{" "}
-                        {DateUtilities.ToLocalDate(formData.submissionDate)}
-                      </ActionLink>
-                    </td>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
+
+          {this.props.isLoading ? (
+            <Loading />
           ) : (
-            <LedeText>No forms submitted yet.</LedeText>
+            <div>
+              {this.renderEditFormButton()}
+
+              {submittedForms.length > 0 ? (
+                <Table>
+                  <Table.Head>
+                    <Table.Row>
+                      <td>
+                        <b>Submitted forms</b>
+                      </td>
+                    </Table.Row>
+                  </Table.Head>
+                  <Table.Body>
+                    {submittedForms.map((formData: IFormR, index: number) => (
+                      <Table.Row
+                        key={formData.id}
+                        className={styles.listTableRow}
+                      >
+                        <td>
+                          <ActionLink
+                            onClick={() => this.handleRowClick(formData.id)}
+                            data-cy="submittedForm"
+                          >
+                            form submitted on{" "}
+                            {DateUtilities.ToLocalDate(formData.submissionDate)}
+                          </ActionLink>
+                        </td>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+              ) : (
+                <LedeText>No forms submitted yet.</LedeText>
+              )}
+            </div>
           )}
         </div>
       );

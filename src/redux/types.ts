@@ -37,10 +37,12 @@ export interface FormRPartAState {
 
 export interface FormRPartAListState {
   submittedForms: FormRPartA[];
+  isLoading: boolean;
 }
 
 export interface FormRPartBListState {
   submittedForms: FormRPartB[];
+  isLoading: boolean;
 }
 
 export interface FormSwitchesState {

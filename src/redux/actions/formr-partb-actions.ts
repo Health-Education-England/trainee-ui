@@ -1,6 +1,7 @@
 import { ActionType } from "../types";
 import {
   LOAD_FORMR_PARTB,
+  LOADING_FORMR_PARTB_LIST,
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
   INITIALIZE_FORMR_PARTB_FAILURE,
@@ -18,6 +19,7 @@ import { ProfileToFormRPartBInitialValues } from "../../models/ProfileToFormRPar
 export const loadFormRPartBList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
+  dispatch({ type: LOADING_FORMR_PARTB_LIST, payload: true });
   return formService
     .getTraineeFormRPartBList()
     .then(response => {

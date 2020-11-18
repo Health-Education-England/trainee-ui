@@ -5,6 +5,7 @@ import {
   FormSwitchesState
 } from "../types";
 import {
+  LOADING_FORMR_PARTB_LIST,
   LOAD_FORMR_PARTB_LIST_SUCCESS,
   LOAD_FORMR_PARTB_LIST_FAILURE,
   INITIALIZE_FORMR_PARTB_FAILURE,
@@ -16,23 +17,31 @@ import {
   LOAD_FORM_SWITCHES_FAILURE
 } from "../action_types";
 
-const formRPartAListState: FormRPartBListState = {
-  submittedForms: []
+const formRPartBListState: FormRPartBListState = {
+  submittedForms: [],
+  isLoading: false
 };
 
 export function FormRPartBListReducer(
-  state = formRPartAListState,
+  state = formRPartBListState,
   action: ActionType
 ): FormRPartBListState {
   switch (action.type) {
+    case LOADING_FORMR_PARTB_LIST:
+      return {
+        ...state,
+        isLoading: true
+      };
     case LOAD_FORMR_PARTB_LIST_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         submittedForms: action.payload
       };
     case LOAD_FORMR_PARTB_LIST_FAILURE:
       return {
         ...state,
+        isLoading: false,
         submittedForms: []
       };
     default:
