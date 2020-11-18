@@ -14,7 +14,8 @@ describe("List", () => {
   const mountComponent = (forms: FormRPartB[], history: any) => {
     const store = mockStore({
       formRPartBList: {
-        submittedForms: forms
+        submittedForms: forms,
+        isLoading: false
       }
     });
 

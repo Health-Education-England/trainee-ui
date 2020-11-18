@@ -52,8 +52,10 @@ class Confirm extends React.PureComponent<ConfirmProps> {
   };
 
   saveDraft(formData: FormRPartA) {
-    formData.submissionDate = null;
-    formData.lifecycleState = LifeCycleState.Draft;
+    if (formData.lifecycleState !== LifeCycleState.Unsubmitted) {
+      formData.submissionDate = null;
+      formData.lifecycleState = LifeCycleState.Draft;
+    }
 
     this.saveForm(formData);
   }

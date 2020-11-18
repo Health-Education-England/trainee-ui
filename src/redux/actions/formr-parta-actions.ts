@@ -4,7 +4,8 @@ import {
   LOAD_FORMR_PARTA_LIST_FAILURE,
   UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_FAILURE,
-  LOAD_FORMR_PARTA_SUCCESS
+  LOAD_FORMR_PARTA_SUCCESS,
+  LOADING_FORMR_PARTA_LIST
 } from "../action_types";
 import { FormRPartA } from "../../models/FormRPartA";
 import { FormsService } from "../../services/FormsService";
@@ -14,6 +15,7 @@ import { ProfileToFormRPartAInitialValues } from "../../models/ProfileToFormRPar
 export const loadFormRPartAList = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
+  dispatch({ type: LOADING_FORMR_PARTA_LIST, payload: true });
   return formService
     .getTraineeFormRPartAList()
     .then(response => {

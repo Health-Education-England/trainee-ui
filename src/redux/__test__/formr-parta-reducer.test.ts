@@ -40,7 +40,8 @@ describe("Load form-r part-a reducer", () => {
 
 describe("Load form-r part-a list reducer", () => {
   const initialState: FormRPartAListState = {
-    submittedForms: []
+    submittedForms: [],
+    isLoading: false
   };
 
   it("should return initial state when no action passed", () => {

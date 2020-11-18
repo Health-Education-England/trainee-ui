@@ -3,7 +3,8 @@ import {
   LOAD_FORMR_PARTA_LIST_FAILURE,
   UPDATE_FORMR_PARTA,
   LOAD_FORMR_PARTA_SUCCESS,
-  LOAD_FORMR_PARTA_FAILURE
+  LOAD_FORMR_PARTA_FAILURE,
+  LOADING_FORMR_PARTA_LIST
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
@@ -54,6 +55,7 @@ describe("loadFormRPartAList method", () => {
       .mockReturnValue(successResponse);
 
     const expectedActions = [
+      { type: LOADING_FORMR_PARTA_LIST, payload: true },
       {
         type: LOAD_FORMR_PARTA_LIST_SUCCESS,
         payload: responsedata
@@ -81,6 +83,7 @@ describe("loadFormRPartAList method", () => {
       .mockReturnValue(Promise.reject(errorResponse));
 
     const expectedActions = [
+      { type: LOADING_FORMR_PARTA_LIST, payload: true },
       {
         type: LOAD_FORMR_PARTA_LIST_FAILURE,
         payload: errorResponse

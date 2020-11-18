@@ -1,6 +1,7 @@
 import { ActionType, FormRPartAState, FormRPartAListState } from "../types";
 import {
   UPDATE_FORMR_PARTA,
+  LOADING_FORMR_PARTA_LIST,
   LOAD_FORMR_PARTA_LIST_SUCCESS,
   LOAD_FORMR_PARTA_LIST_FAILURE,
   LOAD_FORMR_PARTA_SUCCESS,
@@ -33,7 +34,8 @@ export function FormRPartAReducer(
 }
 
 const formRPartAListState: FormRPartAListState = {
-  submittedForms: []
+  submittedForms: [],
+  isLoading: false
 };
 
 export function FormRPartAListReducer(
@@ -41,14 +43,21 @@ export function FormRPartAListReducer(
   action: ActionType
 ): FormRPartAListState {
   switch (action.type) {
+    case LOADING_FORMR_PARTA_LIST:
+      return {
+        ...state,
+        isLoading: true
+      };
     case LOAD_FORMR_PARTA_LIST_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         submittedForms: action.payload
       };
     case LOAD_FORMR_PARTA_LIST_FAILURE:
       return {
         ...state,
+        isLoading: false,
         submittedForms: []
       };
     default:

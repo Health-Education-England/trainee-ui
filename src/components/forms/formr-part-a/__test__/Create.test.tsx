@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { FormRPartA } from "../../../../models/FormRPartA";
 import { submittedFormRPartAs } from "../../../../mock-data/submitted-formr-parta";
 import { BrowserRouter, Redirect } from "react-router-dom";
+import { act } from "react-test-renderer";
 
 const history: any[] = [];
 const location: any[] = [];
@@ -90,5 +91,13 @@ describe("Create", () => {
     } catch (e) {
       //expect(true).toBe(false);
     }
+  });
+
+  it("should invoke saveTraineeFormRPartA with form data when submit button clicked", () => {
+    const wrapper = mount(getComponent(submittedFormRPartAs[0]));
+    const saveButton = wrapper.find("[data-cy='BtnSaveDraft']").last();
+    act(() => {
+      saveButton.simulate("click");
+    });
   });
 });

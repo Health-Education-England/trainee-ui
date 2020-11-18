@@ -28,12 +28,7 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
         initialValues={formData}
         validationSchema={Section7ValidationSchema}
         onSubmit={values => {
-          const {
-            isDeclarationAccepted,
-            isConsentAccepted,
-            ...newValues
-          } = values;
-          nextSection(newValues);
+          nextSection(values);
           history.push("/formr-b/confirm");
         }}
       >
