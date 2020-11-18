@@ -7,7 +7,8 @@ import {
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
   LOAD_FORM_SWITCHES_SUCCESS,
-  LOAD_FORM_SWITCHES_FAILURE
+  LOAD_FORM_SWITCHES_FAILURE,
+  LOADING_FORMR_PARTB_LIST
 } from "../action_types";
 import thunk from "redux-thunk";
 import configureMockStore from "redux-mock-store";
@@ -60,6 +61,7 @@ describe("loadFormRPartBList method", () => {
       .mockReturnValue(successResponse);
 
     const expectedActions = [
+      { type: LOADING_FORMR_PARTB_LIST, payload: true },
       {
         type: LOAD_FORMR_PARTB_LIST_SUCCESS,
         payload: responsedata
@@ -85,6 +87,7 @@ describe("loadFormRPartBList method", () => {
       .mockReturnValue(Promise.reject(errorResponse));
 
     const expectedActions = [
+      { type: LOADING_FORMR_PARTB_LIST, payload: true },
       {
         type: LOAD_FORMR_PARTB_LIST_FAILURE,
         payload: errorResponse

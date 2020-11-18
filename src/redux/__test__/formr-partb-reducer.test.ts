@@ -75,7 +75,8 @@ const formSwitches: FormSwitch[] = [{ id: "1", name: "COVID", enabled: false }];
 
 describe("FormRPartBListReducer", () => {
   const initialState: FormRPartBListState = {
-    submittedForms: []
+    submittedForms: [],
+    isLoading: false
   };
 
   it("should return initial state when no action passed", () => {
