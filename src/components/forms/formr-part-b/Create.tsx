@@ -77,8 +77,11 @@ class Create extends React.PureComponent<
   };
 
   saveDraft = (formData: FormRPartB) => {
-    formData.submissionDate = null;
-    formData.lifecycleState = LifeCycleState.Draft;
+    if (formData.lifecycleState !== LifeCycleState.Unsubmitted) {
+      formData.submissionDate = null;
+      formData.lifecycleState = LifeCycleState.Draft;
+    }
+    formData.lastModifiedDate = new Date();
 
     this.props
       .saveForm(formsService, formData)
