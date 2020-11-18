@@ -300,7 +300,7 @@ describe("Form R (Part A)", () => {
         }
       });
 
-    //submitting / editing the form
+    // submitting / editing the form
     cy.get("[data-cy=BtnContinue]").click();
     cy.get(".nhsuk-warning-callout").should("be.visible");
 
@@ -314,31 +314,63 @@ describe("Form R (Part A)", () => {
     cy.get("[data-cy=BtnSubmit]").should("not.be.visible");
     cy.contains("Edit").should("not.be.visible");
     cy.get("[data-cy=BtnContinue]").should("be.visible");
+
     cy.get("#wholeTimeEquivalent").clear().type("1").should("have.value", "1");
 
-    // Save and exit
-
+    // Save draft
     cy.get("[data-cy=BtnSaveDraft]").click();
     cy.get("[data-cy=btnEditSavedForm]").should("be.visible").click();
     cy.checkFormRAValues(dateAttained, completionDate, startDate, "1");
 
     cy.get("[data-cy=BtnContinue]").click();
     cy.get(".nhsuk-warning-callout").scrollIntoView().should("be.visible");
+
+    // set up route to intercept formr-parta PUT req
+    let uid: string;
+
+    cy.server();
+    cy.route({
+      method: "PUT",
+      url: "/api/forms/formr-parta"
+    }).as("postFormA");
+
+    // set up route to intercept formr-partas get req
+    let formrasArray: string[];
+
+    cy.server();
+    cy.route({
+      method: "GET",
+      url: "/api/forms/formr-partas"
+    }).as("getFormrPartAs");
+
+    // submit form
     cy.get("[data-cy=BtnSubmit]").scrollIntoView().should("be.visible").click();
-
-    //--Go to list of submitted/ saved forms (Form Part A)
     cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
-
     cy.contains("Submitted forms").should("be.visible");
-    // Open the form just saved
-    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
+
+    cy.wait("@postFormA").then(xhr => {
+      const body = xhr.request.body;
+      uid = Object.values(body)[0];
+    });
+
+    cy.wait("@getFormrPartAs").then(xhr => {
+      const body = xhr.responseBody;
+      formrasArray = Object.values(body);
+      formrasArray.forEach((row, index) => {
+        if (row["id"] === uid) {
+          // Open the form just saved
+          cy.get("[data-cy=submittedForm]").eq(index).click();
+        }
+      });
+    });
+
+    // check contents of last submitted form
     cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
     cy.get("[data-cy=localOfficeName]").should(
       "have.text",
       "Health Education England Wessex"
     );
     // Navigate back to the list
-
     cy.get(".nhsuk-back-link__link").should("be.visible").click();
     cy.contains("Submitted forms").should("be.visible");
     cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
