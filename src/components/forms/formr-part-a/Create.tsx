@@ -224,8 +224,13 @@ class Create extends React.PureComponent<CreateProps> {
                 <TextInputField
                   label="Contact Telephone"
                   name="telephoneNumber"
+                  hint="Spaces are allowed between the numbers (e.g. 0xxx xxx xxxx, +447xxx xxx xxx) but no dashes or brackets please."
                 />
-                <TextInputField label="Contact Mobile" name="mobileNumber" />
+                <TextInputField
+                  label="Contact Mobile"
+                  name="mobileNumber"
+                  hint="Spaces are allowed between the numbers (e.g. 07xxx xx xx xx, +447xxx xxx xxx) but no dashes or brackets please."
+                />
                 <TextInputField label="Email Address" name="email" />
               </Panel>
 
