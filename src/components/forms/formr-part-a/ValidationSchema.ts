@@ -1,12 +1,12 @@
 import * as yup from "yup";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { StringValidationSchema } from "../StringValidationSchema";
-import { CCT_DECLARATION } from "../../../utilities/Constants";
-
-const phoneRegex = /^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$/g;
-const mobileRegex = /((\+44(\s\(0\)\s|\s0\s|\s)?)|0)7\d{3}(\s)?\d{6}/g;
-const postcodeRegex = /[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i;
-const wholeTimeEquivalentRegex = /^((0\.[1-9]{1})?|(0\.([0-9]{1}[1-9]{1}|[1-9]{1}[0-9]{1}))|1(\.0{1,2})?)$/;
+import {
+  CCT_DECLARATION,
+  CHECK_PHONE_REGEX,
+  CHECK_POSTCODE_REGEX,
+  CHECK_WHOLE_TIME_EQUIVALENT_REGEX
+} from "../../../utilities/Constants";
 
 const dateValidationSchema = (fieldName: string) =>
   yup.date().required(`${fieldName} is required`);
@@ -46,16 +46,16 @@ export const ValidationSchema = yup.object({
   address2: StringValidationSchema("Address Line 2"),
 
   postCode: StringValidationSchema("Postcode", 8).matches(
-    postcodeRegex,
+    CHECK_POSTCODE_REGEX,
     "Please enter a valid postcode"
   ),
   telephoneNumber: StringValidationSchema("Contact Telephone").matches(
-    phoneRegex,
-    "Contact Telephone - requires a valid number"
+    CHECK_PHONE_REGEX,
+    "Contact Telephone - please provide a valid number with prefix (e.g. 0, +44, or 44), at least 10 digits (including area code), a maximum of 15 digits (to allow for your country code), with no dashes or brackets."
   ),
   mobileNumber: StringValidationSchema("Contact Mobile").matches(
-    mobileRegex,
-    "Contact Mobile - requires a valid number"
+    CHECK_PHONE_REGEX,
+    "Contact Mobile - please provide a valid number with prefix (e.g. 0, +44, or 44), at least 10 digits (including area code), a maximum of 15 digits (to allow for your country code), with no dashes or brackets."
   ),
   email: yup
     .string()
@@ -96,7 +96,7 @@ export const ValidationSchema = yup.object({
     .test(
       "wholeTimeEquivalent",
       "Programme Full Time Equivalent in Training needs to be a number less than or equal to 1 and greater than zero (a maximum of 2 decimal places)",
-      value => (value ? wholeTimeEquivalentRegex.test(value) : false)
+      value => (value ? CHECK_WHOLE_TIME_EQUIVALENT_REGEX.test(value) : false)
     )
     .nullable()
 });

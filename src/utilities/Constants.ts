@@ -36,3 +36,9 @@ export const NEED_DISCUSSION_WITH_SOMEONE =
   "I have concerns with my training and / or wellbeing at the moment and would like to discuss with someone";
 
 export const IMMIGRATION_STATUS_OTHER_TISIDS = ["12", "13"];
+
+export const CHECK_PHONE_REGEX = /^\+?(?:\d\s?){10,15}$/;
+
+export const CHECK_POSTCODE_REGEX = /[A-Z]{1,2}[0-9]{1,2}[A-Z]?\s?[0-9][A-Z]{2}/i;
+
+export const CHECK_WHOLE_TIME_EQUIVALENT_REGEX = /^((0\.[1-9]{1})?|(0\.([0-9]{1}[1-9]{1}|[1-9]{1}[0-9]{1}))|1(\.0{1,2})?)$/;
