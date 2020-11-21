@@ -17,18 +17,18 @@ describe("Desktop/ tablet header", () => {
 
       cy.get(".nhsuk-header__navigation-link")
         .should("be.visible")
-        .should("contain.text", "Profile");
+        .contains(/Profile/);
       cy.get(".nhsuk-header__navigation-link")
         .should("be.visible")
-        .should("contain.text", "Form R-a");
+        .contains(/Part A/);
       cy.get(".nhsuk-header__navigation-link")
         .should("be.visible")
-        .should("contain.text", "Form R-b");
+        .contains(/Part B/);
       cy.get(".nhsuk-header__navigation-link")
         .should("be.visible")
-        .should("contain.text", "Logout");
+        .contains(/Logout/);
 
-      cy.contains("Form R-a").should("be.visible").click();
+      cy.contains("Form R (Part A)").should("be.visible").click();
       cy.location("pathname", { timeout: 10000 }).should("include", "/formr-a");
     });
   });

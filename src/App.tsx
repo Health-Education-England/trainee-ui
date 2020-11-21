@@ -97,7 +97,6 @@ class App extends React.PureComponent<AppProps, AppState> {
         ) : (
           <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
         )}
-        ;
         <HEEFooter appVersion={appVersion} />
         <CookieConsent
           disableStyles={true}
