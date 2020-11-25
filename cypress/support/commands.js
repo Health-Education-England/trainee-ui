@@ -28,30 +28,18 @@
 Cypress.Commands.add(
   "checkFormRAValues",
   (dateAttained, completionDate, startDate, wholeTimeEquivalent) => {
-    cy.get("#forename")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
-    cy.get("#surname")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
-    cy.get("#gmcNumber")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
+    cy.get("#forename").should("exist").invoke("val").should("not.be.empty");
+    cy.get("#surname").should("exist").invoke("val").should("not.be.empty");
+    cy.get("#gmcNumber").should("exist").invoke("val").should("not.be.empty");
     cy.get("[data-cy=localOfficeName]")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "Health Education England Wessex");
-    cy.get("#dateOfBirth")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
+    cy.get("#dateOfBirth").should("exist").invoke("val").should("not.be.empty");
 
-    cy.get("#gender").should("be.visible").should("have.value", "Male");
+    cy.get("#gender").should("exist").should("have.value", "Male");
     //Test for 'Other' immigration status
     cy.get("#immigrationStatus")
-      .should("be.visible")
+      .should("exist")
       .select(
         "Other immigration categories i.e. overseas government employees, innovators etc."
       )
@@ -60,108 +48,94 @@ Cypress.Commands.add(
         "Other immigration categories i.e. overseas government employees, innovators etc."
       );
     cy.get("#otherImmigrationStatus")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "My special status");
     cy.get("#qualification")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
-    cy.get("#dateAttained")
-      .should("be.visible")
-      .should("have.value", dateAttained);
+    cy.get("#dateAttained").should("exist").should("have.value", dateAttained);
     cy.get("#medicalSchool")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "University of Medical Things");
-    cy.get("#address1")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
-    cy.get("#address2")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
-    cy.get("#address3")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
+    cy.get("#address1").should("exist").invoke("val").should("not.be.empty");
+    cy.get("#address2").should("exist").invoke("val").should("not.be.empty");
+    cy.get("#address3").should("exist").invoke("val").should("not.be.empty");
 
-    cy.get("#postCode")
-      .should("be.visible")
-      .invoke("val")
-      .should("not.be.empty");
+    cy.get("#postCode").should("exist").invoke("val").should("not.be.empty");
     cy.get("#telephoneNumber")
-      .should("be.visible")
+      .should("exist")
       .invoke("val")
       .should("not.be.empty");
     cy.get("#mobileNumber")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "0777777777777");
     cy.get("#email")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "traineeui.tester@hee.nhs.uk");
 
     cy.get("[data-cy=declarationType0]").should("be.checked");
 
     cy.get("#programmeSpecialty")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
     cy.get("#cctSpecialty1")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
     cy.get("#cctSpecialty2")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
     cy.get("#college")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
     cy.get("#completionDate")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", completionDate);
 
     cy.get("#trainingGrade")
-      .should("be.visible")
+      .should("exist")
       .should("not.have.value", "--Please select--");
 
-    cy.get("#startDate").should("be.visible").should("have.value", startDate);
+    cy.get("#startDate").should("exist").should("have.value", startDate);
     cy.get("#programmeMembershipType")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", "LAT");
 
     cy.get("#wholeTimeEquivalent")
-      .should("be.visible")
+      .should("exist")
       .should("have.value", wholeTimeEquivalent);
   }
 );
 
 // ### SECTION 1: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
-  cy.contains("Section 1: Doctor's details").should("be.visible");
-  cy.get("[data-cy=mainWarning1]").should("be.visible");
-  cy.get("[data-cy=legendFieldset1]").should("be.visible");
-  cy.get(".nhsuk-warning-callout > p").should("be.visible");
+  cy.contains("Section 1: Doctor's details").should("exist");
+  cy.get("[data-cy=mainWarning1]").should("exist");
+  cy.get("[data-cy=legendFieldset1]").should("exist");
+  cy.get(".nhsuk-warning-callout > p").should("exist");
 
-  cy.get("#forename").should("be.visible").invoke("val");
+  cy.get("#forename").should("exist").invoke("val");
   cy.get("#forename").focus();
   cy.get("#forename").clear();
   cy.get("#forename").type("Fore name");
-  cy.get("#surname").should("be.visible").invoke("val");
+  cy.get("#surname").should("exist").invoke("val");
   cy.get("#surname").clear();
   cy.get("#surname").type("Last name");
 
-  cy.get("#gmcNumber").should("be.visible").invoke("val");
+  cy.get("#gmcNumber").should("exist").invoke("val");
   cy.get("#gmcNumber").clear();
   cy.get("#gmcNumber").type("11111111");
 
-  cy.get("#email").should("be.visible").invoke("val");
+  cy.get("#email").should("exist").invoke("val");
   cy.get("#email").clear();
   cy.get("#email").type("traineeui.tester@hee.nhs.uk");
 
   cy.get("[data-cy='localOfficeName']")
-    .should("be.visible")
+    .should("exist")
     .focus()
     .select("Health Education England Wessex");
   cy.get("#prevRevalBody > option")
@@ -172,8 +146,8 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
         .select(selectedItem)
         .should("not.have.value", "--Please select--");
     });
-  cy.get("#currRevalDate").should("be.visible").clear().type(currRevalDate);
-  cy.get("#prevRevalDate").should("be.visible").clear().type(prevRevalDate);
+  cy.get("#currRevalDate").should("exist").clear().type(currRevalDate);
+  cy.get("#prevRevalDate").should("exist").clear().type(prevRevalDate);
   cy.get("#programmeSpecialty > option")
     .eq(1)
     .then(element => {
@@ -196,11 +170,11 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
 Cypress.Commands.add("checkAndFillSection2", (workStartDate, endDate) => {
   // This command fills the section with default work panel only
 
-  cy.contains("Whole Scope of Practice").should("be.visible");
-  cy.get(".nhsuk-warning-callout > p").should("be.visible");
-  cy.contains("Type of work").should("be.visible");
-  cy.contains("Add more").should("be.visible");
-  cy.contains("TOOT").should("be.visible");
+  cy.contains("Whole Scope of Practice").should("exist");
+  cy.get(".nhsuk-warning-callout > p").should("exist");
+  cy.contains("Type of work").should("exist");
+  cy.contains("Add more").should("exist");
+  cy.contains("TOOT").should("exist");
 
   // Delete all other work panels except default work panel
   Cypress.$('[data-jest="removePanel"]').each(() =>
@@ -210,60 +184,57 @@ Cypress.Commands.add("checkAndFillSection2", (workStartDate, endDate) => {
   // Fill default work panel
   cy.get('[data-cy="work[0].trainingPost"]').select("Yes");
   cy.get('[data-cy="work[0].typeOfWork"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("In Post Doing Something");
   cy.get('[data-cy="work[0].startDate"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type(workStartDate);
 
-  cy.get(`[data-cy="work[0].endDate"]`)
-    .should("be.visible")
-    .clear()
-    .type(endDate);
-  cy.get(`[data-cy="work[0].site"]`).should("be.visible").clear().type("Site");
+  cy.get(`[data-cy="work[0].endDate"]`).should("exist").clear().type(endDate);
+  cy.get(`[data-cy="work[0].site"]`).should("exist").clear().type("Site");
   cy.get(`[data-cy="work[0].siteLocation"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("Location");
 
-  cy.get("#sicknessAbsence").should("be.visible").clear().type("1");
-  cy.get("#paidLeave").should("be.visible").clear().type("2");
-  cy.get("#parentalLeave").should("be.visible").clear().type("3");
-  cy.get("#careerBreaks").should("be.visible").clear().type("4");
-  cy.get("#unauthorisedLeave").should("be.visible").clear().type("5");
-  cy.get("#otherLeave").should("be.visible").clear().type("6");
+  cy.get("#sicknessAbsence").should("exist").clear().type("1");
+  cy.get("#paidLeave").should("exist").clear().type("2");
+  cy.get("#parentalLeave").should("exist").clear().type("3");
+  cy.get("#careerBreaks").should("exist").clear().type("4");
+  cy.get("#unauthorisedLeave").should("exist").clear().type("5");
+  cy.get("#otherLeave").should("exist").clear().type("6");
   cy.get("#totalLeave").should("have.value", "21");
 
-  cy.get("[data-cy=BtnAddWorkType]").should("be.visible");
+  cy.get("[data-cy=BtnAddWorkType]").should("exist");
 });
 
 // ### SECTION 3: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection3", () => {
   cy.get("[data-cy=legendFieldset3]").should("include.text", "Section 3");
-  cy.get("[data-cy=mainWarning3]").should("be.visible");
-  cy.get("[data-cy=declarations]").should("be.visible");
-  cy.get("[data-cy=healthStatement]").should("be.visible");
+  cy.get("[data-cy=mainWarning3]").should("exist");
+  cy.get("[data-cy=declarations]").should("exist");
+  cy.get("[data-cy=healthStatement]").should("exist");
 
   cy.get("[data-cy=isHonest0]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("true");
 
   cy.get("[data-cy=isHealthy0]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("true");
 
   cy.get("[data-cy=isWarned0]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("true");
 
-  cy.get("[data-cy=isComplying0]").should("be.visible").check("true");
+  cy.get("[data-cy=isComplying0]").should("exist").check("true");
   cy.get(".nhsuk-form-group > [data-cy=healthStatement]")
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("I'm in astonishingly excellent health.");
 });
@@ -271,40 +242,40 @@ Cypress.Commands.add("checkAndFillSection3", () => {
 // ### SECTION 4: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection4", pastDate => {
   cy.get("[data-cy=legendFieldset4]").should("include.text", "Section 4");
-  cy.get("[data-cy=mainWarning4]").should("be.visible");
-  cy.get("[data-cy=declarations4]").should("be.visible");
+  cy.get("[data-cy=mainWarning4]").should("exist");
+  cy.get("[data-cy=declarations4]").should("exist");
 
   cy.get("[data-cy=havePreviousDeclarations1]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("false");
 
-  cy.get("#declarationPanel0").should("not.be.visible");
+  cy.get("#declarationPanel0").should("not.exist");
 
   cy.get("[data-cy=havePreviousDeclarations0]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("true");
 
   // Fill declaration
-  cy.get("#declarationPanel0").should("be.visible");
+  cy.get("#declarationPanel0").should("exist");
 
   cy.get('[data-cy="previousDeclarations[0].declarationType"]')
-    .should("be.visible")
+    .should("exist")
     .select("Complaint");
 
   cy.get('[data-cy="previousDeclarations[0].dateOfEntry"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type(pastDate);
 
   cy.get('[data-cy="previousDeclarations[0].title"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("declaration title");
 
   cy.get('[data-cy="previousDeclarations[0].locationOfEntry"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("declaration location");
 });
@@ -312,40 +283,40 @@ Cypress.Commands.add("checkAndFillSection4", pastDate => {
 // ### SECTION 5: CHECK AND FILL
 Cypress.Commands.add("checkAndFillSection5", pastDate => {
   cy.get("[data-cy=legendFieldset5]").should("include.text", "Section 5");
-  cy.get("[data-cy=mainWarning5]").should("be.visible");
-  cy.get("[data-cy=declarations5]").should("be.visible");
+  cy.get("[data-cy=mainWarning5]").should("exist");
+  cy.get("[data-cy=declarations5]").should("exist");
 
   cy.get("[data-cy=haveCurrentDeclarations1]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("false");
 
-  cy.get("#declarationPanel0").should("not.be.visible");
+  cy.get("#declarationPanel0").should("not.exist");
 
   cy.get("[data-cy=haveCurrentDeclarations0]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .check("true");
 
   // Fill declaration
-  cy.get("#declarationPanel0").should("be.visible");
+  cy.get("#declarationPanel0").should("exist");
 
   cy.get('[data-cy="currentDeclarations[0].declarationType"]')
-    .should("be.visible")
+    .should("exist")
     .select("Complaint");
 
   cy.get('[data-cy="currentDeclarations[0].dateOfEntry"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type(pastDate);
 
   cy.get('[data-cy="currentDeclarations[0].title"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("declaration title");
 
   cy.get('[data-cy="currentDeclarations[0].locationOfEntry"]')
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("declaration location");
 });
@@ -355,7 +326,7 @@ Cypress.Commands.add("checkAndFillSection6", compliments => {
   cy.get("[data-cy=legendFieldset6]").should("include.text", "Section 6");
 
   cy.get("[data-cy=compliments]")
-    .should("be.visible")
+    .should("exist")
     .should("contain.value", "")
     .clear()
     .type(compliments);
@@ -365,21 +336,19 @@ Cypress.Commands.add("checkAndFillSection6", compliments => {
 
 Cypress.Commands.add("checkAndFillCovidSection", () => {
   cy.get("[data-cy=legendFieldsetCovid]").should("include.text", "COVID");
-  cy.get("[data-cy='haveCovidDeclarations0']").should("be.visible").check();
-  cy.get("[data-cy='covidForm']").should("be.visible");
+  cy.get("[data-cy='haveCovidDeclarations0']").should("exist").check();
+  cy.get("[data-cy='covidForm']").should("exist");
   cy.get("[data-cy='covidDeclarationDto.selfRateForCovid0']")
-    .should("be.visible")
+    .should("exist")
     .check();
-  cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").should(
-    "be.visible"
-  );
+  cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").should("exist");
   cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").clear();
   cy.get("[data-cy='covidDeclarationDto.reasonOfSelfRate']").type(
     "Covid Training Progress Reason"
   );
 
   cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").should(
-    "be.visible"
+    "exist"
   );
   cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").clear();
   cy.get("[data-cy='covidDeclarationDto.otherInformationForPanel']").type(
@@ -387,31 +356,31 @@ Cypress.Commands.add("checkAndFillCovidSection", () => {
   );
 
   cy.get("[data-cy='covidDeclarationDto.discussWithSupervisorChecked0']")
-    .should("be.visible")
+    .should("exist")
     .check();
   cy.get("[data-cy='covidDeclarationDto.discussWithSomeoneChecked0']")
-    .should("be.visible")
+    .should("exist")
     .check();
 
   cy.get("[data-cy='covidDeclarationDto.haveChangesToPlacement0']")
-    .should("be.visible")
+    .should("exist")
     .check();
 
   cy.get("[data-cy='covidDeclarationDto.changeCircumstances']")
-    .should("be.visible")
+    .should("exist")
     .select("Other")
     .should("have.value", "Other");
   cy.get("[data-cy='covidDeclarationDto.changeCircumstanceOther']")
-    .should("be.visible")
+    .should("exist")
     .type("Other circumstance of change");
   cy.get("[data-cy='covidDeclarationDto.howPlacementAdjusted']")
-    .should("be.visible")
+    .should("exist")
     .type("How your placement was adjusted");
   cy.get("[data-cy='covidDeclarationDto.educationSupervisorName']")
-    .should("be.visible")
+    .should("exist")
     .type("Education Supervisor Name");
   cy.get("[data-cy='covidDeclarationDto.educationSupervisorEmail']").should(
-    "be.visible"
+    "exist"
   );
   cy.get("[data-cy='covidDeclarationDto.educationSupervisorEmail']").type(
     "Education@Supervisor.Name"
@@ -424,38 +393,38 @@ Cypress.Commands.add("addWorkPanel", (startDate, endDate) => {
   const workPanels = Cypress.$(".nhsuk-panel").length;
 
   cy.get(`[data-cy="work[${workPanels}].typeOfWork"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("Type of work");
 
   cy.get(`[data-cy="work[${workPanels}].trainingPost"]`)
-    .should("be.visible")
+    .should("exist")
     .select("No");
 
   cy.get(`[data-cy="work[${workPanels}].startDate"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type(startDate);
 
   cy.get(`[data-cy="work[${workPanels}].endDate"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type(endDate);
 
   cy.get(`[data-cy="work[${workPanels}].site"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("Site name");
 
   cy.get(`[data-cy="work[${workPanels}].siteLocation"]`)
-    .should("be.visible")
+    .should("exist")
     .clear()
     .type("Site location");
 });
 
 Cypress.Commands.add("logout", () => {
   cy.viewport("iphone-6");
-  cy.get("[data-cy=BtnMenu]").should("be.visible").click();
+  cy.get("[data-cy=BtnMenu]").should("exist").click();
   cy.contains("Logout").click();
 });
 
