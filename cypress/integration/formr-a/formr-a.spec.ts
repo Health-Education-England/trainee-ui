@@ -360,19 +360,18 @@ describe("Form R (Part A)", () => {
         if (row["id"] === uid) {
           // Open the form just saved
           cy.get("[data-cy=submittedForm]").eq(index).click();
+          // check contents
+          cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
+          cy.get("[data-cy=localOfficeName]").should(
+            "have.text",
+            "Health Education England Wessex"
+          );
+          // Navigate back to the list
+          cy.get(".nhsuk-back-link__link").should("be.visible").click();
+          cy.contains("Submitted forms").should("be.visible");
+          cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
         }
       });
     });
-
-    // check contents of last submitted form
-    cy.get("[data-cy=mobileNumber]").should("have.text", "0777777777777");
-    cy.get("[data-cy=localOfficeName]").should(
-      "have.text",
-      "Health Education England Wessex"
-    );
-    // Navigate back to the list
-    cy.get(".nhsuk-back-link__link").should("be.visible").click();
-    cy.contains("Submitted forms").should("be.visible");
-    cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
   });
 });

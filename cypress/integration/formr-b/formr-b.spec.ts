@@ -266,23 +266,59 @@ describe("Form R (Part B)", () => {
     cy.get("[data-cy=LinkToNextSection] > .nhsuk-pagination__page").click();
 
     cy.get("[data-cy=gmcNumber]").should("have.text", "11111111");
-    cy.get("[data-cy=BtnSubmitPartB]").should("be.visible").click();
 
-    // See list of submitted forms
-    cy.contains("Submitted forms").should("be.visible");
+    // set up route to intercept formr-partb POST req
+    let uid: string;
 
-    //open the form just submitted
-    cy.get("[data-cy=submittedForm]").first().should("be.visible").click();
-    cy.get("[data-cy=gmcNumber]")
+    cy.server();
+    cy.route({
+      method: "POST",
+      url: "/api/forms/formr-partb"
+    }).as("postFormB");
+
+    // set up route to intercept formr-partBs get req
+    let formrbsArray: string[];
+
+    cy.server();
+    cy.route({
+      method: "GET",
+      url: "/api/forms/formr-partbs"
+    }).as("getFormrPartBs");
+
+    // submit form
+    cy.get("[data-cy=BtnSubmitPartB]")
+      .scrollIntoView()
       .should("be.visible")
-      .should("have.text", "11111111");
-    cy.get("[data-cy=localOfficeName]").should(
-      "have.text",
-      "Health Education England Wessex"
-    );
-    // Navigate back to the list
-    cy.get(".nhsuk-back-link__link").should("be.visible").click();
+      .click();
+    cy.get("[data-cy=btnSubmitNewForm]").should("be.visible");
     cy.contains("Submitted forms").should("be.visible");
+
+    cy.wait("@postFormB").then(xhr => {
+      const body = xhr.request.body;
+      uid = Object.values(body)[0];
+    });
+
+    cy.wait("@getFormrPartBs").then(xhr => {
+      const body = xhr.responseBody;
+      formrbsArray = Object.values(body);
+      formrbsArray.forEach((row, index) => {
+        if (row["id"] === uid) {
+          // Open the form just saved
+          cy.get("[data-cy=submittedForm]").eq(index).click();
+          // check contents
+          cy.get("[data-cy=gmcNumber]")
+            .should("be.visible")
+            .should("have.text", "11111111");
+          cy.get("[data-cy=localOfficeName]").should(
+            "have.text",
+            "Health Education England Wessex"
+          );
+          // Navigate back to the list
+          cy.get(".nhsuk-back-link__link").should("be.visible").click();
+          cy.contains("Submitted forms").should("be.visible");
+        }
+      });
+    });
   });
 
   it("should be able save and edit the form", () => {
