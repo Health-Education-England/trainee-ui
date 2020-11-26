@@ -10,10 +10,10 @@ describe("App sign-in", () => {
       cy.viewport(size);
 
       cy.location("pathname", { timeout: 10000 }).should("include", "/profile");
-      cy.get("#profile").should("be.visible");
-      cy.contains("Personal details").should("be.visible");
-      cy.contains("Placements").should("be.visible");
-      cy.contains("Programmes").should("be.visible");
+      cy.get("#profile").should("exist");
+      cy.contains("Personal details").should("exist");
+      cy.contains("Placements").should("exist");
+      cy.contains("Programmes").should("exist");
     });
   });
 });

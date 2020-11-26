@@ -10,25 +10,25 @@ describe("Desktop/ tablet header", () => {
     it(`should have menu items after successfull sign-in on ${size} screen`, () => {
       cy.viewport(size);
       if (size === mobileView) {
-        cy.get(".nhsuk-header__menu-toggle").should("be.visible");
+        cy.get(".nhsuk-header__menu-toggle").should("exist");
 
         cy.get(".nhsuk-header__menu-toggle").click();
       }
 
       cy.get(".nhsuk-header__navigation-link")
-        .should("be.visible")
+        .should("exist")
         .contains(/Profile/);
       cy.get(".nhsuk-header__navigation-link")
-        .should("be.visible")
+        .should("exist")
         .contains(/Part A/);
       cy.get(".nhsuk-header__navigation-link")
-        .should("be.visible")
+        .should("exist")
         .contains(/Part B/);
       cy.get(".nhsuk-header__navigation-link")
-        .should("be.visible")
+        .should("exist")
         .contains(/Logout/);
 
-      cy.contains("Form R (Part A)").should("be.visible").click();
+      cy.contains("Form R (Part A)").should("exist").click();
       cy.location("pathname", { timeout: 10000 }).should("include", "/formr-a");
     });
   });
