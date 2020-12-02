@@ -15,6 +15,7 @@ interface Props {
   type?: string;
   readOnly?: boolean;
   value?: any;
+  disabled?: boolean;
 }
 
 const TextInputField: FunctionComponent<Props> = props => {
@@ -41,6 +42,7 @@ const TextInputField: FunctionComponent<Props> = props => {
         width={
           field.value ? props.width || setFieldWidth(field.value.length) : 20
         }
+        disabled={props.disabled}
         error={error || ""}
         id={props.id || props.name}
         onBlur={field.onBlur}
