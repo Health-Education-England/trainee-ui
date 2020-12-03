@@ -8,7 +8,6 @@ import { mockTraineeProfile } from "../../../mock-data/trainee-profile";
 import { TraineeProfile } from "../../../models/TraineeProfile";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-import { Formik } from "formik";
 
 // NOTE: can only be called on a wrapper instance that is also the root instance.
 // With React 16 and above, instance() returns null for stateless functional components.
@@ -62,10 +61,6 @@ describe("Support", () => {
       mockTraineeProfile
     );
     expect(currentProgramme.status).toBe("CURRENT");
-
-    // console.log(wrapper.debug());
-    // expect(wrapper.find("h1")).toHaveLength(1);
-    // expect(wrapper.state("showForm")).toBe(true);
   });
 
   it("`getLocalOfficeEmail` should return a valid email when associated with a valid local office.", () => {
