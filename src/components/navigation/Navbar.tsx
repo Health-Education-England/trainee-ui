@@ -53,9 +53,9 @@ const Navbar = (props: navProps) => {
         <NavLink
           onClick={handleClick}
           className="nhsuk-header__navigation-link"
-          to="/feedback"
+          to="/support"
         >
-          Feedback
+          Support
         </NavLink>
       </li>
       <Logout
