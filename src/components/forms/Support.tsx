@@ -3,6 +3,8 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { connect, ConnectedProps } from "react-redux";
 import { Button, Panel } from "nhsuk-react-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   FormParams,
@@ -34,7 +36,6 @@ type profileProps = ConnectedProps<typeof connector>;
 interface LocalState {
   sendingEmail: boolean;
   showForm: boolean;
-  formSubmitted: boolean;
 }
 
 export interface LocalOfficeContact {
@@ -57,7 +58,7 @@ export class UnconnectedSupport extends React.PureComponent<
 > {
   constructor(props: profileProps) {
     super(props);
-    this.state = { sendingEmail: false, showForm: false, formSubmitted: false };
+    this.state = { sendingEmail: false, showForm: false };
   }
 
   localOfficeContacts: LocalOfficeContact[] = [
@@ -99,8 +100,9 @@ export class UnconnectedSupport extends React.PureComponent<
       email: "TIS.yh@hee.nhs.uk"
     },
     { name: "London LETBs", email: null },
-    { name: "West of England", email: null }
+    { name: "West of England", email: "noreply@hee.nhs.uk" }
   ];
+
   currentProgramme: CurrentProgrammeMembership = {};
 
   getLocalOfficeEmail(localOfficeName: string | undefined) {
@@ -114,34 +116,63 @@ export class UnconnectedSupport extends React.PureComponent<
     }
     return null;
   }
-  setCurrentProgramme(profile: TraineeProfile): CurrentProgrammeMembership {
-    return profile.programmeMemberships
+
+  getCurrentProgramme(
+    profile: TraineeProfile | null
+  ): CurrentProgrammeMembership {
+    return profile?.programmeMemberships
       ? profile.programmeMemberships.find((programme: ProgrammeMembership) => {
           return programme.status === "CURRENT";
         })
       : {};
   }
 
-  componentDidMount() {
-    this.props
-      .loadTraineeProfile(new TraineeProfileService())
-      .then((response: any) => {
-        this.currentProgramme = this.setCurrentProgramme(response.payload);
-        this.getLocalOfficeEmail(this.currentProgramme?.managingDeanery)
-          ? this.setState({ showForm: true })
-          : this.setState({ showForm: false });
-      });
+  async componentDidMount() {
+    await this.props.loadTraineeProfile(new TraineeProfileService());
+
+    this.currentProgramme = this.getCurrentProgramme(this.props.traineeProfile);
+    this.getLocalOfficeEmail(this.currentProgramme?.managingDeanery)
+      ? this.setState({ showForm: true })
+      : this.setState({ showForm: false });
   }
 
-  mockSendEmail() {
+  mockSendEmail(success: boolean) {
     return new Promise((resolve, reject) => {
       window.setTimeout(() => {
-        resolve("some string");
-      }, 3000);
+        if (success) {
+          resolve("SUCCESS");
+        } else {
+          reject("FAIL");
+        }
+      }, 1000);
     });
   }
 
-  handleSubmit(values: FormParams) {
+  successToast() {
+    toast.success("Message sent", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
+  }
+
+  failToast() {
+    toast.error("Message failed to send", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
+  }
+
+  handleSubmit(values: FormParams, resetForm: any) {
     this.setState({ sendingEmail: true });
 
     const templateParams: EmailTemplateParams = {
@@ -169,17 +200,18 @@ export class UnconnectedSupport extends React.PureComponent<
       message: values.message
     };
 
-    this.mockSendEmail()
-      .then(
-        response => {
-          console.log(templateParams);
-        },
-        err => {}
-      )
+    this.mockSendEmail(true)
+      .then(() => {
+        this.successToast();
+        resetForm({});
+        console.log(templateParams);
+      })
+      .catch(() => {
+        this.failToast();
+      })
 
       .finally(() => {
         this.setState({ sendingEmail: false });
-        this.setState({ formSubmitted: true });
       });
   }
 
@@ -193,7 +225,7 @@ export class UnconnectedSupport extends React.PureComponent<
         traineeProfile && (
           <div id="feedback">
             <ScrollTo />
-
+            <ToastContainer />
             <h1>Support</h1>
             <p>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint ad
@@ -201,78 +233,71 @@ export class UnconnectedSupport extends React.PureComponent<
               Molestias eos quibusdam libero accusantium officia consequuntur.
               Architecto ducimus laborum similique?
             </p>
-            {this.state.formSubmitted && (
-              <div
-                style={{
-                  padding: "20px",
-                  backgroundColor: "#007f3b",
-                  color: "white"
-                }}
-                className="nhsuk-u-font-size-19"
-              >
-                Message sent.
-              </div>
-            )}
+
             {this.state.showForm ? (
-              <Panel label="Submit your question">
-                <Formik
-                  initialValues={{ message: "" }}
-                  validationSchema={yup.object({
-                    message: yup.string().required("Message is required!")
-                  })}
-                  onSubmit={(values, { resetForm }) => {
-                    this.handleSubmit(values);
-                    resetForm({});
-                  }}
-                >
-                  {({ values, errors }) => (
-                    <Form>
-                      <TextInputField
-                        rows={10}
-                        label="Enter your query"
-                        name="message"
-                        hidelabel={true}
-                        disabled={this.state.sendingEmail}
-                      />
-                      <div className="nhsuk-grid-row">
-                        <div className="nhsuk-grid-column-full">
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end"
-                            }}
-                          >
-                            <Button
-                              disabled={this.state.sendingEmail}
-                              data-cy="BtnSendEmail"
+              <div data-jest="FormPanel">
+                <Panel label="Submit your question">
+                  <Formik
+                    initialValues={{ message: "" }}
+                    validationSchema={yup.object({
+                      message: yup.string().required("Message is required!")
+                    })}
+                    onSubmit={(values, { resetForm }) => {
+                      this.handleSubmit(values, resetForm);
+                    }}
+                  >
+                    {({ values, errors }) => (
+                      <Form>
+                        <TextInputField
+                          rows={10}
+                          label="Enter your query"
+                          name="message"
+                          hidelabel={true}
+                          disabled={this.state.sendingEmail}
+                        />
+                        <div className="nhsuk-grid-row">
+                          <div className="nhsuk-grid-column-full">
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end"
+                              }}
                             >
-                              {this.state.sendingEmail ? (
-                                <span>Sending...</span>
-                              ) : (
-                                <span>Send</span>
-                              )}
-                            </Button>
+                              <Button
+                                disabled={this.state.sendingEmail}
+                                data-cy="BtnSendEmail"
+                                data-jest="btnSendEmail"
+                              >
+                                {this.state.sendingEmail ? (
+                                  <span>Sending...</span>
+                                ) : (
+                                  <span>Send</span>
+                                )}
+                              </Button>
+                            </div>
                           </div>
-                        </div>
-                      </div>{" "}
-                    </Form>
-                  )}
-                </Formik>
-              </Panel>
+                        </div>{" "}
+                      </Form>
+                    )}
+                  </Formik>
+                </Panel>
+              </div>
             ) : (
-              <Panel label="How to get help">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-                  maiores voluptatum voluptas totam nostrum illum omnis harum
-                  aliquid, distinctio id doloribus quos dignissimos iure, magni
-                  odit quam. Odit, repudiandae asperiores.
-                </p>
-                <p>
-                  <a href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true">
-                    PGMDE Support Portal
-                  </a>
-                </p>
-              </Panel>
+              <div data-jest="GetHelpPanel">
+                <Panel label="How to get help">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Amet maiores voluptatum voluptas totam nostrum illum omnis
+                    harum aliquid, distinctio id doloribus quos dignissimos
+                    iure, magni odit quam. Odit, repudiandae asperiores.
+                  </p>
+                  <p>
+                    <a href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true">
+                      PGMDE Support Portal
+                    </a>
+                  </p>
+                </Panel>
+              </div>
             )}
           </div>
         )
