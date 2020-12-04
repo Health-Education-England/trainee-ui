@@ -5,7 +5,10 @@ import { connect, ConnectedProps } from "react-redux";
 import { Button, Panel } from "nhsuk-react-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import {
+  LocalOfficeContact,
+  localOfficeContacts
+} from "../../models/LocalOfficeContacts";
 import {
   FormParams,
   EmailTemplateParams
@@ -38,11 +41,6 @@ interface LocalState {
   showForm: boolean;
 }
 
-export interface LocalOfficeContact {
-  name: string;
-  email: string | null;
-}
-
 //https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types
 export type Partial<T> = {
   [P in keyof T]?: T[P];
@@ -61,53 +59,11 @@ export class UnconnectedSupport extends React.PureComponent<
     this.state = { sendingEmail: false, showForm: false };
   }
 
-  localOfficeContacts: LocalOfficeContact[] = [
-    {
-      name: "Health Education England East Midlands",
-      email: "TIS.EM@hee.nhs.uk"
-    },
-    {
-      name: "Health Education England East of England",
-      email: "TIS.EOE@hee.nhs.uk"
-    },
-    { name: "Health Education England Kent, Surrey and Sussex", email: null },
-    {
-      name: "Health Education England North Central and East London",
-      email: null
-    },
-    {
-      name: "Health Education England North East",
-      email: "InformationTeam.NE@hee.nhs.uk"
-    },
-    {
-      name: "Health Education England North West",
-      email: "medicine.nw@hee.nhs.uk"
-    },
-    { name: "Health Education England North West London", email: null },
-    { name: "Health Education England South London", email: null },
-    {
-      name: "Health Education England South West",
-      email: "TISQueries.sw@hee.nhs.uk"
-    },
-    { name: "Health Education England Thames Valley", email: null },
-    { name: "Health Education England Wessex", email: null },
-    {
-      name: "Health Education England West Midlands",
-      email: "TIS.WM@hee.nhs.uk"
-    },
-    {
-      name: "Health Education England Yorkshire and the Humber",
-      email: "TIS.yh@hee.nhs.uk"
-    },
-    { name: "London LETBs", email: null },
-    { name: "West of England", email: "noreply@hee.nhs.uk" }
-  ];
-
   currentProgramme: CurrentProgrammeMembership = {};
 
   getLocalOfficeEmail(localOfficeName: string | undefined) {
     if (localOfficeName) {
-      const currentLocalOffice = this.localOfficeContacts.find(
+      const currentLocalOffice = localOfficeContacts.find(
         (localOffice: LocalOfficeContact) => {
           return localOffice.name === localOfficeName;
         }
