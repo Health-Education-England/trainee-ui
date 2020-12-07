@@ -79,6 +79,25 @@
   }
 }
 
+.Toastify {
+  & > div {
+    width: 400px;
+  }
+}
+.customToast {
+  div {
+    font-size: large;
+    padding: 15px;
+  }
+
+  &.successToast {
+    background-color: #006747;
+  }
+  &.failToast {
+    background-color: #8a1538;
+  }
+}
+
 @media only screen and (max-width: 900px) {
   .CookieConsent {
     height: 100%;

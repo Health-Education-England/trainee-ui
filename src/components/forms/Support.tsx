@@ -3,8 +3,9 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { connect, ConnectedProps } from "react-redux";
 import { Button, Panel } from "nhsuk-react-components";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import {
   LocalOfficeContact,
   localOfficeContacts
@@ -104,29 +105,16 @@ export class UnconnectedSupport extends React.PureComponent<
     });
   }
 
-  successToast() {
-    toast.success("Message sent", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    });
-  }
-
-  failToast() {
-    toast.error("Message failed to send", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined
-    });
-  }
+  defaultToastOptions: ToastOptions = {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    className: "customToast"
+  };
 
   handleSubmit(values: FormParams, resetForm: any) {
     this.setState({ sendingEmail: true });
@@ -158,12 +146,18 @@ export class UnconnectedSupport extends React.PureComponent<
 
     this.mockSendEmail(true)
       .then(() => {
-        this.successToast();
+        toast.success("Message sent", {
+          ...this.defaultToastOptions,
+          className: "customToast successToast"
+        });
         resetForm({});
         console.log(templateParams);
       })
       .catch(() => {
-        this.failToast();
+        toast.error("Message failed to send", {
+          ...this.defaultToastOptions,
+          className: "autoClose: false, customToast failToast"
+        });
       })
 
       .finally(() => {
