@@ -45,7 +45,7 @@
     "prebuild": "npm run generate-build-version",
     "generate-build-version": "ts-node generate-build-version",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
+    "test": "react-scripts test --silent --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
     "cypress": "cypress run",
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
