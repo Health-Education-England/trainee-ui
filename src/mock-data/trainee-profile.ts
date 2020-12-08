@@ -45,7 +45,7 @@ export const mockProgrammeMemberships = [
     programmeTisId: "1",
     programmeName: "Cardiology",
     programmeNumber: "EOE8945",
-    managingDeanery: "East of England",
+    managingDeanery: "Health Education England East of England",
     programmeMembershipType: "SUBSTANTIVE",
     status: Status.Current,
     curricula: [
@@ -76,7 +76,7 @@ export const mockProgrammeMemberships = [
     programmeTisId: "2",
     programmeName: "General Practice",
     programmeNumber: "EOE8950",
-    managingDeanery: "West of England",
+    managingDeanery: "Health Education England East of England",
     programmeMembershipType: "LAT",
     status: Status.Current,
     curricula: [

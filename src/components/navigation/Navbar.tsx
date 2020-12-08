@@ -49,7 +49,15 @@ const Navbar = (props: navProps) => {
           Form R (Part B)
         </NavLink>
       </li>
-
+      <li className="nhsuk-header__navigation-item">
+        <NavLink
+          onClick={handleClick}
+          className="nhsuk-header__navigation-link"
+          to="/support"
+        >
+          Support
+        </NavLink>
+      </li>
       <Logout
         onClick={async (event: MouseEvent) => {
           event.preventDefault();
