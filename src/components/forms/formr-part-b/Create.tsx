@@ -23,6 +23,7 @@ import { LifeCycleState } from "../../../models/LifeCycleState";
 import { FormsService } from "../../../services/FormsService";
 import Loading from "../../common/Loading";
 import CovidDeclaration from "./Sections/CovidDeclaration";
+import { Redirect } from "react-router-dom";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -107,7 +108,11 @@ class Create extends React.PureComponent<
     const enableCovidDeclaration: boolean =
       formSwitches.find(s => s.name === "COVID")?.enabled || false;
 
-    if (!isLoaded || !formData) {
+    if (!formData) {
+      return <Redirect to="/formr-b" />;
+    }
+
+    if (!isLoaded) {
       return <Loading />;
     }
 
