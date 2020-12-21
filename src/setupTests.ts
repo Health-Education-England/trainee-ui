@@ -1,5 +1,5 @@
 import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import Amplify from "aws-amplify";
 import config from "./aws-amplify/config";
 
