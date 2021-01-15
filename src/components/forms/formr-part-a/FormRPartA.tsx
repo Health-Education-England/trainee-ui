@@ -5,6 +5,7 @@ import Create from "./Create";
 import Confirm from "./Confirm";
 import View from "./View";
 import List from "./List";
+import HowToPrintToPDF from "../HowToPrintToPDF";
 import ScrollTo from "../ScrollTo";
 class FormRPartA extends React.PureComponent {
   render() {
@@ -22,6 +23,8 @@ class FormRPartA extends React.PureComponent {
             <Route path="/formr-a/create" component={Create} />
             <Route path="/formr-a/confirm" component={Confirm} />
             <Route path="/formr-a/:id" component={View} />
+            <Route path="/howtoexport" component={HowToPrintToPDF} />
+
             <Route path="/" component={List} />
           </Switch>
         </BrowserRouter>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { SummaryList, BackLink, Panel } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { CCT_DECLARATION } from "../../../utilities/Constants";
@@ -30,6 +31,13 @@ class View extends React.PureComponent<ViewProps> {
         <>
           <ScrollTo />
           <BackLink href="/formr-a">Go back to list</BackLink>
+          <Link
+            to={{
+              pathname: "/howtoexport"
+            }}
+          >
+            How to export as PDF
+          </Link>
           <Panel label="Personal Details">
             <SummaryList>
               <SummaryList.Row>
@@ -120,7 +128,6 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
           <Panel className="page-break" label="Declarations">
             <SummaryList>
               <SummaryList.Row>
@@ -168,7 +175,6 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
           <Panel label="Programme">
             <SummaryList>
               <SummaryList.Row>

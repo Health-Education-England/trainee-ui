@@ -5,7 +5,6 @@ import { connect, ConnectedProps } from "react-redux";
 import { Button, Panel } from "nhsuk-react-components";
 import { ToastContainer, toast, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import HowToPrintToPDF from "./HowToPrintToPDF";
 import {
   LocalOfficeContact,
   localOfficeContacts
@@ -249,8 +248,6 @@ export class UnconnectedSupport extends React.PureComponent<
                 </Panel>
               </div>
             )}
-
-            <HowToPrintToPDF />
           </div>
         )
       );

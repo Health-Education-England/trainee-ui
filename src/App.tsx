@@ -10,6 +10,7 @@ import HEEFooter from "./components/navigation/HEEFooter";
 import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
 import FormRPartB from "./components/forms/formr-part-b/FormRPartB";
 import Support from "./components/forms/Support";
+import HowToPrintToPDF from "./components/forms/HowToPrintToPDF";
 import { CacheUtilities } from "./utilities/CacheUtilities";
 import packageJson from "../package.json";
 
@@ -92,7 +93,9 @@ class App extends React.PureComponent<AppProps, AppState> {
               <Route path="/formr-a" component={FormRPartA} />
               <Route path="/formr-b" component={FormRPartB} />
               <Route path="/support" component={Support} />
+              <Route path="/howtoexport" component={HowToPrintToPDF} />
               <Redirect exact path="/" to="/profile" />
+
               <Route path="/*" component={PageNotFound} />
             </Switch>
           </main>

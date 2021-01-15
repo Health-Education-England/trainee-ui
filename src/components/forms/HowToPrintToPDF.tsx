@@ -1,13 +1,19 @@
 import React from "react";
-import { Panel } from "nhsuk-react-components";
+import { useHistory } from "react-router-dom";
+import { Panel, BackLink } from "nhsuk-react-components";
+
 import chromePrint1 from "../../static/images/chrome-print-1.png";
 import chromePrint2 from "../../static/images/chrome-print-2.png";
 import edgePrint1 from "../../static/images/edge-print-1.png";
 import edgePrint2 from "../../static/images/edge-print-2.png";
 
 const HowToPrintToPDF = () => {
+  const history = useHistory();
   return (
     <div>
+      <BackLink style={{ cursor: "pointer" }} onClick={() => history.goBack()}>
+        Back
+      </BackLink>
       <h2>How to save a Form R as PDF using the browser.</h2>
       <Panel label="Using Google Chrome">
         <ol>
