@@ -36,7 +36,7 @@ class View extends React.PureComponent<ViewProps> {
               pathname: "/howtoexport"
             }}
           >
-            How to export as PDF
+            How to export form as PDF
           </Link>
           <Panel label="Personal Details">
             <SummaryList>

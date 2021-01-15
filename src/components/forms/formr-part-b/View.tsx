@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ScrollTo from "../ScrollTo";
 import { BackLink, SummaryList, Panel, Button } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
@@ -64,7 +65,14 @@ class View extends React.PureComponent<ViewProps> {
           <BackLink href="/formr-b" data-cy="backLink">
             Go back to list
           </BackLink>
-          <div className="nhsuk-grid-row">
+          <Link
+            to={{
+              pathname: "/howtoexport"
+            }}
+          >
+            How to export form as PDF
+          </Link>
+          <div className="nhsuk-grid-row nhsuk-u-margin-top-3">
             <div
               className={
                 canEdit

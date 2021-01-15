@@ -6,6 +6,7 @@ import List from "./List";
 import View from "./View";
 import Confirm from "./Confirm";
 import ScrollTo from "../ScrollTo";
+import HowToPrintToPDF from "../HowToPrintToPDF";
 const FormRPartB: React.FC = () => {
   return (
     <div>
@@ -21,6 +22,7 @@ const FormRPartB: React.FC = () => {
           <Route path="/formr-b/create" component={Create} />
           <Route path="/formr-b/confirm" component={Confirm} />
           <Route path="/formr-b/:id" component={View} />
+          <Route path="/howtoexport" component={HowToPrintToPDF} />
           <Route path="/" component={List} />
         </Switch>
       </BrowserRouter>
