@@ -137,7 +137,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit
@@ -247,7 +247,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit
@@ -315,7 +315,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit
@@ -415,7 +415,7 @@ class View extends React.PureComponent<ViewProps> {
             ) : null}
           </Panel>
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit
@@ -516,7 +516,7 @@ class View extends React.PureComponent<ViewProps> {
             ) : null}
           </Panel>
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit
@@ -543,7 +543,7 @@ class View extends React.PureComponent<ViewProps> {
 
           {enableCovidDeclaration ? (
             <>
-              <div className="nhsuk-grid-row">
+              <div className="nhsuk-grid-row page-break">
                 <div
                   className={
                     canEdit
@@ -721,7 +721,7 @@ class View extends React.PureComponent<ViewProps> {
             </>
           ) : null}
 
-          <div className="nhsuk-grid-row">
+          <div className="nhsuk-grid-row page-break">
             <div
               className={
                 canEdit

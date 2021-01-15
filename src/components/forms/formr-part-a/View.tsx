@@ -6,6 +6,7 @@ import { DateUtilities } from "../../../utilities/DateUtilities";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
 import ScrollTo from "../ScrollTo";
+
 interface ViewProps {
   formData: FormRPartA | null;
   history: any;
@@ -29,7 +30,6 @@ class View extends React.PureComponent<ViewProps> {
         <>
           <ScrollTo />
           <BackLink href="/formr-a">Go back to list</BackLink>
-
           <Panel label="Personal Details">
             <SummaryList>
               <SummaryList.Row>
@@ -121,7 +121,7 @@ class View extends React.PureComponent<ViewProps> {
             </SummaryList>
           </Panel>
 
-          <Panel label="Declarations">
+          <Panel className="page-break" label="Declarations">
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>I confirm that</SummaryList.Key>

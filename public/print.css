@@ -27,15 +27,11 @@ fieldset {
   margin-bottom: 20px !important;
 }
 
-.page-break:not(:first-of-type) {
+.page-break {
   break-before: page !important;
-  page-break-before: always;
-  border: 10px solid blue;
+  page-break-before: always !important;
 }
 
-.nhsuk-summary-list {
-  width: 100% !important;
-}
 .nhsuk-summary-list__key {
   text-size-adjust: none;
   width: 70mm !important;
@@ -45,6 +41,7 @@ fieldset {
   text-size-adjust: none;
   display: table-cell !important;
 }
+
 @page {
-  margin: 15mm;
+  margin: 20mm 10mm;
 }
