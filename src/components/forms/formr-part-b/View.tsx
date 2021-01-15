@@ -66,6 +66,7 @@ class View extends React.PureComponent<ViewProps> {
             Go back to list
           </BackLink>
           <Link
+            className="hide-from-print"
             to={{
               pathname: "/howtoexport"
             }}

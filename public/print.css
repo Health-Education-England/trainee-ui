@@ -1,7 +1,8 @@
 header,
 header *,
 button,
-.nhsuk-back-link {
+.nhsuk-back-link,
+.hide-from-print {
   display: none !important;
 }
 

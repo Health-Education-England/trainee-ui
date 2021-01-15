@@ -32,6 +32,7 @@ class View extends React.PureComponent<ViewProps> {
           <ScrollTo />
           <BackLink href="/formr-a">Go back to list</BackLink>
           <Link
+            className="hide-from-print"
             to={{
               pathname: "/howtoexport"
             }}
