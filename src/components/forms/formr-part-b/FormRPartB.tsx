@@ -21,8 +21,8 @@ const FormRPartB: React.FC = () => {
         <Switch>
           <Route path="/formr-b/create" component={Create} />
           <Route path="/formr-b/confirm" component={Confirm} />
+          <Route path="/formr-b/howtoexport" component={HowToPrintToPDF} />
           <Route path="/formr-b/:id" component={View} />
-          <Route path="/howtoexport" component={HowToPrintToPDF} />
           <Route path="/" component={List} />
         </Switch>
       </BrowserRouter>
