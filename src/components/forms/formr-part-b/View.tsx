@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ScrollTo from "../ScrollTo";
-import { BackLink, SummaryList, Panel, Button } from "nhsuk-react-components";
+import {
+  Col,
+  Row,
+  WarningCallout,
+  BackLink,
+  SummaryList,
+  Panel,
+  Button
+} from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
 import { FormRPartB, FormSwitch } from "../../../models/FormRPartB";
@@ -62,17 +70,38 @@ class View extends React.PureComponent<ViewProps> {
       formData && (
         <>
           <ScrollTo />
-          <BackLink href="/formr-b" data-cy="backLink">
-            Go back to list
-          </BackLink>
-          <Link
-            className="hide-from-print"
-            to={{
-              pathname: "/howtoexport"
-            }}
-          >
-            How to export form as PDF
-          </Link>
+          <Row>
+            <Col width="one-half">
+              <BackLink href="/formr-b" data-cy="backLink">
+                Go back to list
+              </BackLink>
+            </Col>
+            <Col style={{ textAlign: "right" }} width="one-half">
+              {!canEdit && (
+                <Link
+                  className="hide-from-print"
+                  data-jest="linkHowToExport"
+                  to={{
+                    pathname: "/formr-b/howtoexport"
+                  }}
+                >
+                  How to export form as PDF
+                </Link>
+              )}
+            </Col>
+          </Row>
+
+          {canEdit && (
+            <WarningCallout
+              label="Confirmation"
+              data-jest="warningConfirmation"
+            >
+              <p>
+                Check the information entered below is correct and click Submit
+                at the bottom of the page.
+              </p>
+            </WarningCallout>
+          )}
           <div className="nhsuk-grid-row nhsuk-u-margin-top-3">
             <div
               className={
