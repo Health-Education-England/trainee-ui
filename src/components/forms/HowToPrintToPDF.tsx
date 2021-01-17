@@ -7,7 +7,7 @@ import chromePrint2 from "../../static/images/chrome-print-2.png";
 import edgePrint1 from "../../static/images/edge-print-1.png";
 import edgePrint2 from "../../static/images/edge-print-2.png";
 
-const HowToPrintToPDF = () => {
+const HowToPrintToPDF: React.FunctionComponent = () => {
   const history = useHistory();
   return (
     <div>
