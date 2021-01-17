@@ -76,8 +76,8 @@ class Confirm extends React.PureComponent<ConfirmProps> {
     return (
       <div>
         <ScrollTo />
-        <View history={this.props.history}></View>
-        <WarningCallout label="Warning">
+        <View canEdit={true} history={this.props.history}></View>
+        <WarningCallout data-cy="warningSubmit" label="Warning">
           <p>
             By submitting this form, I confirm that the information above is
             correct and I will keep my Designated Body and the GMC informed as
