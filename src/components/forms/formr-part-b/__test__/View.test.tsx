@@ -6,7 +6,7 @@ import configureMockStore from "redux-mock-store";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { Provider } from "react-redux";
 import { FormRPartB } from "../../../../models/FormRPartB";
-
+import { BrowserRouter } from "react-router-dom";
 const mockStore = configureMockStore([thunk]);
 
 const mountComponent = (
@@ -30,7 +30,9 @@ const mountComponent = (
 
   return mount(
     <Provider store={store}>
-      <View canEdit={canEdit} history={history} editSection={() => jest.fn} />
+      <BrowserRouter>
+        <View canEdit={canEdit} history={history} editSection={() => jest.fn} />
+      </BrowserRouter>
     </Provider>
   );
 };
@@ -50,7 +52,6 @@ describe("View", () => {
   it("should load data when form data is not null", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], [], false);
 
-    expect(wrapper.find("a")).toHaveLength(1);
     expect(wrapper.find("button.sectionEditButton").length).toBe(0);
   });
 
@@ -151,5 +152,33 @@ describe("View", () => {
     const wrapper = mountComponent(submittedFormRPartBs[0], [], true);
 
     expect(wrapper.find("button.sectionEditButton").length).toBeGreaterThan(0);
+  });
+
+  it("should display 'How to export' link when uneditable", () => {
+    const history: any[] = [];
+    const wrapper = mountComponent(submittedFormRPartBs[0], history, false);
+    expect(wrapper.find("a[data-jest='linkHowToExport']")).toHaveLength(1);
+  });
+
+  it("should not display 'How to export' link when editable", () => {
+    const history: any[] = [];
+    const wrapper = mountComponent(submittedFormRPartBs[0], history, true);
+    expect(wrapper.find("a[data-jest='linkHowToExport']")).toHaveLength(0);
+  });
+
+  it("should display confirm message when editable", () => {
+    const history: any[] = [];
+    const wrapper = mountComponent(submittedFormRPartBs[0], history, true);
+    console.log(wrapper.debug());
+    expect(wrapper.find("[data-jest='warningConfirmation'] h3")).toHaveLength(
+      1
+    );
+  });
+
+  it("should not display confirm message when not editable", () => {
+    const history: any[] = [];
+    const wrapper = mountComponent(submittedFormRPartBs[0], history, false);
+    console.log(wrapper.debug());
+    expect(wrapper.find("[data-jest='warningConfirmation']")).toHaveLength(0);
   });
 });

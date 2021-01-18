@@ -1,13 +1,23 @@
 import React from "react";
-import { SummaryList, BackLink, Panel } from "nhsuk-react-components";
+import { Link } from "react-router-dom";
+import {
+  Row,
+  Col,
+  WarningCallout,
+  SummaryList,
+  BackLink,
+  Panel
+} from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { CCT_DECLARATION } from "../../../utilities/Constants";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { connect } from "react-redux";
 import { FormRPartA } from "../../../models/FormRPartA";
 import ScrollTo from "../ScrollTo";
+
 interface ViewProps {
   formData: FormRPartA | null;
+  canEdit: boolean;
   history: any;
 }
 
@@ -17,7 +27,7 @@ const mapStateToProps = (state: RootState) => ({
 
 class View extends React.PureComponent<ViewProps> {
   render() {
-    const { formData, history } = this.props;
+    const { formData, history, canEdit } = this.props;
 
     if (!formData) {
       history.push("/formr-a");
@@ -28,8 +38,36 @@ class View extends React.PureComponent<ViewProps> {
       formData && (
         <>
           <ScrollTo />
-          <BackLink href="/formr-a">Go back to list</BackLink>
 
+          <Row>
+            <Col width="one-half">
+              <BackLink href="/formr-a">Go back to list</BackLink>
+            </Col>
+            <Col style={{ textAlign: "right" }} width="one-half">
+              {!canEdit && (
+                <Link
+                  className="hide-from-print"
+                  data-jest="linkHowToExport"
+                  to={{
+                    pathname: "/formr-a/howtoexport"
+                  }}
+                >
+                  How to export form as PDF
+                </Link>
+              )}
+            </Col>
+          </Row>
+          {canEdit && (
+            <WarningCallout
+              label="Confirmation"
+              data-jest="warningConfirmation"
+            >
+              <p>
+                Check the information entered below is correct and click Submit
+                at the bottom of the page.
+              </p>
+            </WarningCallout>
+          )}
           <Panel label="Personal Details">
             <SummaryList>
               <SummaryList.Row>
@@ -120,8 +158,7 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
-          <Panel label="Declarations">
+          <Panel className="page-break" label="Declarations">
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>I confirm that</SummaryList.Key>
@@ -168,7 +205,6 @@ class View extends React.PureComponent<ViewProps> {
               </SummaryList.Row>
             </SummaryList>
           </Panel>
-
           <Panel label="Programme">
             <SummaryList>
               <SummaryList.Row>

@@ -308,7 +308,10 @@ describe("Form R (Part A)", () => {
     cy.checkFormRAValues(dateAttained, completionDate, startDate, "1");
 
     cy.get("[data-cy=BtnContinue]").click();
-    cy.get(".nhsuk-warning-callout").scrollIntoView().should("exist");
+    cy.get("[data-cy='warningSubmit']")
+      .first()
+      .scrollIntoView()
+      .should("exist");
 
     // intercept formr-parta PUT req
     let uid: string;
