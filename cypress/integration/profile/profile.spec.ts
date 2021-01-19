@@ -20,10 +20,6 @@ describe("Profile", () => {
 
   it("should click expand to show placement information then toggle close", () => {
     cy.contains("Programmes").should("exist").click();
-    cy.contains("Number").should("exist");
-    cy.contains("Curricula").should("exist");
-    cy.contains("Programmes").click();
-    cy.contains("Number").should("not.be.visible");
-    cy.contains("Curricula").should("not.be.visible");
+    cy.get(".nhsuk-details__text").should("exist");
   });
 });
