@@ -23,7 +23,7 @@ import { TraineeProfileService } from "../../services/TraineeProfileService";
 import TextInputField from "./TextInputField";
 import Loading from "../common/Loading";
 import ScrollTo from "./ScrollTo";
-
+import PageTitle from "../common/PageTitle";
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.profile.traineeProfile,
   isLoaded: state.profile.isLoaded
@@ -173,6 +173,7 @@ export class UnconnectedSupport extends React.PureComponent<
       return (
         traineeProfile && (
           <div id="feedback">
+            <PageTitle title="Support" />
             <ScrollTo />
             <ToastContainer />
             <h1>Support</h1>

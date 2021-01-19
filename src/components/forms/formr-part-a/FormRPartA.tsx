@@ -7,10 +7,12 @@ import View from "./View";
 import List from "./List";
 import HowToPrintToPDF from "../HowToPrintToPDF";
 import ScrollTo from "../ScrollTo";
+import PageTitle from "../../common/PageTitle";
 class FormRPartA extends React.PureComponent {
   render() {
     return (
       <div>
+        <PageTitle title="Form R Part-A" />
         <ScrollTo />
         <Fieldset>
           <Fieldset.Legend isPageHeading>Form R (Part A)</Fieldset.Legend>

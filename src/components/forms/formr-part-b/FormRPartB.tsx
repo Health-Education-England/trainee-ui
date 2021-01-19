@@ -6,10 +6,12 @@ import List from "./List";
 import View from "./View";
 import Confirm from "./Confirm";
 import ScrollTo from "../ScrollTo";
+import PageTitle from "../../common/PageTitle";
 import HowToPrintToPDF from "../HowToPrintToPDF";
 const FormRPartB: React.FC = () => {
   return (
     <div>
+      <PageTitle title="Form R Part-B" />
       <ScrollTo />
       <Fieldset>
         <Fieldset.Legend isPageHeading>Form R (Part B)</Fieldset.Legend>
