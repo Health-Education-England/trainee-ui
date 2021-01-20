@@ -10,6 +10,7 @@ import {
   FORMR_PARTB_CONSENT
 } from "../../../../utilities/Constants";
 import FormRPartBPagination from "./FormRPartBPagination";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -34,6 +35,7 @@ const Section7: FunctionComponent<SectionProps> = (props: SectionProps) => {
       >
         {({ values, handleSubmit }) => (
           <Form>
+            <PromptIfDirty />
             <ScrollTo />
             <Fieldset
               disableErrorLine={true}

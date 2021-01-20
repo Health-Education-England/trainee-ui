@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import Section4 from "../Sections/Section4";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import DeclarationPanel from "../Sections/DeclarationPanel";
+import { BrowserRouter } from "react-router-dom";
 
 jest.mock("../ValidationSchema", () => ({
   get Section4ValidationSchema() {
@@ -30,23 +31,39 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("mounts without crashing", () => {
-    mount(<Section4 {...props} />);
+    mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
   });
 
   it("should render page heading", () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     expect(wrapper.find("[data-jest='mainFieldset4'] legend").length).toBe(1);
   });
 
   it("should render two radio buttons for flagging previous Significant Events, Complaints, Other investigations", () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     expect(
       wrapper.find("[data-jest='havePreviousDeclarations'] input").length
     ).toBe(2);
   });
 
   it("should render values of two radio buttons for flagging previous Significant Events, Complaints, Other investigations as true and false", () => {
-    const component = mount(<Section4 {...props} />);
+    const component = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const wrapper = component.find(
       "[data-jest='havePreviousDeclarations'] input"
     );
@@ -55,7 +72,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should render a 'previous declaration' panel when 'yes' radio for flagging previous Significant Events, Complaints, Other investigations is true ", () => {
-    const component = mount(<Section4 {...props} />);
+    const component = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const wrapper = component.find(
       "[data-jest='havePreviousDeclarations'] input"
     );
@@ -64,7 +85,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should render a new panel when clicking on 'Add more'", async () => {
-    const component = mount(<Section4 {...props} />);
+    const component = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const wrapper = component.find("div.placementPanel");
     const panelLength = wrapper.length;
     component.find("button[data-jest='btnAddDeclaration']").simulate("click");
@@ -72,7 +97,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should remove a panel when clicking on delete panel button", async () => {
-    const component = mount(<Section4 {...props} />);
+    const component = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const wrapper = component.find("div.placementPanel");
     const panelLength = wrapper.length;
     component.find("button[data-jest='btnAddDeclaration']").simulate("click");
@@ -82,7 +111,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should render a 'summary of previous unresolved declarations' textarea when 'yes' radio for flagging previous Significant Events, Complaints, Other investigations is true ", () => {
-    const component = mount(<Section4 {...props} />);
+    const component = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const wrapper = component.find(
       "[data-jest='havePreviousDeclarations'] input"
     );
@@ -93,7 +126,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("Should not have any Declaration panel when havePreviousDeclarations is false", () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     expect(wrapper.find(DeclarationPanel)).toHaveLength(1);
 
     wrapper
@@ -111,7 +148,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should render previous section link buttons with correct label", () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
@@ -122,7 +163,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should render next section link buttons  with correct label", async () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
@@ -132,7 +177,11 @@ describe("Form-R Part-B Section4", () => {
   });
 
   it("should submit the form", () => {
-    const wrapper = mount(<Section4 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section4 {...props} />
+      </BrowserRouter>
+    );
     const form = wrapper.find("form").first();
 
     try {

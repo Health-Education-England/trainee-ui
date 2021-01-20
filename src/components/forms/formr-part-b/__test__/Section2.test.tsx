@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Section2 from "../Sections/Section2";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import { BrowserRouter } from "react-router-dom";
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
@@ -30,18 +31,30 @@ describe("Form-R Part-B Section2", () => {
   });
 
   it("mounts without crashing", () => {
-    mount(<Section2 {...props} />);
+    mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
   });
 
   it("should add work panel if no placements exists", () => {
     props.formData.work = [];
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("[data-jest='workPanel']").length).toBe(1);
   });
 
   it("should add work panel on 'Add more' button click", () => {
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("[data-jest='workPanel']").length).toBe(
       props.formData.work.length
@@ -56,7 +69,11 @@ describe("Form-R Part-B Section2", () => {
   });
 
   it("should remove work panel on 'Delete' button click", () => {
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
 
     const addMoreButton = wrapper.find("[data-jest='addMore']").first();
     addMoreButton.simulate("click");
@@ -70,7 +87,11 @@ describe("Form-R Part-B Section2", () => {
   });
 
   it("should render previous section link buttons with correct label", () => {
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
@@ -81,7 +102,11 @@ describe("Form-R Part-B Section2", () => {
   });
 
   it("should render next section link buttons with correct label", async () => {
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
@@ -91,7 +116,11 @@ describe("Form-R Part-B Section2", () => {
   });
 
   it("should submit the form", () => {
-    const wrapper = mount(<Section2 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section2 {...props} />
+      </BrowserRouter>
+    );
     const form = wrapper.find("form").first();
 
     try {

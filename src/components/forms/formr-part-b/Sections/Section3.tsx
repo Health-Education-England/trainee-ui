@@ -14,6 +14,7 @@ import { Section3ValidationSchema } from "../ValidationSchema";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
 import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -36,6 +37,7 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
       >
         {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
+            <PromptIfDirty />
             <ScrollTo />
             <Fieldset
               data-jest="mainFieldset"

@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import Section1 from "../Sections/Section1";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
+import { BrowserRouter } from "react-router-dom";
 
 jest.mock("../ValidationSchema", () => ({
   get Section1ValidationSchema() {
@@ -29,11 +30,19 @@ describe("Form-R Part-B Section1", () => {
   });
 
   it("mounts without crashing", () => {
-    mount(<Section1 {...props} />);
+    mount(
+      <BrowserRouter>
+        <Section1 {...props} />
+      </BrowserRouter>
+    );
   });
 
   it("should render next section link buttons with correct label", async () => {
-    const wrapper = mount(<Section1 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section1 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
@@ -44,7 +53,11 @@ describe("Form-R Part-B Section1", () => {
   });
 
   it("should submit the form", () => {
-    const wrapper = mount(<Section1 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section1 {...props} />
+      </BrowserRouter>
+    );
     const form = wrapper.find("form").first();
 
     try {

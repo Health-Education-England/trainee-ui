@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import Section6 from "../Sections/Section6";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { SectionProps } from "../Sections/SectionProps";
+import { BrowserRouter } from "react-router-dom";
 
 const prevSection = jest.fn();
 const nextSection = jest.fn();
@@ -24,16 +25,28 @@ describe("Form-R Part-B Section6", () => {
   });
 
   it("mounts without crashing", () => {
-    mount(<Section6 {...props} />);
+    mount(
+      <BrowserRouter>
+        <Section6 {...props} />
+      </BrowserRouter>
+    );
   });
 
   it("should render page heading", () => {
-    const wrapper = mount(<Section6 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section6 {...props} />
+      </BrowserRouter>
+    );
     expect(wrapper.find("[data-jest='mainFieldset6'] legend").length).toBe(1);
   });
 
   it("should render previous section link buttons with correct label", () => {
-    const wrapper = mount(<Section6 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section6 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
@@ -44,7 +57,11 @@ describe("Form-R Part-B Section6", () => {
   });
 
   it("should render next section link buttons with correct label", () => {
-    const wrapper = mount(<Section6 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section6 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
@@ -54,7 +71,11 @@ describe("Form-R Part-B Section6", () => {
   });
 
   it("should submit the form", () => {
-    const wrapper = mount(<Section6 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section6 {...props} />
+      </BrowserRouter>
+    );
     const form = wrapper.find("form").first();
 
     try {

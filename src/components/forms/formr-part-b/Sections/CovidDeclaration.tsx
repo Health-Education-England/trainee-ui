@@ -24,6 +24,7 @@ import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import TextInputField from "../../TextInputField";
 import { KeyValue } from "../../../../models/KeyValue";
 import { TraineeReferenceService } from "../../../../services/TraineeReferenceService";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 const CovidDeclaration: FunctionComponent<SectionProps> = (
   props: SectionProps
@@ -69,6 +70,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
       >
         {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
+            <PromptIfDirty />
             <ScrollTo />
             <Fieldset
               disableErrorLine={true}

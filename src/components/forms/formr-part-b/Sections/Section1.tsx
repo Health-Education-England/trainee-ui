@@ -14,6 +14,7 @@ import {
 import { Form, Formik } from "formik";
 import { Section1ValidationSchema } from "../ValidationSchema";
 import { KeyValue } from "../../../../models/KeyValue";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 interface Section1Props {
   localOffices: KeyValue[];
@@ -45,6 +46,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
     >
       {({ values, errors, handleSubmit }) => (
         <Form>
+          <PromptIfDirty />
           <ScrollTo />
           <Fieldset disableErrorLine={true} name="doctorsDetails">
             <Fieldset.Legend

@@ -19,6 +19,7 @@ import { BooleanUtilities } from "../../../../utilities/BooleanUtilities";
 import { YES_NO_OPTIONS } from "../../../../utilities/Constants";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -49,6 +50,7 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
       >
         {({ values, errors, handleSubmit, setFieldValue }) => (
           <Form>
+            <PromptIfDirty />
             <ScrollTo />
             <Fieldset
               disableErrorLine={true}

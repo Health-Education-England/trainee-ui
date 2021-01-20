@@ -35,7 +35,7 @@ import { FormsService } from "../../../services/FormsService";
 import { Redirect } from "react-router-dom";
 import MultiChoiceInputField from "../MultiChoiceInputField";
 import { EventUtilities } from "../../../utilities/EventUtilities";
-
+import PromptIfDirty from "../../common/PromptIfDirty";
 interface CreateProps extends GenericOwnProps {
   formData: FormRPartA | null;
   genders: KeyValue[];
@@ -141,6 +141,7 @@ class Create extends React.PureComponent<CreateProps> {
         >
           {({ values, errors }) => (
             <Form>
+              <PromptIfDirty />
               <WarningCallout label="Important">
                 <p>
                   This form has been pre-populated using the information

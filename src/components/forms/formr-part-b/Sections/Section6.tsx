@@ -5,6 +5,7 @@ import { Fieldset, Panel } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
+import PromptIfDirty from "../../../common/PromptIfDirty";
 
 const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -27,6 +28,7 @@ const Section6: FunctionComponent<SectionProps> = (props: SectionProps) => {
       >
         {({ values, handleSubmit }) => (
           <Form>
+            <PromptIfDirty />
             <ScrollTo />
             <Fieldset
               disableErrorLine={true}

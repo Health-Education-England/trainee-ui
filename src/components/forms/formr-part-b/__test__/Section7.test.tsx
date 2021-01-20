@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import Section7 from "../Sections/Section7";
 import { submittedFormRPartBs } from "../../../../mock-data/submitted-formr-partb";
 import { SectionProps } from "../Sections/SectionProps";
+import { BrowserRouter } from "react-router-dom";
 
 jest.mock("../ValidationSchema", () => ({
   get Section7ValidationSchema() {
@@ -31,16 +32,28 @@ describe("Form-R Part-B Section7", () => {
   });
 
   it("mounts without crashing", () => {
-    mount(<Section7 {...props} />);
+    mount(
+      <BrowserRouter>
+        <Section7 {...props} />
+      </BrowserRouter>
+    );
   });
 
   it("should render page heading", () => {
-    const wrapper = mount(<Section7 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section7 {...props} />
+      </BrowserRouter>
+    );
     expect(wrapper.find("[data-jest='mainFieldset7'] legend").length).toBe(1);
   });
 
   it("should render previous section link buttons with correct label", () => {
-    const wrapper = mount(<Section7 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section7 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--previous").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--previous").text()).toContain(
@@ -51,7 +64,11 @@ describe("Form-R Part-B Section7", () => {
   });
 
   it("should render next section link buttons with correct label", () => {
-    const wrapper = mount(<Section7 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section7 {...props} />
+      </BrowserRouter>
+    );
 
     expect(wrapper.find("li.nhsuk-pagination-item--next").length).toBe(1);
     expect(wrapper.find("li.nhsuk-pagination-item--next").text()).toContain(
@@ -61,7 +78,11 @@ describe("Form-R Part-B Section7", () => {
   });
 
   it("should submit the form", () => {
-    const wrapper = mount(<Section7 {...props} />);
+    const wrapper = mount(
+      <BrowserRouter>
+        <Section7 {...props} />
+      </BrowserRouter>
+    );
     const form = wrapper.find("form").first();
 
     try {
