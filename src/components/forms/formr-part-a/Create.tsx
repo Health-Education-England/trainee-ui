@@ -34,6 +34,7 @@ import { AxiosResponse } from "axios";
 import { FormsService } from "../../../services/FormsService";
 import { Redirect } from "react-router-dom";
 import MultiChoiceInputField from "../MultiChoiceInputField";
+import { EventUtilities } from "../../../utilities/EventUtilities";
 
 interface CreateProps extends GenericOwnProps {
   formData: FormRPartA | null;
@@ -76,6 +77,14 @@ class Create extends React.PureComponent<CreateProps> {
     if (!this.props.isLoaded) {
       this.props.loadReferenceData(new TraineeReferenceService());
     }
+    window.addEventListener("beforeunload", EventUtilities.handleBeforeUnload);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      EventUtilities.handleBeforeUnload
+    );
   }
 
   saveDraft(formData: FormRPartA) {

@@ -24,6 +24,7 @@ import { FormsService } from "../../../services/FormsService";
 import Loading from "../../common/Loading";
 import CovidDeclaration from "./Sections/CovidDeclaration";
 import { Redirect } from "react-router-dom";
+import { EventUtilities } from "../../../utilities/EventUtilities";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -56,11 +57,19 @@ class Create extends React.PureComponent<
   ISection
 > {
   componentDidMount() {
-    const { isLoaded, loadReferenceData } = this.props;
+    const { isLoaded } = this.props;
 
     if (!isLoaded) {
-      loadReferenceData(new TraineeReferenceService());
+      this.props.loadReferenceData(new TraineeReferenceService());
     }
+    window.addEventListener("beforeunload", EventUtilities.handleBeforeUnload);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      EventUtilities.handleBeforeUnload
+    );
   }
 
   nextSection = (formData: FormRPartB, section?: number) => {

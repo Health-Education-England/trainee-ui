@@ -35,12 +35,6 @@ class App extends React.PureComponent<AppProps, AppState> {
     };
   }
 
-  handleBeforeUnload(event: { returnValue: string }) {
-    const confirmMsg = "";
-    event.returnValue = confirmMsg;
-    return confirmMsg;
-  }
-
   async componentDidMount() {
     const currentVersion = globalAny.appVersion;
     const latestVersion = await CacheUtilities.FetchMetaFile();
@@ -50,11 +44,6 @@ class App extends React.PureComponent<AppProps, AppState> {
       ...prevState,
       checkLatestVersion: true
     }));
-    window.addEventListener("beforeunload", this.handleBeforeUnload);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("beforeunload", this.handleBeforeUnload);
   }
 
   setAuthenticationStatus = async (state: string) => {
