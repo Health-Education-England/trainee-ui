@@ -13,7 +13,7 @@ import Support from "./components/forms/Support";
 import HowToPrintToPDF from "./components/forms/HowToPrintToPDF";
 import { CacheUtilities } from "./utilities/CacheUtilities";
 import packageJson from "../package.json";
-
+import PageTitle from "./components/common/PageTitle";
 const globalAny: any = global;
 globalAny.appVersion = packageJson.version;
 
@@ -85,6 +85,7 @@ class App extends React.PureComponent<AppProps, AppState> {
 
     return (
       <BrowserRouter>
+        <PageTitle />
         <HEEHeader isAuthenticated={isAuthenticated} />
         {isAuthenticated && checkLatestVersion ? (
           <main className="nhsuk-width-container nhsuk-u-margin-top-5">
