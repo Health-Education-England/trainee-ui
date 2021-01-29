@@ -89,7 +89,7 @@ jobs:
     environment: prod
     needs: [deploy-pre-prod]
 
-      steps:
+    steps:
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -119,5 +119,3 @@ jobs:
         service: ${{ github.event.repository.name }}
         cluster: trainee-prod
         wait-for-service-stability: true
-
-    
