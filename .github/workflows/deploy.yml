@@ -37,7 +37,6 @@ jobs:
   #         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   deploy-pre-prod:
-    needs: [dockerize]
     environment: pre-prod
     name: Deploy to pre-production environment
     runs-on: ubuntu-latest
