@@ -73,16 +73,7 @@ jobs:
           cluster: trainee-preprod
           wait-for-service-stability: true
 
-      - name: Run E2E Tests
-        id: e2e-tests
-        env:
-          CYPRESS_baseUrl: https://trainee.tis.nhs.uk
-          CYPRESS_password: ${{ secrets.E2E_TEST_PASS }}
-          CYPRESS_username: ${{ secrets.E2E_TEST_USER }}
-        run: |
-          npm install
-          npm run cypress
-
+   
   cypress-e2e:
     needs: [deploy-pre-prod]
     name: Run Cypress E2E tests
