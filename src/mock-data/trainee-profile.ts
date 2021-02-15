@@ -112,7 +112,10 @@ export const mockPlacements = [
     siteLocation: "Site location",
     specialty: "Dermatology",
     startDate: new Date("2020-01-01"),
-    status: Status.Current
+    status: Status.Current,
+    employingBody: "Employing body",
+    trainingBody: "Training body",
+    wholeTimeEquivalent: "0.5"
   }
 ];
 
