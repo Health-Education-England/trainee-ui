@@ -106,7 +106,7 @@ export const mockPlacements = [
   {
     endDate: new Date("2020-12-31"),
     grade: "ST1",
-    placementTisId: "315",
+    tisId: "315",
     placementType: "In Post",
     site: "Addenbrookes Hospital",
     siteLocation: "Site location",

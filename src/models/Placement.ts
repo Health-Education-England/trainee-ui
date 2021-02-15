@@ -1,7 +1,7 @@
 import { Status } from "./Status";
 
 export interface Placement {
-  placementTisId: string;
+  tisId: string;
   startDate: Date;
   endDate: Date;
   site: string;
