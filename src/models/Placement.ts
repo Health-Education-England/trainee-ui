@@ -9,5 +9,8 @@ export interface Placement {
   grade: string;
   specialty: string;
   placementType: string;
+  employingBody: string;
+  trainingBody: string;
+  wholeTimeEquivalent: string;
   status: Status;
 }

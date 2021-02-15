@@ -9,10 +9,10 @@ interface IPlacementProps {
 }
 
 const Placements: React.FC<IPlacementProps> = ({ placements }) => {
-  const columnWidths: any[] = ["full", "full", "one-half", "one-third"];
+  const columnWidths: any[] = ["full", "full", "one-half"];
   let columnWidth = columnWidths[placements.length]
     ? columnWidths[placements.length]
-    : "one-third";
+    : "one-half";
 
   return (
     placements && (

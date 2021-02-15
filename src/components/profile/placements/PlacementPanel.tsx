@@ -16,6 +16,10 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
         <SummaryList.Key>Site</SummaryList.Key>
         <SummaryList.Value>{data.site}</SummaryList.Value>
       </SummaryList.Row>
+      <SummaryList.Row>
+        <SummaryList.Key>Site Location</SummaryList.Key>
+        <SummaryList.Value>{data.siteLocation}</SummaryList.Value>
+      </SummaryList.Row>
 
       <SummaryList.Row>
         <SummaryList.Key>
@@ -25,7 +29,6 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
           {DateUtilities.ToLocalDate(data.startDate)}
         </SummaryList.Value>
       </SummaryList.Row>
-
       <SummaryList.Row>
         <SummaryList.Key>Ends</SummaryList.Key>
         <SummaryList.Value>
@@ -33,10 +36,24 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
         </SummaryList.Value>
       </SummaryList.Row>
       <SummaryList.Row>
+        <SummaryList.Key>Whole Time Equivalent</SummaryList.Key>
+        <SummaryList.Value>{data.wholeTimeEquivalent}</SummaryList.Value>
+      </SummaryList.Row>
+
+      <SummaryList.Row>
         <SummaryList.Key>
           <span className="noWrap">Specialty</span>
         </SummaryList.Key>
         <SummaryList.Value>{data.specialty}</SummaryList.Value>
+      </SummaryList.Row>
+
+      <SummaryList.Row>
+        <SummaryList.Key>Employing Body</SummaryList.Key>
+        <SummaryList.Value>{data.employingBody}</SummaryList.Value>
+      </SummaryList.Row>
+      <SummaryList.Row>
+        <SummaryList.Key>Training Body</SummaryList.Key>
+        <SummaryList.Value>{data.trainingBody}</SummaryList.Value>
       </SummaryList.Row>
     </SummaryList>
   );
