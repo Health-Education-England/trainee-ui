@@ -166,7 +166,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     environment: prod
-    needs: [deploy-pre-prod]
+    needs: [cypress-e2e]
 
     steps:
       - name: Checkout
