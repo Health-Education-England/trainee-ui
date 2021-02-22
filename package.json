@@ -52,7 +52,9 @@
     "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx,.js --fix",
-    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\" --fix"
+    "stylelint": "stylelint \"src/**/*.scss\" \"src/**/*.css\" --fix",
+    "report:merge": "mochawesome-merge cypress/results/json/*.json > cypress/results/index.json",
+    "report:generate": "marge cypress/results/index.json --reportDir cypress/reports --assetsDir cypress/reports/assets --reportPageTitle index.html"
   },
   "husky": {
     "hooks": {
@@ -82,12 +84,16 @@
     "@types/redux-mock-store": "^1.0.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "cypress": "^6.0.0",
+    "cypress-multi-reporters": "^1.4.0",
     "enzyme": "^3.11.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "jest-sonar-reporter": "^2.0.0",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "mochawesome-merge": "^4.2.0",
     "prettier": "^2.1.2",
     "stylelint-prettier": "^1.1.2"
   },
