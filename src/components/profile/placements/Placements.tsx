@@ -19,7 +19,7 @@ const Placements: React.FC<IPlacementProps> = ({ placements }) => {
       <Details expander>
         <Details.Summary>Placements</Details.Summary>
         <Details.Text>
-          <Row className={styles.placementRow}>
+          <Row className={styles.flexRow}>
             {placements.length === 0 ? (
               <div>You are not assigned to any placement</div>
             ) : (
