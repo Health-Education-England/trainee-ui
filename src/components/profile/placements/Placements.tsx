@@ -23,13 +23,24 @@ const Placements: React.FC<IPlacementProps> = ({ placements }) => {
             {placements.length === 0 ? (
               <div>You are not assigned to any placement</div>
             ) : (
-              placements.map(
-                (placement: Placement, index: number | string | undefined) => (
-                  <Col key={index} width={columnWidth}>
-                    <PlacementPanel key={index} placement={placement} />
-                  </Col>
+              placements
+                .sort((a: Placement, b: Placement) =>
+                  a.startDate > b.startDate
+                    ? -1
+                    : b.startDate > a.startDate
+                    ? 1
+                    : 0
                 )
-              )
+                .map(
+                  (
+                    placement: Placement,
+                    index: number | string | undefined
+                  ) => (
+                    <Col key={index} width={columnWidth}>
+                      <PlacementPanel key={index} placement={placement} />
+                    </Col>
+                  )
+                )
             )}
           </Row>
         </Details.Text>
