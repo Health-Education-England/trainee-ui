@@ -77,7 +77,7 @@ const Section3: FunctionComponent<SectionProps> = (props: SectionProps) => {
                   items={[
                     {
                       label:
-                        "I declare that I accept the professional obligations paced on me in Good Medical Practice in relation to honesty and integrity.",
+                        "I declare that I accept the professional obligations placed on me in Good Medical Practice in relation to honesty and integrity.",
                       value: true
                     }
                   ]}

@@ -89,7 +89,7 @@ const Section4: FunctionComponent<SectionProps> = (props: SectionProps) => {
 
               <Panel label="Previous Declarations" data-cy="declarations4">
                 <MultiChoiceInputField
-                  label="Do you have any Significant Events, Complaints, Other investigations on your previous Form R Part B?"
+                  label="Did you declare any Significant Events, Complaints, Other investigations on your previous Form R Part B?"
                   id="havePreviousDeclarations"
                   name="havePreviousDeclarations"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

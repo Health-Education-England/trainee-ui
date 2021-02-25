@@ -107,7 +107,7 @@ const Section5: FunctionComponent<SectionProps> = (props: SectionProps) => {
 
               <Panel label="New Declarations" data-cy="declarations5">
                 <MultiChoiceInputField
-                  label="Do you have any new Significant Events, Complaints, Other investigations since your previous ARCP/RITA/Appraisal?"
+                  label="Do you have any new Significant Events, Complaints, Other investigations to declare since your previous ARCP/RITA/Appraisal?"
                   id="haveCurrentDeclarations"
                   name="haveCurrentDeclarations"
                   type="radios"

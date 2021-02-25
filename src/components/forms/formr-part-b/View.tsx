@@ -373,7 +373,7 @@ class View extends React.PureComponent<ViewProps> {
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>
-                  Do you have any Significant Events, Complaints, Other
+                  Did you declare any Significant Events, Complaints, Other
                   investigations on your previous Form R Part B?
                 </SummaryList.Key>
                 <SummaryList.Value data-jest="havePreviousDeclarations">

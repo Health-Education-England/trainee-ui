@@ -93,7 +93,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 name="localOfficeName"
               />
               <SelectInputField
-                label="Previous Designated Body for Revalidation"
+                label="Previous Designated Body for Revalidation (if applicable)"
                 options={localOffices}
                 name="prevRevalBody"
               />
