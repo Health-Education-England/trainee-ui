@@ -373,8 +373,8 @@ class View extends React.PureComponent<ViewProps> {
             <SummaryList>
               <SummaryList.Row>
                 <SummaryList.Key>
-                Did you declare any Significant Events, Complaints, 
-                Other investigations on your previous Form R Part B?
+                  Did you declare any Significant Events, Complaints, Other
+                  investigations on your previous Form R Part B?
                 </SummaryList.Key>
                 <SummaryList.Value data-jest="havePreviousDeclarations">
                   {BooleanUtilities.ToYesNo(formData.havePreviousDeclarations)}
