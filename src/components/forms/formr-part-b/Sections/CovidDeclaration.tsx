@@ -333,7 +333,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                     <Label>
                       <p>
                         Please provide details of your Educational Supervisor in
-                        this section. A copy of this form will need to be sent
+                        this section. A <strong>PDF</strong> copy of this form will need to be sent
                         to your ES when you submit this form. This will give
                         your ES the opportunity to review the information
                         provided in the self-assessment declaration, comment and
