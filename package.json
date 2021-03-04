@@ -12,7 +12,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-helmet": "^6.1.0",
-    "@types/yup": "0.29.5",
+    "@types/yup": "0.29.11",
     "aws-amplify": "^3.3.13",
     "aws-amplify-react": "^3.1.5",
     "axios": "^0.21.1",
