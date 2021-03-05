@@ -144,3 +144,35 @@ button:disabled {
     display: none;
   }
 }
+
+//Browser outdated
+
+.buorg {
+  color: #fff !important;
+  background-color: #8a1538 !important;
+  font-family: "Frutiger W01" Arial Sans-serif !important;
+  border: none !important;
+  animation: none !important;
+}
+
+#buorgig,
+#buorgul,
+#buorgpermanent {
+  box-shadow: none !important;
+  padding: 6px 16px !important;
+  border: 1px solid lighten(#8a1538, 18%) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.buorg-mainmsg {
+  display: block !important;
+}
+.buorg-moremsg {
+  font-size: 90% !important;
+  width: 80% !important;
+  display: inline-block !important;
+}
+
+.buorg-icon {
+  display: none !important;
+}
