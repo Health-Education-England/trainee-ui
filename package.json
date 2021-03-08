@@ -92,7 +92,7 @@
     "husky": "^4.2.5",
     "jest-sonar-reporter": "^2.0.0",
     "mocha": "^8.2.1",
-    "mochawesome": "^6.2.1",
+    "mochawesome": "^6.2.2",
     "mochawesome-merge": "^4.2.0",
     "prettier": "^2.1.2",
     "stylelint-prettier": "^1.1.2"
