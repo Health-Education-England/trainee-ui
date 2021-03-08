@@ -16,7 +16,7 @@
     "aws-amplify": "^3.3.13",
     "aws-amplify-react": "^3.1.5",
     "axios": "^0.21.1",
-    "contentful": "^7.14.6",
+    "contentful": "^8.1.8",
     "eslint-plugin-cypress": "^2.11.2",
     "formik": "^2.2.6",
     "moment": "^2.27.0",
