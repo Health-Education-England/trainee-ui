@@ -18,7 +18,7 @@
     "axios": "^0.21.1",
     "contentful": "^7.14.6",
     "eslint-plugin-cypress": "^2.11.2",
-    "formik": "^2.2.5",
+    "formik": "^2.2.6",
     "moment": "^2.27.0",
     "nhsuk-frontend": "^3.1.0",
     "nhsuk-react-components": "^1.2.5",
