@@ -1,6 +1,6 @@
 {
   "name": "trainee-ui-app",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -16,6 +16,7 @@
     "aws-amplify": "^3.3.13",
     "aws-amplify-react": "^3.1.5",
     "axios": "^0.21.1",
+    "browser-update": "^3.3.25",
     "contentful": "^7.14.6",
     "eslint-plugin-cypress": "^2.11.2",
     "formik": "^2.2.6",

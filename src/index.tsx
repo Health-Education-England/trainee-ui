@@ -9,7 +9,9 @@ import Amplify from "aws-amplify";
 import config from "./aws-amplify/config";
 
 import store from "./redux/store/store";
-
+import browserUpdate from "browser-update";
+import browserUpdateConfig from "./browser-update-config.json";
+browserUpdate(browserUpdateConfig);
 async function fetchData(): Promise<any> {
   const fetchedData: any = await fetch("/api/environment")
     .then(response => {
