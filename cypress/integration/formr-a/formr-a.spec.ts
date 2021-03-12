@@ -58,20 +58,10 @@ describe("Form R (Part A)", () => {
             .should("not.be.empty");
 
           cy.get("#gender").should("exist").should("have.value", "Male");
-          //Test for 'Other' immigration status
           cy.get("#immigrationStatus")
             .should("exist")
-            .select(
-              "Other immigration categories i.e. overseas government employees, innovators etc."
-            )
-            .should(
-              "have.value",
-              "Other immigration categories i.e. overseas government employees, innovators etc."
-            );
-          cy.get("#otherImmigrationStatus")
-            .should("exist")
-            .type("My special status")
-            .should("have.value", "My special status");
+            .select("Tier 1")
+            .should("have.value", "Tier 1");
           cy.get("#qualification")
             .should("exist")
             .invoke("val")
@@ -197,21 +187,10 @@ describe("Form R (Part A)", () => {
             .type("1991-11-11");
 
           cy.get("#gender").should("exist").select("Male");
-          //Test for 'Other' immigration status
           cy.get("#immigrationStatus")
             .should("exist")
-            .select(
-              "Other immigration categories i.e. overseas government employees, innovators etc."
-            )
-            .should(
-              "have.value",
-              "Other immigration categories i.e. overseas government employees, innovators etc."
-            );
-          cy.get("#otherImmigrationStatus")
-            .should("exist")
-            .clear()
-            .type("My special status")
-            .should("have.value", "My special status");
+            .select("Tier 1")
+            .should("have.value", "Tier 1");
 
           cy.get("#qualification")
             .should("exist")

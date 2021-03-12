@@ -37,19 +37,11 @@ Cypress.Commands.add(
     cy.get("#dateOfBirth").should("exist").invoke("val").should("not.be.empty");
 
     cy.get("#gender").should("exist").should("have.value", "Male");
-    //Test for 'Other' immigration status
     cy.get("#immigrationStatus")
       .should("exist")
-      .select(
-        "Other immigration categories i.e. overseas government employees, innovators etc."
-      )
-      .should(
-        "have.value",
-        "Other immigration categories i.e. overseas government employees, innovators etc."
-      );
-    cy.get("#otherImmigrationStatus")
-      .should("exist")
-      .should("have.value", "My special status");
+      .select("Tier 1")
+      .should("have.value", "Tier 1");
+
     cy.get("#qualification")
       .should("exist")
       .should("not.have.value", "--Please select--");
