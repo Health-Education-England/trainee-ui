@@ -11,9 +11,11 @@ import config from "./aws-amplify/config";
 import store from "./redux/store/store";
 import browserUpdate from "browser-update";
 import browserUpdateConfig from "./browser-update-config.json";
+
 browserUpdate(browserUpdateConfig);
+
 async function fetchData(): Promise<any> {
-  const fetchedData: any = await fetch("/api/environment")
+  return await fetch("/api/environment")
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response error");
@@ -24,7 +26,6 @@ async function fetchData(): Promise<any> {
     .catch(error => {
       console.error("There is a problem fetching the app data: ", error);
     });
-  return fetchedData;
 }
 
 (async function initApp(): Promise<void> {
