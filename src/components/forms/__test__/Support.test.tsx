@@ -1,119 +1,65 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import Support, { UnconnectedSupport } from "../Support";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureMockStore from "redux-mock-store";
+import { shallow } from "enzyme";
+import { Support } from "../Support";
 import { mockTraineeProfile } from "../../../mock-data/trainee-profile";
-import { TraineeProfile } from "../../../models/TraineeProfile";
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
-
-// NOTE: can only be called on a wrapper instance that is also the root instance.
-// With React 16 and above, instance() returns null for stateless functional components.
 
 describe("Support", () => {
-  const createStore = (profile: TraineeProfile | null) =>
-    mockStore({
-      profile: {
-        traineeProfile: profile,
-        isLoaded: profile
-      }
-    });
+  let wrapper: any;
 
-  it("renders without crashing", () => {
-    shallow(
-      <Provider store={createStore(null)}>
-        <Support />
-      </Provider>
-    );
-  });
-
-  it("renders Loading when isLoading is false", () => {
-    const wrapper = mount(
-      <Provider store={createStore(null)}>
-        <Support />
-      </Provider>
-    );
-
-    expect(wrapper.find("h1")).toHaveLength(0);
-  });
-
-  it("renders profile when data available", () => {
-    const wrapper = mount(
-      <Provider store={createStore(mockTraineeProfile)}>
-        <Support />
-      </Provider>
-    );
-
-    expect(wrapper.find("h1")).toHaveLength(1);
-  });
-
-  it("`getCurrentProgramme` should return a `CURRENT` programme.", () => {
-    const wrapper = shallow(
-      <UnconnectedSupport
+  beforeEach(() => {
+    wrapper = shallow(
+      <Support
         traineeProfile={mockTraineeProfile}
         isLoaded={true}
         loadTraineeProfile={null}
       />
     );
-    const currentProgramme = (wrapper.instance() as UnconnectedSupport).getCurrentProgramme(
-      mockTraineeProfile
-    );
-    expect(currentProgramme.status).toBe("CURRENT");
   });
 
-  it("`getLocalOfficeEmail` should return a valid email when associated with a valid local office.", () => {
-    const wrapper = shallow(
-      <UnconnectedSupport
-        traineeProfile={mockTraineeProfile}
-        isLoaded={true}
+  it("renders Loading when isLoading is true", () => {
+    wrapper = shallow(
+      <Support
+        traineeProfile={null}
+        isLoaded={false}
         loadTraineeProfile={null}
       />
     );
-    const localOfficeEmail = (wrapper.instance() as UnconnectedSupport).getLocalOfficeEmail(
-      "Health Education England West Midlands"
-    );
-    expect(localOfficeEmail).not.toBeNull();
+
+    expect(wrapper.find("Loading")).toBeTruthy();
   });
 
-  it("`getLocalOfficeEmail` should return null when associated with a local London office.", () => {
-    const wrapper = shallow(
-      <UnconnectedSupport
-        traineeProfile={mockTraineeProfile}
-        isLoaded={true}
-        loadTraineeProfile={null}
-      />
-    );
-    const localOfficeEmail = (wrapper.instance() as UnconnectedSupport).getLocalOfficeEmail(
-      "Health Education England North West London"
-    );
-    expect(localOfficeEmail).toBeNull();
+  it("should mount and call fetchTraineeProfileProps ", async () => {
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
+    await instance.componentDidMount();
+    expect(instance.fetchTraineeProfileProps).toHaveBeenCalledTimes(1);
   });
 
-  it("Should display the form when showForm is true.", () => {
-    const wrapper = shallow(
-      <UnconnectedSupport
-        traineeProfile={mockTraineeProfile}
-        isLoaded={true}
-        loadTraineeProfile={null}
-      />
-    );
-    wrapper.setState({ showForm: true });
-    expect(wrapper.find("[data-jest='FormPanel']")).toHaveLength(1);
-    expect(wrapper.find("[data-jest='GetHelpPanel']")).toHaveLength(0);
+  it("should render the PGMDE panel for London-based trainee", async () => {
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
+    jest
+      .spyOn(instance, "fetchPersonOwner")
+      .mockReturnValue("Health Education England Thames Valley");
+    await instance.componentDidMount();
+    expect(wrapper.find("[data-jest='PGMDESupportPanel']")).toHaveLength(1);
+    expect(wrapper.find("[data-jest='loSupportPanel']")).toHaveLength(0);
   });
 
-  it("Should display the get help panel when showForm is false.", () => {
-    const wrapper = shallow(
-      <UnconnectedSupport
-        traineeProfile={mockTraineeProfile}
-        isLoaded={true}
-        loadTraineeProfile={null}
-      />
-    );
-    wrapper.setState({ showForm: false });
-    expect(wrapper.find("[data-jest='FormPanel']")).toHaveLength(0);
-    expect(wrapper.find("[data-jest='GetHelpPanel']")).toHaveLength(1);
+  it("should render the dataError panel when no personOwner found", async () => {
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
+    jest.spyOn(instance, "fetchPersonOwner").mockReturnValue(null);
+    await instance.componentDidMount();
+    expect(wrapper.find("[data-jest='dataErrorPanel']")).toHaveLength(1);
+  });
+
+  it("should render the matchError panel if no mapped contact found", async () => {
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
+    jest.spyOn(instance, "fetchPersonOwner").mockReturnValue("made up LO");
+    jest.spyOn(instance, "findMappedContact");
+    await instance.componentDidMount();
+    expect(wrapper.find("[data-jest='matchErrorPanel']")).toHaveLength(1);
   });
 });
