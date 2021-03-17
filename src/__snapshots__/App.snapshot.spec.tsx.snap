@@ -57,7 +57,7 @@ Array [
           </p>
           <p>
             For further information and support, visit the
-
+             
             <a
               href="https://tis-support.hee.nhs.uk"
               style={
@@ -141,7 +141,7 @@ Array [
         <p
           className="nhsuk-footer__copyright"
         >
-          ©
+          © 
           <a
             href="https://www.hee.nhs.uk"
           >
@@ -193,7 +193,7 @@ Array [
         </h3>
         <p>
           We use necessary cookies to make our site work and analytics cookies to help us improve it. In order use this site, you must agree to the storing of such cookies on your device by clicking 'Accept and close'. To learn more about how we use cookies and your data, please see our
-
+           
           <a
             href="https://www.hee.nhs.uk/about/privacy-notice"
             rel="noopener noreferrer nofollow"
