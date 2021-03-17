@@ -22,9 +22,12 @@ export function ProfileToFormRPartBInitialValues(
     programme && programme.curricula.length > 0
       ? programme.curricula
           .filter(c => c.curriculumSubType === MEDICAL_CURRICULUM)
-          .reduce(function (a, b) {
-            return a.curriculumStartDate > b.curriculumStartDate ? a : b;
-          })
+          .sort(
+            (a, b) =>
+              new Date(b.curriculumStartDate).getTime() -
+              new Date(a.curriculumStartDate).getTime()
+          )
+          .shift()
       : null;
 
   const work = traineeProfile.placements.map<Work>(placement => ({

@@ -102,6 +102,51 @@ export const mockProgrammeMemberships = [
   }
 ];
 
+export const mockProgrammeMembershipNoCurricula = {
+  startDate: new Date("2020-01-01"),
+  endDate: new Date("2022-01-01"),
+  programmeCompletionDate: new Date("2019-12-31"),
+  programmeTisId: "1",
+  programmeName: "Cardiology",
+  programmeNumber: "EOE8945",
+  managingDeanery: "Health Education England East of England",
+  programmeMembershipType: "SUBSTANTIVE",
+  status: Status.Current,
+  curricula: []
+};
+
+export const mockProgrammeMembershipNoMedicalCurricula = {
+  startDate: new Date("2020-01-01"),
+  endDate: new Date("2022-01-01"),
+  programmeCompletionDate: new Date("2019-12-31"),
+  programmeTisId: "1",
+  programmeName: "Cardiology",
+  programmeNumber: "EOE8945",
+  managingDeanery: "Health Education England East of England",
+  programmeMembershipType: "SUBSTANTIVE",
+  status: Status.Current,
+  curricula: [
+    {
+      curriculumTisId: "4",
+      curriculumName: "ST4",
+      curriculumSubType: "DENTAL_CURRICULUM",
+      curriculumStartDate: new Date("2022-01-01")
+    },
+    {
+      curriculumTisId: "5",
+      curriculumName: "ST5",
+      curriculumSubType: "ACF_OTHER_FUNDING",
+      curriculumStartDate: new Date("2022-06-01")
+    },
+    {
+      curriculumTisId: "6",
+      curriculumName: "ST6",
+      curriculumSubType: "DENTAL_CURRICULUM",
+      curriculumStartDate: new Date("2022-08-01")
+    }
+  ]
+};
+
 export const mockPlacements = [
   {
     endDate: new Date("2020-12-31"),
