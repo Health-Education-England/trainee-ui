@@ -46,7 +46,7 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
         </SummaryList.Key>
         <SummaryList.Value>{data.specialty}</SummaryList.Value>
       </SummaryList.Row>
-      
+
       <SummaryList.Row>
         <SummaryList.Key>
           <span className="noWrap">Grade</span>
