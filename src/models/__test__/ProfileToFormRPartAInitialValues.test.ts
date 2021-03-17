@@ -1,5 +1,9 @@
 import { ProfileToFormRPartAInitialValues } from "./../ProfileToFormRPartAInitialValues";
-import { mockTraineeProfile } from "../../mock-data/trainee-profile";
+import {
+  mockProgrammeMembershipNoCurricula,
+  mockProgrammeMembershipNoMedicalCurricula,
+  mockTraineeProfile
+} from "../../mock-data/trainee-profile";
 import { FormRPartA } from "../FormRPartA";
 import { LifeCycleState } from "../LifeCycleState";
 
@@ -57,6 +61,28 @@ describe("ProfileToFormRPartAInitialValues", () => {
 
   it("should return formRPartA with empty programmespeciality when no programmeMemberships available", () => {
     const traineeProfile = { ...mockTraineeProfile, programmeMemberships: [] };
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+  });
+
+  it("should return formRPartA with empty programmeSpecialty when no curriculum", () => {
+    const traineeProfile = {
+      ...mockTraineeProfile,
+      programmeMemberships: [mockProgrammeMembershipNoCurricula]
+    };
+
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+  });
+
+  it("should return formRPartA with empty programmeSpecialty when no medical curriculum", () => {
+    const traineeProfile = {
+      ...mockTraineeProfile,
+      programmeMemberships: [mockProgrammeMembershipNoMedicalCurricula]
+    };
+
     expect(
       ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
     ).toEqual("");
