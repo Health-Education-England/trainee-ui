@@ -40,10 +40,21 @@ describe("Support", () => {
     jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
     jest
       .spyOn(instance, "fetchPersonOwner")
-      .mockReturnValue("Health Education England Thames Valley");
+      .mockReturnValue("Health Education England North West London");
     await instance.componentDidMount();
     expect(wrapper.find("[data-jest='PGMDESupportPanel']")).toHaveLength(1);
     expect(wrapper.find("[data-jest='loSupportPanel']")).toHaveLength(0);
+  });
+
+  it("should render the Local Office panel for trainee outside London", async () => {
+    const instance = wrapper.instance();
+    jest.spyOn(instance, "fetchTraineeProfileProps").mockResolvedValue(null);
+    jest
+      .spyOn(instance, "fetchPersonOwner")
+      .mockReturnValue("Health Education England North West");
+    await instance.componentDidMount();
+    expect(wrapper.find("[data-jest='loSupportPanel']")).toHaveLength(1);
+    expect(wrapper.find("[data-jest='PGMDESupportPanel']")).toHaveLength(0);
   });
 
   it("should render the dataError panel when no personOwner found", async () => {

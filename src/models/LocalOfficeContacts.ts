@@ -33,8 +33,11 @@ export const localOfficeContacts: LocalOfficeContact[] = [
     name: "Health Education England South West",
     contact: "TISQueries.sw@hee.nhs.uk"
   },
-  { name: "Health Education England Thames Valley", contact: "PGMDE" },
-  { name: "Health Education England Wessex", contact: "PGMDE" },
+  {
+    name: "Health Education England Thames Valley",
+    contact: "tis.wtv@hee.nhs.uk"
+  },
+  { name: "Health Education England Wessex", contact: "tis.wtv@hee.nhs.uk" },
   {
     name: "Health Education England West Midlands",
     contact: "TIS.WM@hee.nhs.uk"
