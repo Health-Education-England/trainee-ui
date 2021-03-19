@@ -1,7 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Panel } from "nhsuk-react-components";
-import "react-toastify/dist/ReactToastify.css";
 import { localOfficeContacts } from "../../models/LocalOfficeContacts";
 import { loadTraineeProfile } from "../../redux/actions/trainee-profile-actions";
 import { RootState } from "../../redux/reducers";

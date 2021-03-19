@@ -46,6 +46,5 @@ export const localOfficeContacts: LocalOfficeContact[] = [
     name: "Health Education England Yorkshire and the Humber",
     contact: "TIS.yh@hee.nhs.uk"
   },
-  { name: "London LETBs", contact: "PGMDE" },
-  { name: "West of England", contact: "noreply@hee.nhs.uk" }
+  { name: "London LETBs", contact: "PGMDE" }
 ];
