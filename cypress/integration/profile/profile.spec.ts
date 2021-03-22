@@ -14,6 +14,8 @@ describe("Profile", () => {
     cy.contains("Site").should("exist");
     cy.contains("Specialty").should("exist");
     cy.contains("Placements").click();
+    cy.contains("Grade").should("exist");
+    cy.contains("Placement Type").should("exist");
     cy.contains("Site").should("not.be.visible");
     cy.contains("Specialty").should("not.be.visible");
   });
