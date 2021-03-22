@@ -1,46 +1,50 @@
-export interface LocalOfficeContact {
+interface LocalOfficeContact {
   name: string;
-  email: string | null;
+  contact: string;
 }
-
 export const localOfficeContacts: LocalOfficeContact[] = [
   {
     name: "Health Education England East Midlands",
-    email: "TIS.EM@hee.nhs.uk"
+    contact: "TIS.EM@hee.nhs.uk"
   },
   {
     name: "Health Education England East of England",
-    email: "TIS.EOE@hee.nhs.uk"
+    contact: "TIS.EOE@hee.nhs.uk"
   },
-  { name: "Health Education England Kent, Surrey and Sussex", email: null },
+  {
+    name: "Health Education England Kent, Surrey and Sussex",
+    contact: "PGMDE"
+  },
   {
     name: "Health Education England North Central and East London",
-    email: null
+    contact: "PGMDE"
   },
   {
     name: "Health Education England North East",
-    email: "InformationTeam.NE@hee.nhs.uk"
+    contact: "InformationTeam.NE@hee.nhs.uk"
   },
   {
     name: "Health Education England North West",
-    email: "medicine.nw@hee.nhs.uk"
+    contact: "medicine.nw@hee.nhs.uk"
   },
-  { name: "Health Education England North West London", email: null },
-  { name: "Health Education England South London", email: null },
+  { name: "Health Education England North West London", contact: "PGMDE" },
+  { name: "Health Education England South London", contact: "PGMDE" },
   {
     name: "Health Education England South West",
-    email: "TISQueries.sw@hee.nhs.uk"
+    contact: "TISQueries.sw@hee.nhs.uk"
   },
-  { name: "Health Education England Thames Valley", email: null },
-  { name: "Health Education England Wessex", email: null },
+  {
+    name: "Health Education England Thames Valley",
+    contact: "tis.wtv@hee.nhs.uk"
+  },
+  { name: "Health Education England Wessex", contact: "tis.wtv@hee.nhs.uk" },
   {
     name: "Health Education England West Midlands",
-    email: "TIS.WM@hee.nhs.uk"
+    contact: "TIS.WM@hee.nhs.uk"
   },
   {
     name: "Health Education England Yorkshire and the Humber",
-    email: "TIS.yh@hee.nhs.uk"
+    contact: "TIS.yh@hee.nhs.uk"
   },
-  { name: "London LETBs", email: null },
-  { name: "West of England", email: "noreply@hee.nhs.uk" }
+  { name: "London LETBs", contact: "PGMDE" }
 ];

@@ -65,7 +65,6 @@ describe("View", () => {
   it("should display confirm message when editable", () => {
     const history: any[] = [];
     const wrapper = mountComponent(submittedFormRPartAs[0], history, true);
-    console.log(wrapper.debug());
     expect(wrapper.find("[data-jest='warningConfirmation'] h3")).toHaveLength(
       1
     );
@@ -74,7 +73,6 @@ describe("View", () => {
   it("should not display confirm message when not editable", () => {
     const history: any[] = [];
     const wrapper = mountComponent(submittedFormRPartAs[0], history, false);
-    console.log(wrapper.debug());
     expect(wrapper.find("[data-jest='warningConfirmation']")).toHaveLength(0);
   });
 });
