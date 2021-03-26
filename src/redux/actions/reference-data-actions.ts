@@ -4,6 +4,8 @@ import {
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
+  LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
+  LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
@@ -46,6 +48,21 @@ export const loadReferenceData = (
     .catch(error =>
       dispatch({
         type: LOAD_REFERENCE_COLLEGES_FAILURE,
+        payload: error
+      })
+    );
+
+  const designatedBodies = referenceService
+    .getDesignatedBodies()
+    .then(response => {
+      dispatch({
+        type: LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
+        payload: getKeyValuesFromResponse(response)
+      });
+    })
+    .catch(error =>
+      dispatch({
+        type: LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
         payload: error
       })
     );
@@ -114,6 +131,7 @@ export const loadReferenceData = (
     genders,
     colleges,
     immigrationStatus,
+    designatedBodies,
     localOffices,
     trainingGrades,
     curricule

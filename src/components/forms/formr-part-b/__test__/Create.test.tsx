@@ -20,6 +20,7 @@ const createStore = (form: FormRPartB | null, section: number = 1) =>
   mockStore({
     formRPartB: { formData: form, section: section },
     referenceData: {
+      designatedBodies: [{ label: "designatedBody", value: "designatedBody" }],
       localOffices: [{ label: "localOffice", value: "localOffice" }],
       curricula: [{ label: "curriculum", value: "curriculum" }],
       isLoaded: true
@@ -96,6 +97,7 @@ describe("Create", () => {
     store = mockStore({
       formRPartB: { formData: submittedFormRPartBs[0], section: 1 },
       referenceData: {
+        designatedBodies: [],
         localOffices: [],
         curricula: [],
         isLoaded: false

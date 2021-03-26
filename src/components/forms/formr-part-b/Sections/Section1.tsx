@@ -17,6 +17,7 @@ import { KeyValue } from "../../../../models/KeyValue";
 
 interface Section1Props {
   localOffices: KeyValue[];
+  designatedBodies: KeyValue[];
   curricula: KeyValue[];
 }
 type CombinedSectionProps = SectionProps & Section1Props;
@@ -26,6 +27,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
 ) => {
   const {
     localOffices,
+    designatedBodies,
     curricula,
     formData,
     nextSection,
@@ -94,7 +96,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
               />
               <SelectInputField
                 label="Previous Designated Body for Revalidation (if applicable)"
-                options={localOffices}
+                options={designatedBodies}
                 name="prevRevalBody"
               />
               <TextInputField

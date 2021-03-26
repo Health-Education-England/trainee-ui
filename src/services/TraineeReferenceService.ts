@@ -18,6 +18,10 @@ export class TraineeReferenceService extends ApiService {
     return this.get("/college");
   }
 
+  getDesignatedBodies(): Promise<AxiosResponse<any>> {
+    return this.get("/dbc");
+  }
+
   getLocalOffices(): Promise<AxiosResponse<any>> {
     return this.get("/local-office");
   }
