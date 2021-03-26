@@ -46,7 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "npm run generate-build-version",
-    "generate-build-version": "ts-node generate-build-version",
+    "generate-build-version": "node generate-build-version",
     "build": "react-scripts build",
     "test": "react-scripts test --silent --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
     "cypress": "cypress run",
