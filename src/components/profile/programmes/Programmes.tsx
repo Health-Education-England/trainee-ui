@@ -1,35 +1,25 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Details } from "nhsuk-react-components";
+import { Col, Details, Panel, Row } from "nhsuk-react-components";
 import { ProgrammePanel } from "./ProgrammePanel";
 import { ProgrammeMembership } from "../../../models/ProgrammeMembership";
+import styles from "../placements/Placements.module.scss";
 
 interface IProgramProps {
   programmeMemberships: ProgrammeMembership[];
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(22),
-    fontWeight: theme.typography.fontWeightBold,
-    margin: "0px"
-  },
-  sectionPadding: {
-    padding: theme.typography.pxToRem(20)
-  }
-}));
-
 const Programmes: React.FC<IProgramProps> = ({ programmeMemberships }) => {
-  const classes = useStyles();
+  const columnWidths: any[] = ["full", "full", "one-half"];
+  let columnWidth = columnWidths[programmeMemberships.length]
+    ? columnWidths[programmeMemberships.length]
+    : "one-half";
+
   return (
     programmeMemberships && (
       <Details expander>
         <Details.Summary>Programmes</Details.Summary>
         <Details.Text>
-          <div className={classes.root}>
+          <Row className={styles.flexRow}>
             {programmeMemberships.length === 0 ? (
               <div>You are not assigned to any programme</div>
             ) : (
@@ -38,14 +28,18 @@ const Programmes: React.FC<IProgramProps> = ({ programmeMemberships }) => {
                   programmeMembership: ProgrammeMembership,
                   index: string | number | undefined
                 ) => (
-                  <ProgrammePanel
-                    key={index}
-                    programmeMembership={programmeMembership}
-                  />
+                  <Col key={index} width={columnWidth}>
+                    <Panel label="Programme">
+                      <ProgrammePanel
+                        key={index}
+                        programmeMembership={programmeMembership}
+                      />
+                    </Panel>
+                  </Col>
                 )
               )
             )}
-          </div>
+          </Row>
         </Details.Text>
       </Details>
     )

@@ -23,7 +23,7 @@ const Placements: React.FC<IPlacementProps> = ({ placements }) => {
             {placements.length === 0 ? (
               <div>You are not assigned to any placement</div>
             ) : (
-              placements
+              [...placements]
                 .sort((a: Placement, b: Placement) =>
                   a.startDate > b.startDate
                     ? -1
