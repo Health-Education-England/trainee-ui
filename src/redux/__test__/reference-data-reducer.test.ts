@@ -5,8 +5,10 @@ import {
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
-  LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
+  LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
+  LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
+  LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
@@ -19,6 +21,7 @@ describe("form-r part-a reducer", () => {
   const initialState: ReferenceDataState = {
     genders: [],
     colleges: [],
+    designatedBodies: [],
     localOffices: [],
     grades: [],
     immigrationStatus: [],
@@ -61,6 +64,21 @@ describe("form-r part-a reducer", () => {
 
     const successAction: ActionType = {
       type: LOAD_REFERENCE_COLLEGES_SUCCESS,
+      payload: []
+    };
+
+    expect(ReferenceDataReducer(initialState, successAction)).toEqual(state);
+  });
+
+  it("should return updated state when LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS action passed", () => {
+    const state: ReferenceDataState = {
+      ...initialState,
+      designatedBodies: [],
+      isLoaded: true
+    };
+
+    const successAction: ActionType = {
+      type: LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
       payload: []
     };
 
@@ -130,6 +148,7 @@ describe("form-r part-a reducer", () => {
   test.each([
     LOAD_REFERENCE_GENDER_FAILURE,
     LOAD_REFERENCE_COLLEGES_FAILURE,
+    LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
     LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
     LOAD_REFERENCE_GRADES_FAILURE,
     LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,

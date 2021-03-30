@@ -26,6 +26,7 @@ import CovidDeclaration from "./Sections/CovidDeclaration";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
+  designatedBodies: state.referenceData.designatedBodies,
   localOffices: state.referenceData.localOffices,
   curricula: state.referenceData.curricula,
   isLoaded: state.referenceData.isLoaded,
@@ -98,6 +99,7 @@ class Create extends React.PureComponent<
   render() {
     const {
       formData,
+      designatedBodies,
       localOffices,
       curricula,
       isLoaded,
@@ -116,7 +118,7 @@ class Create extends React.PureComponent<
         formData.localOfficeName = "";
       }
 
-      if (!localOffices.some(l => l.label === formData.prevRevalBody)) {
+      if (!designatedBodies.some(l => l.label === formData.prevRevalBody)) {
         formData.prevRevalBody = "";
       }
     }
@@ -182,6 +184,7 @@ class Create extends React.PureComponent<
     if (section < sections.length) {
       return React.createElement(sections[section].component, {
         ...sectionProps,
+        designatedBodies: this.props.designatedBodies,
         localOffices: this.props.localOffices,
         curricula: curricula,
         history: this.props.history,

@@ -4,6 +4,8 @@ import {
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
   LOAD_REFERENCE_COLLEGES_FAILURE,
+  LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
+  LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_SUCCESS,
@@ -17,6 +19,7 @@ import {
 const initialState: ReferenceDataState = {
   genders: [],
   colleges: [],
+  designatedBodies: [],
   localOffices: [],
   grades: [],
   immigrationStatus: [],
@@ -40,6 +43,13 @@ export default function ReferenceDataReducer(
       return {
         ...state,
         colleges: action.payload,
+        isLoaded: true
+      };
+
+    case LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS:
+      return {
+        ...state,
+        designatedBodies: action.payload,
         isLoaded: true
       };
 
@@ -73,6 +83,7 @@ export default function ReferenceDataReducer(
 
     case LOAD_REFERENCE_GENDER_FAILURE:
     case LOAD_REFERENCE_COLLEGES_FAILURE:
+    case LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE:
     case LOAD_REFERENCE_LOCAL_OFFICES_FAILURE:
     case LOAD_REFERENCE_GRADES_FAILURE:
     case LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE:

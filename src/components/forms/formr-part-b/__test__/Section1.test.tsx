@@ -13,6 +13,7 @@ const mockFn = jest.fn();
 const saveDraft = jest.fn();
 
 const props = {
+  designatedBodies: [],
   localOffices: [],
   curricula: [],
   formData: submittedFormRPartBs[0],

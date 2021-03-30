@@ -24,6 +24,7 @@ export interface GenericOwnProps {
 export interface ReferenceDataState {
   genders: KeyValue[];
   colleges: KeyValue[];
+  designatedBodies: KeyValue[];
   localOffices: KeyValue[];
   grades: KeyValue[];
   immigrationStatus: KeyValue[];

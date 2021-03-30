@@ -3,12 +3,14 @@ import { loadReferenceData } from "../actions/reference-data-actions";
 import {
   LOAD_REFERENCE_GENDER_SUCCESS,
   LOAD_REFERENCE_COLLEGES_SUCCESS,
+  LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
   LOAD_REFERENCE_LOCAL_OFFICES_SUCCESS,
   LOAD_REFERENCE_GRADES_SUCCESS,
   LOAD_REFERENCE_IMMIGRATION_STATUS_SUCCESS,
   LOAD_REFERENCE_CURRICULA_SUCCESS,
   LOAD_REFERENCE_GENDER_FAILURE,
   LOAD_REFERENCE_COLLEGES_FAILURE,
+  LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
   LOAD_REFERENCE_LOCAL_OFFICES_FAILURE,
   LOAD_REFERENCE_GRADES_FAILURE,
   LOAD_REFERENCE_IMMIGRATION_STATUS_FAILURE,
@@ -43,6 +45,9 @@ describe("loadReferenceData method", () => {
       .spyOn(referenceService, "getColleges")
       .mockReturnValue(successResponse);
     jest
+      .spyOn(referenceService, "getDesignatedBodies")
+      .mockReturnValue(Promise.reject(successResponse));
+    jest
       .spyOn(referenceService, "getLocalOffices")
       .mockReturnValue(successResponse);
     jest
@@ -68,6 +73,10 @@ describe("loadReferenceData method", () => {
 
       {
         type: LOAD_REFERENCE_COLLEGES_SUCCESS,
+        payload: returnValue
+      },
+      {
+        type: LOAD_REFERENCE_DESIGNATED_BODIES_SUCCESS,
         payload: returnValue
       },
       {
@@ -116,6 +125,9 @@ describe("loadReferenceData method", () => {
       .spyOn(referenceService, "getColleges")
       .mockReturnValue(Promise.reject(errorResponse));
     jest
+      .spyOn(referenceService, "getDesignatedBodies")
+      .mockReturnValue(Promise.reject(errorResponse));
+    jest
       .spyOn(referenceService, "getLocalOffices")
       .mockReturnValue(Promise.reject(errorResponse));
     jest
@@ -136,6 +148,10 @@ describe("loadReferenceData method", () => {
 
       {
         type: LOAD_REFERENCE_COLLEGES_FAILURE,
+        payload: errorResponse
+      },
+      {
+        type: LOAD_REFERENCE_DESIGNATED_BODIES_FAILURE,
         payload: errorResponse
       },
       {
