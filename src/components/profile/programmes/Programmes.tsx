@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Details, Panel, Row } from "nhsuk-react-components";
+import { Col, Details, Row } from "nhsuk-react-components";
 import { ProgrammePanel } from "./ProgrammePanel";
 import { ProgrammeMembership } from "../../../models/ProgrammeMembership";
 import styles from "../placements/Placements.module.scss";
@@ -29,12 +29,10 @@ const Programmes: React.FC<IProgramProps> = ({ programmeMemberships }) => {
                   index: string | number | undefined
                 ) => (
                   <Col key={index} width={columnWidth}>
-                    <Panel label="Programme">
-                      <ProgrammePanel
-                        key={index}
-                        programmeMembership={programmeMembership}
-                      />
-                    </Panel>
+                    <ProgrammePanel
+                      key={index}
+                      programmeMembership={programmeMembership}
+                    />
                   </Col>
                 )
               )

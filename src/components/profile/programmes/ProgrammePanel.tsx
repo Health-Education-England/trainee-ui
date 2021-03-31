@@ -3,7 +3,7 @@ import {
   Curriculum,
   ProgrammeMembership
 } from "../../../models/ProgrammeMembership";
-import { Panel, SummaryList } from "nhsuk-react-components";
+import { SummaryList } from "nhsuk-react-components";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import { CurriculumPanel } from "./CurriculumPanel";
 
@@ -51,19 +51,23 @@ export const ProgrammePanel = (props: IProgrammePanelProps) => {
           <SummaryList.Key>Owner</SummaryList.Key>
           <SummaryList.Value>{data.managingDeanery}</SummaryList.Value>
         </SummaryList.Row>
-      </SummaryList>
 
-      <Panel label="Curricula">
-        {data.curricula.length === 0 ? (
-          <div>N/A</div>
-        ) : (
-          data.curricula.map(
-            (curriculum: Curriculum, index: string | number | undefined) => (
-              <CurriculumPanel key={index} curriculum={curriculum} />
-            )
-          )
-        )}
-      </Panel>
+        <SummaryList.Row>
+          <SummaryList.Key>Curricula</SummaryList.Key>
+          <SummaryList.Value>
+            {data.curricula.length === 0 ? (
+              <div>N/A</div>
+            ) : (
+              data.curricula.map(
+                (
+                  curriculum: Curriculum,
+                  index: string | number | undefined
+                ) => <CurriculumPanel key={index} curriculum={curriculum} />
+              )
+            )}
+          </SummaryList.Value>
+        </SummaryList.Row>
+      </SummaryList>
     </>
   );
 };
