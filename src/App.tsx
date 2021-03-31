@@ -14,6 +14,7 @@ import HowToPrintToPDF from "./components/forms/HowToPrintToPDF";
 import { CacheUtilities } from "./utilities/CacheUtilities";
 import packageJson from "../package.json";
 import PageTitle from "./components/common/PageTitle";
+import PrivacyPolicy from "./components/common/PrivacyPolicy";
 const globalAny: any = global;
 globalAny.appVersion = packageJson.version;
 
@@ -103,7 +104,9 @@ class App extends React.PureComponent<AppProps, AppState> {
         ) : (
           <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
         )}
+
         <HEEFooter appVersion={appVersion} />
+        <PrivacyPolicy />
         <CookieConsent
           disableStyles={true}
           buttonClasses="nhsuk-button nhsuk-button--reverse"
