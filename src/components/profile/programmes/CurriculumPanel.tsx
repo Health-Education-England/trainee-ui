@@ -12,12 +12,7 @@ export const CurriculumPanel = (props: ICurriculumPanelProps) => {
 
   return (
     <div className={styles.cItems}>
-      <div>
-        {curricData.curriculumName}{" "}
-        {curricData.curriculumSubType
-          ? `(${curricData.curriculumSubType})`
-          : null}
-      </div>
+      <div>{curricData.curriculumName}</div>
       <div>
         {DateUtilities.ToLocalDate(curricData.curriculumStartDate)} -{" "}
         {DateUtilities.ToLocalDate(curricData.curriculumEndDate)}
