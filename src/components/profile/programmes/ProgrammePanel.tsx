@@ -22,15 +22,8 @@ export const ProgrammePanel = (props: IProgrammePanelProps) => {
         </SummaryList.Row>
 
         <SummaryList.Row>
-          <SummaryList.Key>Number</SummaryList.Key>
+          <SummaryList.Key>Programme Number</SummaryList.Key>
           <SummaryList.Value>{data.programmeNumber}</SummaryList.Value>
-        </SummaryList.Row>
-
-        <SummaryList.Row>
-          <SummaryList.Key>Status</SummaryList.Key>
-          <SummaryList.Value>
-            {data.status.charAt(0) + data.status.slice(1).toLowerCase()}
-          </SummaryList.Value>
         </SummaryList.Row>
 
         <SummaryList.Row>
