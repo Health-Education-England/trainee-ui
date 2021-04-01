@@ -11,9 +11,6 @@ import { TraineeProfileService } from "../../services/TraineeProfileService";
 import ScrollTo from "../forms/ScrollTo";
 import PageTitle from "../common/PageTitle";
 
-// TO-DO - remove mockProgrammeMemberships data once BE has curriculumEndDate
-import { mockProgrammeMemberships } from "../../mock-data/trainee-profile";
-
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.profile.traineeProfile,
   isLoaded: state.profile.isLoaded
@@ -51,11 +48,8 @@ class Profile extends React.PureComponent<profileProps> {
               />
               <Placements placements={traineeProfile.placements}></Placements>
               <Programmes
-                programmeMemberships={mockProgrammeMemberships}
-              ></Programmes>
-              {/* <Programmes
                 programmeMemberships={traineeProfile.programmeMemberships}
-              ></Programmes> */}
+              ></Programmes>
             </Details.ExpanderGroup>
           </div>
         )
