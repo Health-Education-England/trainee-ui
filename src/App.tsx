@@ -22,6 +22,7 @@ interface AppState {
   isAuthenticated: boolean;
   checkLatestVersion: boolean;
   appVersion: any;
+  displayPrivacyPolicy: boolean;
 }
 
 interface AppProps {}
@@ -33,10 +34,16 @@ class App extends React.PureComponent<AppProps, AppState> {
     this.state = {
       isAuthenticated: false,
       checkLatestVersion: false,
-      appVersion: globalAny.appVersion
+      appVersion: globalAny.appVersion,
+      displayPrivacyPolicy: false
     };
   }
 
+  displayPrivacyPolicy = () => {
+    this.setState({
+      displayPrivacyPolicy: !this.state.displayPrivacyPolicy
+    });
+  };
   async componentDidMount() {
     const currentVersion = globalAny.appVersion;
     const latestVersion = await CacheUtilities.FetchMetaFile();
@@ -106,7 +113,8 @@ class App extends React.PureComponent<AppProps, AppState> {
         )}
 
         <HEEFooter appVersion={appVersion} />
-        <PrivacyPolicy />
+        {this.state.displayPrivacyPolicy && <PrivacyPolicy modal={true} />}
+
         <CookieConsent
           disableStyles={true}
           buttonClasses="nhsuk-button nhsuk-button--reverse"
@@ -125,15 +133,7 @@ class App extends React.PureComponent<AppProps, AppState> {
             storing of such cookies on your device by clicking 'Accept and
             close'. To learn more about how we use cookies and your data, please
             see our{" "}
-            <a
-              target="_blank"
-              style={{ color: "#ffffff" }}
-              rel="noopener noreferrer nofollow"
-              href="https://www.hee.nhs.uk/about/privacy-notice"
-            >
-              privacy policy
-            </a>
-            .
+            <button onClick={this.displayPrivacyPolicy}>privacy policy</button>.
           </p>
         </CookieConsent>
       </BrowserRouter>
