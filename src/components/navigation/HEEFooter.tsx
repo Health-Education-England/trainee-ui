@@ -10,7 +10,11 @@ const HEEFooter = (props: any) => {
         <Footer.ListItem className={styles.refLink} href="#">
           Contact us
         </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="#">
+        <Footer.ListItem
+          className={styles.refLink}
+          onClick={props.displayPrivacyPolicy}
+          href="#"
+        >
           Privacy policy
         </Footer.ListItem>
         <Footer.ListItem className={styles.refLink} href="#">

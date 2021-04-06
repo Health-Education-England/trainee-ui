@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import CookieConsent from "react-cookie-consent";
 import "./App.scss";
 import Profile from "./components/profile/Profile";
@@ -39,7 +39,8 @@ class App extends React.PureComponent<AppProps, AppState> {
     };
   }
 
-  displayPrivacyPolicy = () => {
+  displayPrivacyPolicy = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     this.setState({
       displayPrivacyPolicy: !this.state.displayPrivacyPolicy
     });
@@ -112,8 +113,16 @@ class App extends React.PureComponent<AppProps, AppState> {
           <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
         )}
 
-        <HEEFooter appVersion={appVersion} />
-        {this.state.displayPrivacyPolicy && <PrivacyPolicy modal={true} />}
+        <HEEFooter
+          appVersion={appVersion}
+          displayPrivacyPolicy={this.displayPrivacyPolicy}
+        />
+        {this.state.displayPrivacyPolicy && (
+          <PrivacyPolicy
+            displayPrivacyPolicy={this.displayPrivacyPolicy}
+            modal={true}
+          />
+        )}
 
         <CookieConsent
           disableStyles={true}
@@ -133,7 +142,14 @@ class App extends React.PureComponent<AppProps, AppState> {
             storing of such cookies on your device by clicking 'Accept and
             close'. To learn more about how we use cookies and your data, please
             see our{" "}
-            <button onClick={this.displayPrivacyPolicy}>privacy policy</button>.
+            <a
+              style={{ color: "white" }}
+              href="/"
+              onClick={this.displayPrivacyPolicy}
+            >
+              privacy policy
+            </a>
+            .
           </p>
         </CookieConsent>
       </BrowserRouter>

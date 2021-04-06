@@ -1,8 +1,9 @@
 import React from "react";
-import styles from "./PrivacyPolicy.module.scss";
-
+import "./PrivacyPolicy.scss";
+import { CloseIcon } from "nhsuk-react-components";
 interface IProps {
   modal?: boolean;
+  displayPrivacyPolicy: any;
 }
 const PrivacyPolicyText = (): JSX.Element => {
   return (
@@ -423,12 +424,16 @@ const PrivacyPolicy = (props: IProps): JSX.Element => {
   return (
     <>
       {props.modal ? (
-        <div className={styles.modalWrapper}>
-          <div className={styles.modalHeader}>
-            <div>Privacy Policy</div>
-            <div>Close</div>
+        <div className="modalWrapper">
+          <div className="modalHeader">
+            <div className="title">Privacy Policy</div>
+            <div className="close">
+              <button onClick={props.displayPrivacyPolicy}>
+                <CloseIcon style={{ fill: "white" }} />
+              </button>
+            </div>
           </div>
-          <div className={styles.modalContent}>
+          <div className="modalContent">
             <PrivacyPolicyText />
           </div>
         </div>
