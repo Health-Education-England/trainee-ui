@@ -61,19 +61,47 @@ const PrivacyPolicyText = (): JSX.Element => {
       </p>
       <p>Topics:</p>
       <ul>
-        <li> Why we process your data</li>
-        <li> How we process your data</li>
-        <li> What data do we collect?</li>
-        <li> Data Controllers and Data Processors</li>
-        <li> Processing your data during rotation</li>
-        <li> Legal basis for processing</li>
-        <li> Your rights under GDPR</li>
-        <li> What are cookies</li>
-        <li> How do we use cookies?</li>
-        <li> How to manage your cookies</li>
-        <li> Your responsibility under GDPR</li>
+        <li>
+          <a href="#Why_we_process_your_data">Why we process your data</a>
+        </li>
+        <li>
+          <a href="#How_we_process_your_data">How we process your data</a>
+        </li>
+        <li>
+          <a href="#What_data_do_we_collect">What data do we collect?</a>
+        </li>
+        <li>
+          <a href="#Data_Controllers_and_Data_Processors">
+            Data Controllers and Data Processors
+          </a>
+        </li>
+        <li>
+          <a href="#Processing_your_data_during_rotation">
+            Processing your data during rotation
+          </a>
+        </li>
+        <li>
+          <a href="#Legal_basis_for_processing">Legal basis for processing</a>
+        </li>
+        <li>
+          <a href="#Your_rights_under_GDPR">Your rights under GDPR</a>
+        </li>
+        <li>
+          <a href="#What_are_cookies">What are cookies</a>
+        </li>
+        <li>
+          <a href="#How_do_we_use_cookies">How do we use cookies?</a>
+        </li>
+        <li>
+          <a href="#How_to_manage_your_cookies">How to manage your cookies</a>
+        </li>
+        <li>
+          <a href="#Your_responsibility_under_GDPR">
+            Your responsibility under GDPR
+          </a>
+        </li>
       </ul>
-      <h2>Why we process your data</h2>
+      <h2 id="Why_we_process_your_data">Why we process your data</h2>
       <p>
         We will process your data accordance with the General Data Protection
         Regulation (GDPR) 2016 and the Data Protection Act (DPA) 2018, and will
@@ -97,7 +125,7 @@ const PrivacyPolicyText = (): JSX.Element => {
           information that may be of interest to you.
         </li>
       </ul>
-      <h2>How we process your data</h2>
+      <h2 id="How_we_process_your_data">How we process your data</h2>
       <p>
         Your personal data will be stored by Health Education England on the
         Trainee Information System (TIS) Self Service application. If you agree,
@@ -112,7 +140,7 @@ const PrivacyPolicyText = (): JSX.Element => {
         always aware of what information we collect about you, how we use it and
         with which other organization we will share it with and why.
       </p>
-      <h2>What data do we collect?</h2>
+      <h2 id="What_data_do_we_collect">What data do we collect?</h2>
       <p>
         We collect information such as: Personal Identification Information,
         Eligibility, Programmes, Assessments, Placement type and Equality.
@@ -127,7 +155,9 @@ const PrivacyPolicyText = (): JSX.Element => {
         insurance number, right to work in the UK, nationality status, medical,
         dental school etc.
       </p>
-      <h2>Data Controllers and Data Processors</h2>
+      <h2 id="Data_Controllers_and_Data_Processors">
+        Data Controllers and Data Processors
+      </h2>
       <p>
         Health Education England (HEE) TIS team are the data controllers and
         processors.
@@ -181,7 +211,14 @@ const PrivacyPolicyText = (): JSX.Element => {
         their retention periods.
       </p>
       <p>
-        Health Education England’s Records Management Policy is available here
+        Download the{" "}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.hee.nhs.uk/sites/default/files/documents/Records Management Policy.pdf"
+        >
+          Health Education England’s Records Management Policy.
+        </a>
       </p>
       <p>
         <strong>
@@ -250,7 +287,7 @@ const PrivacyPolicyText = (): JSX.Element => {
         on behalf of or in partnership with the Data Controller) and future
         employers (including private providers of healthcare).
       </p>
-      <h2>Legal basis for processing</h2>
+      <h2 id="Legal_basis_for_processing">Legal basis for processing</h2>
       <p>
         The GDPR requires that data controllers and organisations that process
         personal data demonstrate compliance with its provisions. This involves
@@ -261,7 +298,7 @@ const PrivacyPolicyText = (): JSX.Element => {
         legal bases for the processing of personal data as listed in Article 6
         of the GDPR are as follows:
       </p>
-      <ol>
+      <ol style={{ listStyle: "none" }}>
         <li>6(1) (a) - Consent of the data subject</li>
         <li>
           6(1) (b) - Processing is necessary for the performance of a contract
@@ -282,7 +319,7 @@ const PrivacyPolicyText = (): JSX.Element => {
         legal bases for processing such data, as listed in Article 9 of the GDPR
         are as follows:
       </p>
-      <ol>
+      <ol style={{ listStyle: "none" }}>
         <li>9(2) (a) - Explicit consent of the data subject</li>
         <li>
           9(2) (b) - Processing is necessary for the purposes of carrying out
@@ -319,42 +356,45 @@ const PrivacyPolicyText = (): JSX.Element => {
         retained by us and used by us for other processing activities based on
         the above lawful conditions for processing.
       </p>
-      <h2>Your rights under GDPR</h2>
+      <h2 id="Your_rights_under_GDPR">Your rights under GDPR</h2>
       <ul>
         <li>
-          Right to rectification and erasure – the GDPR extends and strengthens
-          your rights as a data subject. Under the GDPR you have the right to
-          rectification of inaccurate personal data and the right to request the
-          erasure of your personal data. However, the right to erasure is not an
-          absolute right and it may be that it is necessary for the data
-          controller to continue to process your personal data for several
-          lawful and legitimate reasons.
+          <strong>Right to rectification and erasure</strong> – the GDPR extends
+          and strengthens your rights as a data subject. Under the GDPR you have
+          the right to rectification of inaccurate personal data and the right
+          to request the erasure of your personal data. However, the right to
+          erasure is not an absolute right and it may be that it is necessary
+          for the data controller to continue to process your personal data for
+          several lawful and legitimate reasons.
         </li>
         <li>
-          Right to object – you have the right, in certain circumstances, to ask
-          the data controller to stop processing your personal data in relation
-          to the recruitment process. However, the right to object is not an
-          absolute right and it may be that it is necessary in certain
-          circumstances for the data controller to continue to process your
-          personal data for several lawful and legitimate reasons. If you object
-          to the way in which the data controller is processing your personal
-          information or if you wish to ask the data controller to stop
-          processing your personal data, please contact the appropriate
-          recruitment office. However, if the data controller stops processing
-          your personal data, this may prevent them from providing you with the
-          best service.
+          <strong>Right to object</strong> – you have the right, in certain
+          circumstances, to ask the data controller to stop processing your
+          personal data in relation to the recruitment process. However, the
+          right to object is not an absolute right and it may be that it is
+          necessary in certain circumstances for the data controller to continue
+          to process your personal data for several lawful and legitimate
+          reasons. If you object to the way in which the data controller is
+          processing your personal information or if you wish to ask the data
+          controller to stop processing your personal data, please contact the
+          appropriate recruitment office. However, if the data controller stops
+          processing your personal data, this may prevent them from providing
+          you with the best service.
         </li>
         <li>
-          Subject Access – you can access a copy of the information held about
-          you by writing to HEE’s Public and Parliamentary Accountability Team
-          (DPA@hee.nhs.uk). This information is generally available to you free
-          of charge, subject to the receipt of appropriate identification.
+          <strong>Subject Access</strong> – you can access a copy of the
+          information held about you by writing to{" "}
+          <a href="mailto:DPA@hee.nhs.uk">
+            HEE’s Public and Parliamentary Accountability Team
+          </a>
+          . This information is generally available to you free of charge,
+          subject to the receipt of appropriate identification.
         </li>
         <li>
-          Data Portability – the GDPR sets out the right of a data subject to
-          have their personal data ported from one controller to another on
-          request, in certain circumstances. You should discuss any request for
-          this with the appropriate recruitment office.
+          <strong>Data Portability</strong> – the GDPR sets out the right of a
+          data subject to have their personal data ported from one controller to
+          another on request, in certain circumstances. You should discuss any
+          request for this with the appropriate recruitment office.
         </li>
       </ul>
       <p>
@@ -372,14 +412,14 @@ const PrivacyPolicyText = (): JSX.Element => {
         The Office of the Information Commissioner, Wycliffe House, Water Lane,
         Wilmslow, Cheshire, SK9 5AF
       </p>
-      <h2>What are cookies</h2>
+      <h2 id="What_are_cookies">What are cookies</h2>
       <p>
         Cookies are small text files that are placed on your computer by
         websites that you visit. They are widely used in order to make websites
         work, or work more efficiently, as well as to provide information to the
         owners of the site.
       </p>
-      <h2>How do we use cookies?</h2>
+      <h2 id="How_do_we_use_cookies">How do we use cookies?</h2>
       <p>
         When you access the TIS website, your application's browser provides us
         with information such as your IP address, browser type, access time and
@@ -387,14 +427,16 @@ const PrivacyPolicyText = (): JSX.Element => {
         the use of our system. This information may be used to help us to
         improve our system and the services we offer.
       </p>
-      <h2>How to manage your cookies</h2>
+      <h2 id="How_to_manage_your_cookies">How to manage your cookies</h2>
       <p>
         Session cookies can be disabled by changing the settings on your
         browser, but you will not be able to access the application form section
         of our system if you do so. In this case, please write to us for more
         information.
       </p>
-      <h2>Your responsibility under GDPR</h2>
+      <h2 id="Your_responsibility_under_GDPR">
+        Your responsibility under GDPR
+      </h2>
       <p>
         It is important that you work with us to ensure that the information we
         hold about you is accurate and up to date. Please inform us if any of
@@ -408,15 +450,42 @@ const PrivacyPolicyText = (): JSX.Element => {
       </p>
       <p>
         Health Education England’s privacy notice is available at:
-        https://www.hee.nhs.uk/about/privacy-notice
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.hee.nhs.uk/about/privacy-notice"
+        >
+          https://www.hee.nhs.uk/about/privacy-notice
+        </a>
       </p>
       <p>
         If you require assistance on a specific issue, please contact your
         regional service desk.
       </p>
-      Midlands and East: programmeanalysis.me@hee.nhs.uk South:
-      IMSupport.South@hee.nhs.uk London and South East: servicedesk@hee.nhs.uk
-      North: tissupport.north@hee.nhs.uk
+      <ul>
+        <li>
+          Midlands and East:{" "}
+          <a href="mailto:programmeanalysis.me@hee.nhs.uk">
+            programmeanalysis.me@hee.nhs.uk
+          </a>{" "}
+        </li>
+        <li>
+          South:{" "}
+          <a href="mailto:IMSupport.South@hee.nhs.uk">
+            IMSupport.South@hee.nhs.uk
+          </a>
+        </li>
+        <li>
+          London and South East:{" "}
+          <a href="mailto:servicedesk@hee.nhs.uk">servicedesk@hee.nhs.uk</a>
+        </li>
+        <li>
+          North:{" "}
+          <a href="mailto:tissupport.north@hee.nhs.uk">
+            tissupport.north@hee.nhs.uk
+          </a>
+        </li>
+      </ul>
     </>
   );
 };
