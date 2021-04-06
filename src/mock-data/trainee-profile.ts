@@ -1,6 +1,7 @@
 import { PersonalDetails } from "../models/PersonalDetails";
 import { TraineeProfile } from "../models/TraineeProfile";
 import { Status } from "../models/Status";
+import { ProgrammeMembership } from "../models/ProgrammeMembership";
 
 export const mockPersonalDetails: PersonalDetails = {
   surname: "Gilliam",
@@ -37,7 +38,7 @@ export const mockPersonalDetails: PersonalDetails = {
   currRevalDate: new Date("2021-12-31")
 };
 
-export const mockProgrammeMemberships = [
+export const mockProgrammeMemberships: ProgrammeMembership[] = [
   {
     startDate: new Date("2020-01-01"),
     endDate: new Date("2022-01-01"),
@@ -53,19 +54,22 @@ export const mockProgrammeMemberships = [
         curriculumTisId: "1",
         curriculumName: "ST1",
         curriculumSubType: "MEDICAL_CURRICULUM",
-        curriculumStartDate: new Date("2020-01-01")
+        curriculumStartDate: new Date("2020-01-01"),
+        curriculumEndDate: new Date("2023-01-01")
       },
       {
         curriculumTisId: "2",
         curriculumName: "ST2",
         curriculumSubType: "ACF_OTHER_FUNDING",
-        curriculumStartDate: new Date("2020-06-01")
+        curriculumStartDate: new Date("2020-06-01"),
+        curriculumEndDate: new Date("2024-06-01")
       },
       {
         curriculumTisId: "3",
         curriculumName: "ST3",
         curriculumSubType: "MEDICAL_CURRICULUM",
-        curriculumStartDate: new Date("2020-08-01")
+        curriculumStartDate: new Date("2020-08-01"),
+        curriculumEndDate: new Date("2025-08-01")
       }
     ]
   },
@@ -84,19 +88,22 @@ export const mockProgrammeMemberships = [
         curriculumTisId: "4",
         curriculumName: "ST4",
         curriculumSubType: "MEDICAL_CURRICULUM",
-        curriculumStartDate: new Date("2022-01-01")
+        curriculumStartDate: new Date("2022-01-01"),
+        curriculumEndDate: new Date("2023-01-01")
       },
       {
         curriculumTisId: "5",
         curriculumName: "ST5",
         curriculumSubType: "ACF_OTHER_FUNDING",
-        curriculumStartDate: new Date("2022-06-01")
+        curriculumStartDate: new Date("2022-06-01"),
+        curriculumEndDate: new Date("2024-06-01")
       },
       {
         curriculumTisId: "6",
         curriculumName: "ST6",
         curriculumSubType: "MEDICAL_CURRICULUM",
-        curriculumStartDate: new Date("2022-08-01")
+        curriculumStartDate: new Date("2022-08-01"),
+        curriculumEndDate: new Date("2025-08-01")
       }
     ]
   }
@@ -130,19 +137,22 @@ export const mockProgrammeMembershipNoMedicalCurricula = {
       curriculumTisId: "4",
       curriculumName: "ST4",
       curriculumSubType: "DENTAL_CURRICULUM",
-      curriculumStartDate: new Date("2022-01-01")
+      curriculumStartDate: new Date("2022-01-01"),
+      curriculumEndDate: new Date("2025-01-01")
     },
     {
       curriculumTisId: "5",
       curriculumName: "ST5",
       curriculumSubType: "ACF_OTHER_FUNDING",
-      curriculumStartDate: new Date("2022-06-01")
+      curriculumStartDate: new Date("2022-06-01"),
+      curriculumEndDate: new Date("2025-06-01")
     },
     {
       curriculumTisId: "6",
       curriculumName: "ST6",
       curriculumSubType: "DENTAL_CURRICULUM",
-      curriculumStartDate: new Date("2022-08-01")
+      curriculumStartDate: new Date("2022-08-01"),
+      curriculumEndDate: new Date("2025-08-01")
     }
   ]
 };

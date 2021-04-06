@@ -10,6 +10,7 @@ import { Fieldset, Details } from "nhsuk-react-components";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import ScrollTo from "../forms/ScrollTo";
 import PageTitle from "../common/PageTitle";
+
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.profile.traineeProfile,
   isLoaded: state.profile.isLoaded
@@ -46,7 +47,6 @@ class Profile extends React.PureComponent<profileProps> {
                 personalDetails={traineeProfile.personalDetails}
               />
               <Placements placements={traineeProfile.placements}></Placements>
-
               <Programmes
                 programmeMemberships={traineeProfile.programmeMemberships}
               ></Programmes>

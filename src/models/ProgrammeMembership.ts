@@ -10,12 +10,13 @@ export interface ProgrammeMembership {
   startDate: Date;
   endDate: Date;
   programmeCompletionDate: Date;
-  curricula: curriculm[];
+  curricula: Curriculum[];
 }
 
-export interface curriculm {
+export interface Curriculum {
   curriculumTisId: string;
   curriculumName: string;
   curriculumSubType: string;
   curriculumStartDate: Date;
+  curriculumEndDate: Date;
 }
