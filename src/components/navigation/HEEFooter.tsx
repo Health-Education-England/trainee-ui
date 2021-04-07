@@ -9,6 +9,7 @@ const HEEFooter = (props: any) => {
       <Footer.List>
         <Footer.ListItem
           className={styles.refLink}
+          data-cy="linkSupport"
           href={
             props.isAuthenticated
               ? "/support"
@@ -19,6 +20,7 @@ const HEEFooter = (props: any) => {
         </Footer.ListItem>
         <Footer.ListItem
           className={styles.refLink}
+          data-cy="linkPrivacyPolicy"
           onClick={props.displayPrivacyPolicy}
           href="#"
         >
