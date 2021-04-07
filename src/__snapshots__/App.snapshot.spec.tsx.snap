@@ -102,7 +102,8 @@ Array [
           >
             <a
               className="nhsuk-footer__list-item-link refLink"
-              href="#"
+              data-cy="linkSupport"
+              href="https://tis-support.hee.nhs.uk"
             >
               Contact us
             </a>
@@ -112,29 +113,11 @@ Array [
           >
             <a
               className="nhsuk-footer__list-item-link refLink"
+              data-cy="linkPrivacyPolicy"
               href="#"
+              onClick={[Function]}
             >
-              Privacy policy
-            </a>
-          </li>
-          <li
-            className="nhsuk-footer__list-item"
-          >
-            <a
-              className="nhsuk-footer__list-item-link refLink"
-              href="#"
-            >
-              Terms and conditions
-            </a>
-          </li>
-          <li
-            className="nhsuk-footer__list-item"
-          >
-            <a
-              className="nhsuk-footer__list-item-link refLink"
-              href="#"
-            >
-              Cookie policy
+              Privacy & cookie policy
             </a>
           </li>
         </ul>
@@ -164,7 +147,7 @@ Array [
                   }
                 }
               >
-                version: 0.18.0
+                version: 0.19.0
               </span>
             </a>
           </li>
@@ -195,14 +178,13 @@ Array [
           We use necessary cookies to make our site work and analytics cookies to help us improve it. In order use this site, you must agree to the storing of such cookies on your device by clicking 'Accept and close'. To learn more about how we use cookies and your data, please see our
            
           <a
-            href="https://www.hee.nhs.uk/about/privacy-notice"
-            rel="noopener noreferrer nofollow"
+            href="/"
+            onClick={[Function]}
             style={
               Object {
-                "color": "#ffffff",
+                "color": "white",
               }
             }
-            target="_blank"
           >
             privacy policy
           </a>

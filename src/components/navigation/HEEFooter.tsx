@@ -7,17 +7,24 @@ const HEEFooter = (props: any) => {
   return (
     <Footer>
       <Footer.List>
-        <Footer.ListItem className={styles.refLink} href="#">
+        <Footer.ListItem
+          className={styles.refLink}
+          data-cy="linkSupport"
+          href={
+            props.isAuthenticated
+              ? "/support"
+              : "https://tis-support.hee.nhs.uk"
+          }
+        >
           Contact us
         </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="#">
-          Privacy policy
-        </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="#">
-          Terms and conditions
-        </Footer.ListItem>
-        <Footer.ListItem className={styles.refLink} href="#">
-          Cookie policy
+        <Footer.ListItem
+          className={styles.refLink}
+          data-cy="linkPrivacyPolicy"
+          onClick={props.displayPrivacyPolicy}
+          href="#"
+        >
+          Privacy &amp; cookie policy
         </Footer.ListItem>
       </Footer.List>
       <Footer.Copyright>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import CookieConsent from "react-cookie-consent";
 import "./App.scss";
 import Profile from "./components/profile/Profile";
@@ -14,6 +14,7 @@ import HowToPrintToPDF from "./components/forms/HowToPrintToPDF";
 import { CacheUtilities } from "./utilities/CacheUtilities";
 import packageJson from "../package.json";
 import PageTitle from "./components/common/PageTitle";
+import PrivacyPolicy from "./components/common/PrivacyPolicy";
 const globalAny: any = global;
 globalAny.appVersion = packageJson.version;
 
@@ -21,6 +22,7 @@ interface AppState {
   isAuthenticated: boolean;
   checkLatestVersion: boolean;
   appVersion: any;
+  displayPrivacyPolicy: boolean;
 }
 
 interface AppProps {}
@@ -32,10 +34,17 @@ class App extends React.PureComponent<AppProps, AppState> {
     this.state = {
       isAuthenticated: false,
       checkLatestVersion: false,
-      appVersion: globalAny.appVersion
+      appVersion: globalAny.appVersion,
+      displayPrivacyPolicy: false
     };
   }
 
+  displayPrivacyPolicy = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    this.setState({
+      displayPrivacyPolicy: !this.state.displayPrivacyPolicy
+    });
+  };
   async componentDidMount() {
     const currentVersion = globalAny.appVersion;
     const latestVersion = await CacheUtilities.FetchMetaFile();
@@ -103,7 +112,19 @@ class App extends React.PureComponent<AppProps, AppState> {
         ) : (
           <Login setAuthenticationStatus={this.setAuthenticationStatus}></Login>
         )}
-        <HEEFooter appVersion={appVersion} />
+
+        <HEEFooter
+          isAuthenticated={isAuthenticated}
+          appVersion={appVersion}
+          displayPrivacyPolicy={this.displayPrivacyPolicy}
+        />
+        {this.state.displayPrivacyPolicy && (
+          <PrivacyPolicy
+            displayPrivacyPolicy={this.displayPrivacyPolicy}
+            modal={true}
+          />
+        )}
+
         <CookieConsent
           disableStyles={true}
           buttonClasses="nhsuk-button nhsuk-button--reverse"
@@ -123,10 +144,9 @@ class App extends React.PureComponent<AppProps, AppState> {
             close'. To learn more about how we use cookies and your data, please
             see our{" "}
             <a
-              target="_blank"
-              style={{ color: "#ffffff" }}
-              rel="noopener noreferrer nofollow"
-              href="https://www.hee.nhs.uk/about/privacy-notice"
+              style={{ color: "white" }}
+              href="/"
+              onClick={this.displayPrivacyPolicy}
             >
               privacy policy
             </a>
