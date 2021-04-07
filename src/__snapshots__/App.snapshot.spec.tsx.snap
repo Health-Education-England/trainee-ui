@@ -102,6 +102,7 @@ Array [
           >
             <a
               className="nhsuk-footer__list-item-link refLink"
+              data-cy="linkSupport"
               href="https://tis-support.hee.nhs.uk"
             >
               Contact us
@@ -112,6 +113,7 @@ Array [
           >
             <a
               className="nhsuk-footer__list-item-link refLink"
+              data-cy="linkPrivacyPolicy"
               href="#"
               onClick={[Function]}
             >
