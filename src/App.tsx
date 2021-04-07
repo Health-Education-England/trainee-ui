@@ -114,6 +114,7 @@ class App extends React.PureComponent<AppProps, AppState> {
         )}
 
         <HEEFooter
+          isAuthenticated={isAuthenticated}
           appVersion={appVersion}
           displayPrivacyPolicy={this.displayPrivacyPolicy}
         />
