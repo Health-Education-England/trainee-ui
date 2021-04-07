@@ -3,7 +3,7 @@ import "./PrivacyPolicy.scss";
 import { CloseIcon } from "nhsuk-react-components";
 interface IProps {
   modal?: boolean;
-  displayPrivacyPolicy: any;
+  displayPrivacyPolicy?: any;
 }
 const PrivacyPolicyText = (): JSX.Element => {
   return (
@@ -493,7 +493,7 @@ const PrivacyPolicy = (props: IProps): JSX.Element => {
   return (
     <>
       {props.modal ? (
-        <div className="modalWrapper">
+        <div className="modalWrapper" data-jest="modal">
           <div className="modalHeader">
             <div className="title">Privacy Policy</div>
             <div className="close">
