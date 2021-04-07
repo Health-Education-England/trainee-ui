@@ -102,7 +102,7 @@ Array [
           >
             <a
               className="nhsuk-footer__list-item-link refLink"
-              href="#"
+              href="https://tis-support.hee.nhs.uk"
             >
               Contact us
             </a>
@@ -115,27 +115,7 @@ Array [
               href="#"
               onClick={[Function]}
             >
-              Privacy policy
-            </a>
-          </li>
-          <li
-            className="nhsuk-footer__list-item"
-          >
-            <a
-              className="nhsuk-footer__list-item-link refLink"
-              href="#"
-            >
-              Terms and conditions
-            </a>
-          </li>
-          <li
-            className="nhsuk-footer__list-item"
-          >
-            <a
-              className="nhsuk-footer__list-item-link refLink"
-              href="#"
-            >
-              Cookie policy
+              Privacy & cookie policy
             </a>
           </li>
         </ul>
