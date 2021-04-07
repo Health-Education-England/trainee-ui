@@ -3,6 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   margin-left: auto;
   margin-right: auto;
   background-color: #fff;
@@ -38,8 +39,15 @@
     }
   }
   .modalContent {
-    padding: 30px 30px 80px 30px;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
     overflow: scroll;
-    height: 540px;
+    padding: 30px 30px 0 30px;
+    @media (min-width: 768px) {
+      padding: 30px 30px 80px 30px;
+
+      height: 540px;
+    }
   }
 }
