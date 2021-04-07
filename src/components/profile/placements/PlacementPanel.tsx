@@ -2,6 +2,7 @@ import React from "react";
 import { Placement } from "../../../models/Placement";
 import { SummaryList } from "nhsuk-react-components";
 import { DateUtilities } from "../../../utilities/DateUtilities";
+import { StringUtilities } from "../../../utilities/StringUtilities";
 
 interface IPlacementPanelProps {
   placement: Placement;
@@ -37,7 +38,9 @@ export const PlacementPanel = (props: IPlacementPanelProps) => {
       </SummaryList.Row>
       <SummaryList.Row>
         <SummaryList.Key>Whole Time Equivalent</SummaryList.Key>
-        <SummaryList.Value>{data.wholeTimeEquivalent}</SummaryList.Value>
+        <SummaryList.Value>
+          {StringUtilities.TrimZeros(data.wholeTimeEquivalent)}
+        </SummaryList.Value>
       </SummaryList.Row>
 
       <SummaryList.Row>

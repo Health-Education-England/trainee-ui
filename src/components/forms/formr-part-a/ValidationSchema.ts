@@ -55,7 +55,7 @@ export const ValidationSchema = yup.object({
   ),
   mobileNumber: StringValidationSchema("Contact Mobile").matches(
     CHECK_PHONE_REGEX,
-    "Contact Mobile - please provide a valid number with prefix (e.g. 0, +44, or 44), at least 10 digits (including area code), a maximum of 15 digits (to allow for your country code), with no dashes or brackets."
+    "Contact Mobile - please provide a valid number with prefix (e.g. 0, +44, or 44), at least 10 digits, a maximum of 15 digits (to allow for your country code), with no dashes or brackets."
   ),
   email: yup
     .string()
