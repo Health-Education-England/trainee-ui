@@ -215,7 +215,7 @@ const PrivacyPolicyText = (): JSX.Element => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.hee.nhs.uk/sites/default/files/documents/Records Management Policy.pdf"
+          href="https://www.hee.nhs.uk/sites/default/files/documents/Records%20Management%20Policy%20.pdf"
         >
           Health Education England’s Records Management Policy.
         </a>
