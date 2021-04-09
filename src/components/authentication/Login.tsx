@@ -6,6 +6,7 @@ import {
   ForgotPassword,
   RequireNewPassword
 } from "aws-amplify-react";
+import "@aws-amplify/ui/dist/style.css";
 
 import styles from "./Login.module.scss";
 import { LoginTheme } from "./LoginTheme";
