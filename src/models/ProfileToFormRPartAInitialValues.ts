@@ -22,11 +22,15 @@ export function ProfileToFormRPartAInitialValues(
     programme && programme.curricula.length > 0
       ? programme.curricula
           .filter(c => c.curriculumSubType === MEDICAL_CURRICULUM)
-          .sort(
-            (a, b) =>
+          .sort((a, b) => {
+            const diff =
               new Date(b.curriculumStartDate).getTime() -
-              new Date(a.curriculumStartDate).getTime()
-          )
+              new Date(a.curriculumStartDate).getTime();
+
+            return diff === 0
+              ? a.curriculumName.localeCompare(b.curriculumName)
+              : diff;
+          })
           .shift()
       : null;
 

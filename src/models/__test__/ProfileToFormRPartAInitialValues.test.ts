@@ -1,5 +1,6 @@
 import { ProfileToFormRPartAInitialValues } from "./../ProfileToFormRPartAInitialValues";
 import {
+  mockProgrammeMembershipDuplicateCurriculaStart,
   mockProgrammeMembershipNoCurricula,
   mockProgrammeMembershipNoMedicalCurricula,
   mockTraineeProfile
@@ -57,12 +58,24 @@ describe("ProfileToFormRPartAInitialValues", () => {
     expect(
       ProfileToFormRPartAInitialValues(mockTraineeProfile)?.programmeSpecialty
     ).toEqual("ST6");
+    expect(
+      ProfileToFormRPartAInitialValues(mockTraineeProfile)?.cctSpecialty1
+    ).toEqual("ST6");
+    expect(
+      ProfileToFormRPartAInitialValues(mockTraineeProfile)?.cctSpecialty2
+    ).toEqual("");
   });
 
   it("should return formRPartA with empty programmespeciality when no programmeMemberships available", () => {
     const traineeProfile = { ...mockTraineeProfile, programmeMemberships: [] };
     expect(
       ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty1
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty2
     ).toEqual("");
   });
 
@@ -75,6 +88,12 @@ describe("ProfileToFormRPartAInitialValues", () => {
     expect(
       ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
     ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty1
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty2
+    ).toEqual("");
   });
 
   it("should return formRPartA with empty programmeSpecialty when no medical curriculum", () => {
@@ -85,6 +104,29 @@ describe("ProfileToFormRPartAInitialValues", () => {
 
     expect(
       ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty1
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty2
+    ).toEqual("");
+  });
+
+  it("should return formRPartA with first alphabetical programmeSpecialty when latest start date duplicated", () => {
+    const traineeProfile = {
+      ...mockTraineeProfile,
+      programmeMemberships: [mockProgrammeMembershipDuplicateCurriculaStart]
+    };
+
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("A");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty1
+    ).toEqual("A");
+    expect(
+      ProfileToFormRPartAInitialValues(traineeProfile)?.cctSpecialty2
     ).toEqual("");
   });
 

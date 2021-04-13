@@ -1,5 +1,6 @@
 import { ProfileToFormRPartBInitialValues } from "./../ProfileToFormRPartBInitialValues";
 import {
+  mockProgrammeMembershipDuplicateCurriculaStart,
   mockProgrammeMembershipNoCurricula,
   mockProgrammeMembershipNoMedicalCurricula,
   mockTraineeProfile
@@ -70,12 +71,18 @@ describe("ProfileToFormRPartBInitialValues", () => {
     expect(
       ProfileToFormRPartBInitialValues(mockTraineeProfile)?.programmeSpecialty
     ).toEqual("ST6");
+    expect(
+      ProfileToFormRPartBInitialValues(mockTraineeProfile)?.dualSpecialty
+    ).toEqual("");
   });
 
   it("should return formRPartB with empty programmespeciality when no programmeMemberships available", () => {
     const traineeProfile = { ...mockTraineeProfile, programmeMemberships: [] };
     expect(
       ProfileToFormRPartBInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartBInitialValues(traineeProfile)?.dualSpecialty
     ).toEqual("");
   });
 
@@ -88,6 +95,9 @@ describe("ProfileToFormRPartBInitialValues", () => {
     expect(
       ProfileToFormRPartBInitialValues(traineeProfile)?.programmeSpecialty
     ).toEqual("");
+    expect(
+      ProfileToFormRPartBInitialValues(traineeProfile)?.dualSpecialty
+    ).toEqual("");
   });
 
   it("should return formRPartB with empty programmeSpecialty when no medical curriculum", () => {
@@ -98,6 +108,23 @@ describe("ProfileToFormRPartBInitialValues", () => {
 
     expect(
       ProfileToFormRPartBInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("");
+    expect(
+      ProfileToFormRPartBInitialValues(traineeProfile)?.dualSpecialty
+    ).toEqual("");
+  });
+
+  it("should return formRPartB with first alphabetical programmeSpecialty when latest start date duplicated", () => {
+    const traineeProfile = {
+      ...mockTraineeProfile,
+      programmeMemberships: [mockProgrammeMembershipDuplicateCurriculaStart]
+    };
+
+    expect(
+      ProfileToFormRPartBInitialValues(traineeProfile)?.programmeSpecialty
+    ).toEqual("A");
+    expect(
+      ProfileToFormRPartBInitialValues(traineeProfile)?.dualSpecialty
     ).toEqual("");
   });
 
