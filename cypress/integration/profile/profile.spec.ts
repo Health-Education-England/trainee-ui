@@ -3,10 +3,10 @@ describe("Profile", () => {
   it("should click expand to show all personal information then toggle close", () => {
     cy.contains("Personal details").should("exist").click();
     cy.contains("Gender").should("exist");
-    cy.contains("Sensitive data").should("exist");
+    cy.contains("Registration details").should("exist");
     cy.contains("Personal details").click();
     cy.contains("Gender").should("not.be.visible");
-    cy.contains("Sensitive data").should("not.be.visible");
+    cy.contains("Registration details").should("not.be.visible");
   });
 
   it("should click expand to show placement information then toggle close", () => {
