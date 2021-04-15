@@ -26,12 +26,24 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
     { label: "Mobile", value: personalDetails.mobileNumber }
   ];
 
-  const sensitiveData: KeyValue[] = [
-    { label: "GMC", value: personalDetails.gmcNumber },
-    { label: "GDC", value: personalDetails.gdcNumber },
-    { label: "PH", value: personalDetails.publicHealthNumber },
-    { label: "GMC status", value: personalDetails.gmcStatus },
-    { label: "GDC status", value: personalDetails.gdcStatus },
+  const registrationDetails: KeyValue[] = [
+    {
+      label: "General Medical Council (GMC)",
+      value: personalDetails.gmcNumber
+    },
+    { label: "General Dental Council (GDC)", value: personalDetails.gdcNumber },
+    {
+      label: "Public Health Number",
+      value: personalDetails.publicHealthNumber
+    },
+    {
+      label: "GMC status",
+      value: personalDetails.gmcStatus
+    },
+    {
+      label: "GDC status",
+      value: personalDetails.gdcStatus
+    },
     { label: "Permit to Work", value: personalDetails.permitToWork },
     { label: "Settled", value: personalDetails.settled },
     { label: "Visa Issued", value: personalDetails.visaIssued },
@@ -68,14 +80,14 @@ const PersonalDetailsComponent: React.FC<IProps> = ({ personalDetails }) => {
             </SummaryList.Value>
           </SummaryList.Row>
           <div className="nhsuk-heading-m nhsuk-u-margin-top-4">
-            Sensitive data
+            Registration details
           </div>
-          {sensitiveData.map(
-            sd =>
-              sd.value && (
-                <SummaryList.Row key={sd.label}>
-                  <SummaryList.Key>{sd.label}</SummaryList.Key>
-                  <SummaryList.Value>{sd.value}</SummaryList.Value>
+          {registrationDetails.map(
+            rd =>
+              rd.value && (
+                <SummaryList.Row key={rd.label}>
+                  <SummaryList.Key>{rd.label}</SummaryList.Key>
+                  <SummaryList.Value>{rd.value}</SummaryList.Value>
                 </SummaryList.Row>
               )
           )}
