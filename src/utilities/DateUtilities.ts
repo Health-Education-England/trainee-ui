@@ -56,8 +56,8 @@ export class DateUtilities {
   ): boolean {
     if (value) {
       const momentDate = moment(value, moment.ISO_8601);
-      const minDate = moment().subtract(10, "y");
-      const maxDate = moment().add(10, "y");
+      const minDate = moment().subtract(25, "y");
+      const maxDate = moment().add(25, "y");
       return momentDate.isValid() && momentDate.isBetween(minDate, maxDate);
     }
     return false;
