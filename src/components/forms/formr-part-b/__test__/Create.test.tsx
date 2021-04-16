@@ -25,13 +25,12 @@ const createStore = (form: FormRPartB | null, section: number = 1) =>
       curricula: [{ label: "curriculum", value: "curriculum" }],
       isLoaded: true
     },
-    formSwitches: {
-      formSwitches: [
-        {
-          name: "COVID",
-          enabled: covidEnabled
+    featureFlags: {
+      featureFlags: {
+        formRPartB: {
+          covidDeclaration: covidEnabled
         }
-      ]
+      }
     }
   });
 
@@ -102,13 +101,12 @@ describe("Create", () => {
         curricula: [],
         isLoaded: false
       },
-      formSwitches: {
-        formSwitches: [
-          {
-            name: "COVID",
-            enabled: covidEnabled
+      featureFlags: {
+        featureFlags: {
+          formRPartB: {
+            covidDeclaration: covidEnabled
           }
-        ]
+        }
       }
     });
 

@@ -33,7 +33,7 @@ const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   section: state.formRPartB.section,
   history: ownProps.history,
   location: ownProps.location,
-  formSwitches: state.formSwitches.formSwitches
+  featureFlags: state.featureFlags.featureFlags
 });
 
 const mapDispatchProps = {
@@ -104,10 +104,10 @@ class Create extends React.PureComponent<
       curricula,
       isLoaded,
       section,
-      formSwitches
+      featureFlags
     } = this.props;
     const enableCovidDeclaration: boolean =
-      formSwitches.find(s => s.name === "COVID")?.enabled || false;
+      featureFlags != null && featureFlags.formRPartB.covidDeclaration;
 
     if (!isLoaded || !formData) {
       return <Loading />;

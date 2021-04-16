@@ -12,7 +12,7 @@ import {
 } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
-import { FormRPartB, FormSwitch } from "../../../models/FormRPartB";
+import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
@@ -22,10 +22,11 @@ import {
   NEED_DISCUSSION_WITH_SOMEONE,
   NEED_DISCUSSION_WITH_SUPERVISOR
 } from "../../../utilities/Constants";
+import { FeatureFlags } from "../../../models/FeatureFlags";
 
 interface ViewProps {
   formData: FormRPartB | null;
-  formSwitches: FormSwitch[];
+  featureFlags: FeatureFlags | null;
   editSection: (section: number) => any;
   canEdit: boolean;
   history: any;
@@ -33,7 +34,7 @@ interface ViewProps {
 
 const mapStateToProps = (state: RootState) => ({
   formData: state.formRPartB.formData,
-  formSwitches: state.formSwitches.formSwitches
+  featureFlags: state.featureFlags.featureFlags
 });
 
 class View extends React.PureComponent<ViewProps> {
@@ -43,10 +44,10 @@ class View extends React.PureComponent<ViewProps> {
       history,
       editSection,
       canEdit,
-      formSwitches
+      featureFlags
     } = this.props;
     const enableCovidDeclaration: boolean =
-      formSwitches.find(s => s.name === "COVID")?.enabled || false;
+      featureFlags != null && featureFlags.formRPartB.covidDeclaration;
 
     if (!formData) {
       history.push("/formr-b");

@@ -2,7 +2,7 @@ import {
   ActionType,
   FormRPartBListState,
   FormRPartBState,
-  FormSwitchesState
+  FeatureFlagsState
 } from "../types";
 import {
   LOADING_FORMR_PARTB_LIST,
@@ -13,8 +13,8 @@ import {
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
   LOAD_FORMR_PARTB,
-  LOAD_FORM_SWITCHES_SUCCESS,
-  LOAD_FORM_SWITCHES_FAILURE
+  LOAD_FEATURE_FLAGS_SUCCESS,
+  LOAD_FEATURE_FLAGS_FAILURE
 } from "../action_types";
 
 const formRPartBListState: FormRPartBListState = {
@@ -89,24 +89,24 @@ export function FormRPartBReducer(
   }
 }
 
-const formSwitchesState: FormSwitchesState = {
-  formSwitches: []
+const featureFlagsInitialState: FeatureFlagsState = {
+  featureFlags: null
 };
 
-export function FormSwitchesReducer(
-  state = formSwitchesState,
+export function FeatureFlagsReducer(
+  state = featureFlagsInitialState,
   action: ActionType
-): FormSwitchesState {
+): FeatureFlagsState {
   switch (action.type) {
-    case LOAD_FORM_SWITCHES_SUCCESS:
+    case LOAD_FEATURE_FLAGS_SUCCESS:
       return {
         ...state,
-        formSwitches: action.payload
+        featureFlags: action.payload
       };
-    case LOAD_FORM_SWITCHES_FAILURE:
+    case LOAD_FEATURE_FLAGS_FAILURE:
       return {
         ...state,
-        formSwitches: []
+        featureFlags: null
       };
     default:
       return state;

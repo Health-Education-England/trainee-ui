@@ -8,7 +8,7 @@ import {
 import {
   FormRPartBReducer,
   FormRPartBListReducer,
-  FormSwitchesReducer
+  FeatureFlagsReducer
 } from "./formr-partb-reducer";
 
 export const rootReducer = combineReducers({
@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
   formRPartAList: FormRPartAListReducer,
   formRPartB: FormRPartBReducer,
   formRPartBList: FormRPartBListReducer,
-  formSwitches: FormSwitchesReducer
+  featureFlags: FeatureFlagsReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

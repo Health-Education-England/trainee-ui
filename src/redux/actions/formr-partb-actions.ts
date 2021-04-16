@@ -8,8 +8,8 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  LOAD_FORM_SWITCHES_SUCCESS,
-  LOAD_FORM_SWITCHES_FAILURE
+  LOAD_FEATURE_FLAGS_SUCCESS,
+  LOAD_FEATURE_FLAGS_FAILURE
 } from "../action_types";
 import { FormRPartB } from "../../models/FormRPartB";
 import { FormsService } from "../../services/FormsService";
@@ -107,20 +107,20 @@ export const moveToSection = (section: number) => (
   });
 };
 
-export const loadFormSwitches = (formService: FormsService) => (
+export const loadFeatureFlags = (formService: FormsService) => (
   dispatch: (action: ActionType) => any
 ) => {
   return formService
-    .getFormSwitches()
+    .getFeatureFlags()
     .then(response => {
       dispatch({
-        type: LOAD_FORM_SWITCHES_SUCCESS,
+        type: LOAD_FEATURE_FLAGS_SUCCESS,
         payload: response.data
       });
     })
     .catch(error => {
       dispatch({
-        type: LOAD_FORM_SWITCHES_FAILURE,
+        type: LOAD_FEATURE_FLAGS_FAILURE,
         payload: null
       });
     });

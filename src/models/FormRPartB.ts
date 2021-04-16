@@ -67,9 +67,3 @@ export interface CovidDeclaration {
   educationSupervisorName: string;
   educationSupervisorEmail: string;
 }
-
-export interface FormSwitch {
-  id: string;
-  name: string;
-  enabled: boolean;
-}

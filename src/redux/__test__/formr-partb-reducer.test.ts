@@ -2,7 +2,7 @@ import {
   ActionType,
   FormRPartBState,
   FormRPartBListState,
-  FormSwitchesState
+  FeatureFlagsState
 } from "../types";
 import {
   LOAD_FORMR_PARTB_LIST_SUCCESS,
@@ -12,16 +12,17 @@ import {
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
   LOAD_FORMR_PARTB,
-  LOAD_FORM_SWITCHES_SUCCESS,
-  LOAD_FORM_SWITCHES_FAILURE
+  LOAD_FEATURE_FLAGS_SUCCESS,
+  LOAD_FEATURE_FLAGS_FAILURE
 } from "../action_types";
 import {
   FormRPartBListReducer,
   FormRPartBReducer,
-  FormSwitchesReducer
+  FeatureFlagsReducer
 } from "../reducers/formr-partb-reducer";
-import { FormRPartB, FormSwitch } from "../../models/FormRPartB";
+import { FormRPartB } from "../../models/FormRPartB";
 import { LifeCycleState } from "../../models/LifeCycleState";
+import { FeatureFlags } from "../../models/FeatureFlags";
 
 const formrPartB: FormRPartB = {
   traineeTisId: "123",
@@ -71,7 +72,9 @@ const formrPartB: FormRPartB = {
   lastModifiedDate: null
 };
 
-const formSwitches: FormSwitch[] = [{ id: "1", name: "COVID", enabled: false }];
+const featureFlags: FeatureFlags = {
+  formRPartB: { covidDeclaration: false }
+};
 
 describe("FormRPartBListReducer", () => {
   const initialState: FormRPartBListState = {
@@ -207,10 +210,8 @@ describe("FormRPartBReducer", () => {
   });
 });
 
-describe("FormSwitchesReducer", () => {
-  const initialState: FormSwitchesState = {
-    formSwitches: []
-  };
+describe("FeatureFlagsReducer", () => {
+  const initialState = { featureFlags: null };
 
   it("should return initial state when no action passed", () => {
     const defaultAction: ActionType = {
@@ -218,33 +219,33 @@ describe("FormSwitchesReducer", () => {
       payload: null
     };
 
-    expect(FormSwitchesReducer(undefined, defaultAction)).toEqual(initialState);
+    expect(FeatureFlagsReducer(undefined, defaultAction)).toEqual(initialState);
   });
 
-  it("should return updated state when LOAD_FORM_SWITCHES_SUCCESS action passed", () => {
-    const state: FormSwitchesState = {
+  it("should return updated state when LOAD_FEATURE_FLAGS_SUCCESS action passed", () => {
+    const state: FeatureFlagsState = {
       ...initialState,
-      formSwitches
+      featureFlags
     };
 
     const successAction: ActionType = {
-      type: LOAD_FORM_SWITCHES_SUCCESS,
-      payload: formSwitches
+      type: LOAD_FEATURE_FLAGS_SUCCESS,
+      payload: featureFlags
     };
 
-    expect(FormSwitchesReducer(initialState, successAction)).toEqual(state);
+    expect(FeatureFlagsReducer(initialState, successAction)).toEqual(state);
   });
 
-  it("should return updated state when LOAD_FORM_SWITCHES_FAILURE action passed", () => {
-    const state: FormSwitchesState = {
+  it("should return updated state when LOAD_FEATURE_FLAGS_FAILURE action passed", () => {
+    const state: FeatureFlagsState = {
       ...initialState
     };
 
     const failureAction: ActionType = {
-      type: LOAD_FORM_SWITCHES_FAILURE,
+      type: LOAD_FEATURE_FLAGS_FAILURE,
       payload: null
     };
 
-    expect(FormSwitchesReducer(initialState, failureAction)).toEqual(state);
+    expect(FeatureFlagsReducer(initialState, failureAction)).toEqual(state);
   });
 });
