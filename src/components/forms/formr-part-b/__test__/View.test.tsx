@@ -18,13 +18,10 @@ const mountComponent = (
     formRPartB: {
       formData: form
     },
-    formSwitches: {
-      formSwitches: [
-        {
-          name: "COVID",
-          enabled: false
-        }
-      ]
+    featureFlags: {
+      formRPartB: {
+        covidDeclaration: false
+      }
     }
   });
 

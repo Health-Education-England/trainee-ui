@@ -9,7 +9,7 @@ import { IFormR } from "../../models/IFormR";
 import { LifeCycleState } from "../../models/LifeCycleState";
 import Loading from "../common/Loading";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
-import { loadFormSwitches } from "../../redux/actions/formr-partb-actions";
+import { loadFeatureFlags } from "../../redux/actions/formr-partb-actions";
 import ScrollTo from "./ScrollTo";
 
 export const CreateList = (
@@ -38,7 +38,7 @@ export const CreateList = (
     initializeForm: (
       traineeProfileService: TraineeProfileService
     ) => Promise<void>;
-    loadFormSwitches: (service: FormsService) => Promise<void>;
+    loadFeatureFlags: (service: FormsService) => Promise<void>;
   }
 
   const formsService = new FormsService();
@@ -59,13 +59,13 @@ export const CreateList = (
     loadFormList,
     loadSavedForm,
     initializeForm,
-    loadFormSwitches
+    loadFeatureFlags
   };
 
   class List extends React.PureComponent<ListProps> {
     componentDidMount() {
       this.props.loadFormList(formsService);
-      this.props.loadFormSwitches(formsService);
+      this.props.loadFeatureFlags(formsService);
     }
 
     getFormDataByFormId = (formId: string) => {

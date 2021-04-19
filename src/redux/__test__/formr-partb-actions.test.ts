@@ -6,8 +6,8 @@ import {
   INITIALIZE_FORMR_PARTB_SUCCESS,
   MOVE_TO_SECTION,
   EDIT_FORMR_PARTB,
-  LOAD_FORM_SWITCHES_SUCCESS,
-  LOAD_FORM_SWITCHES_FAILURE,
+  LOAD_FEATURE_FLAGS_SUCCESS,
+  LOAD_FEATURE_FLAGS_FAILURE,
   LOADING_FORMR_PARTB_LIST
 } from "../action_types";
 import thunk from "redux-thunk";
@@ -19,16 +19,17 @@ import {
   initializeForm,
   moveToSection,
   editForm,
-  loadFormSwitches,
+  loadFeatureFlags,
   loadSavedForm
 } from "../actions/formr-partb-actions";
-import { FormRPartB, FormSwitch } from "../../models/FormRPartB";
+import { FormRPartB } from "../../models/FormRPartB";
 import { AxiosResponse } from "axios";
 import { FormsService } from "../../services/FormsService";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import { TraineeProfile } from "../../models/TraineeProfile";
 import { mockTraineeProfile } from "../../mock-data/trainee-profile";
 import { ProfileToFormRPartBInitialValues } from "../../models/ProfileToFormRPartBInitialValues";
+import { FeatureFlags } from "../../models/FeatureFlags";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -195,14 +196,16 @@ describe("editForm", () => {
   });
 });
 
-describe("loadFormSwitches method", () => {
-  it("Should dispatch LOAD_FORM_SWITCHES_SUCCESS on successfull api call", () => {
-    const responsedata: FormSwitch[] = [
-      { id: "1", name: "COVID", enabled: false }
-    ];
+describe("loadFeatureFlags method", () => {
+  it("Should dispatch LOAD_FEATURE_FLAGS_SUCCESS on successful api call", () => {
+    const responsedata: FeatureFlags = {
+      formRPartB: {
+        covidDeclaration: false
+      }
+    };
 
     const successResponse: Promise<AxiosResponse<
-      FormSwitch[]
+        FeatureFlags
     >> = Promise.resolve({
       data: responsedata,
       status: 200,
@@ -212,22 +215,22 @@ describe("loadFormSwitches method", () => {
     });
 
     jest
-      .spyOn(formsService, "getFormSwitches")
+      .spyOn(formsService, "getFeatureFlags")
       .mockReturnValue(successResponse);
 
     const expectedActions = [
       {
-        type: LOAD_FORM_SWITCHES_SUCCESS,
+        type: LOAD_FEATURE_FLAGS_SUCCESS,
         payload: responsedata
       }
     ];
 
-    return store.dispatch(loadFormSwitches(formsService)).then(() => {
+    return store.dispatch(loadFeatureFlags(formsService)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
-  it("Should dispatch LOAD_FORM_SWITCHES_FAILURE if api call fails", () => {
+  it("Should dispatch LOAD_FEATURE_FLAGS_FAILURE if api call fails", () => {
     const errorResponse = {
       data: null,
       status: 500,
@@ -237,24 +240,24 @@ describe("loadFormSwitches method", () => {
     };
 
     jest
-      .spyOn(formsService, "getFormSwitches")
+      .spyOn(formsService, "getFeatureFlags")
       .mockReturnValue(Promise.reject(errorResponse));
 
     const expectedActions = [
       {
-        type: LOAD_FORM_SWITCHES_FAILURE,
+        type: LOAD_FEATURE_FLAGS_FAILURE,
         payload: null
       }
     ];
 
-    return store.dispatch(loadFormSwitches(formsService)).then(() => {
+    return store.dispatch(loadFeatureFlags(formsService)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });
 
 describe("loadSavedForm method", () => {
-  it("Should dispatch INITIALIZE_FORMR_PARTB_SUCCESS on successfull api call", () => {
+  it("Should dispatch INITIALIZE_FORMR_PARTB_SUCCESS on successful api call", () => {
     const formrPartb = submittedFormRPartBs[0];
 
     const successResponse: Promise<AxiosResponse<FormRPartB>> = Promise.resolve(
@@ -283,7 +286,7 @@ describe("loadSavedForm method", () => {
     });
   });
 
-  it("Should dispatch LOAD_FORM_SWITCHES_FAILURE if api call fails", () => {
+  it("Should dispatch INITIALIZE_FORMR_PARTB_FAILURE if api call fails", () => {
     const errorResponse = {
       data: null,
       status: 500,
