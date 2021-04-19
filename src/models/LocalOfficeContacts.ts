@@ -13,11 +13,11 @@ export const localOfficeContacts: LocalOfficeContact[] = [
   },
   {
     name: "Health Education England Kent, Surrey and Sussex",
-    contact: "PGMDE"
+    contact: "PGMDE support portal"
   },
   {
     name: "Health Education England North Central and East London",
-    contact: "PGMDE"
+    contact: "PGMDE support portal"
   },
   {
     name: "Health Education England North East",
@@ -27,8 +27,14 @@ export const localOfficeContacts: LocalOfficeContact[] = [
     name: "Health Education England North West",
     contact: "medicine.nw@hee.nhs.uk"
   },
-  { name: "Health Education England North West London", contact: "PGMDE" },
-  { name: "Health Education England South London", contact: "PGMDE" },
+  {
+    name: "Health Education England North West London",
+    contact: "PGMDE support portal"
+  },
+  {
+    name: "Health Education England South London",
+    contact: "PGMDE support portal"
+  },
   {
     name: "Health Education England South West",
     contact: "TISQueries.sw@hee.nhs.uk"
@@ -46,5 +52,5 @@ export const localOfficeContacts: LocalOfficeContact[] = [
     name: "Health Education England Yorkshire and the Humber",
     contact: "TIS.yh@hee.nhs.uk"
   },
-  { name: "London LETBs", contact: "PGMDE" }
+  { name: "London LETBs", contact: "PGMDE support portal" }
 ];
