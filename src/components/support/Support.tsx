@@ -1,12 +1,14 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { Panel } from "nhsuk-react-components";
+import { Details, Panel } from "nhsuk-react-components";
 import { localOfficeContacts } from "../../models/LocalOfficeContacts";
 import { loadTraineeProfile } from "../../redux/actions/trainee-profile-actions";
 import { RootState } from "../../redux/reducers";
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 import Loading from "../common/Loading";
 import PageTitle from "../common/PageTitle";
+import { SupportList } from "./SupportList";
+import { SupportMsg } from "./SupportMsg";
 
 const mapStateToProps = (state: RootState) => ({
   traineeProfile: state.profile.traineeProfile,
@@ -72,63 +74,45 @@ export class Support extends React.PureComponent<profileProps, LocalState> {
 
     if (!isLoaded) {
       return <Loading />;
-    }
-    if (dataError) {
-      return (
-        <div data-jest="dataErrorPanel">
-          <p>
-            {`Sorry but your Local Office could not be found. We need this to route your query to the right place. For further assistance, We suggest you raise this with your supervisor.`}
-          </p>
-        </div>
-      );
-    }
-    if (matchError) {
-      return (
-        <div data-jest="matchErrorPanel">
-          <p>
-            {`Sorry but your Local Office name ${personOwner} cannot be matched with a support contact email address. We suggest you raise this with your supervisor.`}
-          </p>
-        </div>
-      );
     } else {
       return (
         traineeProfile && (
           <>
-            <div>
-              <PageTitle title="Support" />
-              <h1>Support</h1>
-              <p>
-                If you have a query relating to completing the Form R - which
-                includes queries about the information we currrently hold for
-                you - then please follow the instructions below.
-              </p>
-            </div>
-            {contact === "PGMDE" ? (
-              <div data-jest="PGMDESupportPanel">
-                <Panel label="Support via the PGMDE Support Portal">
-                  <p>
-                    {`According to our records, your Local Office is ${personOwner}. Please click on the link below to send your query to the team via the PGMDE Support Portal.`}
-                  </p>
-                  <p>
-                    <a href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true">
-                      PGMDE Support Portal
-                    </a>
-                  </p>
-                </Panel>
-              </div>
-            ) : (
-              <div data-jest="loSupportPanel">
-                <Panel label="Support from your Local Office">
-                  <p>
-                    {`According to our records, your Local Office name is ${personOwner}. Please email them your query by either clicking on the link below (which should open your email client) or copying the email
-                    address and pasting it into your email client.`}
-                  </p>
-                  <p>
-                    <a href={`mailto:${contact}`}>{contact}</a>
-                  </p>
-                </Panel>
-              </div>
-            )}
+            <PageTitle title="Support" />
+            <h1 style={{ marginBottom: 16 }}>Support</h1>
+            <Details>
+              <Details.Summary>Got a question?</Details.Summary>
+              <Details.Text>
+                <p>
+                  If you have a query about completing the Form R or the
+                  information we currrently hold for you then please click on
+                  the link provided in the Contact section.
+                </p>
+                <p>
+                  Based on your current information, this link should direct
+                  your query to the someone best placed to help you.
+                </p>
+                <p>
+                  Clicking on the link will either give you an email address to
+                  use or, if you are based in London and South East, forward you
+                  to the PGMDE Support Portal to submit your query.
+                </p>
+                <p>
+                  However, if you feel another contact than the one given would
+                  be more suitable, then please choose an alternative from the
+                  drop-down list.
+                </p>
+              </Details.Text>
+            </Details>
+
+            <Panel label="Contact">
+              <SupportMsg
+                dataError={dataError}
+                matchError={matchError}
+                personOwner={personOwner}
+              />
+              <SupportList contact={contact} />
+            </Panel>
           </>
         )
       );
