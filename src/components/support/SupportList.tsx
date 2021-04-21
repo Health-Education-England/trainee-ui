@@ -21,21 +21,30 @@ export const SupportList = (props: Props) => {
   return (
     <>
       <div>
-        {linkContact === "PGMDE support portal" ? (
-          <ActionLink
-            data-jest="pgdmeLink"
-            href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true"
-          >
-            PGMDE Support Portal
-          </ActionLink>
-        ) : (
-          <ActionLink
-            data-jest="loLink"
-            href={`mailto:${linkContact}?subject=Form R support query`}
-          >
-            {linkContact}
-          </ActionLink>
-        )}
+        {(() => {
+          switch (linkContact) {
+            case "":
+              return null;
+            case "PGMDE support portal":
+              return (
+                <ActionLink
+                  data-jest="pgdmeLink"
+                  href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true"
+                >
+                  PGMDE Support Portal
+                </ActionLink>
+              );
+            default:
+              return (
+                <ActionLink
+                  data-jest="loLink"
+                  href={`mailto:${linkContact}?subject=Form R support query`}
+                >
+                  {linkContact}
+                </ActionLink>
+              );
+          }
+        })()}
       </div>
 
       <Select data-jest="contactList" onChange={handleChange}>

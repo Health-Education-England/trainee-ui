@@ -28,6 +28,15 @@ describe("SupportList", () => {
     expect(wrapper.exists("[data-jest='loLink']")).toBe(true);
   });
 
+  it("should give no link for a blank contact", () => {
+    const props = {
+      contact: ""
+    };
+    wrapper = mount(<SupportList {...props} />);
+    expect(wrapper.exists("[data-jest='loLink']")).toBe(false);
+    expect(wrapper.exists("[data-jest='pgdmeLink']")).toBe(false);
+  });
+
   it("should update the link when choosing a contact from the list", () => {
     const props = {
       contact: "PGMDE support portal"
