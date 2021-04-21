@@ -9,7 +9,7 @@ import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
 import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
 import FormRPartB from "./components/forms/formr-part-b/FormRPartB";
-import Support from "./components/forms/Support";
+import Support from "./components/support/Support";
 import HowToPrintToPDF from "./components/forms/HowToPrintToPDF";
 import { CacheUtilities } from "./utilities/CacheUtilities";
 import packageJson from "../package.json";
