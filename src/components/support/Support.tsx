@@ -89,13 +89,13 @@ export class Support extends React.PureComponent<profileProps, LocalState> {
                   the link provided in the Contact section.
                 </p>
                 <p>
-                  Based on your current information, this link should direct
-                  your query to the someone best placed to help you.
-                </p>
-                <p>
                   Clicking on the link will either give you an email address to
                   use or, if you are based in London and South East, forward you
                   to the PGMDE Support Portal to submit your query.
+                </p>
+                <p>
+                  Based on your current information, this link should direct
+                  your query to someone best placed to help you.
                 </p>
                 <p>
                   However, if you feel another contact than the one given would

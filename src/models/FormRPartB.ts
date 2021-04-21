@@ -9,7 +9,7 @@ export interface FormRPartB extends IFormR {
   localOfficeName: string;
   prevRevalBody: string;
   currRevalDate: Date | undefined;
-  prevRevalDate: Date | undefined;
+  prevRevalDate: Date | undefined | null;
   programmeSpecialty: string;
   dualSpecialty: string;
   work: Work[];
