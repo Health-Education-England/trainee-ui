@@ -105,7 +105,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 name="currRevalDate"
               />
               <TextInputField
-                label="Date of Previous Revalidation"
+                label="Date of Previous Revalidation (if applicable)"
                 type="date"
                 name="prevRevalDate"
               />

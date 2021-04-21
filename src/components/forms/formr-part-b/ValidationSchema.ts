@@ -56,7 +56,7 @@ export const Section1ValidationSchema = yup.object({
       "The date is outside the allowed date range",
       value => DateUtilities.IsInsideDateRange(value)
     ),
-  prevRevalDate: yup.string(),
+  prevRevalDate: yup.string().nullable().notRequired(),
   programmeSpecialty: StringValidationSchema("Programme / Training Specialty"),
   dualSpecialty: yup.string()
 });
