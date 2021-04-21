@@ -8,33 +8,37 @@ interface Props {
 
 export const SupportList = (props: Props) => {
   const { contact } = props;
-  const [altContact, updateContact] = useState("");
+  const [linkContact, updateLinkContact] = useState("");
 
   useEffect(() => {
     if (contact) {
-      updateContact(contact);
+      updateLinkContact(contact);
     }
   }, [contact]);
 
-  const handleChange = (event: any) => updateContact(event.target.value);
+  const handleChange = (event: any) => updateLinkContact(event.target.value);
 
   return (
     <>
       <div>
-        {altContact === "PGMDE support portal" ? (
-          <ActionLink href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true">
+        {linkContact === "PGMDE support portal" ? (
+          <ActionLink
+            data-jest="pgdmeLink"
+            href="https://lasepgmdesupport.hee.nhs.uk/support/tickets/new?form_7=true"
+          >
             PGMDE Support Portal
           </ActionLink>
         ) : (
           <ActionLink
-            href={`mailto:${altContact}?subject=Form R support query`}
+            data-jest="loLink"
+            href={`mailto:${linkContact}?subject=Form R support query`}
           >
-            {altContact}
+            {linkContact}
           </ActionLink>
         )}
       </div>
 
-      <Select onChange={handleChange}>
+      <Select data-jest="contactList" onChange={handleChange}>
         <Select.Option value={contact}>
           -- Choose an alternative contact --
         </Select.Option>

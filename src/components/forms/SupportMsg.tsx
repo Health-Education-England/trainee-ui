@@ -14,7 +14,7 @@ export const SupportMsg = (props: Props) => {
       <div data-jest="dataErrorMsg">
         <ErrorMessage>
           Sorry but your contact could not be found. Please choose a contact
-          from the list below (which will provide a link)
+          from the list below (which will provide a new link)
         </ErrorMessage>
       </div>
     );
@@ -22,7 +22,7 @@ export const SupportMsg = (props: Props) => {
     return (
       <div data-jest="matchErrorMsg">
         <ErrorMessage>
-          {`Sorry but your contact ${personOwner} cannot be matched with a support contact. Please choose a contact from the list below (which will provide a link)`}
+          {`Sorry but your contact ${personOwner} cannot be matched with a support contact. Please choose a contact from the list below (which will provide a new link)`}
         </ErrorMessage>
       </div>
     );
