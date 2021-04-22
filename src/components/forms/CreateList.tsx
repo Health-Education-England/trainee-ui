@@ -121,7 +121,7 @@ export const CreateList = (
         );
       }
 
-      if (draftForm.length === 1) {
+      if (draftForm.length >= 1) {
         return (
           <Button
             id="btnOpenForm"
@@ -135,9 +135,6 @@ export const CreateList = (
         );
       }
 
-      if (draftForm.length > 1) {
-        return <Loading />;
-      }
       return (
         <Button
           id="btnOpenForm"
