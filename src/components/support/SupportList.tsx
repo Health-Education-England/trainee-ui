@@ -53,7 +53,7 @@ export const SupportList = (props: Props) => {
         </Select.Option>
         {localOfficeContacts.map((contact, index) => (
           <Select.Option key={index} value={contact.contact}>
-            {contact.name}
+            {contact.abbrevName}
           </Select.Option>
         ))}
       </Select>
