@@ -28,8 +28,11 @@ const initialState: ReferenceDataState = {
 };
 
 export default function ReferenceDataReducer(
-  state = initialState,
-  action: ActionType
+  state: ReferenceDataState = initialState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): ReferenceDataState {
   switch (action.type) {
     case LOAD_REFERENCE_GENDER_SUCCESS:

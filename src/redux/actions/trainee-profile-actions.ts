@@ -6,20 +6,18 @@ import {
 import { TraineeProfileService } from "../../services/TraineeProfileService";
 
 export function loadTraineeProfile(profileService: TraineeProfileService) {
-  return (dispatch: (action: ActionType) => any) => {
-    return profileService
-      .getTraineeProfile()
-      .then(response =>
-        dispatch({
-          type: LOAD_TRAINEE_PROFILE_SUCCESS,
-          payload: response.data
-        })
-      )
-      .catch(error =>
-        dispatch({
-          type: LOAD_TRAINEE_PROFILE_FAILURE,
-          payload: error
-        })
-      );
+  return async (dispatch: (action: ActionType) => any) => {
+    try {
+      const response = await profileService.getTraineeProfile();
+      return dispatch({
+        type: LOAD_TRAINEE_PROFILE_SUCCESS,
+        payload: response.data
+      });
+    } catch (error) {
+      return dispatch({
+        type: LOAD_TRAINEE_PROFILE_FAILURE,
+        payload: error
+      });
+    }
   };
 }

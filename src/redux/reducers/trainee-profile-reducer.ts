@@ -10,8 +10,11 @@ const initialState: PersonState = {
 };
 
 export default function TraineeProfileReducer(
-  state = initialState,
-  action: ActionType
+  state: PersonState = initialState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): PersonState {
   switch (action.type) {
     case LOAD_TRAINEE_PROFILE_SUCCESS:
