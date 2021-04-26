@@ -109,7 +109,8 @@
       "html",
       "lcov",
       "text"
-    ]
+    ],
+    "resetMocks": false
   },
   "jestSonar": {
     "sonar56x": true,
