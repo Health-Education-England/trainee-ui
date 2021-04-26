@@ -4,7 +4,8 @@ import {
   Authenticator,
   SignIn,
   ForgotPassword,
-  RequireNewPassword
+  RequireNewPassword,
+  ConfirmSignIn
 } from "aws-amplify-react";
 import "@aws-amplify/ui/dist/style.css";
 
@@ -50,6 +51,7 @@ const Login = (props: LoginProps) => {
               <SignIn />
               <ForgotPassword />
               <RequireNewPassword />
+              <ConfirmSignIn />
             </Authenticator>
           </div>
         </div>
