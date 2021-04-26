@@ -114,18 +114,28 @@ class Create extends React.PureComponent<
     }
 
     if (localOffices.length > 0) {
-      if (!localOffices.some(l => l.label === formData.localOfficeName)) {
+      if (
+        !localOffices.some(
+          (l: { label: string }) => l.label === formData.localOfficeName
+        )
+      ) {
         formData.localOfficeName = "";
       }
 
-      if (!designatedBodies.some(l => l.label === formData.prevRevalBody)) {
+      if (
+        !designatedBodies.some(
+          (l: { label: string }) => l.label === formData.prevRevalBody
+        )
+      ) {
         formData.prevRevalBody = "";
       }
     }
 
     if (
       curricula.length > 0 &&
-      !curricula.some(l => l.label === formData.programmeSpecialty)
+      !curricula.some(
+        (l: { label: string }) => l.label === formData.programmeSpecialty
+      )
     ) {
       formData.programmeSpecialty = "";
     }

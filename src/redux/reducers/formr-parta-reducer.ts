@@ -13,8 +13,11 @@ const formRPartAState: FormRPartAState = {
 };
 
 export function FormRPartAReducer(
-  state = formRPartAState,
-  action: ActionType
+  state: FormRPartAState = formRPartAState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): FormRPartAState {
   switch (action.type) {
     case UPDATE_FORMR_PARTA:
@@ -39,8 +42,11 @@ const formRPartAListState: FormRPartAListState = {
 };
 
 export function FormRPartAListReducer(
-  state = formRPartAListState,
-  action: ActionType
+  state: FormRPartAListState = formRPartAListState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): FormRPartAListState {
   switch (action.type) {
     case LOADING_FORMR_PARTA_LIST:

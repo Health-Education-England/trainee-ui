@@ -23,8 +23,11 @@ const formRPartBListState: FormRPartBListState = {
 };
 
 export function FormRPartBListReducer(
-  state = formRPartBListState,
-  action: ActionType
+  state: FormRPartBListState = formRPartBListState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): FormRPartBListState {
   switch (action.type) {
     case LOADING_FORMR_PARTB_LIST:
@@ -55,8 +58,11 @@ const initialState: FormRPartBState = {
 };
 
 export function FormRPartBReducer(
-  state = { ...initialState },
-  action: ActionType
+  state: FormRPartBState = { ...initialState },
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): FormRPartBState {
   switch (action.type) {
     case INITIALIZE_FORMR_PARTB_SUCCESS:
@@ -94,8 +100,11 @@ const featureFlagsInitialState: FeatureFlagsState = {
 };
 
 export function FeatureFlagsReducer(
-  state = featureFlagsInitialState,
-  action: ActionType
+  state: FeatureFlagsState = featureFlagsInitialState,
+  action: ActionType = {
+    type: "",
+    payload: ""
+  }
 ): FeatureFlagsState {
   switch (action.type) {
     case LOAD_FEATURE_FLAGS_SUCCESS:
