@@ -1,6 +1,6 @@
 {
   "name": "trainee-ui-app",
-  "version": "0.23.1",
+  "version": "0.23.2",
   "private": true,
   "dependencies": {
     "@sentry/browser": "^5.20.1",
@@ -22,9 +22,9 @@
     "nhsuk-frontend": "^3.1.0",
     "nhsuk-react-components": "^1.2.5",
     "prettier": "^2.2.1",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-cookie-consent": "^5.2.0",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-loading": "^2.0.3",
     "react-redux": "^7.2.3",
