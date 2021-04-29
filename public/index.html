@@ -4,11 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Trainee UI web application" />
+    <meta
+      name="description"
+      content="Health Education England Trainee Self-Service web application"
+    />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="stylesheet" media="print" href="%PUBLIC_URL%/print.css" />
-    <title>Trainee UI</title>
+    <title>Trainee Self-Service</title>
+
+    <div id="ieMsg" hidden>
+      <h1>
+        Your web browser Internet Explorer is not supported by TIS Self Service.
+      </h1>
+      <p>
+        TIS Self Service application has been designed to work with modern web
+        browsers, such as the latest versions of Google Chrome or Microsoft
+        Edge. The site will not open in your current browser and it will be
+        necessary to update your browser or use a modern alternative in order to
+        run this application.
+      </p>
+    </div>
+    <script>
+      if (document.documentMode) {
+        document.getElementById("ieMsg").hidden = false;
+      }
+    </script>
 
     <!-- Hotjar Tracking Code for http://trainee.tis.nhs.uk/ -->
     <script>
