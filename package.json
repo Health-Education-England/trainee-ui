@@ -1,6 +1,6 @@
 {
   "name": "trainee-ui-app",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "private": true,
   "dependencies": {
     "@sentry/browser": "^5.20.1",
