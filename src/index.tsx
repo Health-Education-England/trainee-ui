@@ -50,7 +50,7 @@ async function fetchData(): Promise<any> {
     </Provider>,
     document.getElementById("root")
   );
-  serviceWorker.register();
+  serviceWorker.unregister();
 })();
 
 Sentry.init({
