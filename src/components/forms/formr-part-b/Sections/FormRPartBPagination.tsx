@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react";
-import { Pagination, Button } from "nhsuk-react-components";
+import { Pagination } from "nhsuk-react-components";
+import DebounceButton from "../../DebounceButton";
 import { FormRPartB } from "../../../../models/FormRPartB";
 import classes from "../FormRPartB.module.scss";
 
@@ -37,10 +38,13 @@ const FormRPartBPagination: React.FC<Props> = (props: Props) => {
         </Pagination.Link>
       ) : null}
 
-      <Pagination.Link onClick={() => props.saveDraft(values)}>
-        <Button type="button" data-cy="BtnSaveDraft">
-          Save & Exit
-        </Button>
+      <Pagination.Link>
+        <DebounceButton
+          clickHandler={() => props.saveDraft(values)}
+          type="button"
+          data-cy="BtnSaveDraft"
+          label="Save & Exit"
+        />
       </Pagination.Link>
 
       <Pagination.Link
