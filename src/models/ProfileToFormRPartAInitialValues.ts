@@ -39,7 +39,7 @@ export function ProfileToFormRPartAInitialValues(
     surname: pd?.surname || "",
     gmcNumber: pd?.gmcNumber || "",
     localOfficeName: pd?.personOwner || "",
-    dateOfBirth: pd?.dateOfBirth || new Date("1800-01-01"),
+    dateOfBirth: pd?.dateOfBirth || null,
     gender: pd?.gender || "",
     immigrationStatus: "",
     qualification: pd?.qualification || "",
