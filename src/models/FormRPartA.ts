@@ -6,7 +6,7 @@ export interface FormRPartA extends IFormR {
   surname: string;
   gmcNumber: string;
   localOfficeName: string;
-  dateOfBirth: Date;
+  dateOfBirth: any;
   gender: string;
   immigrationStatus: string;
   qualification: string;
