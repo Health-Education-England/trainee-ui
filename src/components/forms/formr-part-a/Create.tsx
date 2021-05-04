@@ -16,6 +16,7 @@ import {
 } from "../../../redux/actions/formr-parta-actions";
 import SelectInputField from "../SelectInputField";
 import TextInputField from "../TextInputField";
+import SubmitButton from "../SubmitButton";
 import { ValidationSchema } from "./ValidationSchema";
 import { GenericOwnProps } from "../../../redux/types";
 import {
@@ -318,12 +319,11 @@ class Create extends React.PureComponent<CreateProps> {
                 <div className="nhsuk-grid-column-two-thirds">
                   <div className="nhsuk-grid-row">
                     <div className="nhsuk-grid-column-one-third">
-                      <Button
-                        onClick={() => this.saveDraft(values)}
+                      <SubmitButton
+                        label="Save & Exit"
+                        clickHandler={() => this.saveDraft(values)}
                         data-cy="BtnSaveDraft"
-                      >
-                        Save & Exit
-                      </Button>
+                      />
                     </div>
                     <div className="nhsuk-grid-column-two-thirds">
                       <Button type="submit" data-cy="BtnContinue">

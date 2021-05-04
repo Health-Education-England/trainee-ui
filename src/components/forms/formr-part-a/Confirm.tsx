@@ -1,6 +1,7 @@
 import View from "./View";
 import React from "react";
 import { Button, WarningCallout } from "nhsuk-react-components";
+import SubmitButton from "../SubmitButton";
 import { connect } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import { FormsService } from "../../../services/FormsService";
@@ -92,21 +93,19 @@ class Confirm extends React.PureComponent<ConfirmProps> {
                 <Button onClick={() => this.handleEdit(formData)}>Edit</Button>
               </div>
               <div className="nhsuk-grid-column-one-third">
-                <Button
-                  onClick={() => this.saveDraft(formData)}
+                <SubmitButton
+                  label="Save & Exit"
+                  clickHandler={() => this.saveDraft(formData)}
                   data-cy="BtnSaveDraft"
-                >
-                  Save & Exit
-                </Button>
+                />
               </div>
               <div className="nhsuk-grid-column-one-quarter">
-                <Button
+                <SubmitButton
                   type="submit"
-                  onClick={() => this.handleSubmit(formData)}
+                  label="Submit"
+                  clickHandler={() => this.handleSubmit(formData)}
                   data-cy="BtnSubmit"
-                >
-                  Submit
-                </Button>
+                />
               </div>
             </div>
           </div>
