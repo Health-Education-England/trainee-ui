@@ -10,7 +10,7 @@ export interface FormRPartA extends IFormR {
   gender: string;
   immigrationStatus: string;
   qualification: string;
-  dateAttained: Date;
+  dateAttained: any;
   medicalSchool: string;
   address1: string;
   address2: string;
@@ -25,9 +25,9 @@ export interface FormRPartA extends IFormR {
   cctSpecialty1: string;
   cctSpecialty2: string;
   college: string;
-  completionDate: Date;
+  completionDate: any;
   trainingGrade: string;
-  startDate: Date;
+  startDate: any;
   programmeMembershipType: string;
   wholeTimeEquivalent: number | undefined;
   declarationType: string;
