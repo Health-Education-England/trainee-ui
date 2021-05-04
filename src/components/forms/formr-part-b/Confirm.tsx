@@ -1,5 +1,5 @@
 import React from "react";
-import DebounceButton from "../DebounceButton";
+import SubmitButton from "../SubmitButton";
 import { connect } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import { FormsService } from "../../../services/FormsService";
@@ -91,14 +91,14 @@ class Confirm extends React.PureComponent<ConfirmProps> {
             <div className="nhsuk-grid-column-two-thirds">
               <div className="nhsuk-grid-row">
                 <div className="nhsuk-grid-column-one-third">
-                  <DebounceButton
+                  <SubmitButton
                     clickHandler={() => this.saveDraft(formData)}
                     data-cy="BtnSaveDraft"
                     label="Save & Exit"
                   />
                 </div>
                 <div className="nhsuk-grid-column-one-quarter">
-                  <DebounceButton
+                  <SubmitButton
                     type="submit"
                     clickHandler={() => this.handleSubmit(formData)}
                     data-cy="BtnSubmitPartB"

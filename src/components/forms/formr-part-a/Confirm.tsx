@@ -1,7 +1,7 @@
 import View from "./View";
 import React from "react";
 import { Button, WarningCallout } from "nhsuk-react-components";
-import DebounceButton from "../DebounceButton";
+import SubmitButton from "../SubmitButton";
 import { connect } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import { FormsService } from "../../../services/FormsService";
@@ -93,14 +93,14 @@ class Confirm extends React.PureComponent<ConfirmProps> {
                 <Button onClick={() => this.handleEdit(formData)}>Edit</Button>
               </div>
               <div className="nhsuk-grid-column-one-third">
-                <DebounceButton
+                <SubmitButton
                   label="Save & Exit"
                   clickHandler={() => this.saveDraft(formData)}
                   data-cy="BtnSaveDraft"
                 />
               </div>
               <div className="nhsuk-grid-column-one-quarter">
-                <DebounceButton
+                <SubmitButton
                   type="submit"
                   label="Submit"
                   clickHandler={() => this.handleSubmit(formData)}

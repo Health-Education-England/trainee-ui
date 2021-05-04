@@ -13,7 +13,7 @@ const defaultProps: ButtonProps = {
   disableOnClick: true
 };
 
-const DebounceButton: React.FC<ButtonProps> = props => {
+const SubmitButton: React.FC<ButtonProps> = props => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const buttonHandler = () => {
     disableOnClick && setButtonDisabled(true);
@@ -26,5 +26,5 @@ const DebounceButton: React.FC<ButtonProps> = props => {
     </Button>
   );
 };
-DebounceButton.defaultProps = defaultProps;
-export default DebounceButton;
+SubmitButton.defaultProps = defaultProps;
+export default SubmitButton;
