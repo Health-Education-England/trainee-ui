@@ -58,8 +58,7 @@ export function ProfileToFormRPartAInitialValues(
     cctSpecialty1: curriculum?.curriculumName || "",
     cctSpecialty2: "",
     college: "",
-    completionDate:
-      programme?.programmeCompletionDate || null,
+    completionDate: programme?.programmeCompletionDate || null,
     trainingGrade: "",
     startDate: programme?.startDate || null,
     programmeMembershipType: programme?.programmeMembershipType || "",
