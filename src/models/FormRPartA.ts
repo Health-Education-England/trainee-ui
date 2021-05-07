@@ -6,11 +6,11 @@ export interface FormRPartA extends IFormR {
   surname: string;
   gmcNumber: string;
   localOfficeName: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | null;
   gender: string;
   immigrationStatus: string;
   qualification: string;
-  dateAttained: Date;
+  dateAttained: Date | null;
   medicalSchool: string;
   address1: string;
   address2: string;
@@ -25,9 +25,9 @@ export interface FormRPartA extends IFormR {
   cctSpecialty1: string;
   cctSpecialty2: string;
   college: string;
-  completionDate: Date;
+  completionDate: Date | null;
   trainingGrade: string;
-  startDate: Date;
+  startDate: Date | null;
   programmeMembershipType: string;
   wholeTimeEquivalent: number | undefined;
   declarationType: string;
