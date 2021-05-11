@@ -22,7 +22,7 @@ export const ValidationSchema = yup.object({
     )
     .test(
       "dateOfBirth",
-      "This date is before the minumum date allowed",
+      "This date is before the minimum date allowed",
       value => DateUtilities.IsMoreThanMinDate(value)
     ),
   gender: StringValidationSchema("Gender"),
@@ -36,7 +36,7 @@ export const ValidationSchema = yup.object({
     )
     .test(
       "dateAttained",
-      "This date is before the minumum date allowed",
+      "This date is before the minimum date allowed",
       value => DateUtilities.IsMoreThanMinDate(value)
     ),
   medicalSchool: StringValidationSchema(
