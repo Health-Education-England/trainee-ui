@@ -7,7 +7,7 @@
     "@types/node": "^14.14.32",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
-    "@types/react-helmet": "^6.1.0",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/yup": "0.29.11",
     "aws-amplify": "^3.3.13",
