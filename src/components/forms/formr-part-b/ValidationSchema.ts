@@ -162,71 +162,74 @@ export const CovidSectionValidationSchema = yup.object({
     .nullable()
     .when("haveCovidDeclarations", {
       is: true,
-      then: yup.object({
-        selfRateForCovid: StringValidationSchema(
-          "Covid Training Progress",
-          300
-        ),
-        reasonOfSelfRate: yup
-          .string()
-          .nullable()
-          .when("selfRateForCovid", {
-            is: (selfRate: string) =>
-              selfRate !==
-              "Satisfactory progress for stage of training and required competencies met",
-            then: yup
-              .string()
-              .nullable()
-              .required("Reason for self-rate is required")
-          }),
-        otherInformationForPanel: yup
-          .string()
-          .nullable()
-          .max(1000, "You have reached the maximum length allowed"),
-        educationSupervisorName: StringValidationSchema(
-          "Education Supervisor Name",
-          300
-        ),
-        educationSupervisorEmail: yup
-          .string()
-          .nullable()
-          .email("Email address is invalid")
-          .max(255, "Email must be shorter than 255 characters")
-          .required("Email is required"),
-        haveChangesToPlacement: yup
-          .boolean()
-          .nullable()
-          .required("You must select yes or no"),
-        changeCircumstances: yup
-          .string()
-          .nullable()
-          .when("haveChangesToPlacement", {
-            is: true,
-            then: yup
-              .string()
-              .nullable()
-              .required("Circumstance of change is required")
-          }),
-        changeCircumstanceOther: yup
-          .string()
-          .nullable()
-          .when("changeCircumstances", {
-            is: (changeCircumstance: string) => changeCircumstance === "Other",
-            then: yup
-              .string()
-              .nullable()
-              .required("Other circumstance is required")
-          }),
-        howPlacementAdjusted: yup
-          .string()
-          .nullable()
-          .when("haveChangesToPlacement", {
-            is: true,
-            then: yup
-              .string()
-              .nullable()
-              .required("How your placement was adjusted is required")
-          })
-      })
+      then: yup
+        .object({
+          selfRateForCovid: StringValidationSchema(
+            "Covid Training Progress",
+            300
+          ),
+          reasonOfSelfRate: yup
+            .string()
+            .nullable()
+            .when("selfRateForCovid", {
+              is: (selfRate: string) =>
+                selfRate !==
+                "Satisfactory progress for stage of training and required competencies met",
+              then: yup
+                .string()
+                .nullable()
+                .required("Reason for self-rate is required")
+            }),
+          otherInformationForPanel: yup
+            .string()
+            .nullable()
+            .max(1000, "You have reached the maximum length allowed"),
+          educationSupervisorName: StringValidationSchema(
+            "Education Supervisor Name",
+            300
+          ),
+          educationSupervisorEmail: yup
+            .string()
+            .nullable()
+            .email("Email address is invalid")
+            .max(255, "Email must be shorter than 255 characters")
+            .required("Email is required"),
+          haveChangesToPlacement: yup
+            .boolean()
+            .nullable()
+            .required("You must select yes or no"),
+          changeCircumstances: yup
+            .string()
+            .nullable()
+            .when("haveChangesToPlacement", {
+              is: true,
+              then: yup
+                .string()
+                .nullable()
+                .required("Circumstance of change is required")
+            }),
+          changeCircumstanceOther: yup
+            .string()
+            .nullable()
+            .when("changeCircumstances", {
+              is: (changeCircumstance: string) =>
+                changeCircumstance === "Other",
+              then: yup
+                .string()
+                .nullable()
+                .required("Other circumstance is required")
+            }),
+          howPlacementAdjusted: yup
+            .string()
+            .nullable()
+            .when("haveChangesToPlacement", {
+              is: true,
+              then: yup
+                .string()
+                .nullable()
+                .required("How your placement was adjusted is required")
+            })
+        })
+        .nullable()
     })
 });
