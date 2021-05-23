@@ -366,6 +366,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                 aria-labelledby="errorSummaryTitle"
                 role="alert"
                 tabIndex={-1}
+                data-cy="covidErrorSummary"
               >
                 <ErrorMessage>Please check highlighted fields</ErrorMessage>
               </ErrorSummary>

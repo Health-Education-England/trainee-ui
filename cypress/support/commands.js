@@ -330,6 +330,7 @@ Cypress.Commands.add("checkAndFillCovidSection", () => {
   cy.get("[data-cy=legendFieldsetCovid]").should("include.text", "COVID");
   cy.get("[data-cy='haveCovidDeclarations0']").should("exist").check();
   cy.get("[data-cy='covidForm']").should("exist");
+  cy.get("[data-cy=covidErrorSummary").should("not.exist");
   cy.get("[data-cy='covidDeclarationDto.selfRateForCovid0']")
     .should("exist")
     .check();
