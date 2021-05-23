@@ -171,7 +171,7 @@ export const CovidSectionValidationSchema = yup.object({
           .string()
           .nullable()
           .when("selfRateForCovid", {
-            is: selfRate =>
+            is: (selfRate: string) =>
               selfRate !==
               "Satisfactory progress for stage of training and required competencies met",
             then: yup
@@ -211,7 +211,7 @@ export const CovidSectionValidationSchema = yup.object({
           .string()
           .nullable()
           .when("changeCircumstances", {
-            is: changeCircumstance => changeCircumstance === "Other",
+            is: (changeCircumstance: string) => changeCircumstance === "Other",
             then: yup
               .string()
               .nullable()

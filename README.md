@@ -4,71 +4,84 @@
 
 # trainee-ui
 
-Front-end for Training Pathway app
+Front-end for TIS Self Service app
 
 ## Tech Stack and Architecture
 
 Full Tech and Architecture are described elsewhere. The front-end uses REST interaction with the back-end service(s).
 
-We've decided to use [React](https://reactjs.org/) to build the UI with a set of libraries for the aspects given below.
+[Create React App (CRA)](https://create-react-app.dev/) is used to build the app as it comes with many build tools already configured.
+This single page application (SPA) is written in [TypeScript](https://www.typescriptlang.org/) using the [React](https://reactjs.org/) library.
 
 ## Core Libraries
 
-We'll start by using:
-
-1. [Reach Router](https://reach.tech/router) for Routing\*
+1. [React Router](https://reactrouter.com/) for Routing
 2. [React Redux](https://react-redux.js.org/) for State Management
-3. [Axios](https://github.com/axios/axios) for HTTP communication\*
-4. [Material](https://material-ui.com/) for UI design
-5. [Jest](https://jestjs.io/) for unit and snapshot testing\*
-6. [Cypress](https://www.cypress.io/) for E2E testing
+3. [Redux-Thunk](https://github.com/reduxjs/redux-thunk) middleware (for e.g. handling asynchronous redux actions)
+4. [Axios](https://github.com/axios/axios) for HTTP communication
+5. [nhsuk react components](https://github.com/NHSDigital/nhsuk-react-components/releases/tag/v1.2.0) for UI design
+6. [Jest](https://jestjs.io/) for unit and snapshot testing
+7. [Cypress](https://www.cypress.io/) for E2E testing
 
-\*There was wide support for using these.
+### Initial decision-making/conversation
 
-## Other decisions/Conversation
+The thread can be picked up from the Jira ticket [Identify Core React Libraries](https://hee-tis.atlassian.net/browse/TISNEW-3581)
 
-- There was a clear choice to use typescript rather than prop-types
-- We definitely need to review the libraries as part of making sure the tech stack is right for the app
-- There's a good chance we'll need to discuss whether to add:
-  1. Middleware from [Redux-Saga](https://redux-saga.js.org) or less-likely [Redux-Thunk](https://github.com/reduxjs/redux-thunk)
-  2. [enzyme](https://github.com/airbnb/enzyme) in unit and snapshot testing
-- We probably won't end up adopting [prop-types](https://github.com/facebook/prop-types) for the additional validation it provides.
-- The thread can be picked up from the Jira ticket [Identify Core React Libraries](https://hee-tis.atlassian.net/browse/TISNEW-3581)
+## Running the application locally
 
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm start` runs the app in the development mode.<br />
+Open [http://local.tis.com](http://local.tis.com/) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test` (unit tests)
+Note: To populate the form with data, you will need to run the Docker containers to start the back-end services. See
+[dev-handbook](https://github.com/Health-Education-England/dev-handbook/tree/master/tis-self-service) for more details on these services.
 
-Launches the test runner in the interactive watch mode.<br />
+## Unit tests (Jest)
+
+`npm test` launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run cypress` (E2E tests)
+## E2E tests (cypress)
 
-This will run the E2E tests in headless mode with Cypress. Alternatively, `npm run cypress:open` will allow you to view the tests in the browser. For more information visit (https://www.cypress.io/)
+### configurating e2e tests
 
-### `npm run build`
+Before you can run the e2e tests (logging in as an authorised user), you will need to add a `cypress.env.json` file to the root of your project folder:
 
-Builds the app for production to the `build` folder.<br />
+```
+{
+  "username": "anthony.gilliam@hee.nhs.uk",
+  "password": "xxxxxxxx"
+}
+```
+
+### running e2e tests
+
+`npm run cypress` will run the e2e tests in headless mode with Cypress.<br />
+`npm run cypress:open` will allow you to view the tests in the browser. For more information visit (https://www.cypress.io/)
+
+## Building a production app
+
+`npm run build` builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The app is then ready to be deployed.
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Ejecting from CRA (Create React App)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`npm run eject` will 'eject' the app from CRA at any time in the development process if, for example, more choices are needed for build tools and configuration. This command will remove the single build dependency from your project.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Note**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can `eject` at any time in the development cycle
+
+This is a one-way operation. Once you `eject`, you can’t go back!
+
+It will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 

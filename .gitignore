@@ -132,3 +132,6 @@ videos/
 screenshots/
 reports/
 results/
+
+### vscode debugger config ###
+launch.json
