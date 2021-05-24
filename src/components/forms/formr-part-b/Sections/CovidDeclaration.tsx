@@ -189,14 +189,15 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                         );
                       }}
                     />
-                    {values.covidDeclarationDto?.selfRateForCovid !==
-                    COVID_RESULT_DECLARATIONS[2] ? (
-                      <TextInputField
-                        label="Please explain your reason for your progress self-rating."
-                        name="covidDeclarationDto.reasonOfSelfRate"
-                        rows={5}
-                      />
-                    ) : null}
+                    {values.covidDeclarationDto?.selfRateForCovid &&
+                      values.covidDeclarationDto?.selfRateForCovid !==
+                        COVID_RESULT_DECLARATIONS[2] && (
+                        <TextInputField
+                          label="Please explain your reason for your progress self-rating."
+                          name="covidDeclarationDto.reasonOfSelfRate"
+                          rows={5}
+                        />
+                      )}
 
                     <Label>
                       <b>
@@ -286,7 +287,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
 
                     {BooleanUtilities.ToBoolean(
                       values.covidDeclarationDto?.haveChangesToPlacement
-                    ) ? (
+                    ) && (
                       <div
                         data-jest="placementChanges"
                         data-cy="placementChanges"
@@ -311,13 +312,13 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           }}
                         />
                         {values.covidDeclarationDto?.changeCircumstances ===
-                        "Other" ? (
+                          "Other" && (
                           <TextInputField
                             label="If other, please explain"
                             name="covidDeclarationDto.changeCircumstanceOther"
                             data-jest="changeCircumstanceOther"
                           />
-                        ) : null}
+                        )}
 
                         <TextInputField
                           label="Please explain further how your placement was adjusted"
@@ -326,7 +327,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                           data-jest="howPlacementAdjusted"
                         />
                       </div>
-                    ) : null}
+                    )}
                   </Panel>
 
                   <Panel label="Section 4: Educational Supervisor (ES) Report / Validation">
@@ -365,6 +366,7 @@ const CovidDeclaration: FunctionComponent<SectionProps> = (
                 aria-labelledby="errorSummaryTitle"
                 role="alert"
                 tabIndex={-1}
+                data-cy="covidErrorSummary"
               >
                 <ErrorMessage>Please check highlighted fields</ErrorMessage>
               </ErrorSummary>
