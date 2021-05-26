@@ -5,5 +5,10 @@
   "reporter": "cypress-multi-reporters",
   "reporterOptions": {
     "configFile": "reporter-config.json"
+  },
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/*cy-test.{js,jsx,ts,tsx}",
+    "supportFile": false
   }
 }
