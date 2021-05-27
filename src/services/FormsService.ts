@@ -33,11 +33,8 @@ export class FormsService extends ApiService {
   async saveTraineeFormRPartB(
     formData: FormRPartB
   ): Promise<AxiosResponse<FormRPartB>> {
-    const {
-      isDeclarationAccepted,
-      isConsentAccepted,
-      ...newFormData
-    } = formData;
+    const { isDeclarationAccepted, isConsentAccepted, ...newFormData } =
+      formData;
     return this.post<FormRPartB>("/formr-partb", newFormData);
   }
 
@@ -54,11 +51,8 @@ export class FormsService extends ApiService {
   async updateTraineeFormRPartB(
     formData: FormRPartB
   ): Promise<AxiosResponse<FormRPartB>> {
-    const {
-      isDeclarationAccepted,
-      isConsentAccepted,
-      ...newFormData
-    } = formData;
+    const { isDeclarationAccepted, isConsentAccepted, ...newFormData } =
+      formData;
     return this.put<FormRPartB>("/formr-partb", newFormData);
   }
 

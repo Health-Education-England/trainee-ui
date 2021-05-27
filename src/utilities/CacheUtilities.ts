@@ -21,7 +21,8 @@ export class CacheUtilities {
 
   public static async UnregisterServiceWorker(): Promise<void> {
     if (navigator.serviceWorker.controller != null) {
-      const registrations: readonly ServiceWorkerRegistration[] = await navigator.serviceWorker.getRegistrations();
+      const registrations: readonly ServiceWorkerRegistration[] =
+        await navigator.serviceWorker.getRegistrations();
       registrations.forEach(registration => registration.unregister());
     }
   }

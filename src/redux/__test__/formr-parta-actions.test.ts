@@ -40,15 +40,14 @@ describe("loadFormRPartAList method", () => {
   it("Should dispatch LOAD_FORMR_PARTA_LIST_SUCCESS on successfull api call", () => {
     const responsedata = submittedFormRPartAs;
 
-    const successResponse: Promise<AxiosResponse<
-      FormRPartA[]
-    >> = Promise.resolve({
-      data: responsedata,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<FormRPartA[]>> =
+      Promise.resolve({
+        data: responsedata,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(formRPartAService, "getTraineeFormRPartAList")
@@ -114,15 +113,14 @@ describe("updateFormData method", () => {
 
 describe("initializeForm method", () => {
   it("should dispatch LOAD_FORMR_PARTA_SUCCESS if trainee profile is received", () => {
-    const successResponse: Promise<AxiosResponse<
-      TraineeProfile
-    >> = Promise.resolve({
-      data: mockTraineeProfile,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<TraineeProfile>> =
+      Promise.resolve({
+        data: mockTraineeProfile,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(traineeProfileService, "getTraineeProfile")
