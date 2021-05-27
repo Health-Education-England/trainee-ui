@@ -39,13 +39,8 @@ const mapStateToProps = (state: RootState) => ({
 
 class View extends React.PureComponent<ViewProps> {
   render() {
-    const {
-      formData,
-      history,
-      editSection,
-      canEdit,
-      featureFlags
-    } = this.props;
+    const { formData, history, editSection, canEdit, featureFlags } =
+      this.props;
     const enableCovidDeclaration: boolean =
       featureFlags != null && featureFlags.formRPartB.covidDeclaration;
 

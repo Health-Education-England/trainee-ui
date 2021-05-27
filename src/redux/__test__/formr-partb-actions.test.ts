@@ -47,15 +47,14 @@ describe("loadFormRPartBList method", () => {
   it("Should dispatch LOAD_FORMR_PARTB_LIST_SUCCESS on successfull api call", () => {
     const responsedata = submittedFormRPartBs;
 
-    const successResponse: Promise<AxiosResponse<
-      FormRPartB[]
-    >> = Promise.resolve({
-      data: responsedata,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<FormRPartB[]>> =
+      Promise.resolve({
+        data: responsedata,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(formsService, "getTraineeFormRPartBList")
@@ -103,15 +102,14 @@ describe("loadFormRPartBList method", () => {
 
 describe("initializeForm method", () => {
   it("should dispatch INITIALIZE_FORMR_PARTB_SUCCESS if trainee profile is received", () => {
-    const successResponse: Promise<AxiosResponse<
-      TraineeProfile
-    >> = Promise.resolve({
-      data: mockTraineeProfile,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<TraineeProfile>> =
+      Promise.resolve({
+        data: mockTraineeProfile,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(traineeProfileService, "getTraineeProfile")
@@ -204,15 +202,14 @@ describe("loadFeatureFlags method", () => {
       }
     };
 
-    const successResponse: Promise<AxiosResponse<
-        FeatureFlags
-    >> = Promise.resolve({
-      data: responsedata,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<FeatureFlags>> =
+      Promise.resolve({
+        data: responsedata,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(formsService, "getFeatureFlags")

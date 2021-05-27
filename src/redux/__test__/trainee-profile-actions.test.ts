@@ -18,15 +18,14 @@ describe("fetchTraineeProfile method", () => {
   it("Should dispatch LOAD_TRAINEE_PROFILE_SUCCESS on successfull api call", () => {
     const store = mockStore({});
 
-    const successResponse: Promise<AxiosResponse<
-      TraineeProfile
-    >> = Promise.resolve({
-      data: mockTraineeProfile,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {}
-    });
+    const successResponse: Promise<AxiosResponse<TraineeProfile>> =
+      Promise.resolve({
+        data: mockTraineeProfile,
+        status: 200,
+        statusText: "OK",
+        headers: {},
+        config: {}
+      });
 
     jest
       .spyOn(profileService, "getTraineeProfile")
