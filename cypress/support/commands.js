@@ -44,7 +44,8 @@ Cypress.Commands.add(
 
     cy.get("#qualification")
       .should("exist")
-      .should("not.have.value", "--Please select--");
+      .invoke("val")
+      .should("not.be.empty");
 
     cy.get("#dateAttained").should("exist").should("have.value", dateAttained);
     cy.get("#medicalSchool")
