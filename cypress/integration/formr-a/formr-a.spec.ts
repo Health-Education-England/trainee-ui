@@ -194,7 +194,8 @@ describe("Form R (Part A)", () => {
 
           cy.get("#qualification")
             .should("exist")
-            .select("MBBS Bachelor of Medicine and Bachelor of Surgery");
+            .clear()
+            .type("MBBS Bachelor of Medicine and Bachelor of Surgery");
 
           cy.get("#dateAttained")
             .should("exist")
