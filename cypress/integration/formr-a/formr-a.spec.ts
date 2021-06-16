@@ -1,18 +1,17 @@
 /// <reference types="cypress" />
 /// <reference path="../../support/index.d.ts" />
+import dayjs from "dayjs";
+import * as duration from "dayjs/plugin/duration";
+dayjs.extend(duration);
 
-const todaysDate = Cypress.moment().format("YYYY-MM-DD");
-
-const dateAttained = Cypress.moment(todaysDate)
-  .subtract({ years: 1, months: 6, days: 12 })
+const dateAttained = dayjs()
+  .subtract(dayjs.duration({ years: 1, months: 6, days: 12 }))
   .format("YYYY-MM-DD");
-
-const completionDate = Cypress.moment(todaysDate)
-  .add(6, "M")
+const completionDate = dayjs()
+  .add(dayjs.duration({ months: 6 }))
   .format("YYYY-MM-DD");
-
-const startDate = Cypress.moment(todaysDate)
-  .subtract({ months: 9, days: 30 })
+const startDate = dayjs()
+  .subtract(dayjs.duration({ months: 9, days: 30 }))
   .format("YYYY-MM-DD");
 
 describe("Form R (Part A)", () => {
