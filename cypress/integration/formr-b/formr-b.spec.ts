@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 /// <reference path="../../support/index.d.ts" />
+import dayjs from "dayjs";
 
 let isCovid = false;
 
@@ -7,23 +8,20 @@ before(() => {
   isCovid = true;
 });
 
-let currentDate = Cypress.moment().format("YYYY-MM-DD");
-let futureDate = Cypress.moment(currentDate).add(6, "M").format("YYYY-MM-DD");
-let pastDate = Cypress.moment(currentDate)
-  .subtract(6, "M")
+const currentDate = dayjs().format("YYYY-MM-DD");
+const futureDate = dayjs()
+  .add(dayjs.duration({ months: 6 }))
+  .format("YYYY-MM-DD");
+const pastDate = dayjs()
+  .subtract(dayjs.duration({ months: 6 }))
+  .format("YYYY-MM-DD");
+const outOfRangeFutureDate = dayjs(futureDate)
+  .add(dayjs.duration({ years: 20 }))
   .format("YYYY-MM-DD");
 
-let outOfRangeFutureDate = Cypress.moment(futureDate)
-  .add({ years: 20 })
-  .format("YYYY-MM-DD");
+const currRevalDate = dayjs().add(3, "month").format("YYYY-MM-DD");
 
-const currRevalDate = Cypress.moment(currentDate)
-  .add(3, "M")
-  .format("YYYY-MM-DD");
-
-const prevRevalDate = Cypress.moment(currentDate)
-  .subtract({ years: 5 })
-  .format("YYYY-MM-DD");
+const prevRevalDate = dayjs().subtract(5, "years").format("YYYY-MM-DD");
 
 describe("Form R (Part B)", () => {
   it("Should complete a new Form R Part B.", () => {
