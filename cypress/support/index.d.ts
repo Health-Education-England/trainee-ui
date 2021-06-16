@@ -17,4 +17,9 @@ declare namespace Cypress {
     login: any;
     checkFlags: any;
   }
+
+  import dayjs from "dayjs";
+  interface Cypress {
+    dayjs: dayjs.Dayjs;
+  }
 }
