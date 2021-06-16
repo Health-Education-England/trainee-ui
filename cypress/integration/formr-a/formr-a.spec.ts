@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /// <reference path="../../support/index.d.ts" />
 import dayjs from "dayjs";
-import * as duration from "dayjs/plugin/duration";
+import duration from "dayjs/plugin/duration";
 dayjs.extend(duration);
 
 const dateAttained = dayjs()

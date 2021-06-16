@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 /// <reference path="../../support/index.d.ts" />
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+dayjs.extend(duration);
 
 let isCovid = false;
 
