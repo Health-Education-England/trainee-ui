@@ -54,7 +54,9 @@ const MultiChoiceInputField: React.FC<Props> = props => {
                       false
                 }
                 onChange={() => {
-                  helpers.setValue(item.value);
+                  props.type === "checkbox"
+                    ? helpers.setValue(!item.value)
+                    : helpers.setValue(item.value);
                 }}
                 conditional={props.conditional}
               >
