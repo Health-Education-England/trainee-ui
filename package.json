@@ -1,6 +1,6 @@
 {
   "name": "trainee-ui-app",
-  "version": "0.25.7",
+  "version": "0.25.8",
   "private": true,
   "dependencies": {
     "@cypress/react": "^5.8.0",
