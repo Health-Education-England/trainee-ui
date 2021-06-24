@@ -102,7 +102,6 @@ export const CreateList = (
       const draftForm = forms.filter(
         form => form.lifecycleState === LifeCycleState.Draft
       );
-
       const unsubmittedForm = forms.filter(
         form => form.lifecycleState === LifeCycleState.Unsubmitted
       );
@@ -153,48 +152,38 @@ export const CreateList = (
       const submittedForms = forms.filter(
         form => form.lifecycleState === LifeCycleState.Submitted
       );
+      if (this.props.isLoading) return <Loading />;
       return (
         <div>
           <ScrollTo />
-
-          {this.props.isLoading ? (
-            <Loading />
-          ) : (
-            <div>
-              {this.renderEditFormButton()}
-
-              {submittedForms.length > 0 ? (
-                <Table>
-                  <Table.Head>
-                    <Table.Row>
-                      <td>
-                        <b>Submitted forms</b>
-                      </td>
-                    </Table.Row>
-                  </Table.Head>
-                  <Table.Body>
-                    {submittedForms.map((formData: IFormR, index: number) => (
-                      <Table.Row
-                        key={formData.id}
-                        className={styles.listTableRow}
+          {this.renderEditFormButton()}
+          {submittedForms.length > 0 ? (
+            <Table>
+              <Table.Head>
+                <Table.Row>
+                  <td>
+                    <b>Submitted forms</b>
+                  </td>
+                </Table.Row>
+              </Table.Head>
+              <Table.Body>
+                {submittedForms.map((formData: IFormR, index: number) => (
+                  <Table.Row key={formData.id} className={styles.listTableRow}>
+                    <td>
+                      <ActionLink
+                        onClick={() => this.handleRowClick(formData.id)}
+                        data-cy="submittedForm"
                       >
-                        <td>
-                          <ActionLink
-                            onClick={() => this.handleRowClick(formData.id)}
-                            data-cy="submittedForm"
-                          >
-                            form submitted on{" "}
-                            {DateUtilities.ToLocalDate(formData.submissionDate)}
-                          </ActionLink>
-                        </td>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              ) : (
-                <LedeText>No forms submitted yet.</LedeText>
-              )}
-            </div>
+                        form submitted on{" "}
+                        {DateUtilities.ToLocalDate(formData.submissionDate)}
+                      </ActionLink>
+                    </td>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          ) : (
+            <LedeText>No forms submitted yet.</LedeText>
           )}
         </div>
       );
