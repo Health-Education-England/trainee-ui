@@ -38,17 +38,17 @@ export class Support extends React.PureComponent<profileProps, LocalState> {
     };
   }
 
-  fetchTraineeProfileProps = async () =>
-    await this.props.loadTraineeProfile(new TraineeProfileService());
+  fetchTraineeProfileProps = () =>
+    this.props.loadTraineeProfile(new TraineeProfileService());
 
   fetchPersonOwner = () => {
     return this.props.traineeProfile?.personalDetails?.personOwner;
   };
 
   findMappedContact(loadedPersonOwner: string | null | undefined) {
-    for (let i = 0; i < localOfficeContacts.length; i++) {
-      if (localOfficeContacts[i].name === loadedPersonOwner) {
-        return localOfficeContacts[i].contact;
+    for (const localOffice of localOfficeContacts) {
+      if (localOffice.name === loadedPersonOwner) {
+        return localOffice.contact;
       }
     }
     return null;
