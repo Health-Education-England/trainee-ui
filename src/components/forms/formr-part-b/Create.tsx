@@ -24,6 +24,7 @@ import { FormsService } from "../../../services/FormsService";
 import Loading from "../../common/Loading";
 import CovidDeclaration from "./Sections/CovidDeclaration";
 import { Redirect } from "react-router-dom";
+import { ReferenceDataUtilities } from "../../../utilities/ReferenceDataUtilities";
 
 const mapStateToProps = (state: RootState, ownProps: GenericOwnProps) => ({
   formData: state.formRPartB.formData,
@@ -108,8 +109,7 @@ class Create extends React.PureComponent<
       featureFlags
     } = this.props;
     const enableCovidDeclaration: boolean =
-      featureFlags != null && featureFlags.formRPartB.covidDeclaration;
-
+      !!featureFlags && featureFlags.formRPartB.covidDeclaration;
     if (!formData) {
       return <Redirect to="/formr-b" />;
     }
@@ -119,30 +119,21 @@ class Create extends React.PureComponent<
     }
 
     if (localOffices.length > 0) {
-      if (
-        !localOffices.some(
-          (l: { label: string }) => l.label === formData.localOfficeName
-        )
-      ) {
-        formData.localOfficeName = "";
-      }
-
-      if (
-        !designatedBodies.some(
-          (l: { label: string }) => l.label === formData.prevRevalBody
-        )
-      ) {
-        formData.prevRevalBody = "";
-      }
+      formData.localOfficeName = ReferenceDataUtilities.checkDataProp(
+        localOffices,
+        formData.localOfficeName
+      );
+      formData.prevRevalBody = ReferenceDataUtilities.checkDataProp(
+        designatedBodies,
+        formData.prevRevalBody
+      );
     }
 
-    if (
-      curricula.length > 0 &&
-      !curricula.some(
-        (l: { label: string }) => l.label === formData.programmeSpecialty
-      )
-    ) {
-      formData.programmeSpecialty = "";
+    if (curricula.length > 0) {
+      formData.programmeSpecialty = ReferenceDataUtilities.checkDataProp(
+        curricula,
+        formData.programmeSpecialty
+      );
     }
 
     const sectionProps: SectionProps = {
