@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FocusEvent } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "amazon-cognito-identity-js";
@@ -49,7 +49,6 @@ const SetTOTPForm: React.FC = () => {
       .then(() => {
         Auth.setPreferredMFA(user, "TOTP")
           .then(data => {
-            setErrorMessage("");
             if (data === "SUCCESS") {
               history.push(`/profile`);
             }
@@ -91,7 +90,13 @@ const SetTOTPForm: React.FC = () => {
                 to see the QR code, you can enter the following code manually
                 into your authentication application.
               </p>
-              <Input disabled value={code} label="" />
+              <Input
+                onFocus={(event: FocusEvent<HTMLInputElement>) =>
+                  event.target.select()
+                }
+                value={code}
+                label=""
+              />
             </Details.Text>
           </Details>
 
