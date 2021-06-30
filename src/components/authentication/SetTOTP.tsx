@@ -27,11 +27,17 @@ const SetTOTP: React.FC = () => {
         application will be switching to the safer approach using authenticator
         applications, which require set-up by the user first.
       </p>
+
       <p>
         If you are already familiar with authenticator apps, then simply scan
         the barcode below in the Authenticator Setup section
       </p>
 
+      <SetTOTPForm />
+      <p>
+        If you are less familiar with or would like an alternative to a
+        phone-based authenticator then please click on the links below.
+      </p>
       <Details.ExpanderGroup>
         <Details expander>
           <Details.Summary>
@@ -360,8 +366,6 @@ const SetTOTP: React.FC = () => {
           </Details.Text>
         </Details>
       </Details.ExpanderGroup>
-
-      <SetTOTPForm />
     </Container>
   );
 };
