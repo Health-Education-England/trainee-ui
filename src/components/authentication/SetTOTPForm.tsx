@@ -23,9 +23,7 @@ const SetTOTPForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
   useEffect(() => {
-    (async () => {
-      getUser();
-    })();
+    getUser();
   }, []);
 
   const getUser = async () => {
@@ -54,7 +52,15 @@ const SetTOTPForm: React.FC = () => {
         Auth.setPreferredMFA(user, "TOTP")
           .then(data => {
             if (data === "SUCCESS") {
-              history.push(`/profile`);
+              // This step is necessary to prevent MFA reverting to SMS. It's a Cognito bug.
+              // https://github.com/aws-amplify/amplify-js/issues/7254
+              // https://github.com/aws-amplify/amplify-js/issues/1226
+
+              Auth.currentAuthenticatedUser()
+                .then(user => history.push(`/profile`))
+                .catch(err => {
+                  setErrorMessage(err.message);
+                });
             }
           })
           .catch(err => {
