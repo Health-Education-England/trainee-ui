@@ -307,9 +307,9 @@ const SetTOTP: React.FC = () => {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="http://gauth.apps.gbraad.nl"
+                  href="https://gauth.apps.gbraad.nl"
                 >
-                  http://gauth.apps.gbraad.nl
+                  https://gauth.apps.gbraad.nl
                 </a>
               </li>
               <li>Click on the pen icon in the top right corner.</li>
