@@ -21,6 +21,7 @@ const SetTOTPForm: React.FC = () => {
   const [code, setCode] = useState("");
   const [qrCode, setQRCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [copied, setCopied] = useState(false);
   const history = useHistory();
   useEffect(() => {
     getUser();
@@ -72,6 +73,23 @@ const SetTOTPForm: React.FC = () => {
       );
   };
 
+  // for local testing
+  const copyToClip = (): void => {
+    document.execCommand("copy");
+    setCopied(true);
+  };
+  // for https (preprod & prod)
+  // const copyToClip = (code: string): void => {
+  //   navigator.clipboard.writeText(code).then(
+  //     () => {
+  //       setCopied(true);
+  //     },
+  //     () => {
+  //       alert("Code not copied. Please try again.");
+  //     }
+  //   );
+  // };
+
   return (
     <Panel label="Authenticator Setup">
       {qrCode !== "" && (
@@ -104,11 +122,17 @@ const SetTOTPForm: React.FC = () => {
                   onFocus={(event: FocusEvent<HTMLInputElement>) =>
                     event.target.select()
                   }
+                  onClick={() => copyToClip()}
                   defaultValue={code}
                   label=""
                   readOnly
                 />
               </Details.Text>
+              {copied ? (
+                <span style={{ color: "green", margin: 5 }}>
+                  Copied to clipboard!
+                </span>
+              ) : null}
             </Details>
 
             <Formik
@@ -123,7 +147,7 @@ const SetTOTPForm: React.FC = () => {
               })}
               onSubmit={values => handleSubmit(values)}
             >
-              {({ values, errors }) => (
+              {() => (
                 <Form>
                   <TextInputField
                     width={10}

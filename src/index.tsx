@@ -21,7 +21,7 @@ TagManager.initialize(tagManagerArgs);
 browserUpdate(browserUpdateConfig);
 
 async function fetchData(): Promise<any> {
-  return await fetch("/api/environment")
+  return fetch("/api/environment")
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response error");
