@@ -8,9 +8,7 @@ import {
   Button,
   Details,
   ErrorSummary,
-  WarningCallout,
-  CrossIcon,
-  TickIcon
+  WarningCallout
 } from "nhsuk-react-components";
 import QRCode from "qrcode.react";
 import { Formik, Form } from "formik";
@@ -23,8 +21,6 @@ const SetTOTPForm: React.FC = () => {
   const [code, setCode] = useState("");
   const [qrCode, setQRCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [copied, setCopied] = useState(false);
-  const [copiedErrorText, setCopiedErrorText] = useState("");
 
   const history = useHistory();
   useEffect(() => {
@@ -77,26 +73,6 @@ const SetTOTPForm: React.FC = () => {
       );
   };
 
-  const copyToClip = (): void => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(code).then(
-        () => {
-          setCopied(true);
-        },
-        () => {
-          setCopiedErrorText("Code not copied. Please try again.");
-        }
-      );
-    } else {
-      try {
-        document.execCommand("copy");
-        setCopied(true);
-      } catch (err) {
-        setCopiedErrorText("An error has occurred. " + err.message);
-      }
-    }
-  };
-
   return (
     <Panel label="Authenticator Setup">
       {qrCode !== "" && (
@@ -129,28 +105,11 @@ const SetTOTPForm: React.FC = () => {
                   onFocus={(event: FocusEvent<HTMLInputElement>) =>
                     event.target.select()
                   }
-                  onClick={() => copyToClip()}
                   defaultValue={code}
                   label=""
                   readOnly
                 />
               </Details.Text>
-              {copied && (
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <TickIcon />
-                  <span style={{ color: "green", margin: 5 }}>
-                    Copied to clipboard
-                  </span>
-                </div>
-              )}
-              {!copied && copiedErrorText && (
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <CrossIcon />
-                  <span style={{ color: "red", margin: 5 }}>
-                    {copiedErrorText}
-                  </span>
-                </div>
-              )}
             </Details>
 
             <Formik
