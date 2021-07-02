@@ -58,7 +58,7 @@ const SetTOTPForm: React.FC = () => {
               // https://github.com/aws-amplify/amplify-js/issues/1226
 
               Auth.currentAuthenticatedUser()
-                .then(user => history.push(`/profile`))
+                .then(currentUser => history.push(`/profile`))
                 .catch(err => {
                   setErrorMessage(err.message);
                 });
