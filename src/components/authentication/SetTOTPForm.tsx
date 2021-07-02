@@ -29,16 +29,16 @@ const SetTOTPForm: React.FC = () => {
 
   const getUser = async () => {
     try {
-      const user: CognitoUser = await Auth.currentAuthenticatedUser();
+      const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
       const currentMFA: string = await Auth.getPreferredMFA(user);
-      const code: string = await Auth.setupTOTP(user);
+      const totpCode: string = await Auth.setupTOTP(user);
       const authCode: string =
         "otpauth://totp/AWSCognito:" +
-        user.getUsername() +
+        currentUser.getUsername() +
         "?secret=" +
-        code +
+        totpCode +
         "&issuer=AWSCognito";
-      setUser(user);
+      setUser(currentUser);
       setMFAType(currentMFA);
       setCode(code);
       setQRCode(authCode);
