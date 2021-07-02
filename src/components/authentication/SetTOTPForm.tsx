@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FocusEvent, useCallback } from "react";
+import React, { useState, useEffect, FocusEvent } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "amazon-cognito-identity-js";
@@ -24,29 +24,28 @@ const SetTOTPForm: React.FC = () => {
 
   const history = useHistory();
 
-  const getUser = useCallback(async () => {
-    try {
-      const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
-      const currentMFA: string = await Auth.getPreferredMFA(currentUser);
-      const totpCode: string = await Auth.setupTOTP(currentUser);
-      const authCode: string =
-        "otpauth://totp/AWSCognito:" +
-        currentUser.getUsername() +
-        "?secret=" +
-        totpCode +
-        "&issuer=AWSCognito";
-      setUser(currentUser);
-      setMFAType(currentMFA);
-      setCode(totpCode);
-      setQRCode(authCode);
-    } catch (err) {
-      setErrorMessage("Enable to get user. " + err);
-    }
-  }, []);
-
   useEffect(() => {
+    const getUser = async () => {
+      try {
+        const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
+        const currentMFA: string = await Auth.getPreferredMFA(currentUser);
+        const totpCode: string = await Auth.setupTOTP(currentUser);
+        const authCode: string =
+          "otpauth://totp/AWSCognito:" +
+          currentUser.getUsername() +
+          "?secret=" +
+          totpCode +
+          "&issuer=AWSCognito";
+        setUser(currentUser);
+        setMFAType(currentMFA);
+        setCode(totpCode);
+        setQRCode(authCode);
+      } catch (err) {
+        setErrorMessage("Enable to get user. " + err);
+      }
+    };
     getUser();
-  }, [getUser]);
+  }, []);
 
   const handleSubmit = (values: { confirmTOTPCode: string }) => {
     Auth.verifyTotpToken(user, values.confirmTOTPCode)
