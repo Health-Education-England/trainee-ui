@@ -5,6 +5,7 @@ import Profile from "./components/profile/Profile";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import HEEHeader from "./components/navigation/HEEHeader";
 import Login from "./components/authentication/Login";
+import SetTOTP from "./components/authentication/SetTOTP";
 import PageNotFound from "./components/common/PageNotFound";
 import HEEFooter from "./components/navigation/HEEFooter";
 import FormRPartA from "./components/forms/formr-part-a/FormRPartA";
@@ -103,6 +104,7 @@ class App extends React.PureComponent<AppProps, AppState> {
               <Route path="/formr-a" component={FormRPartA} />
               <Route path="/formr-b" component={FormRPartB} />
               <Route path="/support" component={Support} />
+              <Route path="/totp" component={SetTOTP} />
               <Route path="/howtoexport" component={HowToPrintToPDF} />
               <Redirect exact path="/" to="/profile" />
 
