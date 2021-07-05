@@ -5,7 +5,7 @@
   "dependencies": {
     "@cypress/react": "^5.8.0",
     "@cypress/webpack-dev-server": "^1.4.0",
-    "@sentry/browser": "^6.3.4",
+    "@sentry/browser": "^6.8.0",
     "@types/node": "^14.14.32",
     "@types/qrcode.react": "^1.0.1",
     "@types/react": "^17.0.5",
@@ -13,7 +13,7 @@
     "@types/react-gtm-module": "^2.0.0",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.5",
-    "@types/yup": "0.29.11",
+    "@types/yup": "0.29.12",
     "aws-amplify": "^3.3.13",
     "aws-amplify-react": "^4.2.30",
     "axios": "^0.21.1",
