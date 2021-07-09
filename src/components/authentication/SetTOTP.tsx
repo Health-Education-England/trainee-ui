@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  Container,
-  Table,
-  Details,
-  WarningCallout
-} from "nhsuk-react-components";
+import { Container, Table, Details } from "nhsuk-react-components";
 import SetTOTPForm from "./SetTOTPForm";
 import imgAuthenticator1 from "../../static/images/mfa/authenticator_1.jpg";
 import imgAuthenticator2 from "../../static/images/mfa/authenticator_2.jpg";
@@ -45,9 +40,9 @@ const SetTOTP: React.FC = () => {
           </Details.Summary>
           <Details.Text>
             <p>
-              There are several different options available for authentication
-              application; mobile, desktop or browser based. Please use the
-              following table to help you decide which option to use:{" "}
+              There are a couple of different options available for
+              authentication application; either mobile or desktop. Please use
+              the following table to help you decide which option to use:{" "}
             </p>
             <Table>
               <Table.Head>
@@ -64,6 +59,10 @@ const SetTOTP: React.FC = () => {
                   </Table.Cell>
                   <Table.Cell>
                     Google Authenticator on your smartphone.
+                    <br />
+                    Other authenticator apps will also work, such as Authy or
+                    Microsoft Authenticator, but we have provided instructions
+                    for Google Authenticator only.
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -83,18 +82,6 @@ const SetTOTP: React.FC = () => {
                       rel="noreferrer"
                     >
                       Authy Desktop
-                    </a>
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>Do not have access to a telephone </Table.Cell>
-                  <Table.Cell>
-                    <a
-                      rel="noreferrer"
-                      target="_blank"
-                      href="https://gauth.apps.gbraad.nl/"
-                    >
-                      GAuth web-based authenticator using any browser.
                     </a>
                   </Table.Cell>
                 </Table.Row>
@@ -163,7 +150,8 @@ const SetTOTP: React.FC = () => {
                 </strong>
               </li>
               <li>
-                Enter this code into the box below and click Verify. Your
+                Enter this code into the box below and click Verify. If
+                successful, you will be redirected to the Profile page and your
                 account is now authenticated.
               </li>
             </ol>
@@ -267,7 +255,8 @@ const SetTOTP: React.FC = () => {
               </li>
               <li>
                 Return to this page and enter the code into the box below and
-                click <strong>Verify</strong>. Your account is now
+                click <strong>Verify</strong>. If successful, you will be
+                redirected to the Profile page and your account is now
                 authenticated.
               </li>
             </ol>
@@ -280,69 +269,7 @@ const SetTOTP: React.FC = () => {
             </p>
           </Details.Text>
         </Details>
-        <Details expander>
-          <Details.Summary>Set up GAuth</Details.Summary>
-          <Details.Text>
-            <p>
-              If you do not have a phone, you can use GAuth web-based
-              authenticator from any browser to activate your account.
-            </p>
-            <WarningCallout label="Do not use from a shared computer">
-              <p>
-                Do not use this approach if you are using a shared computer on
-                which you do not have your own personal login. Only use from
-                your own PC or laptop.
-              </p>
-            </WarningCallout>
-            <ol>
-              <li>
-                In the section <strong>Authenticator Setup</strong> below, click{" "}
-                <strong>Unable to scan QR code</strong> to reveal a 30-digit
-                code.
-              </li>
-              <li>Copy this 30-digit code</li>
 
-              <li>
-                Open another browser tab and navigate to{" "}
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://gauth.apps.gbraad.nl"
-                >
-                  https://gauth.apps.gbraad.nl
-                </a>
-              </li>
-              <li>Click on the pen icon in the top right corner.</li>
-              <li>
-                Click <strong>Add</strong> and paste or type the 30-digit code
-                in the <strong>Secret key</strong>
-                field.
-              </li>
-
-              <li>
-                In the Account name field enter a meaningful name and click{" "}
-                <strong>Add</strong>. The page will display a 6-digit code and a
-                countdown.
-              </li>
-
-              <li>Click on the pen icon to stop editing.</li>
-
-              <li>Copy or make a note of the 6-digit code.</li>
-              <li>
-                Return to this page and enter the code into the box below and
-                click <strong>Verify</strong>. Your account is now
-                authenticated.
-              </li>
-            </ol>
-            <p>
-              <strong>
-                If you receive an error code after clicking Submit, it is likely
-                the code generated by GAuth refreshed before the setup was
-                complete. Simply reverify with the new code.
-              </strong>
-            </p>
-          </Details.Text>
-        </Details>
         <Details expander>
           <Details.Summary>
             How to login using an authentication application
@@ -359,7 +286,7 @@ const SetTOTP: React.FC = () => {
             </div>
             <p>
               Refer to the account created previously using your chosen
-              authenticator appliction. Enter the 6-digit code displayed on
+              authenticator application. Enter the 6-digit code displayed on
               authenticator app into the Confirm TOTP code text box and click{" "}
               <strong>Confirm.</strong>
             </p>
