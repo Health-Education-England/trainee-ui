@@ -96,7 +96,10 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
               />
               <SelectInputField
                 label="Previous Designated Body for Revalidation (if applicable)"
-                options={designatedBodies}
+                options={[
+                  ...designatedBodies,
+                  { label: "other", value: "other" }
+                ]}
                 name="prevRevalBody"
               />
               <TextInputField

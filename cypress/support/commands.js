@@ -132,12 +132,12 @@ Cypress.Commands.add("checkAndFillSection1", (currRevalDate, prevRevalDate) => {
     .focus()
     .select("Health Education England Wessex");
   cy.get("#prevRevalBody > option")
-    .eq(1)
+    .last()
     .then(element => {
       const selectedItem = element.val().toString();
       cy.get("#prevRevalBody")
         .select(selectedItem)
-        .should("not.have.value", "--Please select--");
+        .should("have.value", "other");
     });
   cy.get("#currRevalDate").should("exist").clear().type(currRevalDate);
   cy.get("#prevRevalDate").should("exist").clear().type(prevRevalDate);
