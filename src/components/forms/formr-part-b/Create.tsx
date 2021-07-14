@@ -124,7 +124,7 @@ class Create extends React.PureComponent<
         formData.localOfficeName
       );
       formData.prevRevalBody = ReferenceDataUtilities.checkDataProp(
-        designatedBodies,
+        [...designatedBodies, { label: "other", value: "other" }],
         formData.prevRevalBody
       );
     }
