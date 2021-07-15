@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
 import ScrollTo from "../../ScrollTo";
@@ -12,8 +12,11 @@ import {
   ErrorMessage
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Section1ValidationSchema } from "../ValidationSchema";
 import { KeyValue } from "../../../../models/KeyValue";
+import { CircularProgress } from "@material-ui/core";
 
 interface Section1Props {
   localOffices: KeyValue[];
@@ -37,6 +40,42 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
     nextSectionLabel,
     section
   } = props;
+
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState<KeyValue[]>([]);
+  const loading = open && options.length === 0;
+
+  useEffect(() => {
+    let active = true;
+
+    if (!loading) {
+      return undefined;
+    }
+
+    (async () => {
+      const response = await (await fetch("../dbc.json")).json();
+      const options: KeyValue[] = response.map((dbc: { label: string }) => {
+        return {
+          label: dbc.label,
+          value: dbc.label
+        };
+      });
+      if (active) {
+        setOptions(options);
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [loading]);
+
+  useEffect(() => {
+    if (!open) {
+      setOptions([]);
+    }
+  }, [open]);
+
   return (
     <Formik
       initialValues={formData}
@@ -45,7 +84,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
         nextSection(values);
       }}
     >
-      {({ values, errors, handleSubmit }) => (
+      {({ values, errors, handleSubmit, setFieldValue }) => (
         <Form>
           <ScrollTo />
           <Fieldset disableErrorLine={true} name="doctorsDetails">
@@ -102,6 +141,60 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 ]}
                 name="prevRevalBody"
               />
+              {values.prevRevalBody === "other" ? (
+                <Autocomplete
+                  id="prevRevalBodyOther"
+                  options={options}
+                  style={{ width: 400 }}
+                  open={open}
+                  inputValue={values.prevRevalBodyOther}
+                  onOpen={() => {
+                    setOpen(true);
+                    setFieldValue("prevRevalBodyOther", "");
+                  }}
+                  onClose={() => {
+                    setOpen(false);
+                  }}
+                  onInputChange={(_, option, reason) => {
+                    if (reason === "clear") {
+                      setFieldValue("prevRevalBodyOther", "");
+                    } else {
+                      setFieldValue(
+                        "prevRevalBodyOther",
+                        option ? option : values.prevRevalBodyOther
+                      );
+                    }
+                  }}
+                  getOptionLabel={option => option.label}
+                  getOptionSelected={(option, value) =>
+                    option.value === value.value
+                  }
+                  loading={loading}
+                  renderInput={params => {
+                    return (
+                      <TextField
+                        {...params}
+                        margin="normal"
+                        label="Previous Revalidation Body (if applicable)"
+                        variant="outlined"
+                        name="prevRevalBodyOther"
+                        InputProps={{
+                          ...params.InputProps,
+                          endAdornment: (
+                            <>
+                              {loading ? (
+                                <CircularProgress color="inherit" size={20} />
+                              ) : null}
+                              {params.InputProps.endAdornment}
+                            </>
+                          )
+                        }}
+                      />
+                    );
+                  }}
+                />
+              ) : null}
+
               <TextInputField
                 label="Current Revalidation Date"
                 type="date"
@@ -124,7 +217,6 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
               />
             </Panel>
           </Fieldset>
-
           {[...Object.values(errors)].length > 0 ? (
             <ErrorSummary
               aria-labelledby="errorSummaryTitle"

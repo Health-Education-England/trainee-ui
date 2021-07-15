@@ -50,8 +50,8 @@ describe("List", () => {
     expect(wrapper.find("table")).toHaveLength(1);
 
     const rows = wrapper.find("tr");
-    expect(rows).toHaveLength(2);
-    expect(wrapper.find("tr").find("td")).toHaveLength(2);
+    expect(rows).toHaveLength(3);
+    expect(wrapper.find("tr").find("td")).toHaveLength(3);
 
     const linkElement = rows.last().find("a");
     linkElement.simulate("click");
