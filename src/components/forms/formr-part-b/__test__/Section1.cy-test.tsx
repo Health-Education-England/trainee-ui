@@ -35,19 +35,19 @@ describe("Section 1 - previous revalidation body", () => {
     mount(<Section1 {...props} />);
   });
   it("should keep the 'other' dropdown list hidden if 'Other' option is not chosen", () => {
-    cy.get("#prevRevalBodyOther").should("not.exist");
+    cy.get("#defaultAutocompleteID").should("not.exist");
     cy.get("#prevRevalBody")
       .should("exist")
       .select("Health Education England East of England")
       .should("have.value", "Health Education England East of England");
-    cy.get("#prevRevalBodyOther").should("not.exist");
+    cy.get("#defaultAutocompleteID").should("not.exist");
   });
 
   it("should display the 'other' dropdown default value when 'Other' option chosen", () => {
-    cy.get("#prevRevalBodyOther").should("not.exist");
+    cy.get("#defaultAutocompleteID").should("not.exist");
     cy.get("#prevRevalBody").select("other").should("have.value", "other");
-    cy.get("#prevRevalBodyOther").should("exist");
-    cy.get("#prevRevalBodyOther").should(
+    cy.get("#defaultAutocompleteID").should("exist");
+    cy.get("#defaultAutocompleteID").should(
       "have.value",
       "AFC Bournemouth Limited"
     );
@@ -66,9 +66,9 @@ describe("Section 1 - previous revalidation body", () => {
       nextSectionLabel: "Next section navigation label"
     };
     mount(<Section1 {...props} />);
-    cy.get("#prevRevalBodyOther").should("not.exist");
+    cy.get("#defaultAutocompleteID").should("not.exist");
     cy.get("#prevRevalBody").select("other").should("have.value", "other");
-    cy.get("#prevRevalBodyOther").should("exist");
-    cy.get("#prevRevalBodyOther").should("have.value", "");
+    cy.get("#defaultAutocompleteID").should("exist");
+    cy.get("#defaultAutocompleteID").should("have.value", "Select...");
   });
 });
