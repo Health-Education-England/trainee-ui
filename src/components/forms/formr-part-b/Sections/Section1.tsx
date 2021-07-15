@@ -1,6 +1,8 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import SelectInputField from "../../SelectInputField";
 import TextInputField from "../../TextInputField";
+import MyAutocomplete from "../../Autocomplete";
+
 import ScrollTo from "../../ScrollTo";
 import FormRPartBPagination from "./FormRPartBPagination";
 import { SectionProps } from "./SectionProps";
@@ -13,6 +15,7 @@ import {
 } from "nhsuk-react-components";
 import { Form, Formik } from "formik";
 import TextField from "@material-ui/core/TextField";
+
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Section1ValidationSchema } from "../ValidationSchema";
 import { KeyValue } from "../../../../models/KeyValue";
@@ -142,57 +145,68 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 name="prevRevalBody"
               />
               {values.prevRevalBody === "other" ? (
-                <Autocomplete
-                  id="prevRevalBodyOther"
-                  options={options}
-                  style={{ width: 400 }}
-                  open={open}
-                  inputValue={values.prevRevalBodyOther}
-                  onOpen={() => {
-                    setOpen(true);
-                    setFieldValue("prevRevalBodyOther", "");
-                  }}
-                  onClose={() => {
-                    setOpen(false);
-                  }}
-                  onInputChange={(_, option, reason) => {
-                    if (reason === "clear") {
+                <>
+                  <MyAutocomplete
+                    name="prevRevalBodyOther"
+                    label="Previous Revalidation Body (if applicable)"
+                    options={options}
+                    handleOpen={() => {
+                      setOpen(true);
+                    }}
+                  />
+
+                  {/* <Autocomplete
+                    id="prevRevalBodyOther"
+                    options={options}
+                    style={{ width: 400 }}
+                    open={open}
+                    inputValue={values.prevRevalBodyOther}
+                    onOpen={() => {
+                      setOpen(true);
                       setFieldValue("prevRevalBodyOther", "");
-                    } else {
-                      setFieldValue(
-                        "prevRevalBodyOther",
-                        option ? option : values.prevRevalBodyOther
-                      );
+                    }}
+                    onClose={() => {
+                      setOpen(false);
+                    }}
+                    onInputChange={(_, option, reason) => {
+                      if (reason === "clear") {
+                        setFieldValue("prevRevalBodyOther", "");
+                      } else {
+                        setFieldValue(
+                          "prevRevalBodyOther",
+                          option ? option : values.prevRevalBodyOther
+                        );
+                      }
+                    }}
+                    getOptionLabel={option => option.label}
+                    getOptionSelected={(option, value) =>
+                      option.value === value.value
                     }
-                  }}
-                  getOptionLabel={option => option.label}
-                  getOptionSelected={(option, value) =>
-                    option.value === value.value
-                  }
-                  loading={loading}
-                  renderInput={params => {
-                    return (
-                      <TextField
-                        {...params}
-                        margin="normal"
-                        label="Previous Revalidation Body (if applicable)"
-                        variant="outlined"
-                        name="prevRevalBodyOther"
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <>
-                              {loading ? (
-                                <CircularProgress color="inherit" size={20} />
-                              ) : null}
-                              {params.InputProps.endAdornment}
-                            </>
-                          )
-                        }}
-                      />
-                    );
-                  }}
-                />
+                    loading={loading}
+                    renderInput={params => {
+                      return (
+                        <TextField
+                          {...params}
+                          margin="normal"
+                          label="Previous Revalidation Body (if applicable)"
+                          variant="outlined"
+                          name="prevRevalBodyOther"
+                          InputProps={{
+                            ...params.InputProps,
+                            endAdornment: (
+                              <>
+                                {loading ? (
+                                  <CircularProgress color="inherit" size={20} />
+                                ) : null}
+                                {params.InputProps.endAdornment}
+                              </>
+                            )
+                          }}
+                        />
+                      );
+                    }}
+                  /> */}
+                </>
               ) : null}
 
               <TextInputField
