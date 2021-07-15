@@ -1,0 +1,158 @@
+import React, { useState } from "react";
+import useAutocomplete from "@material-ui/lab/useAutocomplete";
+import { makeStyles } from "@material-ui/core/styles";
+import { connect, useField } from "formik";
+import { KeyValue } from "../../models/KeyValue";
+interface IProps {
+  name: string;
+  options: KeyValue[];
+  label: string;
+  id?: string;
+  defaultValue?: any;
+  onChange?: any;
+  handleOpen?: any;
+}
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    position: "relative",
+    width: "100%",
+    marginBottom: "20px"
+  },
+  dropdown: {
+    position: "relative",
+    display: "block",
+    cursor: "pointer",
+    "&::before": {
+      position: "absolute",
+      content: "'\\2BC6'",
+      top: "9px",
+      right: "0px",
+      height: "50px",
+      width: "20px"
+    }
+  },
+
+  iconLabel: {
+    width: "100%",
+    display: "flex",
+    alignItems: "inherit",
+    justifyContent: "inherit"
+  },
+  iconRoot: {
+    fill: "currentColor",
+    width: "1em",
+    height: "1em",
+    display: "inline-block",
+    fontSize: "1.5rem",
+    transition: "fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+    flexShrink: 0,
+    userSelect: "none"
+  },
+  listbox: {
+    boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
+    width: "100%",
+    margin: 0,
+    padding: 0,
+    zIndex: 1,
+    position: "absolute",
+    listStyle: "none",
+    backgroundColor: theme.palette.background.paper,
+    overflow: "auto",
+    maxHeight: 300,
+    border: "1px solid rgba(0,0,0,.25)",
+    "& li": {
+      padding: "2px 6px"
+    },
+    '& li[data-focus="true"]': {
+      backgroundColor: "#4a8df6",
+      color: "white",
+      cursor: "pointer"
+    },
+    "& li:active": {
+      backgroundColor: "#2977f5",
+      color: "white"
+    }
+  }
+}));
+
+const Autocomplete: React.FC<IProps> = (props: IProps) => {
+  const [field, { error }, helpers] = useField(props);
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const loading = open && props.options.length === 0 ? true : false;
+
+  const {
+    getRootProps,
+    getInputLabelProps,
+    getInputProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions
+  } = useAutocomplete({
+    id: props.id ? props.id : "defaultAutocompleteID",
+    options: props.options.length
+      ? [{ label: "Select...", value: "" }, ...props.options]
+      : [],
+    value: field.value
+      ? { label: field.value, value: field.value }
+      : { label: "Select...", value: "" },
+    getOptionLabel: (option: KeyValue) => option.label,
+    getOptionSelected: (option, value) => option.value === value.value,
+    onChange: (_, value: KeyValue | null) => {
+      helpers.setValue(value && value.value);
+    },
+    onOpen: () => {
+      setOpen(true);
+      props.handleOpen && props.handleOpen();
+    },
+    onClose: () => {
+      setOpen(false);
+    },
+    open: open
+  });
+
+  return (
+    <div className={classes.wrapper}>
+      <div
+        className={
+          error
+            ? "nhsuk-form-group nhsuk-form-group--error"
+            : "nhsuk-form-group"
+        }
+        {...getRootProps()}
+      >
+        <label
+          className="nhsuk-label"
+          htmlFor="myAutoComplete"
+          {...getInputLabelProps()}
+        >
+          {props.label}
+        </label>
+        {error && (
+          <span className="nhsuk-error-message">
+            <span className="nhsuk-u-visually-hidden">Error:</span> {error}
+          </span>
+        )}
+        <div className={classes.dropdown}>
+          <input
+            name={props.name}
+            id={props.id ? props.id : props.name}
+            className="nhsuk-input"
+            style={{ cursor: "context-menu" }}
+            placeholder={loading ? "Loading..." : "Select..."}
+            {...getInputProps()}
+          />
+        </div>
+        {groupedOptions.length > 0 ? (
+          <ul className={classes.listbox} {...getListboxProps()}>
+            {groupedOptions.map((option, index) => (
+              <li {...getOptionProps({ option, index })}>{option.label}</li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </div>
+  );
+};
+
+export default connect(Autocomplete);
