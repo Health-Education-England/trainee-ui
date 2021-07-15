@@ -18,18 +18,18 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     marginBottom: "20px"
   },
-  dropdown: {
-    position: "relative",
-    display: "block",
-    cursor: "pointer",
-    "&::before": {
-      position: "absolute",
-      content: "'\\2BC6'",
-      top: "9px",
-      right: "0px",
-      height: "50px",
-      width: "20px"
-    }
+  chevronDown: {
+    backgroundPosition: "right center",
+    backgroundRepeat: "no-repeat",
+    background:
+      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAhUlEQVQ4T+3SMQrCUBCE4S+3EDyNR7EIWgtaWUqKeAElRRrPoafxGII8SCCErK9IF9xyd+dnmZ3CzCpm6i0Q0OKMd+DNGhds+/nYgyNKbCYgSfxCg2sESP0D9iPICk88UA2vi74whHwicQL9euOpuyTt3VBP+ZLLwb0T7aLA5QDZoP4BfAGA0hIRKj7iQAAAAABJRU5ErkJggg==)"
+  },
+
+  chevronUp: {
+    backgroundPosition: "right center",
+    backgroundRepeat: "no-repeat",
+    background:
+      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAg0lEQVQ4T+XSMQrCQBRF0ZNdCFlNlmIhSS9aWSZNsgHFwsptmNW4DEGEGQhDRpGU+eWHex88XmHhFQt5KxBcQkd1rqtvHRzRBPCMfk6SE+zxSa3wwgN3dKlkTjCFnwHY5CSp4IBdSI5wDC0x4oohPlPBDSek8FTSYpsT/D3MFSzxZydvcKYSEbowaRgAAAAASUVORK5CYII=)"
   },
 
   iconLabel: {
@@ -133,16 +133,20 @@ const Autocomplete: React.FC<IProps> = (props: IProps) => {
             <span className="nhsuk-u-visually-hidden">Error:</span> {error}
           </span>
         )}
-        <div className={classes.dropdown}>
-          <input
-            name={props.name}
-            id={props.id ? props.id : props.name}
-            className="nhsuk-input"
-            style={{ cursor: "context-menu" }}
-            placeholder={loading ? "Loading..." : "Select..."}
-            {...getInputProps()}
-          />
-        </div>
+
+        <input
+          name={props.name}
+          id={props.id ? props.id : props.name}
+          className={
+            open
+              ? `${classes.chevronUp} nhsuk-input`
+              : `${classes.chevronDown} nhsuk-input`
+          }
+          style={{ cursor: "context-menu" }}
+          placeholder={loading ? "Loading..." : "Select..."}
+          {...getInputProps()}
+        />
+
         {groupedOptions.length > 0 ? (
           <ul className={classes.listbox} {...getListboxProps()}>
             {groupedOptions.map((option, index) => (
