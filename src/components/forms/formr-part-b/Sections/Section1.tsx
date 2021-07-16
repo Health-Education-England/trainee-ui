@@ -144,7 +144,7 @@ const Section1: FunctionComponent<CombinedSectionProps> = (
                 <>
                   <MyAutocomplete
                     name="prevRevalBodyOther"
-                    label="Previous Revalidation Body (if applicable)"
+                    label="Previous Revalidation Body ('other' non-Deanery)"
                     options={options}
                     handleOpen={() => {
                       setOpen(true);

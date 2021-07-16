@@ -69,6 +69,6 @@ describe("Section 1 - previous revalidation body", () => {
     cy.get("#defaultAutocompleteID").should("not.exist");
     cy.get("#prevRevalBody").select("other").should("have.value", "other");
     cy.get("#defaultAutocompleteID").should("exist");
-    cy.get("#defaultAutocompleteID").should("have.value", "Select...");
+    cy.get("#defaultAutocompleteID").should("have.value", "");
   });
 });

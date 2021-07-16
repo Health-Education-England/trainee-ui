@@ -58,8 +58,7 @@ export const Section1ValidationSchema = yup.object({
     ),
   prevRevalDate: yup.string().nullable().notRequired(),
   programmeSpecialty: StringValidationSchema("Programme / Training Specialty"),
-  dualSpecialty: yup.string(),
-  prevRevalBodyOther: yup.string().nullable().required()
+  dualSpecialty: yup.string()
 });
 
 export const Section2ValidationSchema = yup.object({

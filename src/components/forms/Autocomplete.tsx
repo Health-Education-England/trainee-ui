@@ -9,8 +9,9 @@ interface IProps {
   label: string;
   id?: string;
   defaultValue?: any;
-  onChange?: any;
+  onInputChange?: any;
   handleOpen?: any;
+  inputValue?: string;
 }
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -91,19 +92,22 @@ const Autocomplete: React.FC<IProps> = (props: IProps) => {
   } = useAutocomplete({
     id: props.id ? props.id : "defaultAutocompleteID",
     options: props.options.length
-      ? [{ label: "Select...", value: "" }, ...props.options]
+      ? [{ label: "", value: "" }, ...props.options]
       : [],
-    value: field.value
-      ? { label: field.value, value: field.value }
-      : { label: "Select...", value: "" },
+    inputValue: field.value ? field.value : "",
     getOptionLabel: (option: KeyValue) => option.label,
     getOptionSelected: (option, value) => option.value === value.value,
-    onChange: (_, value: KeyValue | null) => {
-      helpers.setValue(value && value.value);
+    onInputChange: (_, option, reason) => {
+      if (reason === "clear") {
+        helpers.setValue({ label: "", value: "" });
+      } else {
+        helpers.setValue(option ? option : field.value);
+      }
     },
     onOpen: () => {
       setOpen(true);
       props.handleOpen && props.handleOpen();
+      helpers.setValue("");
     },
     onClose: () => {
       setOpen(false);
@@ -143,7 +147,7 @@ const Autocomplete: React.FC<IProps> = (props: IProps) => {
               : `${classes.chevronDown} nhsuk-input`
           }
           style={{ cursor: "context-menu" }}
-          placeholder={loading ? "Loading..." : "Select..."}
+          placeholder={loading ? "Loading..." : "Select / start typing..."}
           {...getInputProps()}
         />
 
