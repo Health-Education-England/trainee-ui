@@ -12,7 +12,7 @@ import {
 } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
-import { FormRPartB, Work } from "../../../models/FormRPartB";
+import { FormRPartB } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
@@ -23,6 +23,7 @@ import {
   NEED_DISCUSSION_WITH_SUPERVISOR
 } from "../../../utilities/Constants";
 import { FeatureFlags } from "../../../models/FeatureFlags";
+import { ProfileUtilities } from "../../../utilities/ProfileUtilities";
 
 interface ViewProps {
   formData: FormRPartB | null;
@@ -63,10 +64,7 @@ class View extends React.PureComponent<ViewProps> {
     };
 
     if (formData && formData.work.length > 1) {
-      formData.work.sort(
-        (a: Work, b: Work) =>
-          new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
-      );
+      ProfileUtilities.sortWorkDesc(formData);
     }
 
     return (

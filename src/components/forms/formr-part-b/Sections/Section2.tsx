@@ -17,6 +17,7 @@ import { Section2ValidationSchema } from "../ValidationSchema";
 import classes from "../FormRPartB.module.scss";
 import { SectionProps } from "./SectionProps";
 import FormRPartBPagination from "./FormRPartBPagination";
+import { ProfileUtilities } from "../../../../utilities/ProfileUtilities";
 
 const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
   const {
@@ -46,10 +47,7 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
   }
 
   if (formData && formData.work.length > 1) {
-    formData.work.sort(
-      (a: Work, b: Work) =>
-        new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
-    );
+    ProfileUtilities.sortWorkDesc(formData);
   }
 
   return (
