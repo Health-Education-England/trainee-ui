@@ -38,7 +38,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 class View extends React.PureComponent<ViewProps> {
-  
   render() {
     const { formData, history, editSection, canEdit, featureFlags } =
       this.props;
@@ -63,14 +62,13 @@ class View extends React.PureComponent<ViewProps> {
       ) : null;
     };
 
-    if(formData && formData.work.length > 1)
-  {
-    formData.work.sort(
-      (a: Work, b: Work) =>
-        new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
-    );
-  }
-  
+    if (formData && formData.work.length > 1) {
+      formData.work.sort(
+        (a: Work, b: Work) =>
+          new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+      );
+    }
+
     return (
       formData && (
         <>

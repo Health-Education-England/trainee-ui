@@ -39,11 +39,9 @@ describe("Form-R Part-B Section2", () => {
     const firstWorkEndDate = wrapper
       .find("[data-cy='work[0].endDate']")
       .first()
-      .prop("value")
+      .prop("value");
 
-    expect(firstWorkEndDate).toBe("2020-12-31")
-    
-
+    expect(firstWorkEndDate).toBe("2020-12-31");
   });
 
   it("should add work panel if no placements exists", () => {

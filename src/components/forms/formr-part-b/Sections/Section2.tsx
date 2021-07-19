@@ -45,8 +45,7 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
     formData.work.push(newWork);
   }
 
-  if(formData && formData.work.length > 1)
-  {
+  if (formData && formData.work.length > 1) {
     formData.work.sort(
       (a: Work, b: Work) =>
         new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
