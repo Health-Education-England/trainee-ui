@@ -33,6 +33,17 @@ describe("Form-R Part-B Section2", () => {
     mount(<Section2 {...props} />);
   });
 
+  it("should put the work placements in decending order by end date", () => {
+    const wrapper = mount(<Section2 {...props} />);
+
+    const firstWorkEndDate = wrapper
+      .find("[data-cy='work[0].endDate']")
+      .first()
+      .prop("value");
+
+    expect(firstWorkEndDate).toBe("2020-12-31");
+  });
+
   it("should add work panel if no placements exists", () => {
     props.formData.work = [];
     const wrapper = mount(<Section2 {...props} />);

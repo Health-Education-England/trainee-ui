@@ -23,6 +23,7 @@ import {
   NEED_DISCUSSION_WITH_SUPERVISOR
 } from "../../../utilities/Constants";
 import { FeatureFlags } from "../../../models/FeatureFlags";
+import { ProfileUtilities } from "../../../utilities/ProfileUtilities";
 
 interface ViewProps {
   formData: FormRPartB | null;
@@ -61,6 +62,10 @@ class View extends React.PureComponent<ViewProps> {
         </Button>
       ) : null;
     };
+
+    if (formData && formData.work.length > 1) {
+      ProfileUtilities.sortWorkDesc(formData);
+    }
 
     return (
       formData && (

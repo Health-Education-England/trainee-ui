@@ -32,7 +32,7 @@ export interface FormRPartB extends IFormR {
   currentDeclarations: Declaration[];
   currentDeclarationSummary: string;
   compliments: string;
-  haveCovidDeclarations: boolean | string;
+  haveCovidDeclarations: boolean | string | null;
   covidDeclarationDto: CovidDeclaration | null;
   isDeclarationAccepted?: boolean;
   isConsentAccepted?: boolean;
@@ -47,8 +47,8 @@ export interface Declaration {
 
 export interface Work {
   typeOfWork: string;
-  startDate: Date | undefined;
-  endDate: Date | undefined;
+  startDate: Date | string;
+  endDate: Date | string;
   trainingPost: string;
   site: string;
   siteLocation: string;
