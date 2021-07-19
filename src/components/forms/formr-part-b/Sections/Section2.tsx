@@ -30,8 +30,8 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
   } = props;
   const newWork: Work = {
     typeOfWork: "",
-    startDate: undefined,
-    endDate: undefined,
+    startDate: "",
+    endDate: "",
     trainingPost: "",
     site: "",
     siteLocation: ""
@@ -45,6 +45,21 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
     formData.work.push(newWork);
   }
 
+  if(formData && formData.work.length > 1)
+  {
+    formData.work.sort(
+      (a: Work, b: Work) =>
+        new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+    );
+  }
+
+  /*
+  formData.work.sort(function compare(a, b) {
+    var dateA = new Date(a.endDate);
+    var dateB = new Date(b.endDate);
+    return a.endDate - b.endDate;
+  });
+*/
   return (
     formData && (
       <Formik

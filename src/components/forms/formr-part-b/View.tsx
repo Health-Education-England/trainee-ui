@@ -12,7 +12,7 @@ import {
 } from "nhsuk-react-components";
 import { RootState } from "../../../redux/types";
 import { connect } from "react-redux";
-import { FormRPartB } from "../../../models/FormRPartB";
+import { FormRPartB, Work } from "../../../models/FormRPartB";
 import { DateUtilities } from "../../../utilities/DateUtilities";
 import classes from "./FormRPartB.module.scss";
 import { BooleanUtilities } from "../../../utilities/BooleanUtilities";
@@ -38,6 +38,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 class View extends React.PureComponent<ViewProps> {
+  
   render() {
     const { formData, history, editSection, canEdit, featureFlags } =
       this.props;
@@ -62,6 +63,14 @@ class View extends React.PureComponent<ViewProps> {
       ) : null;
     };
 
+    if(formData && formData.work.length > 1)
+  {
+    formData.work.sort(
+      (a: Work, b: Work) =>
+        new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+    );
+  }
+  
     return (
       formData && (
         <>

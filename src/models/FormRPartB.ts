@@ -47,8 +47,8 @@ export interface Declaration {
 
 export interface Work {
   typeOfWork: string;
-  startDate: Date | undefined;
-  endDate: Date | undefined;
+  startDate: Date | string;
+  endDate: Date | string;
   trainingPost: string;
   site: string;
   siteLocation: string;
