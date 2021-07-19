@@ -53,13 +53,6 @@ const Section2: FunctionComponent<SectionProps> = (props: SectionProps) => {
     );
   }
 
-  /*
-  formData.work.sort(function compare(a, b) {
-    var dateA = new Date(a.endDate);
-    var dateB = new Date(b.endDate);
-    return a.endDate - b.endDate;
-  });
-*/
   return (
     formData && (
       <Formik
