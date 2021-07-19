@@ -32,7 +32,7 @@ export interface FormRPartB extends IFormR {
   currentDeclarations: Declaration[];
   currentDeclarationSummary: string;
   compliments: string;
-  haveCovidDeclarations: boolean | string;
+  haveCovidDeclarations: boolean | string | null;
   covidDeclarationDto: CovidDeclaration | null;
   isDeclarationAccepted?: boolean;
   isConsentAccepted?: boolean;
